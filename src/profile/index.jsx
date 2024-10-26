@@ -13,7 +13,7 @@ import {
   
   const { Title } = Typography;
   
-  const Dashboard = () => {
+  const Profile = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -25,5 +25,5 @@ import {
     );
   };
   
-  export default Dashboard;
+  export default Profile;
   
