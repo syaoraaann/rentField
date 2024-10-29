@@ -34,14 +34,16 @@ function  LandingPage () {
         </div>
         <div className="header-col header-nav">
         <nav>
-          <Link to="/login">Login</Link> |{" "}
+        <Link to="/login" style={{ color: 'white' }}>Login</Link>
           <Link to="/dashboard">Dashboard</Link> |{" "}
           <Link to="/list-lapangan">List Lapangan</Link> |{" "}
           <Link to="/profile">Profile</Link>
         </nav>
         </div>
         <div className="header-col header-btn">
-          <Button type="primary">Login</Button>
+          <Button type="primary"
+          onClick={() => navigate("/login")}>Login
+          </Button>
         </div>
       </Header>
       <Content className="signin login-container">
