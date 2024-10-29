@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Layout,
   Button,
@@ -7,19 +8,18 @@ import {
   Input,
   Drawer,
   Card,
-  Menu,
   Select,
   DatePicker,
   notification,
 } from "antd";
-import { useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import SideNav from "../pages/sidenav"; // Ensure the path to your SideNav component is correct
 import "@fontsource/poppins";
 
 const { Title, Text } = Typography;
 const { Meta } = Card;
-const { Header, Content, Sider } = Layout;
+const { Header, Content } = Layout;
 const { Option } = Select;
 
 const ListLapangan = () => {
@@ -34,7 +34,7 @@ const ListLapangan = () => {
   const [additionalCharge, setAdditionalCharge] = useState(0);
   const [tax, setTax] = useState(0);
   const [total, setTotal] = useState(0);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isRentButtonVisible, setIsRentButtonVisible] = useState(false);
 
@@ -43,24 +43,30 @@ const ListLapangan = () => {
       id: 1,
       name: "Singaraja Futsal",
       category: "Soccer Field",
-      address: "Jl. Udayana, Banjar Jawa, Kec. Buleleng, Kabupaten Buleleng, Bali 81113",
-      imageUrl: "https://fastly.4sqi.net/img/general/600x600/58082938_ZBAJ3Wcn-B_m8pP16l42N0uVIgxWSdnNIQG36_ff0Nk.jpg",
+      address:
+        "Jl. Udayana, Banjar Jawa, Kec. Buleleng, Kabupaten Buleleng, Bali 81113",
+      imageUrl:
+        "https://fastly.4sqi.net/img/general/600x600/58082938_ZBAJ3Wcn-B_m8pP16l42N0uVIgxWSdnNIQG36_ff0Nk.jpg",
       price: 50000,
     },
     {
       id: 2,
       name: "GOR Bulutangkis UNDIKSHA",
       category: "Badminton Field",
-      address: "GOR BULUTANGKIS UNDIKSHA, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116",
-      imageUrl: "https://cdn.undiksha.ac.id/wp-content/uploads/2022/09/01123108/GOR-Bulutangkis-Undiksha.jpg",
+      address:
+        "GOR BULUTANGKIS UNDIKSHA, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116",
+      imageUrl:
+        "https://cdn.undiksha.ac.id/wp-content/uploads/2022/09/01123108/GOR-Bulutangkis-Undiksha.jpg",
       price: 70000,
     },
     {
       id: 3,
       name: "Lapangan Basket GOR Bhuana Patra",
       category: "Basketball Field",
-      address: "Jl. Udayana No.6, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81114",
-      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlo9Y32JrsrMnXiPbH9Xzfbf8126C2Q1Kpkg&s",
+      address:
+        "Jl. Udayana No.6, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81114",
+      imageUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlo9Y32JrsrMnXiPbH9Xzfbf8126C2Q1Kpkg&s",
       price: 80000,
     },
   ];
@@ -88,12 +94,6 @@ const ListLapangan = () => {
     setIsRentButtonVisible(false);
   };
 
-  const handleMenuClick = (key) => {
-    if (key === "dashboard") {
-      navigate("/dashboard");
-    }
-  };
-
   const handleHoursChange = (value) => {
     setSelectedHours(value);
     calculateTotal(value.length, selectedField.price, selectedFieldOption);
@@ -113,7 +113,6 @@ const ListLapangan = () => {
     if (fieldOption === "Field 2 VIP") {
       additionalChargeValue = 20000 * hours;
     }
-    // No additional charge for Field 1 and Field 3 (they are standard)
 
     let taxValue = (subtotalValue + additionalChargeValue) * 0.1; // 10% Tax
     let totalValue = subtotalValue + additionalChargeValue + taxValue;
@@ -139,34 +138,25 @@ const ListLapangan = () => {
     </Option>
   ));
 
-  const filteredFields = fields.filter(field => {
-    const matchesSearch = field.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory ? field.category === selectedCategory : true;
+  const filteredFields = fields.filter((field) => {
+    const matchesSearch = field.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory
+      ? field.category === selectedCategory
+      : true;
     return matchesSearch && matchesCategory;
   });
 
-  
-
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider width={200} style={{ backgroundColor: "#f0f2f5" }}>
-        <div className="logo" style={{ padding: "20px", textAlign: "center" }}>
-          <Title level={3} style={{ color: "#52c41a" }}>Rent Field</Title>
-        </div>
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={["list"]}
-          style={{ height: "100%" }}
-          onClick={({ key }) => handleMenuClick(key)}
-          items={[
-            { key: "dashboard", label: "Dashboard" },
-            { key: "list", label: "Field List" },
-          ]}
-        />
-      </Sider>
-
-      <Layout>
-        <Header style={{ backgroundColor: "#fff", padding: 0, height: "120px" }}>
+      <SideNav /> {/* Add SideNav here */}
+      <Layout style={{ marginLeft: 256 }}>
+        {" "}
+        {/* Adjust margin for the SideNav */}
+        <Header
+          style={{ backgroundColor: "#fff", padding: 0, height: "120px" }}
+        >
           <Title
             level={1}
             style={{
@@ -175,14 +165,17 @@ const ListLapangan = () => {
               fontWeight: "bold",
               marginTop: "20px",
               color: "#375D22",
-              fontSize: "60px"
+              fontSize: "60px",
             }}
           >
-            {selectedField ? `Order Field ${selectedField.name}` : "Available Fields at Singaraja"}
+            {selectedField
+              ? `Order Field ${selectedField.name}`
+              : "Available Fields at Singaraja"}
           </Title>
         </Header>
-
-        <Content style={{ margin: "20px", padding: "20px", backgroundColor: "#fff" }}>
+        <Content
+          style={{ margin: "20px", padding: "20px", backgroundColor: "#fff" }}
+        >
           <Row gutter={16} align="middle" style={{ marginBottom: "20px" }}>
             <Col>
               <Input
@@ -210,62 +203,84 @@ const ListLapangan = () => {
           <Row gutter={16}>
             {filteredFields.map((field) => (
               <Col span={8} key={field.id} style={{ marginBottom: "16px" }}>
-              <Card
-                hoverable
-                style={{ height: '450px', display: 'flex', flexDirection: 'column' }} // Add fixed height to card
-                cover={
-                  <img
-                    alt={field.name}
-                    src={field.imageUrl}
-                    style={{ width: "100%", height: "200px", objectFit: "cover" }}
-                  />
-                }
-                actions={[
-                  <Button
-                    type="primary"
-                    onClick={() => showDrawer(field)}
-                    style={{ backgroundColor: "#D8E795", color: "#000000"}}
-                  >
-                    Rent
-                  </Button>
-                ]}
-              >
-                <Meta 
-                  title={<Text strong style={{ fontSize: '18px' }}>{field.name}</Text>}
-                  description={
-                    <div style={{ 
-                      display: 'flex', 
-                      flexDirection: 'column', 
-                      gap: '8px',
-                      height: '120px', // Fixed height for description area
-                    }}>
-                      <Text strong style={{ color: '#000000', fontStyle: "italic" }}>{field.category}</Text>
-                      <Text strong style={{ color: '#375D22', fontStyle: "bold" }}>
-                        Price /Hr: Rp {field.price.toLocaleString()}
+                <Card
+                  hoverable
+                  style={{
+                    height: "450px",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                  cover={
+                    <img
+                      alt={field.name}
+                      src={field.imageUrl}
+                      style={{
+                        width: "100%",
+                        height: "200px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  }
+                  actions={[
+                    <Button
+                      type="primary"
+                      onClick={() => showDrawer(field)}
+                      style={{ backgroundColor: "#D8E795", color: "#000000" }}
+                    >
+                      Rent
+                    </Button>,
+                  ]}
+                >
+                  <Meta
+                    title={
+                      <Text strong style={{ fontSize: "18px" }}>
+                        {field.name}
                       </Text>
-                      <Text 
-                        type="secondary" 
-                        style={{ 
-                          fontSize: '12px',
-                          overflow: 'hidden',
-                          display: '-webkit-box',
-                          WebkitBoxOrient: 'vertical',
-                          WebkitLineClamp: 2, // Limits text to 2 lines
-                          textOverflow: 'ellipsis'
+                    }
+                    description={
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "8px",
+                          height: "120px",
                         }}
                       >
-                        {field.address}
-                      </Text>
-                    </div>
-                  } 
-                />
-              </Card>
+                        <Text
+                          strong
+                          style={{ color: "#000000", fontStyle: "italic" }}
+                        >
+                          {field.category}
+                        </Text>
+                        <Text
+                          strong
+                          style={{ color: "#375D22", fontStyle: "bold" }}
+                        >
+                          Price /Hr: Rp {field.price.toLocaleString()}
+                        </Text>
+                        <Text
+                          type="secondary"
+                          style={{
+                            fontSize: "12px",
+                            overflow: "hidden",
+                            display: "-webkit-box",
+                            WebkitBoxOrient: "vertical",
+                            WebkitLineClamp: 2,
+                            textOverflow: "ellipsis",
+                          }}
+                        >
+                          {field.address}
+                        </Text>
+                      </div>
+                    }
+                  />
+                </Card>
               </Col>
             ))}
           </Row>
 
           <Drawer
-            title={`Order Field ${selectedField?.name || ''}`}
+            title={`Order Field ${selectedField?.name || ""}`}
             placement="right"
             width={320}
             onClose={closeDrawer}
@@ -274,67 +289,64 @@ const ListLapangan = () => {
             <img
               src={selectedField?.imageUrl}
               alt={selectedField?.name}
-              style={{ width: "100%", height: "200px", objectFit: "cover", marginBottom: "16px" }}
+              style={{ width: "100%", height: "200px", objectFit: "cover" }}
             />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
-              <Text strong>Name: {selectedField?.name}</Text>
-              <Text strong>Price /Hr: Rp {selectedField?.price.toLocaleString()}</Text>
-              <Text strong style={{ wordBreak: 'break-word' }}>Address: {selectedField?.address}</Text>
-            </div>
-
-            <Text strong style={{ display: "block", marginBottom: "8px" }}>
-              Select Date:
+            <Text
+              strong
+              style={{ fontSize: "18px" }}
+            >{`Rent ${selectedField?.name}`}</Text>
+            <Text
+              type="secondary"
+              style={{ display: "block", marginBottom: "16px" }}
+            >
+              {selectedField?.address}
             </Text>
-            <DatePicker onChange={(date) => setSelectedDate(date)} style={{ marginBottom: "16px", width: "100%" }} />
 
-            <Text strong style={{ display: "block", marginBottom: "8px" }}>
-              Select Hours:
-            </Text>
+            <Text strong>Choose Date:</Text>
+            <DatePicker
+              onChange={(date) => setSelectedDate(date)}
+              style={{ width: "100%", marginBottom: "16px" }}
+            />
+
+            <Text strong>Choose Hours:</Text>
             <Select
               mode="multiple"
+              placeholder="Select Hours"
               onChange={handleHoursChange}
               style={{ width: "100%", marginBottom: "16px" }}
             >
               {hourOptions}
             </Select>
 
-            <Text strong style={{ display: "block", marginBottom: "8px" }}>
-              Select Field Option:
-            </Text>
+            <Text strong>Select Field Option:</Text>
             <Select
+              placeholder="Select Field Option"
               onChange={handleFieldOptionChange}
               style={{ width: "100%", marginBottom: "16px" }}
-              placeholder="Select an option"
-              value={selectedFieldOption}
             >
-              <Option value="Field 1">Field 1 (Standard)</Option>
-              <Option value="Field 2 VIP">Field 2 VIP (+ Rp 20,000/hour)</Option>
-              <Option value="Field 3">Field 3 (Standard)</Option>
+              <Option value="Standard">Standard</Option>
+              <Option value="Field 2 VIP">Field 2 VIP</Option>
             </Select>
 
             <Button
               type="primary"
               onClick={handleRent}
-              disabled={!selectedHours.length || !selectedFieldOption}
-              style={{ backgroundColor: "#D8E795", color: "#000000"}}
+              disabled={!isRentButtonVisible}
+              style={{ marginTop: "20px" }}
             >
               Rent Now
             </Button>
 
-            {isRentButtonVisible && (
-              <div style={{ marginTop: "16px" }}>
-                <Text strong style={{ display: "block" }}>
-                  Subtotal: Rp {subtotal.toLocaleString()}
-                </Text>
-                <Text strong style={{ display: "block" }}>
-                  Additional Charge: Rp {additionalCharge.toLocaleString()}
-                </Text>
-                <Text strong style={{ display: "block" }}>
-                  Tax (10%): Rp {tax.toLocaleString()}
-                </Text>
-                <Text strong style={{ display: "block", fontSize: "16px", color: "#52c41a" }}>
-                  Total: Rp {total.toLocaleString()}
-                </Text>
+            {selectedFieldOption && (
+              <div style={{ marginTop: "20px" }}>
+                <Text
+                  strong
+                >{`Subtotal: Rp ${subtotal.toLocaleString()}`}</Text>
+                <Text
+                  strong
+                >{`Additional Charge: Rp ${additionalCharge.toLocaleString()}`}</Text>
+                <Text strong>{`Tax (10%): Rp ${tax.toLocaleString()}`}</Text>
+                <Text strong>{`Total: Rp ${total.toLocaleString()}`}</Text>
               </div>
             )}
           </Drawer>
