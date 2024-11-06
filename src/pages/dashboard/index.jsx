@@ -1,30 +1,70 @@
-// src/pages/Dashboard.jsx
 import React from "react";
-import { Layout, Typography } from "antd";
-import SideNav from "../sidenav";
+import { Layout, Card, Row, Col } from "antd";
+import SideNav from "../sidenav"; // Assuming SideNav is in the same directory
 
-const { Header, Content } = Layout;
-const { Title } = Typography;
+const { Content } = Layout;
 
 const Dashboard = () => {
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: "100vh", backgroundColor: "#F6F9EB" }}>
+      {" "}
       <SideNav />
-      <Layout style={{ marginLeft: 256 }}>
+      <Layout style={{ marginLeft: 256, backgroundColor: "#F6F9EB" }}>
         {" "}
-        {/* Tambahkan margin untuk konten utama */}
-        <Header style={{ backgroundColor: "#fff", padding: 0 }}>
-          <Title style={{ margin: "20px", color: "#375D22" }} level={2}>
-            Dashboard
-          </Title>
-        </Header>
-        <Content
-          style={{ margin: "20px", padding: "20px", backgroundColor: "#fff" }}
-        >
-          <div>
-            <Title level={4}>Welcome to the Dashboard</Title>
-            <p>This is your dashboard where you can manage your activities.</p>
-          </div>
+        {/* Set background color here as well */}
+        <Content style={{ margin: "24px 16px 0", padding: 24 }}>
+          {/* Statistics and Widgets */}
+          <Row gutter={16}>
+            <Col span={8}>
+              <Card
+                title="Total Users"
+                bordered={false}
+                style={{ background: "#D8E795" }}
+              >
+                <p>100</p>
+              </Card>
+            </Col>
+            <Col span={8}>
+              <Card
+                title="Active Bookings"
+                bordered={false}
+                style={{ background: "#D8E795" }}
+              >
+                <p>25</p>
+              </Card>
+            </Col>
+            <Col span={8}>
+              <Card
+                title="Total Fields"
+                bordered={false}
+                style={{ background: "#D8E795" }}
+              >
+                <p>10</p>
+              </Card>
+            </Col>
+          </Row>
+
+          {/* Recent Activity or Other Sections */}
+          <Row gutter={16} style={{ marginTop: "16px" }}>
+            <Col span={12}>
+              <Card
+                title="Recent Bookings"
+                bordered={false}
+                style={{ background: "#D8E795" }}
+              >
+                <p>Booking list goes here</p>
+              </Card>
+            </Col>
+            <Col span={12}>
+              <Card
+                title="Support Tickets"
+                bordered={false}
+                style={{ background: "#D8E795" }}
+              >
+                <p>Support list goes here</p>
+              </Card>
+            </Col>
+          </Row>
         </Content>
       </Layout>
     </Layout>
