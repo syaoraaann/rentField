@@ -1,14 +1,21 @@
 import React from "react";
 import { Menu } from "antd";
-import { HomeOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import {
+  HomeOutlined,
+  UserOutlined,
+  LogoutOutlined,
+  CalendarOutlined,
+  StarOutlined,
+  SettingOutlined,
+  QuestionCircleOutlined,
+} from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const SideNav = () => {
   const navigate = useNavigate();
-  const location = useLocation(); // Get the current location
+  const location = useLocation();
 
   const handleLogout = () => {
-    // Add any necessary cleanup logic here, if needed
     navigate("/"); // Redirect to landing page
   };
 
@@ -19,40 +26,88 @@ const SideNav = () => {
         height: "100vh",
         position: "fixed",
         backgroundColor: "#D8E795",
+        fontWeight: 600,
       }}
-      selectedKeys={[location.pathname]} // Highlight the current page
+      selectedKeys={[location.pathname]}
       mode="inline"
     >
-      <Menu.Item
-        key="/dashboard"
-        icon={<HomeOutlined />}
-        style={{ fontWeight: 600 }}
+      {/* Logo */}
+      <div
+        style={{
+          padding: "20px",
+          textAlign: "center",
+        }}
       >
+        <img
+          src="../src/assets/images/rentfield1.png" // Adjust path as needed
+          alt="Rent Field Logo"
+          style={{ width: "80%", height: "auto", marginBottom: "-30px" }}
+        />
+      </div>
+
+      {/* Dashboard Section */}
+      <Menu.Item key="/dashboard" icon={<HomeOutlined />}>
         <Link to="/dashboard">Dashboard</Link>
       </Menu.Item>
-      <Menu.Item
-        key="/list-lapangan"
-        icon={<UserOutlined />}
-        style={{ fontWeight: 600 }}
+
+      {/* Jenis Lapangan Section */}
+      <div
+        style={{
+          padding: "15px 20px 5px",
+          color: "#4CAF50",
+          fontSize: "1em",
+          fontWeight: "bold",
+        }}
       >
-        <Link to="/list-lapangan">List Lapangan</Link>
+        Jenis Lapangan
+      </div>
+      <Menu.Item key="/list-lapangan" icon={<StarOutlined />}>
+        <Link to="/list-lapangan">Futsal</Link>
       </Menu.Item>
-      <Menu.Item
-        key="/profile"
-        icon={<UserOutlined />}
-        style={{ fontWeight: 600 }}
+
+      {/* User Management Section */}
+      <div
+        style={{
+          padding: "15px 20px 5px",
+          color: "#4CAF50",
+          fontSize: "1em",
+          fontWeight: "bold",
+        }}
       >
+        User Management
+      </div>
+      <Menu.Item key="/profile" icon={<UserOutlined />}>
         <Link to="/profile">Profile</Link>
       </Menu.Item>
-      <Menu.Item
-        key="logout"
-        icon={<LogoutOutlined />}
-        style={{ fontWeight: 600 }}
-        onClick={handleLogout}
+      <Menu.Item key="/mypoint" icon={<StarOutlined />}>
+        <Link to="/mypoint">MyPoint</Link>
+      </Menu.Item>
+      <Menu.Item key="/history" icon={<CalendarOutlined />}>
+        <Link to="/history">History</Link>
+      </Menu.Item>
+
+      {/* Help Center Section */}
+      <div
+        style={{
+          padding: "15px 20px 5px",
+          color: "#4CAF50",
+          fontSize: "1em",
+          fontWeight: "bold",
+        }}
       >
+        Help Center
+      </div>
+      <Menu.Item key="/settings" icon={<SettingOutlined />}>
+        <Link to="/settings">Setting</Link>
+      </Menu.Item>
+      <Menu.Item key="/help-center" icon={<QuestionCircleOutlined />}>
+        <Link to="/help-center">Help Center</Link>
+      </Menu.Item>
+
+      {/* Logout */}
+      <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
         Logout
       </Menu.Item>
-      {/* Add other menu items here as needed */}
     </Menu>
   );
 };
