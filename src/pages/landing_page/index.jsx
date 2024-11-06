@@ -1,57 +1,47 @@
-import {
-    Layout,
-    Button,
-    Row,
-    Col,
-    Typography,
-    Form,
-    Input,
-  } from "antd";
+import { Layout, Button, Row, Col, Typography, Form, Input } from "antd";
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../pages/landing_page/index.css";
 
-  
 const { Title } = Typography;
 const { Header, Footer, Content } = Layout;
-  
-function  LandingPage () {
+
+function LandingPage() {
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState("Home");
 
   const handleMenuClick = (menu) => {
-        setActiveMenu(menu);
-        // Navigasi ke halaman yang sesuai (optional)
-        navigate(menu);
+    setActiveMenu(menu);
+    // Navigasi ke halaman yang sesuai (optional)
+    navigate(menu);
   };
 
   const handleLoginClick = () => {
-    navigate("/login"); // Change this path to your login route
+    navigate("/dashboard"); // Change this path to your login route
   };
 
   const renderContent = () => {
     switch (activeMenu) {
       case "Home":
         return (
-          <section 
+          <section
             style={{
               backgroundImage: `url('/landingbg.png')`, // Replace with your actual image path
               backgroundSize: "cover",
-              backgroundPosition: "center center",   
+              backgroundPosition: "center center",
               backgroundRepeat: "no-repeat",
               minHeight: "100vh", // Full viewport height
-              minWidth: "100vw",  // Full viewport width
+              minWidth: "100vw", // Full viewport width
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
               color: "white", // Adjust text color for readability
               textAlign: "center",
-              margin: "0",       // Remove default margins
-              padding: "0", 
-               
-          }}
+              margin: "0", // Remove default margins
+              padding: "0",
+            }}
           >
             <h2>Home</h2>
             <p>Welcome to the Home page!</p>
@@ -87,7 +77,7 @@ function  LandingPage () {
         );
     }
   };
-  
+
   return (
     <Layout className="layout-default layout-signin">
       <Header>
@@ -95,23 +85,25 @@ function  LandingPage () {
           <h5>WebfmSI.com</h5>
         </div>
         <div className="header-col header-nav">
-        <nav>
-          <Link onClick={() => handleMenuClick("Home")}>Home</Link> |{" "}
-          <Link onClick={() => handleMenuClick("About Us")}>About Us</Link> |{" "}
-          <Link onClick={() => handleMenuClick("Services")}>Services</Link> |{" "}
-          <Link onClick={() => handleMenuClick("Contact")}>Contact</Link>
-          {/* <Link to=" ">Home</Link> |{" "}
+          <nav>
+            <Link onClick={() => handleMenuClick("Home")}>Home</Link> |{" "}
+            <Link onClick={() => handleMenuClick("About Us")}>About Us</Link> |{" "}
+            <Link onClick={() => handleMenuClick("Services")}>Services</Link> |{" "}
+            <Link onClick={() => handleMenuClick("Contact")}>Contact</Link>
+            {/* <Link to=" ">Home</Link> |{" "}
           <Link to=" ">About Us</Link> |{" "}
           <Link to=" ">Services</Link> |{" "}
           <Link to=" ">Contact</Link> |{" "} */}
-          {/* <Link to="/login">Login</Link> */}
-          {/* <Link to="/dashboard">Dashboard</Link>
+            {/* <Link to="/login">Login</Link> */}
+            {/* <Link to="/dashboard">Dashboard</Link>
           <Link to="/list-lapangan">List Lapangan</Link>
           <Link to="/profile">Profile</Link> */}
-        </nav>
+          </nav>
         </div>
         <div className="header-col header-btn">
-          <Button type="primary" onClick={handleLoginClick}>Login</Button>
+          <Button type="primary" onClick={handleLoginClick}>
+            Login
+          </Button>
         </div>
       </Header>
       <Content>
@@ -122,12 +114,12 @@ function  LandingPage () {
       <Footer>
         <p className="copyright">
           {" "}
-          Copyright © 2024 WebfmSI.com - Powered by Universitas Pendidikan Ganesha
+          Copyright © 2024 WebfmSI.com - Powered by Universitas Pendidikan
+          Ganesha
         </p>
       </Footer>
     </Layout>
   );
-};
-  
+}
+
 export default LandingPage;
-  
