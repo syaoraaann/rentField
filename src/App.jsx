@@ -1,4 +1,4 @@
-import {Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import "./assets/styles/main.css";
 import "./assets/styles/responsive.css";
@@ -11,8 +11,6 @@ import Dashboard from "./pages/dashboard";
 import ListLapangan from "./list_lapangan";
 import Profile from "./profile";
 
-
-
 function App() {
   return (
     <div className="App">
@@ -23,16 +21,6 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/list-lapangan" element={<ListLapangan />} />
         <Route path="/profile" element={<Profile />} />
-        {/* <Route
-          exact 
-          path="/" 
-          element={<LandingPage/>}
-        />
-        <Route
-          exact 
-          path="/landing-page" 
-          element={<LandingPage/>}
-        /> */}
       </Routes>
     </div>
   );

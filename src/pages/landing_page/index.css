@@ -1,0 +1,69 @@
+.layout-default {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+.layout-signin {
+    background-color: #f0f2f5;
+  }
+
+.header {
+    display: flex;
+    justify-content: space-between; /* Membuat elemen di dalam header tersebar */
+    align-items: center; /* Memusatkan elemen secara vertikal */
+    padding: 0 20px;
+  }
+  
+.header-col {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 30px;
+  }
+  
+/* Gaya untuk brand (logo atau nama website) */
+.header-brand h5 {
+    font-size: 1.5rem;
+    color: #b2d12d;
+    margin: 0;
+  }
+  
+/* Gaya untuk menu navigasi */
+.header-nav nav {
+    display: flex;
+    gap: 15px;
+    align-items: end;
+  }
+  
+.header-nav nav a {
+    color: #b2d12d;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+  
+.header-nav nav a:hover {
+    color: #b2d12d;
+  }
+
+.active-menu {
+    background-color: #b2d12d; /* Warna latar belakang saat aktif */
+    color: white; /* Warna teks saat aktif (opsional) */
+    padding: 5px 10px; /* Padding untuk memperbesar area klik */
+    border-radius: 5px; /* Menambahkan sudut yang membulat (opsional) */
+}
+  
+/* Gaya untuk tombol login di header */
+.header-btn .ant-btn-primary {
+    background-color: #b2d12d !important;
+    border-color: #b2d12d !important;
+    font-weight: bold;
+    color: black;
+  }
+  
+.header-btn .ant-btn-primary:hover {
+    background-color: #b2d12d !important;
+    border-color: #b2d12d !important;
+  }
+
