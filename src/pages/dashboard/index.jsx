@@ -1,6 +1,7 @@
 import React from "react";
 import { Layout, Card, Row, Col, Typography, Calendar } from "antd";
 import SideNav from "../sidenav";
+import "./index.css"; // Import CSS file for animations
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
@@ -15,30 +16,43 @@ const Dashboard = () => {
 
   const titleStyle = {
     color: "#4CAF50",
-    fontSize: "2em", // Increase font size for card titles
+    fontSize: "2.5em", // Increase font size for card titles
     fontWeight: "bold", // Make the text bold
   };
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: "100vh", background: "#FFFFFF" }}>
       {/* Sidebar */}
       <SideNav />
 
       {/* Main content area */}
-      <Layout style={{ marginLeft: 256 }}>
+      <Layout style={{ marginLeft: 256, background: "#FFFFFF" }}>
         <Content
-          style={{ margin: "24px 16px 0", padding: 24, background: "#F6F9EB" }}
+          style={{
+            margin: "24px 16px 0",
+            padding: 24,
+            background: "#FFFFFF", // Set content area to white
+          }}
         >
           {/* Dashboard Header */}
-          <Title level={2} style={titleStyle}>
-            Dashboard
+          <Title
+            level={1}
+            className="fadeInSlideDown"
+            style={{ ...titleStyle, fontSize: "3em", marginBottom: "8px" }}
+          >
+            Ready to make the most of today, Kevin?
           </Title>
-          <Text style={{ fontSize: "1.2em" }}>Welcome Kevin!</Text>
+          <Text
+            className="fadeInSlideDown"
+            style={{ fontSize: "1.5em", marginTop: "0" }}
+          >
+            Here's an overview of your recent activities!
+          </Text>
 
           {/* Cards Layout */}
           <Row gutter={[16, 16]} style={{ marginTop: "24px" }}>
             <Col span={8}>
-              <Card bordered={false} style={cardStyle}>
+              <Card bordered={false} style={cardStyle} className="fadeInCard">
                 <Title style={titleStyle}>MyPoint</Title>
                 <Title
                   level={1}
@@ -54,12 +68,12 @@ const Dashboard = () => {
               </Card>
             </Col>
             <Col span={8}>
-              <Card bordered={false} style={cardStyle}>
+              <Card bordered={false} style={cardStyle} className="fadeInCard">
                 <Title style={titleStyle}>History</Title>
               </Card>
             </Col>
             <Col span={8}>
-              <Card bordered={false} style={cardStyle}>
+              <Card bordered={false} style={cardStyle} className="fadeInCard">
                 <Title style={titleStyle}>Calendar</Title>
                 <Calendar fullscreen={false} style={{ marginTop: 0 }} />{" "}
                 {/* Ant Design Calendar */}
@@ -68,12 +82,12 @@ const Dashboard = () => {
           </Row>
           <Row gutter={[16, 16]} style={{ marginTop: "16px" }}>
             <Col span={12}>
-              <Card bordered={false} style={cardStyle}>
+              <Card bordered={false} style={cardStyle} className="fadeInCard">
                 <Title style={titleStyle}>Top Booked</Title>
               </Card>
             </Col>
             <Col span={12}>
-              <Card bordered={false} style={cardStyle}>
+              <Card bordered={false} style={cardStyle} className="fadeInCard">
                 <Title style={titleStyle}>Event</Title>
               </Card>
             </Col>
