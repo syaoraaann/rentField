@@ -1,50 +1,41 @@
-/* Animation Keyframes */
-@keyframes fadeInSlideDown {
-  0% {
+/* Simple Fade-In Animation */
+@keyframes fadeIn {
+  from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(10px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+/* Apply the fade-in animation with no delays */
+.fadeIn {
+  animation: fadeIn 0.6s ease-out forwards;
 }
 
-/* Animation Classes */
-.fadeInSlideDown {
-  animation: fadeInSlideDown 1s ease-out forwards;
+/* Smooth Page Fade-In */
+.pageContent {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out forwards;
 }
 
-.fadeInCard {
-  animation: fadeIn 1s ease-out forwards;
-  animation-delay: 0.3s;
+/* Simplified hover effect */
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Add a small delay to stagger card animations */
-.fadeInCard:nth-child(2) {
-  animation-delay: 0.5s;
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.fadeInCard:nth-child(3) {
-  animation-delay: 0.7s;
+/* Card title hover effect */
+.card-title {
+  transition: color 0.2s ease;
 }
 
-/* Add more delay to the second row */
-.fadeInCard:nth-child(4) {
-  animation-delay: 0.9s;
-}
-
-.fadeInCard:nth-child(5) {
-  animation-delay: 1.1s;
+.card-title:hover {
+  color: #2e7d32;
 }
