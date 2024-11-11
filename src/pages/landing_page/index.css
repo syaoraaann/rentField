@@ -2,7 +2,41 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-image: url('../../assets/images/landingbg6.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
+
+/* .home-menu {
+    background-image: url('../../assets/images/landingbg6.png');
+    
+}
+
+.other-menus {
+    background-image: url('../../assets/images/face-1.jpg');
+} */
+
+.ant-layout-header {
+    background: rgba(0, 0, 0, 0.2) !important; /* Latar belakang putih semi-transparan */
+    backdrop-filter: blur(10px) !important; /* Efek blur */
+    -webkit-backdrop-filter: blur(10px) !important; /* Efek blur untuk Safari */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; /* Bayangan lembut */
+    padding: 10px 20px !important; /* Padding untuk header dan footer */
+    color: white !important; /* Warna teks putih agar kontras dengan latar belakang */
+    /* border: 1px solid rgba(255, 255, 255, 0.3) !important; Batas semi-transparan untuk efek glass */
+    box-shadow: none !important;
+    position: relative !important;
+    z-index: 10 !important; /* Tetapkan z-index agar konten tetap di atas background */
+    height: 60px !important;
+    overflow: hidden;
+
+  }
+
+.ant-layout-content {
+    
+    flex: 1; /* Biarkan content mengambil ruang yang tersisa */
+}
   
 .layout-signin {
     background-color: #f0f2f5;
@@ -13,6 +47,7 @@
     justify-content: space-between; /* Membuat elemen di dalam header tersebar */
     align-items: center; /* Memusatkan elemen secara vertikal */
     padding: 0 20px;
+    height: 60px;
   }
   
 .header-col {
@@ -32,9 +67,39 @@
 /* Gaya untuk menu navigasi */
 .header-nav nav {
     display: flex;
-    gap: 15px;
-    align-items: end;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    align-items: center;
+    height: 100%;
   }
+
+.header-nav a {
+    padding: 10px 15px;
+    /* border-radius: 5px; */
+    color: white !important;
+    text-decoration: none;
+    display: flex;
+    width: 100px; /* Tentukan lebar tetap yang sesuai untuk setiap link */
+    padding: 0; /* Atur padding untuk memastikan ketinggian yang sama */
+    text-align: center; /* Agar teks berada di tengah */
+    margin: 0; /* Berikan jarak antar link jika diperlukan */  
+    align-items: center; /* Tambahan ini */
+    justify-content: center; /* Tambahan ini */
+    height: 60px;
+
+    
+}
+  
+.header-nav a.active-link {
+    background-color: rgba(255, 255, 255, 0.2); /* Putih semi-transparan */
+    color: white;
+    font-weight: bold;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
   
 .header-nav nav a {
     color: #b2d12d;
@@ -57,13 +122,58 @@
 /* Gaya untuk tombol login di header */
 .header-btn .ant-btn-primary {
     background-color: #b2d12d !important;
-    border-color: #b2d12d !important;
     font-weight: bold;
     color: black;
+    font-size: 16px !important;
+    padding: 20px 15px !important;  
+    background: linear-gradient(90deg, #b2d12d, #dcf764); /* Gradasi dari biru ke hijau */
+    cursor: pointer;  
+    border: none;
   }
   
 .header-btn .ant-btn-primary:hover {
     background-color: #b2d12d !important;
-    border-color: #b2d12d !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px !important;
+    font-weight: bold;
+    padding: 20px 15px !important;
+    background: linear-gradient(90deg, #00C9FF, #92FE9D) !important;
+    cursor: pointer;  
+    border: none;
   }
+
+.footer{
+    background: rgba(0, 0, 0, 0.2) !important; /* Latar belakang putih semi-transparan */
+    backdrop-filter: blur(10px); /* Efek blur */
+    -webkit-backdrop-filter: blur(10px); /* Efek blur untuk Safari */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
+    padding: 10px 20px; /* Padding untuk header dan footer */
+    color: white; /* Warna teks putih agar kontras dengan latar belakang */
+    /* border: 1px solid rgba(255, 255, 255, 0.3); */
+
+}
+
+.font-color{
+  color: white !important;
+}
+
+.content-animation {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+
+
+
 
