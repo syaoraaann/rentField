@@ -1,55 +1,37 @@
-.login-layout {
-  min-height: 100vh;
-  background-color: #f0f2f5;
-}
-
-.login-header {
-  background-color: #001529;
-  text-align: center;
-  padding: 20px 0;
-}
-
-.logo img {
-  max-height: 50px;
-}
-
-.login-content {
+/* LoginPage.css */
+.login-container {
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 50px 0;
-}
-
-.login-row {
-  width: 100%;
+  align-items: center;
+  height: 100vh;
+  background-color: #d1e59e; /* Warna latar belakang */
 }
 
 .login-box {
+  width: 400px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  padding: 30px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  text-align: center;
 }
 
-.login-title {
-  text-align: center;
+.login-box .ant-typography {
   margin-bottom: 20px;
 }
 
-.login-subtitle {
-  text-align: center;
-  margin-bottom: 40px;
-  color: #888;
+.login-box .ant-input {
+  border-radius: 10px;
+  
 }
 
-.login-button {
-  background-color: #001529;
-  border-color: #001529;
+.login-box .ant-btn-primary {
+  background-color: #b3d146;
+  border-color: #b3d146;
+  border-radius: 10px;
 }
 
-.login-footer {
-  text-align: center;
-  padding: 20px 0;
-  background-color: #001529;
-  color: #fff;
+.login-box .ant-typography-secondary a {
+  color: #1890ff;
+  cursor: pointer;
 }
