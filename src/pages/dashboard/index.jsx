@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout, Card, Row, Col, Typography, List } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SideNav from "../sidenav";
 import "./index.css";
 
@@ -78,6 +78,15 @@ const upcomingEvents = [
 
 const Dashboard = () => {
   const [hoveredCard, setHoveredCard] = useState(null); // State for hovered card
+  const [username, setUsername] = useState(null);
+
+  useEffect(() => {
+    const storedUsername = sessionStorage.getItem('username');
+    if (storedUsername) {
+      setUsername(storedUsername);
+
+    }
+  }, []);
 
   const handleMouseEnter = (card) => {
     setHoveredCard(card); // Set hovered card
@@ -97,7 +106,7 @@ const Dashboard = () => {
         <Content className="pageContent fadeIn" style={mainContentStyle}>
           {/* Dashboard Header */}
           <Title level={1} style={dashboardHeaderStyle}>
-            Ready to make the most of today, Kevin?
+            Ready to make the most of today, {username}?
           </Title>
           <Text style={{ fontSize: "1.5em", color: "#666" }}>
             Here's an overview of your recent activities!
