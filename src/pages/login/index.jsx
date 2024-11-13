@@ -23,6 +23,9 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     if (username && password) {
+
+      //save username di sessionstorage setelah login
+      sessionStorage.setItem('username', username);
       navigate("/dashboard");
     } else {
       alert("Please fill in both email and password.");
