@@ -2,7 +2,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-image: url('../../assets/images/landingbg6.png');
+    background-image: url('../../assets/images/landingbg7.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -18,12 +18,10 @@
 } */
 
 .ant-layout-header {
-    background: rgba(0, 0, 0, 0.2) !important; /* Latar belakang putih semi-transparan */
-    backdrop-filter: blur(10px) !important; /* Efek blur */
-    -webkit-backdrop-filter: blur(10px) !important; /* Efek blur untuk Safari */
+    background: white !important; /* Latar belakang putih semi-transparan */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; /* Bayangan lembut */
     padding: 10px 20px !important; /* Padding untuk header dan footer */
-    color: white !important; /* Warna teks putih agar kontras dengan latar belakang */
+    color: black !important; /* Warna teks putih agar kontras dengan latar belakang */
     /* border: 1px solid rgba(255, 255, 255, 0.3) !important; Batas semi-transparan untuk efek glass */
     box-shadow: none !important;
     position: relative !important;
@@ -76,7 +74,7 @@
 .header-nav a {
     padding: 10px 15px;
     /* border-radius: 5px; */
-    color: white !important;
+    color: black !important;
     text-decoration: none;
     display: flex;
     width: 100px; /* Tentukan lebar tetap yang sesuai untuk setiap link */
@@ -91,8 +89,7 @@
 }
   
 .header-nav a.active-link {
-    background-color: rgba(255, 255, 255, 0.2); /* Putih semi-transparan */
-    color: white;
+    background-color: rgba(177, 177, 177, 0.797); /* Putih semi-transparan */
     font-weight: bold;
     height: 60px;
     display: flex;
@@ -143,18 +140,16 @@
   }
 
 .footer{
-    background: rgba(0, 0, 0, 0.2) !important; /* Latar belakang putih semi-transparan */
-    backdrop-filter: blur(10px); /* Efek blur */
-    -webkit-backdrop-filter: blur(10px); /* Efek blur untuk Safari */
+    background: white !important; /* Latar belakang putih semi-transparan */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
     padding: 10px 20px; /* Padding untuk header dan footer */
-    color: white; /* Warna teks putih agar kontras dengan latar belakang */
+    color: black; /* Warna teks putih agar kontras dengan latar belakang */
     /* border: 1px solid rgba(255, 255, 255, 0.3); */
 
 }
 
 .font-color{
-  color: white !important;
+  color: black !important;
 }
 
 .content-animation {
@@ -172,6 +167,15 @@
       transform: translateY(0);
   }
 }
+
+.container {
+  padding: 20px;
+  color: White !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  font-family: 'Poppins';
+}
+
 
 
 
