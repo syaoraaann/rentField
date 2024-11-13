@@ -18,7 +18,7 @@ function LandingPage() {
   };
 
   const handleLoginClick = () => {
-    navigate("/dashboard"); // Change this path to your login route
+    navigate("/login"); // Change this path to your login route
   };
 
   const renderContent = () => {

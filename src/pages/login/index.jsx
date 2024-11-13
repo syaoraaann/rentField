@@ -8,6 +8,8 @@ import {
   Divider
 } from "antd";
 import "./login.css";
+import rentfield1 from "../../assets/images/rentfield1.png";
+import "@fontsource/poppins";
 
 const { Title, Text } = Typography;
 
@@ -34,16 +36,22 @@ const LoginPage = () => {
   return (
     <div className="login-container">
       <div className="login-box">
+
+        {/* logo */}
+        <img src= {rentfield1} alt="Logo" className="logo" />
         <Title level={2}>{isForgotPassword ? "Forgot Password" : "Log In"}</Title>
 
         {isForgotPassword ? (
           <Form onFinish={handlePasswordReset}>
+
             <Form.Item
               name="username"
               rules={[{ required: true, message: 'Please input your email!' }]}
             >
               <Input placeholder="Enter your Username" />
             </Form.Item>
+
+
             <Form.Item>
               <Button type="primary" htmlType="submit" block>
                 Submit
