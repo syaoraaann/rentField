@@ -7,6 +7,22 @@
   background-color: #d1e59e; /* Warna latar belakang */
 }
 
+.body {
+  font-family: 'Poppins', san-serif;
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.login-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 .login-box {
   width: 400px;
   padding: 20px;
@@ -22,8 +38,8 @@
 
 .login-box .ant-input {
   border-radius: 10px;
-  
 }
+
 
 .login-box .ant-btn-primary {
   background-color: #b3d146;

@@ -8,6 +8,8 @@ import {
   Divider
 } from "antd";
 import "./login.css";
+import rentfield1 from "../../assets/images/rentfield1.png";
+import "@fontsource/poppins";
 
 const { Title, Text } = Typography;
 
@@ -21,12 +23,16 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     if (username && password) {
+
+      //save username di sessionstorage setelah login
+      sessionStorage.setItem('username', username);
       navigate("/dashboard");
     } else {
       alert("Please fill in both email and password.");
     }
   };
 
+  //UPCOMING FEATURES//
   const handlePasswordReset = (values) => {
     console.log("Password reset for:", values.email);
   };
@@ -34,16 +40,26 @@ const LoginPage = () => {
   return (
     <div className="login-container">
       <div className="login-box">
+
+        {/* logo */}
+        <img src= {rentfield1} 
+        alt="Logo" 
+        className="logo"
+        onClick={() => navigate("/")}
+        style={{ cursor: "pointer"}} />
         <Title level={2}>{isForgotPassword ? "Forgot Password" : "Log In"}</Title>
 
         {isForgotPassword ? (
           <Form onFinish={handlePasswordReset}>
+
             <Form.Item
               name="username"
-              rules={[{ required: true, message: 'Please input your email!' }]}
+              rules={[{ required: true, message: 'Please input your Username!' }]}
             >
               <Input placeholder="Enter your Username" />
             </Form.Item>
+
+
             <Form.Item>
               <Button type="primary" htmlType="submit" block>
                 Submit

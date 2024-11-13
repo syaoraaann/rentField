@@ -154,16 +154,14 @@ const ListLapangan = () => {
       <Layout style={{ marginLeft: 256 }}>
         {" "}
         {/* Adjust margin for the SideNav */}
-        <Header
-          style={{ backgroundColor: "#fff", padding: 0, height: "120px" }}
-        >
+
           <Title
-            level={1}
+            level={3}
             style={{
               paddingLeft: "20px",
               fontFamily: "Poppins, sans-serif",
               fontWeight: "bold",
-              marginTop: "20px",
+              marginTop: "30px",
               color: "#375D22",
               fontSize: "60px",
             }}
@@ -172,9 +170,9 @@ const ListLapangan = () => {
               ? `Order Field ${selectedField.name}`
               : "Available Fields at Singaraja"}
           </Title>
-        </Header>
+      
         <Content
-          style={{ margin: "20px", padding: "20px", backgroundColor: "#fff" }}
+          style={{ margin: "10px", padding: "20px", backgroundColor: "#fff" }}
         >
           <Row gutter={16} align="middle" style={{ marginBottom: "20px" }}>
             <Col>
