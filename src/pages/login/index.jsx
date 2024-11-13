@@ -5,10 +5,10 @@ import {
   Typography,
   Form,
   Input,
-  Divider
 } from "antd";
 import "./login.css";
-import rentfield1 from "../../assets/images/rentfield1.png";
+import rentfieldlogo from "../../assets/images/rentfield1.png";
+import Login1 from "../../assets/images/Login1.png";
 import "@fontsource/poppins";
 
 const { Title, Text } = Typography;
@@ -38,78 +38,90 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
+    <div className="login-page">
+      <div className="login-container">
+        {/* Left Section */}
+        <div className="login-box">
+          <img
+            src={rentfieldlogo}
+            alt="Logo"
+            className="logo"
+            onClick={() => navigate("/")}
+            style={{ cursor: "pointer" }}
+          />
+          <Title level={2} style={{ color: "#000" }}>
+            LOG IN
+          </Title>
 
-        {/* logo */}
-        <img src= {rentfield1} 
-        alt="Logo" 
-        className="logo"
-        onClick={() => navigate("/")}
-        style={{ cursor: "pointer"}} />
-        <Title level={2}>{isForgotPassword ? "Forgot Password" : "Log In"}</Title>
+          {isForgotPassword ? (
+            <Form onFinish={handlePasswordReset}>
+              <Form.Item
+                name="username"
+                rules={[{ required: true, message: "Please input your Username!" }]}
+              >
+                <Input placeholder="Enter your Username" />
+              </Form.Item>
 
-        {isForgotPassword ? (
-          <Form onFinish={handlePasswordReset}>
+              <Form.Item>
+                <Button type="primary" htmlType="submit" block>
+                  Submit
+                </Button>
+              </Form.Item>
+              <Text type="secondary">
+                Remembered your password?{" "}
+                <a onClick={() => setIsForgotPassword(false)}>Log In</a>
+              </Text>
+            </Form>
+          ) : (
+            <Form onFinish={handleLogin}>
+              <Form.Item>
+                <Input
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Email"
+                  style={{ borderRadius: "8px", padding: "10px" }}
+                />
+              </Form.Item>
+              <Form.Item>
+                <Input.Password
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
+                  style={{ borderRadius: "8px", padding: "10px" }}
+                />
+              </Form.Item>
+              <Text type="secondary">
+                <a onClick={() => setIsForgotPassword(true)}>Forgot Password?</a>
+              </Text>
+              <Form.Item>
+                <Button
+                
+                  type="primary"
+                  htmlType="submit"
+                  disabled={!isFormValid}
+                  block
+                  className="login-button"
+                >
+                  Log In
+                </Button>
+              </Form.Item>
+            </Form>
+          )}
 
-            <Form.Item
-              name="username"
-              rules={[{ required: true, message: 'Please input your Username!' }]}
-            >
-              <Input placeholder="Enter your Username" />
-            </Form.Item>
+          <Text>
+            Don't have an account?{" "}
+            <a onClick={() => navigate("/signup")} style={{ color: "#000" }}>
+              Register here
+            </a>
+          </Text>
+        </div>
 
-
-            <Form.Item>
-              <Button type="primary" htmlType="submit" block>
-                Submit
-              </Button>
-            </Form.Item>
-            <Text type="secondary">
-              Remembered your password?{' '}
-              <a onClick={() => setIsForgotPassword(false)}>Log In</a>
-            </Text>
-          </Form>
-        ) : (
-          <Form onFinish={handleLogin}>
-            <Form.Item>
-              <Input
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Username"
-              />
-            </Form.Item>
-            <Form.Item>
-              <Input.Password
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-              />
-            </Form.Item>
-            <Form.Item>
-              <Button type="primary" 
-                htmlType="submit"
-                disabled={!isFormValid}
-                block>
-                Log In
-              </Button>
-            </Form.Item>
-
-            <Text type="secondary">
-              <a onClick={() => setIsForgotPassword(true)}>Forgot your password?</a>
-            </Text>
-
-            <Divider />
-
-            <Text className="text-black">
-                Don't have an account?
-                </Text>
-                <br />
-                <Text type="secondary">
-                <a onClick={() => navigate("/signup")}>Sign Up</a>
-            </Text>
-          </Form>
-        )}
+        {/* Right Section with Nested Card Effect */}
+        <div className="login-illustration">
+          <div className="illustration-card">
+            <img src={Login1} alt="Field illustration" className="field-image" />
+          </div>
+        </div>
       </div>
     </div>
   );
