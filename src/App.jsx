@@ -10,6 +10,7 @@ import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
 import ListLapangan from "./list_lapangan";
 import Profile from "./profile";
+import ApiPage from "./pages/api_page/index";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/list-lapangan" element={<ListLapangan />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/api-page" element={<ApiPage />} />
       </Routes>
     </div>
   );
