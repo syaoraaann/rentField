@@ -1,13 +1,16 @@
-import { Layout, Button, Row, Col, Typography, Form, Input } from "antd";
+import { Layout, Button, Row, Col, Typography, Form, Input, Avatar, Card } from "antd";
+import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../pages/landing_page/index.css";
 import rentfield1 from "../../assets/images/rentfield1.png";
 import rentfieldlogo from "../../assets/images/rentfieldlogo.png";
+import ourteam from "../../assets/images/ourteam.png";
 
 const { Title } = Typography;
 const { Header, Footer, Content } = Layout;
+const { Meta } = Card;
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -38,23 +41,20 @@ function LandingPage() {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              color: "white", // Adjust text color for readability
+              // color: "white",
               textAlign: "center",
-              padding: "20px",
-              marginTop: "30px",
+              padding: "10px",
+              marginTop: "20px",
 
             }}
           >
             <div
               style={{
-                backgroundColor: "rgba(0, 0, 0, 0.3)", // Warna putih semi-transparan
-                backdropFilter: "blur(7px)", // Efek blur
-                borderRadius: "20px", // Membuat sudut kontainer membulat
-                padding: "20px",
+                padding: "30px",
                 color: "white",
                 textAlign: "center",
                 fontFamily: "Poppins",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)"
                 // border: "1px solid rgba(255, 255, 255, 0.3)",
             }}
             >
@@ -76,22 +76,36 @@ function LandingPage() {
         );
       case "About Us":
         return (
-          <section style={{ padding: "50px", maxWidth: "1000px", margin: "0 auto" }}>
-            <Row gutter={[24, 24]} align="middle" justify="center">
+          <section>
+            <Row gutter={[24, 24]} style={{color: "white"}}>
               <Col xs={24} md={12}>
-                <Title level={2} style={{ color: "#A6CE39", fontWeight: "bold" }}>
-                  About Us
-                </Title>
-                <p style={{ fontSize: "1rem", lineHeight: "1.8", color: "#333" }}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                </p >
+                <div className="container"
+                  style={{
+                    marginRight: "10px",  // Tambahkan margin kanan
+                    height: "100%",       // Pastikan tinggi penuh
+                    padding: "60px"       // Tambahkan padding dalam
+                  }}>
+                  <Title level={1} style={{ color: "#A6CE39", fontWeight: "bold", fontFamily: "Poppins" }}>
+                    About Us
+                  </Title>
+                  <p style={{ fontSize: "16px", lineHeight: "1.8", color: "white", fontFamily: "Poppins" }}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                  </p >
+                </div> 
               </Col>
       
-              <Col xs={24} md={12} style={{ textAlign: "center" }}>
+              <Col xs={24} md={12}>    
                 <img
-                  src={rentfield1} // Ganti dengan path logo Anda
-                  alt="Rent Field Logo"
-                  style={{ maxWidth: "200px", width: "100%" }}
+                  src={ourteam} // Ganti dengan path logo Anda
+                  alt="CodeBlue Team"
+                  style={{ 
+                    maxWidth: "1000px",
+                    maxHeight: "1000px",
+                    width: "100%",           // Membuat gambar menyesuaikan lebar kolom
+                    height: "100%",          // Mengisi tinggi kolom
+                    objectFit: "cover",      // Memastikan gambar memenuhi ruang tanpa terdistorsi
+                    borderRadius: "10px"     // Opsional: Menambahkan sedikit border-radius jika ingin 
+                    }}
                 />
               </Col>
             </Row>
@@ -99,16 +113,144 @@ function LandingPage() {
         );
       case "Services":
         return (
-          <section>
-            <h2>Services</h2>
-            <p>Our services include a range of solutions to meet your needs.</p>
+          <section
+            style={{
+              margin: "0 auto", // Membuat konten berada di tengah halaman
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              // color: "white",
+              textAlign: "center",
+              padding: "10px",
+            
+            }}
+          >
+            <div
+              style={{
+                
+                color: "white",
+                textAlign: "center",
+                fontFamily: "Poppins",
+                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)"
+                // border: "1px solid rgba(255, 255, 255, 0.3)",
+              }} 
+            >
+              <h2 style={{ fontFamily: "Poppins", fontSize: "2.5rem", fontWeight: "bold" }}>Our Services</h2>
+              <Row gutter={[24,24]} xs={24} md={12}>
+              <Card
+                style={{ 
+                    width: 300, 
+                    marginRight: "20px",  // Tambahkan margin kanan
+                    height: "100%",       // Pastikan tinggi penuh
+                    padding: "60px"       // Tambahkan padding dalam
+                }}
+                cover={
+                  <img
+                    alt="example"
+                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                  />
+                }
+                actions={[
+                  <SettingOutlined key="setting" />,
+                  <EditOutlined key="edit" />,
+                  <EllipsisOutlined key="ellipsis" />,
+                ]}
+              >
+                <Meta
+                  avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />}
+                  title="Card title"
+                  description="This is the description"
+                />
+              </Card>
+              <Card
+                style={{ 
+                  width: 300, 
+                  marginRight: "20px",  // Tambahkan margin kanan
+                  height: "100%",       // Pastikan tinggi penuh
+                  padding: "60px"       // Tambahkan padding dalam
+                }}
+                cover={
+                  <img
+                    alt="example"
+                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                  />
+                }
+                actions={[
+                  <SettingOutlined key="setting" />,
+                  <EditOutlined key="edit" />,
+                  <EllipsisOutlined key="ellipsis" />,
+                ]}
+              >
+                <Meta
+                  avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />}
+                  title="Card title"
+                  description="This is the description"
+                />
+              </Card>
+              <Card
+                style={{ 
+                  width: 300, 
+                  marginRight: "20px",  // Tambahkan margin kanan
+                  height: "100%",       // Pastikan tinggi penuh
+                  padding: "60px"       // Tambahkan padding dalam
+               }}
+                cover={
+                  <img
+                    alt="example"
+                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                  />
+                }
+                actions={[
+                  <SettingOutlined key="setting" />,
+                  <EditOutlined key="edit" />,
+                  <EllipsisOutlined key="ellipsis" />,
+                ]}
+              >
+                <Meta
+                  avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />}
+                  title="Card title"
+                  description="This is the description"
+                />
+              </Card>
+              </Row>
+              
+            </div>
           </section>
         );
       case "Contact":
         return (
-          <section>
-            <h2>Contact</h2>
-            <p>Contact us through email or phone for more information.</p>
+          <section
+            style={{
+              maxWidth: "700px", 
+              margin: "0 auto", // Membuat konten berada di tengah halaman
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              // color: "white",
+              textAlign: "center",
+              padding: "10px",
+            
+            }}
+          >
+            <div
+              style={{
+                padding: "30px",
+                color: "white",
+                textAlign: "center",
+                fontFamily: "Poppins",
+                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)"
+                // border: "1px solid rgba(255, 255, 255, 0.3)",
+            }}
+            >
+              <div >
+                <h2 style={{ fontFamily: "Poppins", fontSize: "2.5rem", fontWeight: "bold" }}>Contact Us</h2>
+              </div>
+              <div>
+                <p style={{ fontFamily: "Poppins", fontSize: "16px"}}>testestestestest</p>
+              </div>
+            </div>
           </section>
         );
       default:
@@ -134,7 +276,7 @@ function LandingPage() {
           <img
             src={rentfieldlogo}
             alt="Rent Field Logo"
-            style={{ maxWidth: "60px", width: "100%", borderRadius: "60px"}}
+            style={{ maxWidth: "55px", width: "100%", borderRadius: "60px"}}
           />
         </div>
         <div className="header-col header-nav">
@@ -175,7 +317,7 @@ function LandingPage() {
       <Footer className="footer content-animation">
         <p className="copyright font-color">
           {" "}
-          Copyright © 2024 RentField.com - Powered by Information System Study Program Universitas Pendidikan
+          Copyright © 2024 RentField.com - Powered by CodeBlue Universitas Pendidikan
           Ganesha
         </p>
       </Footer>

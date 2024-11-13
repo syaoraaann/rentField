@@ -32,6 +32,7 @@ const LoginPage = () => {
     }
   };
 
+  //UPCOMING FEATURES//
   const handlePasswordReset = (values) => {
     console.log("Password reset for:", values.email);
   };
@@ -41,7 +42,11 @@ const LoginPage = () => {
       <div className="login-box">
 
         {/* logo */}
-        <img src= {rentfield1} alt="Logo" className="logo" />
+        <img src= {rentfield1} 
+        alt="Logo" 
+        className="logo"
+        onClick={() => navigate("/")}
+        style={{ cursor: "pointer"}} />
         <Title level={2}>{isForgotPassword ? "Forgot Password" : "Log In"}</Title>
 
         {isForgotPassword ? (
@@ -49,7 +54,7 @@ const LoginPage = () => {
 
             <Form.Item
               name="username"
-              rules={[{ required: true, message: 'Please input your email!' }]}
+              rules={[{ required: true, message: 'Please input your Username!' }]}
             >
               <Input placeholder="Enter your Username" />
             </Form.Item>
