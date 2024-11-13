@@ -103,6 +103,9 @@ const SideNav = () => {
       <Menu.Item key="/help-center" icon={<QuestionCircleOutlined />}>
         <Link to="/help-center">Help Center</Link>
       </Menu.Item>
+      <Menu.Item key="/api-page" icon={<QuestionCircleOutlined />}>
+        <Link to="/api-page">Api Page</Link>
+      </Menu.Item>
 
       {/* Logout */}
       <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
