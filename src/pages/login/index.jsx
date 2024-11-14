@@ -41,6 +41,8 @@ const LoginPage = () => {
     <div className="login-page">
       <div className="login-container">
         {/* Left Section */}
+
+        
         <div className="login-box">
           <img
             src={rentfieldlogo}
@@ -78,8 +80,8 @@ const LoginPage = () => {
                 <Input
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Email"
-                  style={{ borderRadius: "8px", padding: "10px" }}
+                  placeholder="Username"
+                 
                 />
               </Form.Item>
               <Form.Item>
@@ -87,10 +89,10 @@ const LoginPage = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
-                  style={{ borderRadius: "8px", padding: "10px" }}
+                 
                 />
               </Form.Item>
-              <Text type="secondary">
+              <Text type="primary">
                 <a onClick={() => setIsForgotPassword(true)}>Forgot Password?</a>
               </Text>
               <Form.Item>
@@ -109,10 +111,10 @@ const LoginPage = () => {
           )}
 
           <Text>
-            Don't have an account?{" "}
-            <a onClick={() => navigate("/signup")} style={{ color: "#000" }}>
+            Don't have an account?
+            <span className="register-link" onClick={() => navigate("/signup")}>
               Register here
-            </a>
+            </span>
           </Text>
         </div>
 
