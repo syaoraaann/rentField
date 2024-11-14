@@ -1,5 +1,4 @@
-/* ApiPage.css */
-
+/* Container styles */
 .api-page-container {
   display: flex;
 }
@@ -12,6 +11,7 @@
 
 .api-page-title {
   text-align: center;
+  font-weight: 700;
 }
 
 .api-page-description {
@@ -29,26 +29,89 @@
   margin-top: 20px;
 }
 
+/* Card styles */
 .api-page-card {
-  text-align: center;
-  width: 375px; /* Set a fixed width for consistency */
-  height: 350px; /* Set a fixed height for consistency */
+  width: 220px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+}
+
+.api-page-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .api-page-card img {
   width: 100%;
-  height: 150px; /* Set image height to be consistent */
-  object-fit: cover; /* Ensures the image covers the area without distortion */
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
+/* URL text with ellipsis */
 .api-page-url {
   display: block;
   width: 100%;
-  white-space: nowrap; /* Prevents the text from wrapping */
-  overflow: hidden; /* Hides overflow content */
-  text-overflow: ellipsis; /* Shows ellipsis when text overflows */
-  color: #1890ff; /* Optional: Customize URL text color */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #1890ff;
+  font-size: 0.9em;
+}
+
+.api-page-url:hover {
+  text-decoration: underline;
+}
+
+/* Title style for cards */
+.api-page-card .ant-card-head {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+/* Adjust the List layout for better spacing */
+.ant-list-item {
+  display: flex;
+  justify-content: center;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .api-page-card {
+    width: 180px;
+    height: 300px;
+  }
+
+  .api-page-title {
+    font-size: 1.5em;
+  }
+}
+
+.api-page-card.wider-card {
+  width: 100%; /* Make the card take full width of the container */
+}
+
+.floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1890ff;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floating-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
