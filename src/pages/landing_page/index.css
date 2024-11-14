@@ -2,10 +2,11 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-image: url('../../assets/images/landingbg7.png');
-    background-size: cover;
+    
+    background-color: #b2d12d !important;
+    /* background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
   }
 
 /* .home-menu {
@@ -24,10 +25,12 @@
     color: black !important; /* Warna teks putih agar kontras dengan latar belakang */
     /* border: 1px solid rgba(255, 255, 255, 0.3) !important; Batas semi-transparan untuk efek glass */
     box-shadow: none !important;
-    position: relative !important;
-    z-index: 10 !important; /* Tetapkan z-index agar konten tetap di atas background */
+    position: fixed !important;
+    z-index: 1000 !important; /* Tetapkan z-index agar konten tetap di atas background */
     height: 60px !important;
     overflow: hidden;
+    top: 0;
+    width: 100%;
 
   }
 
