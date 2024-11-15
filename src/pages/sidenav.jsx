@@ -35,8 +35,10 @@ const SideNav = () => {
       <div
         style={{
           padding: "20px",
+          cursor: "pointer",
           textAlign: "center",
         }}
+        onClick={() => navigate("/")}
       >
         <img
           src="../src/assets/images/rentfield1.png" // Adjust path as needed
