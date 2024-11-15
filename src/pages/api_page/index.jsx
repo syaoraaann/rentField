@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getDataUTS, sendDataUTS } from "../../utils/apiuts";
+import { getDataUTS, sendDataUTS, deleteDataUTS } from "../../utils/apiuts";
 import {
   Typography,
   Spin,
@@ -12,8 +12,13 @@ import {
   Button,
   notification,
   FloatButton,
+  Popconfirm,
 } from "antd";
-import { PlusCircleOutlined } from "@ant-design/icons";
+import {
+  PlusCircleOutlined,
+  DeleteOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
 import SideNav from "../sidenav";
 import "./index.css"; // Import the external CSS
 
@@ -50,10 +55,41 @@ const ApiPage = () => {
       });
   };
 
-  // Call getDataGallery on component mount
   useEffect(() => {
     getDataGallery();
   }, []);
+
+  // Show alert notification
+  const showAlert = (type, message, description) => {
+    api[type]({
+      message,
+      description,
+    });
+  };
+
+  const confirmDelete = async (id_play) => {
+    try {
+      let url = `/api/playlist/${id_play}`;
+      const resp = await deleteDataUTS(url);
+
+      console.log("Delete response:", resp);
+
+      if (resp && resp.status === 200) {
+        showAlert("success", "Data deleted", "Data berhasil terhapus");
+
+        await getDataGallery();
+      } else {
+        showAlert("error", "Failed to delete", "Data gagal terhapus");
+      }
+    } catch (err) {
+      console.error("Error during delete:", err);
+      showAlert(
+        "error",
+        "Failed to delete",
+        "Terjadi kesalahan saat menghapus data"
+      );
+    }
+  };
 
   const handleDrawerOpen = () => setIsDrawerVisible(true);
   const handleDrawerClose = () => {
@@ -87,27 +123,22 @@ const ApiPage = () => {
         if (resp?.message === "OK") {
           setIsEdit(false);
           setIdSelected(null);
-          api.success({
-            message: "Success",
-            description: "Data successfully added!",
-          });
+          showAlert("success", "Data submitted", "Data berhasil disubmit");
           form.resetFields();
           setIsDrawerVisible(false);
           getDataGallery(); // Fetch updated data
         } else {
-          api.error({
-            message: "Failed to send data",
-            description: "Cannot send data",
-          });
+          showAlert(
+            "error",
+            "Failed to send data",
+            "Tidak dapat mengirim data"
+          );
         }
       })
       .catch((err) => {
         setIsEdit(false);
         setIdSelected(null);
-        api.error({
-          message: "Failed to send data",
-          description: err.toString(),
-        });
+        showAlert("error", "Failed to send data", err.toString());
       });
   };
 
@@ -152,6 +183,31 @@ const ApiPage = () => {
                   bordered={true}
                   cover={<img src={item.play_thumbnail} alt={item.play_name} />}
                   className="api-page-card wider-card"
+                  actions={[
+                    <Button
+                      icon={<EditOutlined />}
+                      type="link"
+                      onClick={() => handleDrawerOpen()}
+                      tooltip="Edit"
+                    >
+                      Edit
+                    </Button>,
+                    <Popconfirm
+                      title="Are you sure you want to delete this playlist?"
+                      onConfirm={() => confirmDelete(item.id_play)} // Use the confirmDelete function
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                      <Button
+                        icon={<DeleteOutlined />}
+                        type="link"
+                        danger
+                        tooltip="Delete"
+                      >
+                        Delete
+                      </Button>
+                    </Popconfirm>,
+                  ]}
                 >
                   <Text strong>Genre:</Text> {item.play_genre} <br />
                   <Text strong>Description:</Text> {item.play_description}{" "}
