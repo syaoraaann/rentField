@@ -13,7 +13,7 @@ import {
   notification,
   FloatButton,
 } from "antd";
-import { PlusCircleOutlined } from "@ant-design/icons";
+import { PlusCircleOutlined, EditOutlined } from "@ant-design/icons";
 import SideNav from "../sidenav";
 import "./index.css"; // Import the external CSS
 
@@ -59,6 +59,10 @@ const ApiPage = () => {
   const handleDrawerClose = () => {
     form.resetFields();
     setIsDrawerVisible(false);
+  };
+
+  const handleEdit = (record) => {
+    
   };
 
   const handleFormSubmit = () => {
@@ -137,11 +141,11 @@ const ApiPage = () => {
         {!isLoading && !error && dataSource.length > 0 ? (
           <List
             grid={{
-              gutter: 8,
+              gutter: 16,
               xs: 1,
               sm: 2,
-              md: 3,
-              lg: 3,
+              md: 4,
+              lg: 4,
               xl: 3,
             }}
             dataSource={dataSource}
@@ -152,6 +156,12 @@ const ApiPage = () => {
                   bordered={true}
                   cover={<img src={item.play_thumbnail} alt={item.play_name} />}
                   className="api-page-card wider-card"
+                  actions={[
+                  <EditOutlined
+                    key="edit"
+                    onClick={() => handleEdit()}
+                  />,
+                  ]}
                 >
                   <Text strong>Genre:</Text> {item.play_genre} <br />
                   <Text strong>Description:</Text> {item.play_description}{" "}

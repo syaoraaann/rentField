@@ -32,7 +32,7 @@
 /* Card styles */
 .api-page-card {
   width: 220px;
-  height: 500px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
