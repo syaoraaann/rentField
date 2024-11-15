@@ -78,10 +78,10 @@ const upcomingEvents = [
 
 // List of images for the carousel (place images in the public/assets/images folder)
 const imageList = [
-  "/assets/images/BG.png",
-  "/assets/images/BG.png",
-  "/assets/images/BG.png",
-  "/assets/images/BG.png",
+  "/assets/images/cmgsoon.png",
+  "/assets/images/cmgsoon.png",
+  "/assets/images/cmgsoon.png",
+  "/assets/images/cmgsoon.png",
 ];
 
 const Dashboard = () => {
@@ -122,7 +122,11 @@ const Dashboard = () => {
                 <img
                   src={src}
                   alt={`carousel-${index}`}
-                  style={{ width: "100%", height: "auto", borderRadius: "8px" }}
+                  style={{
+                    width: "100%",
+                    height: "400px",
+                    borderRadius: "8px",
+                  }}
                 />
               </div>
             ))}

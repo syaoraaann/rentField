@@ -8,6 +8,7 @@ import {
   Drawer,
   Form,
   Input,
+  Select,
   Button,
   notification,
   FloatButton,
@@ -24,6 +25,7 @@ import SideNav from "../sidenav";
 import "./index.css"; // Import the external CSS
 
 const { Title, Text } = Typography;
+const { Option } = Select;
 
 const ApiPage = () => {
   const [dataSource, setDataSource] = useState([]);
@@ -292,9 +294,15 @@ const ApiPage = () => {
             <Form.Item
               name="play_genre"
               label="Genre"
-              rules={[{ required: true, message: "Please enter the genre" }]}
+              rules={[{ required: true, message: "Please select a genre" }]}
             >
-              <Input placeholder="Enter genre" />
+              <Select placeholder="Select a genre">
+                <Option value="education">Education</Option>
+                <Option value="movie">Movie</Option>
+                <Option value="music">Music</Option>
+                <Option value="song">Song</Option>
+                <Option value="others">Others</Option>
+              </Select>
             </Form.Item>
 
             <Form.Item
@@ -317,12 +325,12 @@ const ApiPage = () => {
 
             <Form.Item
               name="play_thumbnail"
-              label="Thumbnail URL"
+              label="Thumbnail"
               rules={[
-                { required: true, message: "Please enter the thumbnail URL" },
+                { required: true, message: "Please provide a thumbnail file" },
               ]}
             >
-              <Input placeholder="Enter URL Thumbnail" />
+              <Input placeholder="Enter URL" />
             </Form.Item>
           </Form>
         </Drawer>
