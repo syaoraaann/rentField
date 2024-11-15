@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { getDataUTS, sendDataUTS, deleteDataUTS } from "../../utils/apiuts";
 import {
   Typography,
-  Spin,
   Alert,
   Card,
   List,
@@ -12,13 +11,9 @@ import {
   Button,
   notification,
   FloatButton,
-  Popconfirm,
+  Skeleton,
 } from "antd";
-import {
-  PlusCircleOutlined,
-  DeleteOutlined,
-  EditOutlined,
-} from "@ant-design/icons";
+import { PlusCircleOutlined, SearchOutlined } from "@ant-design/icons";
 import SideNav from "../sidenav";
 import "./index.css"; // Import the external CSS
 
@@ -33,6 +28,7 @@ const ApiPage = () => {
   const [api, contextHolder] = notification.useNotification();
   const [isEdit, setIsEdit] = useState(false);
   const [idSelected, setIdSelected] = useState(null);
+  const [searchText, setSearchText] = useState("");
 
   // Fetch the gallery data
   const getDataGallery = () => {
@@ -55,6 +51,22 @@ const ApiPage = () => {
       });
   };
 
+  const handleSearch = (value) => {
+    setSearchText(value.toLowerCase());
+  };
+
+  let dataSourceFiltered = dataSource.filter((item) => {
+    return (
+      item?.play_name?.toLowerCase().includes(searchText.toLowerCase()) ||
+      item?.play_genre?.toLowerCase().includes(searchText.toLowerCase()) ||
+      item?.play_description
+        ?.toLowerCase()
+        .includes(searchText.toLowerCase()) ||
+      item?.play_url?.toLowerCase().includes(searchText.toLowerCase())
+    );
+  });
+
+  // Call getDataGallery on component mount
   useEffect(() => {
     getDataGallery();
   }, []);
@@ -154,7 +166,17 @@ const ApiPage = () => {
           Explore your playlists below!
         </Text>
 
-        {isLoading && <Spin className="api-page-spinner" />}
+        {/*Search bar*/}
+        <Input
+          prefix={<SearchOutlined />}
+          placeholder="Input search text"
+          className="header-search"
+          allowClear
+          size="large"
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+
+        {isLoading && <Skeleton active />}
         {error && (
           <Alert
             message="Error"
@@ -175,7 +197,7 @@ const ApiPage = () => {
               lg: 3,
               xl: 3,
             }}
-            dataSource={dataSource}
+            dataSource={dataSourceFiltered}
             renderItem={(item) => (
               <List.Item>
                 <Card
