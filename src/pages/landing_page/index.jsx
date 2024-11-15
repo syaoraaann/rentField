@@ -1,5 +1,5 @@
 import { Layout, Button, Row, Col, Typography, Form, Input, Avatar, Card, Flex } from "antd";
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { EditOutlined, EllipsisOutlined, SettingOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 import { useState, useEffect } from "react";
 import { Settings, Edit, MoreHorizontal } from 'lucide-react';
@@ -15,6 +15,9 @@ import futsal from "../../assets/images/futsal.jpg";
 import voli from "../../assets/images/voli.jpg";
 import biliard from "../../assets/images/biliard.jpg";
 import ourteam from "../../assets/images/ourteam.png";
+import status from "../../assets/images/status.png";
+import forrent from "../../assets/images/forrent.jpg";
+import efficient from "../../assets/images/efficient.jpg";
 
 const { Title } = Typography;
 const { Header, Footer, Content } = Layout;
@@ -24,7 +27,19 @@ function LandingPage() {
   const navigate = useNavigate();
   // const [activeMenu, setActiveMenu] = useState("Home");
   const [activeSection, setActiveSection] = useState("Home");
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleNext = () => {
+    setActiveIndex((prevIndex) =>
+      prevIndex === galleryData.length - 1 ? 0 : prevIndex + 1
+    );
+  };
   
+  const handlePrev = () => {
+    setActiveIndex((prevIndex) =>
+      prevIndex === 0 ? galleryData.length - 1 : prevIndex - 1
+    );
+  };
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -48,31 +63,55 @@ function LandingPage() {
       id: 1,
       image: basket,
       title: "Lapangan Bola Basket Kampus Tengah Undiksha",
-      description: "Professional photographer with 10 years of experience in portrait and landscape photography."
+      description: "Lapangan bola basket Kampus Tengah Undiksha berada di jln. Udayana, Singaraja. Buka 24 jam untuk umum."
     },
     {
       id: 2,
       image: bultang,
       title: "Lapangan Bola Tangkis Gor Undiksha",
-      description: "We use Boards to share initial goals and ideas, show the user flow, and capture inspiration."
+      description: "Lapangan bola tangkis Kampus Tengah Undiksha berada di jln. Udayana, Singaraja. Buka 24 jam untuk umum."
     },
     {
       id: 3,
       image: futsal,
       title: "Lapangan Futsal Banyuasri",
-      description: "Specializing in urban photography and street culture documentation."
+      description: "Lapangan futsal Banyuasri berada di jln. Udayana, Singaraja. Buka 24 jam untuk umum."
     },
     {
       id: 4,
       image: voli,
       title: "Lapangan Voli Gor Undiksha Jineng Dalem",
-      description: "Expert in minimal and contemporary photography styles."
+      description: "Lapangan bola voli Gor Undiksha Jineng Dalem berada di Desa Jineng Dalem. Buka 24 jam untuk mahasiswa Undiksha"
     },
     {
       id: 5,
       image: biliard,
       title: "Billiard Singaraja",
-      description: "Fashion photographer with a unique perspective on modern trends."
+      description: "Biliard Singaraja berada di jln. A. Yani, Singaraja. Buka dari pukul 08.00 WITA-23.00 WITA"
+    },
+    {
+      id: 6,
+      image: voli,
+      title: "Lapangan Voli Gor Undiksha Jineng Dalem",
+      description: "Lapangan bola voli Gor Undiksha Jineng Dalem berada di Desa Jineng Dalem. Buka 24 jam untuk mahasiswa Undiksha"
+    },
+    {
+      id: 7,
+      image: biliard,
+      title: "Billiard Singaraja",
+      description: "Biliard Singaraja berada di jln. A. Yani, Singaraja. Buka dari pukul 08.00 WITA-23.00 WITA"
+    },
+    {
+      id: 8,
+      image: voli,
+      title: "Lapangan Voli Gor Undiksha Jineng Dalem",
+      description: "Lapangan bola voli Gor Undiksha Jineng Dalem berada di Desa Jineng Dalem. Buka 24 jam untuk mahasiswa Undiksha"
+    },
+    {
+      id: 9,
+      image: biliard,
+      title: "Billiard Singaraja",
+      description: "Biliard Singaraja berada di jln. A. Yani, Singaraja. Buka dari pukul 08.00 WITA-23.00 WITA"
     }
   ];
 
@@ -206,8 +245,8 @@ function LandingPage() {
             justifyContent: "center",
           }}
         >
-        <Row style={{color: "white", height: "100vh"}}>
-              <Col style={{height: "100%", padding: 0}}>
+        <Row gutter={[0, 48]} justify="center" style={{color: "white", height: "100vh"}}>
+              <Col xs={8} lg={32} style={{height: "100%", padding: 0}}>
                 <div
                   style={{ 
                     height: "100%", 
@@ -230,19 +269,20 @@ function LandingPage() {
                 </div> 
               </Col>
       
-              <Col>    
-                <img
-                  src={ourteam} // Ganti dengan path logo Anda
-                  alt="CodeBlue Team"
-                  style={{ 
-                    maxWidth: "912px",
-                    maxHeight: "1000px",
-                    width: "100%",           // Membuat gambar menyesuaikan lebar kolom
-                    height: "100%",          // Mengisi tinggi kolom
-                    objectFit: "cover",      // Memastikan gambar memenuhi ruang tanpa terdistorsi
-                    
-                    }}
-                />
+              <Col xs={16} lg={32}>
+                <div style={{ backgroundColor: "#A6CE39", height: "100vh"}}>
+                  <img
+                    src={ourteam} // Ganti dengan path logo Anda
+                    alt="CodeBlue Team"
+                    style={{ 
+                     
+                     
+                      width: "100%",           // Membuat gambar menyesuaikan lebar kolom
+                      height: "100%", 
+                      objectFit: "cover",      // Memastikan gambar memenuhi ruang tanpa terdistorsi   
+                      }}
+                  />
+                </div>
               </Col>
             </Row>
         </section>
@@ -260,139 +300,157 @@ function LandingPage() {
 
           }}
         >
-          <Col>
-          <div
+          <Col style={{ width: "100%" }}>
+            <div
               style={{
-                
                 color: "white",
                 textAlign: "center",
                 fontFamily: "Poppins",
-                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                justifyContent: "center",
+                paddingTop: "90px",
+                display: "flex",           // Tambahkan
+                flexDirection: "column",   // Tambahkan
                 alignItems: "center",
-                paddingLeft: "50px",
-                paddingTop: "90px"
+                paddingBottom: "70px" 
                 // border: "1px solid rgba(255, 255, 255, 0.3)",
               }} 
             >
               <h2 style={{ fontFamily: "Poppins", fontSize: "2.5rem", fontWeight: "bold", paddingBottom: "10px" }}>Our Services</h2>
               <Row gutter={[24,24]} xs={24} md={12}>
               <Card
+                className="card"
                 style={{ 
-                    width: 300, 
+                    width: 400, 
                     marginRight: "20px",  // Tambahkan margin kanan
-                    height: "100%",       // Pastikan tinggi penuh
+                    height: 450,       // Pastikan tinggi penuh
                     padding: "60px"       // Tambahkan padding dalam
                 }}
                 cover={
                   <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                    className="card-img"
+                    alt="For Rent"
+                    src={forrent}
                   />
                 }
-                actions={[
-                  <SettingOutlined key="setting" />,
-                  <EditOutlined key="edit" />,
-                  <EllipsisOutlined key="ellipsis" />,
-                ]}
               >
                 <Meta
-                  avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />}
-                  title="Card title"
-                  description="This is the description"
+                  title="Rent Field Services"
+                  description="Provide several rental field or place."
                 />
               </Card>
               <Card
+                className="card"
                 style={{ 
-                  width: 300, 
+                  width: 400, 
                   marginRight: "20px",  // Tambahkan margin kanan
-                  height: "100%",       // Pastikan tinggi penuh
+                  height: 450,       // Pastikan tinggi penuh
                   padding: "60px"       // Tambahkan padding dalam
                 }}
                 cover={
                   <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                    className="card-img"
+                    alt="Efficient"
+                    src={efficient}
                   />
                 }
-                actions={[
-                  <SettingOutlined key="setting" />,
-                  <EditOutlined key="edit" />,
-                  <EllipsisOutlined key="ellipsis" />,
-                ]}
               >
                 <Meta
-                  avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />}
-                  title="Card title"
-                  description="This is the description"
+                  title="Effectiveness & Efficientcy"
+                  description="Provide effectiveness and efficientcy for user who want to rent field or place."
                 />
               </Card>
               <Card
+                className="card"
                 style={{ 
-                  width: 300, 
+                  width: 400, 
                   marginRight: "20px",  // Tambahkan margin kanan
-                  height: "100%",       // Pastikan tinggi penuh
+                  height: 450,       // Pastikan tinggi penuh
                   padding: "60px"       // Tambahkan padding dalam
                }}
                 cover={
                   <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                    className="card-img"
+                    alt="Status"
+                    src={status}
                   />
                 }
-                actions={[
-                  <SettingOutlined key="setting" />,
-                  <EditOutlined key="edit" />,
-                  <EllipsisOutlined key="ellipsis" />,
-                ]}
               >
                 <Meta
-                  avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />}
-                  title="Card title"
-                  description="This is the description"
+                  title="Provide Status Field"
+                  description="We provide information about status field or place, so user can check easyly the field or place already booked or not."
                 />
               </Card>
               </Row>    
             </div>
 
-            <div style={{paddingTop:"80px", backgroundColor: "pink", maxWidth: "100%", width: "250vh"}}>
-              <h2 style={{ fontFamily: "Poppins", fontSize: "2.5rem", fontWeight: "bold", paddingBottom: "10px", paddingLeft: "10px" }}>Available For Rent</h2>
-                <Row style={{paddingBottom: "30px", paddingLeft: "10px"}}>
-                  <div style={{maxWidth: "400px", backgroundColor: "pink"}}>
-                      <img
-                        src={activePhoto.image}
-                        alt={activePhoto.title}
-                      />
-                  </div>
-                  <div style={{paddingLeft: "20px", backgroundColor: "pink"}}>
-                    <h4 style={{fontFamily: "Poppins", fontSize: "70", fontWeight: "bold"}}>{activePhoto.title}</h4>
-                    <p style={{fontFamily: "Poppins", fontWeight: "bold"}}>{activePhoto.description}</p>
-                  </div>
-                </Row>
-
-                <Row> 
-                  {/* Bagian bawah - Preview foto kecil */}
-                    {galleryData.map((photo) => (
-                          <div
-                            style={{maxWidth: "200px", paddingLeft: "10px"}}
-                            key={photo.id}
-                            className={`flex-none snap-start cursor-pointer transition-all duration-300 w-48 h-48 ${
-                              activePhoto.id === photo.id
-                                ? 'ring-4 ring-blue-500 scale-105'
-                                : 'opacity-60 hover:opacity-100'
-                            }`}
-                            onClick={() => setActivePhoto(photo)}
-                          >
-                            <div className="w-full h-full relative">
-                              <img
-                                src={photo.image}
-                                alt={photo.title}
-                                className="w-full h-full object-cover absolute inset-0"
-                              />
-                            </div>           
-                          </div>
-                        ))}
-                </Row> 
+            <div style={{
+                  paddingTop:"80px",  
+                  maxWidth: "100%", 
+                  width: "100%",           // Ubah dari 250vh ke 100%
+                  display: "flex",         // Tambahkan
+                  flexDirection: "column", // Tambahkan
+                  alignItems: "center",
+                  animation: "fadeIn 1s ease-in",
+                  backgroundColor: "white",
+                  paddingBottom: "90px"
+            }}>
+              <h2 style={{ fontFamily: "Poppins", fontSize: "2.5rem", fontWeight: "bold", paddingBottom: "10px", color: "#A6CE39"}}>Available For Rent</h2>
+                  <Row style={{paddingBottom: "30px", animation: "slideIn 0.8s ease-out",}}>
+                    <div className="image-hover-container" style={{maxWidth: "400px", flexShrink: 0, }}>
+                        <img
+                          
+                          src={activePhoto.image}
+                          alt={activePhoto.title}
+                        />
+                    </div>
+                    <div style={{paddingLeft: "20px", width: "400px", flexShrink: 0, overflow: "hidden"}}>
+                      <h4 style={{
+                            fontFamily: "Poppins", 
+                            fontSize: "24px", 
+                            fontWeight: "bold", 
+                            wordWrap: "break-word",    // Memungkinkan text untuk wrap
+                            overflowWrap: "break-word" // Memastikan text panjang bisa wrap
+                          }}>{activePhoto.title}</h4>
+                      <p  style={{
+                            fontFamily: "Poppins", 
+                            fontWeight: "bold",
+                            wordWrap: "break-word",    // Memungkinkan text untuk wrap
+                            overflowWrap: "break-word" // Memastikan text panjang bisa wrap
+                          }}>{activePhoto.description}</p>
+                    </div>
+                  </Row>
+                  <Row className="relative overflow-hidden flex items-center" style={{ display: 'flex', flexWrap: 'nowrap', gap: '10px', paddingLeft: "110px", paddingRight: "110px", paddingBottom: "20px"}}
+                  > 
+                      {activeIndex > 0 && (
+                        <Button icon={<LeftOutlined />} onClick={handlePrev} />
+                      )}
+                      {/* Bagian bawah - Preview foto kecil */}
+                      <div className="flex flex-row" style={{display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
+                        {galleryData.map((photo) => (
+                                <div
+                                  style={{maxWidth: "200px", transform: `translateX(-${activeIndex * 200}px)`,  flexShrink: 0, padding: "5px", border: activePhoto.id === photo.id ? "4px solid #3B82F6" : "none", overflowX: 'auto', transform: `translateX(-${activeIndex * 200}px)`}}
+                                  key={photo.id}
+                                  className={`transition-transform duration-300 flex-none snap-start cursor-pointer w-48 h-48 ${
+                                    activePhoto.id === photo.id
+                                      ? 'scale-105'
+                                      : 'opacity-60 hover:opacity-100'
+                                  }`}
+                                  onClick={() => setActivePhoto(photo)}
+                                >
+                                  <div className="w-full h-full relative img">
+                                    <img
+                                      src={photo.image}
+                                      alt={photo.title}
+                                      className="w-full h-full object-cover absolute inset-0"
+                                    />
+                                  </div>           
+                                </div>
+                              ))}
+                      </div>
+                      {activeIndex < galleryData.length - 6 && (
+                        <Button icon={<RightOutlined />} onClick={handleNext} />
+                      )}      
+                  </Row>              
+                    <p>Want to see more? <Link to="/login"> Sign In</Link></p>                   
             </div>
           </Col>      
         </section>
