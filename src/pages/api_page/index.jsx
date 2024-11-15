@@ -12,8 +12,14 @@ import {
   notification,
   FloatButton,
   Skeleton,
+  Popconfirm,
 } from "antd";
-import { PlusCircleOutlined, SearchOutlined } from "@ant-design/icons";
+import {
+  PlusCircleOutlined,
+  SearchOutlined,
+  EditOutlined,
+  DeleteOutlined,
+} from "@ant-design/icons";
 import SideNav from "../sidenav";
 import "./index.css"; // Import the external CSS
 
@@ -31,24 +37,23 @@ const ApiPage = () => {
   const [searchText, setSearchText] = useState("");
 
   // Fetch the gallery data
-  const getDataGallery = () => {
+  const getDataGallery = async () => {
     setIsLoading(true);
     setError(null);
 
-    getDataUTS("/api/playlist/28")
-      .then((resp) => {
-        setIsLoading(false);
-        if (resp && Array.isArray(resp.datas)) {
-          setDataSource(resp.datas);
-        } else {
-          setError("No data available or incorrect data structure");
-        }
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        setError("Failed to load data");
-        console.error("API error:", err);
-      });
+    try {
+      const resp = await getDataUTS("/api/playlist/28");
+      setIsLoading(false);
+      if (resp && Array.isArray(resp.datas)) {
+        setDataSource(resp.datas);
+      } else {
+        setError("No data available or incorrect data structure");
+      }
+    } catch (err) {
+      setIsLoading(false);
+      setError("Failed to load data");
+      console.error("API error:", err);
+    }
   };
 
   const handleSearch = (value) => {
@@ -87,8 +92,10 @@ const ApiPage = () => {
       console.log("Delete response:", resp);
 
       if (resp && resp.status === 200) {
+        // First, show success alert
         showAlert("success", "Data deleted", "Data berhasil terhapus");
 
+        // Then, refresh the gallery
         await getDataGallery();
       } else {
         showAlert("error", "Failed to delete", "Data gagal terhapus");
