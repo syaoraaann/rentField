@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     
-    background-color: #b2d12d !important;
+    background-color: #A6CE39 !important;
     /* background-size: cover;
     background-position: center;
     background-repeat: no-repeat; */
@@ -179,6 +179,57 @@
   font-family: 'Poppins';
 }
 
+.image-hover-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-hover-container img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-hover-container:hover img {
+  transform: scale(1.1); /* Memperbesar gambar sedikit saat dihover */
+  opacity: 0.8; /* Mengurangi opacity sedikit untuk efek halus */
+}
+
+.img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.img:hover {
+  transform: scale(1.2);
+}
+
+
+.button {
+  padding-top: 50ox;
+  padding-bottom: 50px;
+}
+
+.button:hover {
+  background-color: #f0f0f0;
+}
+
+.button-position {
+  position: relative;
+  width: 300px; /* Sesuaikan dengan lebar gambar */
+  height: 200px; /* Sesuaikan dengan tinggi gambar */
+}
+
+.card {
+  transition: transform 0.3s ease-in-out;
+}
+
+.card-hover {
+  transform: scale(1.0);
+}
+
+.card-img {
+  width: 100%;
+  height: 200px; /* Tentukan tinggi gambar yang diinginkan */
+  object-fit: cover; /* Menjaga proporsi gambar agar tidak terdistorsi */
+}
 
 
 
