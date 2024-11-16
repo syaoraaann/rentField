@@ -93,22 +93,22 @@ const ApiPage = () => {
 
       console.log("Delete response:", resp);
 
-      if (resp && resp.status === 200) {
+      if (resp.status === 200 || resp.status === 201 || resp.status === 204 || resp.message === "OK") {
         // First, show success alert
         showAlert("success", "Data deleted", "Data berhasil terhapus");
 
         // Then, refresh the gallery
-        await getDataGallery();
+        setTimeout(() => {
+          getDataGallery();
+        }, 500);
       } else {
         showAlert("error", "Failed to delete", "Data gagal terhapus");
       }
-    } catch (err) {
+    }  catch (err) {
       console.error("Error during delete:", err);
-      showAlert(
-        "error",
-        "Failed to delete",
-        "Terjadi kesalahan saat menghapus data"
-      );
+      showAlert("error", "Error", "An error occurred while deleting the data");
+    } finally {
+      setIsLoading(false);
     }
   };
 
