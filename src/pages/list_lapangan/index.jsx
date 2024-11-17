@@ -15,7 +15,7 @@ import {
 import { SearchOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
-import SideNav from "../pages/sidenav";
+import SideNav from "../sidenav";
 import "@fontsource/poppins";
 
 const { Title, Text } = Typography;
