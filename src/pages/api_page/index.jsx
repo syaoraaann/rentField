@@ -37,7 +37,6 @@ const ApiPage = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [idSelected, setIdSelected] = useState(null);
   const [searchText, setSearchText] = useState("");
-  // const [isDrawer, setIsDrawer] = useState(false);
 
   // Fetch the gallery data
   const getDataGallery = async () => {
@@ -59,13 +58,6 @@ const ApiPage = () => {
     }
   };
 
-  // Call getDataGallery on component mount
-  useEffect(() => {
-    getDataGallery();
-  }, []);
-
-
-  //handle Search
   const handleSearch = (value) => {
     setSearchText(value.toLowerCase());
   };
@@ -81,24 +73,11 @@ const ApiPage = () => {
     );
   });
 
-  // const handleDrawer = () => {
-  //   setIsDrawer(true);
-  //   setIsEdit(false);
-  // };
+  // Call getDataGallery on component mount
+  useEffect(() => {
+    getDataGallery();
+  }, []);
 
-  // const onCloseDrawer = () => {
-  //   if (isEdit) {
-  //     form.resetFields();
-  //   }
-  //   setIsDrawer(false);
-  // };
-
-  const handleDrawerOpen = () => {
-    setIsDrawerVisible(true);
-    setIsEdit(false);
-  }
-
-<<<<<<< HEAD
   // Show alert notification
   const showAlert = (type, message, description) => {
     api[type]({
@@ -134,13 +113,13 @@ const ApiPage = () => {
   };
 
   const handleDrawerOpen = () => setIsDrawerVisible(true);
-=======
->>>>>>> apiupdate
   const handleDrawerClose = () => {
-    if (isEdit) {
-      form.resetFields();
-    }
+    form.resetFields();
     setIsDrawerVisible(false);
+  };
+
+  const handleEdit = (record) => {
+    
   };
 
   const handleFormSubmit = () => {
@@ -161,116 +140,31 @@ const ApiPage = () => {
 
     // Use appropriate API endpoint based on whether it's an edit or new data
     let request = !isEdit
-      ? sendDataUTS("/api/playlist/update/28", formData)
-      : sendDataUTS(`/api/playlist/update/28/${idSelected}`, formData);
+      ? sendDataUTS("/api/playlist/28", formData)
+      : sendDataUTS(`/api/playlist/28/${idSelected}`, formData);
 
-    //request for sending data
     request
       .then((resp) => {
         if (resp?.message === "OK") {
           setIsEdit(false);
           setIdSelected(null);
-<<<<<<< HEAD
           showAlert("success", "Data submitted", "Data berhasil disubmit");
-=======
-          showAlert("success", "Success", isEdit ? "Applied" : "Data sent");
->>>>>>> apiupdate
           form.resetFields();
-          // api.success({
-          //   message: "Success",
-          //   description: "Data successfully added!",
-          // });
-          // form.resetFields();
           setIsDrawerVisible(false);
           getDataGallery(); // Fetch updated data
         } else {
-<<<<<<< HEAD
           showAlert(
             "error",
             "Failed to send data",
             "Tidak dapat mengirim data"
           );
-=======
-          // api.error({
-          //   message: "Failed to send data",
-          //   description: "Cannot send data",
-          // });
-          showAlert("error", "Failed to send data", "Can't send data");
->>>>>>> apiupdate
         }
       })
       .catch((err) => {
         setIsEdit(false);
         setIdSelected(null);
         showAlert("error", "Failed to send data", err.toString());
-<<<<<<< HEAD
-=======
-        // api.error({
-        //   message: "Failed to send data",
-        //   description: err.toString(),
-        // });
->>>>>>> apiupdate
       });
-  };
-
-  //Edit Data
-  const handleDrawerEdit = (record) => {
-    setIsDrawerVisible(true);
-    setIsEdit(true);
-    setIdSelected(record?.id);
-    form.setFieldValue("play_name", record?.play_name);
-    form.setFieldValue("play_genre", record?.play_genre);
-    form.setFieldValue("play_description", record?.play_description);
-    form.setFieldValue("play_url", record?.play_url);
-    form.setFieldValue("play_thumbnail", record?.play_thumbnail);
-  };
-
-  const drawerSection = () => {
-    return (
-      <Drawer
-        title={isEdit ? "Edit Data" : "Add New Data"}
-        onClose={handleDrawerClose}
-        open={isDrawerVisible}
-        extra={
-          <Button
-            type="primary"
-            htmlType="submit"
-            onClick={() => handleFormSubmit()}
-            style={{
-              backgroundColor: isEdit ? "green" : "blue",
-              borderColor: isEdit ? "green" : "blue",
-            }}
-          >
-            {isEdit ? "Apply" : "Submit"}
-          </Button>
-        }
-      >
-        <Form layout="vertical" name="play_form" form={form}>
-          <Form.Item name="play_name" label="Name of Playlist" required>
-            <Input placeholder="Enter play name" />
-          </Form.Item>
-          <Form.Item name="play_genre" label="Genre" required>
-            <Input.TextArea rows={4} placeholder="Enter genre" />
-          </Form.Item>
-          <Form.Item name="play_description" label="Playlist Description" required>
-            <Input.TextArea rows={4} placeholder="Enter description" />
-          </Form.Item>
-          <Form.Item name="play_url" label="Playlist URL" required>
-            <Input.TextArea rows={4} placeholder="Enter URL" />
-          </Form.Item>
-          <Form.Item name="play_thumbnail" label="Playlist Tumbnail" required>
-            <Input.TextArea rows={4} placeholder="Enter Thumbnail" />
-          </Form.Item>
-        </Form>
-      </Drawer>
-    );
-  };
-
-  const showAlert = (status, title, description) => {
-    api[status]({
-      message: title,
-      description: description,
-    });
   };
 
   return (
@@ -325,7 +219,6 @@ const ApiPage = () => {
                   cover={<img src={item.play_thumbnail} alt={item.play_name} />}
                   className="api-page-card wider-card"
                   actions={[
-<<<<<<< HEAD
                     <Button
                       icon={<EditOutlined />}
                       type="link"
@@ -349,12 +242,6 @@ const ApiPage = () => {
                         Delete
                       </Button>
                     </Popconfirm>,
-=======
-                  <EditOutlined
-                    key="edit"
-                    onClick={() => handleDrawerEdit(item)}
-                  />,
->>>>>>> apiupdate
                   ]}
                 >
                   <Text strong>Genre:</Text> {item.play_genre} <br />
@@ -384,32 +271,30 @@ const ApiPage = () => {
           icon={<PlusCircleOutlined />}
           onClick={handleDrawerOpen}
         />
-        {drawerSection()}
 
         {/* Drawer with Form */}
-          {/* <Drawer
-            title="Add New Playlist"
-            width={400}
-            onClose={handleDrawerClose}
-            open={isDrawerVisible}
-            footer={
-              <Button type="primary" onClick={handleFormSubmit}>
-                Submit
-              </Button>
-            }
-          >
-            <Form layout="vertical" form={form}>
-              <Form.Item
-                name="play_name"
-                label="Play Name"
-                rules={[
-                  { required: true, message: "Please enter the play name" },
-                ]}
-              >
-                <Input placeholder="Enter play name" />
-              </Form.Item>
+        <Drawer
+          title="Add New Playlist"
+          width={400}
+          onClose={handleDrawerClose}
+          open={isDrawerVisible}
+          footer={
+            <Button type="primary" onClick={handleFormSubmit}>
+              Submit
+            </Button>
+          }
+        >
+          <Form layout="vertical" form={form}>
+            <Form.Item
+              name="play_name"
+              label="Play Name"
+              rules={[
+                { required: true, message: "Please enter the play name" },
+              ]}
+            >
+              <Input placeholder="Enter play name" />
+            </Form.Item>
 
-<<<<<<< HEAD
             <Form.Item
               name="play_genre"
               label="Genre"
@@ -423,35 +308,25 @@ const ApiPage = () => {
                 <Option value="others">Others</Option>
               </Select>
             </Form.Item>
-=======
-              <Form.Item
-                name="play_genre"
-                label="Genre"
-                rules={[{ required: true, message: "Please enter the genre" }]}
-              >
-                <Input placeholder="Enter genre" />
-              </Form.Item>
->>>>>>> apiupdate
 
-              <Form.Item
-                name="play_description"
-                label="Description"
-                rules={[
-                  { required: true, message: "Please enter the description" },
-                ]}
-              >
-                <Input.TextArea rows={4} placeholder="Enter description" />
-              </Form.Item>
+            <Form.Item
+              name="play_description"
+              label="Description"
+              rules={[
+                { required: true, message: "Please enter the description" },
+              ]}
+            >
+              <Input.TextArea rows={4} placeholder="Enter description" />
+            </Form.Item>
 
-              <Form.Item
-                name="play_url"
-                label="URL"
-                rules={[{ required: true, message: "Please enter the URL" }]}
-              >
-                <Input placeholder="Enter URL" />
-              </Form.Item>
+            <Form.Item
+              name="play_url"
+              label="URL"
+              rules={[{ required: true, message: "Please enter the URL" }]}
+            >
+              <Input placeholder="Enter URL" />
+            </Form.Item>
 
-<<<<<<< HEAD
             <Form.Item
               name="play_thumbnail"
               label="Thumbnail"
@@ -463,19 +338,6 @@ const ApiPage = () => {
             </Form.Item>
           </Form>
         </Drawer>
-=======
-              <Form.Item
-                name="play_thumbnail"
-                label="Thumbnail URL"
-                rules={[
-                  { required: true, message: "Please enter the thumbnail URL" },
-                ]}
-              >
-                <Input placeholder="Enter URL Thumbnail" />
-              </Form.Item>
-            </Form>
-          </Drawer> */}
->>>>>>> apiupdate
       </div>
     </div>
   );
