@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getDataUTS, sendDataUTS } from "../../utils/apiuts";
+import { getDataUTS, sendDataUTS, deleteDataUTS } from "../../utils/apiuts";
 import {
   Typography,
   Alert,
@@ -8,16 +8,24 @@ import {
   Drawer,
   Form,
   Input,
+  Select,
   Button,
   notification,
   FloatButton,
-  Skeleton
+  Skeleton,
+  Popconfirm,
 } from "antd";
-import { PlusCircleOutlined,SearchOutlined, EditOutlined } from "@ant-design/icons";
+import {
+  PlusCircleOutlined,
+  SearchOutlined,
+  EditOutlined,
+  DeleteOutlined,
+} from "@ant-design/icons";
 import SideNav from "../sidenav";
 import "./index.css"; // Import the external CSS
 
 const { Title, Text } = Typography;
+const { Option } = Select;
 
 const ApiPage = () => {
   const [dataSource, setDataSource] = useState([]);
@@ -31,35 +39,36 @@ const ApiPage = () => {
   const [searchText, setSearchText] = useState("");
 
   // Fetch the gallery data
-  const getDataGallery = () => {
+  const getDataGallery = async () => {
     setIsLoading(true);
     setError(null);
 
-    getDataUTS("/api/playlist/28")
-      .then((resp) => {
-        setIsLoading(false);
-        if (resp && Array.isArray(resp.datas)) {
-          setDataSource(resp.datas);
-        } else {
-          setError("No data available or incorrect data structure");
-        }
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        setError("Failed to load data");
-        console.error("API error:", err);
-      });
+    try {
+      const resp = await getDataUTS("/api/playlist/28");
+      setIsLoading(false);
+      if (resp && Array.isArray(resp.datas)) {
+        setDataSource(resp.datas);
+      } else {
+        setError("No data available or incorrect data structure");
+      }
+    } catch (err) {
+      setIsLoading(false);
+      setError("Failed to load data");
+      console.error("API error:", err);
+    }
   };
 
   const handleSearch = (value) => {
     setSearchText(value.toLowerCase());
-  }
-  
+  };
+
   let dataSourceFiltered = dataSource.filter((item) => {
     return (
       item?.play_name?.toLowerCase().includes(searchText.toLowerCase()) ||
       item?.play_genre?.toLowerCase().includes(searchText.toLowerCase()) ||
-      item?.play_description?.toLowerCase().includes(searchText.toLowerCase()) ||
+      item?.play_description
+        ?.toLowerCase()
+        .includes(searchText.toLowerCase()) ||
       item?.play_url?.toLowerCase().includes(searchText.toLowerCase())
     );
   });
@@ -68,6 +77,40 @@ const ApiPage = () => {
   useEffect(() => {
     getDataGallery();
   }, []);
+
+  // Show alert notification
+  const showAlert = (type, message, description) => {
+    api[type]({
+      message,
+      description,
+    });
+  };
+
+  const confirmDelete = async (id_play) => {
+    try {
+      let url = `/api/playlist/${id_play}`;
+      const resp = await deleteDataUTS(url);
+
+      console.log("Delete response:", resp);
+
+      if (resp.status === 200 || resp.status === 201 || resp.status === 204 || resp.message === "OK") {
+        // First, show success alert
+        showAlert("success", "Data deleted", "Data berhasil terhapus");
+
+        // Then, refresh the gallery
+        setTimeout(() => {
+          getDataGallery();
+        }, 500);
+      } else {
+        showAlert("error", "Failed to delete", "Data gagal terhapus");
+      }
+    }  catch (err) {
+      console.error("Error during delete:", err);
+      showAlert("error", "Error", "An error occurred while deleting the data");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleDrawerOpen = () => setIsDrawerVisible(true);
   const handleDrawerClose = () => {
@@ -105,27 +148,22 @@ const ApiPage = () => {
         if (resp?.message === "OK") {
           setIsEdit(false);
           setIdSelected(null);
-          api.success({
-            message: "Success",
-            description: "Data successfully added!",
-          });
+          showAlert("success", "Data submitted", "Data berhasil disubmit");
           form.resetFields();
           setIsDrawerVisible(false);
           getDataGallery(); // Fetch updated data
         } else {
-          api.error({
-            message: "Failed to send data",
-            description: "Cannot send data",
-          });
+          showAlert(
+            "error",
+            "Failed to send data",
+            "Tidak dapat mengirim data"
+          );
         }
       })
       .catch((err) => {
         setIsEdit(false);
         setIdSelected(null);
-        api.error({
-          message: "Failed to send data",
-          description: err.toString(),
-        });
+        showAlert("error", "Failed to send data", err.toString());
       });
   };
 
@@ -141,18 +179,17 @@ const ApiPage = () => {
           Explore your playlists below!
         </Text>
 
-         {/*Search bar*/}
-         <Input
-        prefix={<SearchOutlined/>}
-        placeholder="Input search text"
-        className="header-search"
-        allowClear
-        size="large"
-        onChange={(e) => handleSearch(e.target.value)}
+        {/*Search bar*/}
+        <Input
+          prefix={<SearchOutlined />}
+          placeholder="Input search text"
+          className="header-search"
+          allowClear
+          size="large"
+          onChange={(e) => handleSearch(e.target.value)}
         />
-        
 
-        {isLoading && <Skeleton active/>}
+        {isLoading && <Skeleton active />}
         {error && (
           <Alert
             message="Error"
@@ -182,10 +219,29 @@ const ApiPage = () => {
                   cover={<img src={item.play_thumbnail} alt={item.play_name} />}
                   className="api-page-card wider-card"
                   actions={[
-                  <EditOutlined
-                    key="edit"
-                    onClick={() => handleEdit()}
-                  />,
+                    <Button
+                      icon={<EditOutlined />}
+                      type="link"
+                      onClick={() => handleDrawerOpen()}
+                      tooltip="Edit"
+                    >
+                      Edit
+                    </Button>,
+                    <Popconfirm
+                      title="Are you sure you want to delete this playlist?"
+                      onConfirm={() => confirmDelete(item.id_play)} // Use the confirmDelete function
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                      <Button
+                        icon={<DeleteOutlined />}
+                        type="link"
+                        danger
+                        tooltip="Delete"
+                      >
+                        Delete
+                      </Button>
+                    </Popconfirm>,
                   ]}
                 >
                   <Text strong>Genre:</Text> {item.play_genre} <br />
@@ -242,9 +298,15 @@ const ApiPage = () => {
             <Form.Item
               name="play_genre"
               label="Genre"
-              rules={[{ required: true, message: "Please enter the genre" }]}
+              rules={[{ required: true, message: "Please select a genre" }]}
             >
-              <Input placeholder="Enter genre" />
+              <Select placeholder="Select a genre">
+                <Option value="education">Education</Option>
+                <Option value="movie">Movie</Option>
+                <Option value="music">Music</Option>
+                <Option value="song">Song</Option>
+                <Option value="others">Others</Option>
+              </Select>
             </Form.Item>
 
             <Form.Item
@@ -267,12 +329,12 @@ const ApiPage = () => {
 
             <Form.Item
               name="play_thumbnail"
-              label="Thumbnail URL"
+              label="Thumbnail"
               rules={[
-                { required: true, message: "Please enter the thumbnail URL" },
+                { required: true, message: "Please provide a thumbnail file" },
               ]}
             >
-              <Input placeholder="Enter URL Thumbnail" />
+              <Input placeholder="Enter URL" />
             </Form.Item>
           </Form>
         </Drawer>

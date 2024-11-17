@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Card, Row, Col, Typography, List } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Layout, Card, Row, Col, Typography, List, Carousel } from "antd";
+import { Link } from "react-router-dom";
 import SideNav from "../sidenav";
 import "./index.css";
 
@@ -76,25 +76,25 @@ const upcomingEvents = [
   },
 ];
 
+// List of images for the carousel (place images in the public/assets/images folder)
+const imageList = [
+  "/assets/images/cmgsoon.png",
+  "/assets/images/cmgsoon.png",
+  "/assets/images/cmgsoon.png",
+  "/assets/images/cmgsoon.png",
+];
+
 const Dashboard = () => {
-  const [hoveredCard, setHoveredCard] = useState(null); // State for hovered card
+  const [hoveredCard, setHoveredCard] = useState(null);
   const [username, setUsername] = useState(null);
 
   useEffect(() => {
-    const storedUsername = sessionStorage.getItem('username');
-    if (storedUsername) {
-      setUsername(storedUsername);
-
-    }
+    const storedUsername = sessionStorage.getItem("username");
+    if (storedUsername) setUsername(storedUsername);
   }, []);
 
-  const handleMouseEnter = (card) => {
-    setHoveredCard(card); // Set hovered card
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredCard(null); // Reset hovered card
-  };
+  const handleMouseEnter = (card) => setHoveredCard(card);
+  const handleMouseLeave = () => setHoveredCard(null);
 
   return (
     <Layout style={{ minHeight: "100vh", background: "#FFFFFF" }}>
@@ -112,8 +112,28 @@ const Dashboard = () => {
             Here's an overview of your recent activities!
           </Text>
 
+          {/* Carousel Component */}
+          <Carousel
+            autoplay
+            style={{ marginTop: "24px", marginBottom: "24px" }}
+          >
+            {imageList.map((src, index) => (
+              <div key={index}>
+                <img
+                  src={src}
+                  alt={`carousel-${index}`}
+                  style={{
+                    width: "100%",
+                    height: "400px",
+                    borderRadius: "8px",
+                  }}
+                />
+              </div>
+            ))}
+          </Carousel>
+
           {/* Cards Layout */}
-          <Row gutter={[16, 16]} style={{ marginTop: "24px" }}>
+          <Row gutter={[16, 16]}>
             <Col span={8}>
               <Link to="/mypoint" style={{ color: "inherit" }}>
                 <Card
@@ -129,7 +149,6 @@ const Dashboard = () => {
                         ? "0 6px 12px rgba(0, 0, 0, 0.15)"
                         : "0 2px 6px rgba(0, 0, 0, 0.1)",
                   }}
-                  className="fadeIn card"
                   hoverable
                   onMouseEnter={() => handleMouseEnter("mypoint")}
                   onMouseLeave={handleMouseLeave}
@@ -158,7 +177,6 @@ const Dashboard = () => {
                         ? "0 6px 12px rgba(0, 0, 0, 0.15)"
                         : "0 2px 6px rgba(0, 0, 0, 0.1)",
                   }}
-                  className="fadeIn card"
                   hoverable
                   onMouseEnter={() => handleMouseEnter("history")}
                   onMouseLeave={handleMouseLeave}
@@ -172,7 +190,6 @@ const Dashboard = () => {
                 </Card>
               </Link>
             </Col>
-            {/* Upcoming Event Card with scrollable list */}
             <Col span={8}>
               <Link to="/upcoming-event" style={{ color: "inherit" }}>
                 <Card
@@ -188,7 +205,6 @@ const Dashboard = () => {
                         ? "0 6px 12px rgba(0, 0, 0, 0.15)"
                         : "0 2px 6px rgba(0, 0, 0, 0.1)",
                   }}
-                  className="fadeIn card"
                   hoverable
                   onMouseEnter={() => handleMouseEnter("upcoming")}
                   onMouseLeave={handleMouseLeave}
@@ -203,8 +219,8 @@ const Dashboard = () => {
                       maxHeight: "250px",
                       overflowY: "auto",
                       padding: "10px",
-                      backgroundColor: "#f9f9f9", // Soft light gray background for list
-                      borderRadius: "8px", // Match the card border radius
+                      backgroundColor: "#f9f9f9",
+                      borderRadius: "8px",
                     }}
                   >
                     <List
@@ -214,7 +230,7 @@ const Dashboard = () => {
                         <List.Item
                           style={{
                             padding: "8px 0",
-                            borderBottom: "1px solid #f0f0f0", // Soft border for items
+                            borderBottom: "1px solid #f0f0f0",
                           }}
                         >
                           <Text style={{ fontSize: "1.1em", color: "#666" }}>
@@ -230,6 +246,7 @@ const Dashboard = () => {
             </Col>
           </Row>
 
+          {/* More Cards (Top Booked, Events) */}
           <Row gutter={[16, 16]} style={{ marginTop: "16px" }}>
             <Col span={12}>
               <Link to="/topbooked" style={{ color: "inherit" }}>
@@ -246,7 +263,6 @@ const Dashboard = () => {
                         ? "0 6px 12px rgba(0, 0, 0, 0.15)"
                         : "0 2px 6px rgba(0, 0, 0, 0.1)",
                   }}
-                  className="fadeIn card"
                   hoverable
                   onMouseEnter={() => handleMouseEnter("topbooked")}
                   onMouseLeave={handleMouseLeave}
@@ -261,30 +277,29 @@ const Dashboard = () => {
               </Link>
             </Col>
             <Col span={12}>
-              <Link to="/event" style={{ color: "inherit" }}>
+              <Link to="/events" style={{ color: "inherit" }}>
                 <Card
                   bordered={false}
                   style={{
                     ...cardStyle,
                     transform:
-                      hoveredCard === "event"
+                      hoveredCard === "events"
                         ? "translateY(-10px)"
                         : "translateY(0)",
                     boxShadow:
-                      hoveredCard === "event"
+                      hoveredCard === "events"
                         ? "0 6px 12px rgba(0, 0, 0, 0.15)"
                         : "0 2px 6px rgba(0, 0, 0, 0.1)",
                   }}
-                  className="fadeIn card"
                   hoverable
-                  onMouseEnter={() => handleMouseEnter("event")}
+                  onMouseEnter={() => handleMouseEnter("events")}
                   onMouseLeave={handleMouseLeave}
                 >
                   <Title className="card-title" style={titleStyle}>
-                    Event
+                    Events
                   </Title>
                   <Title level={1} style={cardContentTitleStyle}>
-                    50
+                    20
                   </Title>
                 </Card>
               </Link>
