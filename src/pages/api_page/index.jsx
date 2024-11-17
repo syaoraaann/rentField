@@ -112,14 +112,27 @@ const ApiPage = () => {
     }
   };
 
-  const handleDrawerOpen = () => setIsDrawerVisible(true);
+  const handleDrawerOpen = () => {
+    setIsDrawerVisible(true);
+    setIsEdit(false);
+  }
+
   const handleDrawerClose = () => {
-    form.resetFields();
+    if (isEdit) {
+      form.resetFields();
+    }
     setIsDrawerVisible(false);
   };
 
-  const handleEdit = (record) => {
-    
+  const handleDrawerEdit = (record) => {
+    setIsDrawerVisible(true);
+    setIsEdit(true);
+    setIdSelected(record?.id_play);
+    form.setFieldValue("play_name", record?.play_name);
+    form.setFieldValue("play_genre", record?.play_genre);
+    form.setFieldValue("play_description", record?.play_description);
+    form.setFieldValue("play_url", record?.play_url);
+    form.setFieldValue("play_thumbnail", record?.play_thumbnail);
   };
 
   const handleFormSubmit = () => {
@@ -141,7 +154,7 @@ const ApiPage = () => {
     // Use appropriate API endpoint based on whether it's an edit or new data
     let request = !isEdit
       ? sendDataUTS("/api/playlist/28", formData)
-      : sendDataUTS(`/api/playlist/28/${idSelected}`, formData);
+      : sendDataUTS(`/api/playlist/update/${idSelected}`, formData);
 
     request
       .then((resp) => {
@@ -167,120 +180,24 @@ const ApiPage = () => {
       });
   };
 
-  return (
-    <div className="api-page-container">
-      {contextHolder}
-      <SideNav />
-      <div className="api-page-sidenav">
-        <Title level={1} className="api-page-title">
-          Playlist Gallery
-        </Title>
-        <Text className="api-page-description">
-          Explore your playlists below!
-        </Text>
-
-        {/*Search bar*/}
-        <Input
-          prefix={<SearchOutlined />}
-          placeholder="Input search text"
-          className="header-search"
-          allowClear
-          size="large"
-          onChange={(e) => handleSearch(e.target.value)}
-        />
-
-        {isLoading && <Skeleton active />}
-        {error && (
-          <Alert
-            message="Error"
-            description={error}
-            type="error"
-            showIcon
-            className="api-page-alert"
-          />
-        )}
-
-        {!isLoading && !error && dataSource.length > 0 ? (
-          <List
-            grid={{
-              gutter: 16,
-              xs: 1,
-              sm: 2,
-              md: 4,
-              lg: 4,
-              xl: 3,
-            }}
-            dataSource={dataSourceFiltered}
-            renderItem={(item) => (
-              <List.Item>
-                <Card
-                  title={item.play_name}
-                  bordered={true}
-                  cover={<img src={item.play_thumbnail} alt={item.play_name} />}
-                  className="api-page-card wider-card"
-                  actions={[
-                    <Button
-                      icon={<EditOutlined />}
-                      type="link"
-                      onClick={() => handleDrawerOpen()}
-                      tooltip="Edit"
-                    >
-                      Edit
-                    </Button>,
-                    <Popconfirm
-                      title="Are you sure you want to delete this playlist?"
-                      onConfirm={() => confirmDelete(item.id_play)} // Use the confirmDelete function
-                      okText="Yes"
-                      cancelText="No"
-                    >
-                      <Button
-                        icon={<DeleteOutlined />}
-                        type="link"
-                        danger
-                        tooltip="Delete"
-                      >
-                        Delete
-                      </Button>
-                    </Popconfirm>,
-                  ]}
-                >
-                  <Text strong>Genre:</Text> {item.play_genre} <br />
-                  <Text strong>Description:</Text> {item.play_description}{" "}
-                  <br />
-                  <Text strong>URL:</Text>
-                  <a
-                    href={item.play_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="api-page-url"
-                  >
-                    {item.play_url}
-                  </a>
-                </Card>
-              </List.Item>
-            )}
-          />
-        ) : (
-          !isLoading && !error && <Text>No data available</Text>
-        )}
-
-        {/* Floating Button to Open Drawer */}
-        <FloatButton
-          type="primary"
-          tooltip={<div>Add New Playlist</div>}
-          icon={<PlusCircleOutlined />}
-          onClick={handleDrawerOpen}
-        />
-
-        {/* Drawer with Form */}
-        <Drawer
+  const drawerSection = () => {
+    return (
+      <Drawer
           title="Add New Playlist"
           width={400}
           onClose={handleDrawerClose}
           open={isDrawerVisible}
           footer={
-            <Button type="primary" onClick={handleFormSubmit}>
-              Submit
+            <Button
+              type="primary"
+              htmlType="submit"
+              onClick={() => handleFormSubmit()}
+              style={{
+                backgroundColor: isEdit ? "green" : "blue",
+                borderColor: isEdit ? "green" : "blue",
+              }}
+            >
+              {isEdit ? "Apply" : "Submit"}
             </Button>
           }
         >
@@ -338,6 +255,117 @@ const ApiPage = () => {
             </Form.Item>
           </Form>
         </Drawer>
+    )
+  }
+  
+  return (
+    <div className="api-page-container">
+      {contextHolder}
+      <SideNav />
+      <div className="api-page-sidenav">
+        <Title level={1} className="api-page-title">
+          Playlist Gallery
+        </Title>
+        <Text className="api-page-description">
+          Explore your playlists below!
+        </Text>
+
+        {/*Search bar*/}
+        <Input
+          prefix={<SearchOutlined />}
+          placeholder="Input search text"
+          className="header-search"
+          allowClear
+          size="large"
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+
+        {isLoading && <Skeleton active />}
+        {error && (
+          <Alert
+            message="Error"
+            description={error}
+            type="error"
+            showIcon
+            className="api-page-alert"
+          />
+        )}
+
+        {!isLoading && !error && dataSource.length > 0 ? (
+          <List
+            grid={{
+              gutter: 16,
+              xs: 1,
+              sm: 2,
+              md: 4,
+              lg: 4,
+              xl: 3,
+            }}
+            dataSource={dataSourceFiltered}
+            renderItem={(item) => (
+              <List.Item>
+                <Card
+                  title={item.play_name}
+                  bordered={true}
+                  cover={<img src={item.play_thumbnail} alt={item.play_name} />}
+                  className="api-page-card wider-card"
+                  actions={[
+                    <Button
+                      icon={<EditOutlined />}
+                      type="link"
+                      onClick={() => handleDrawerEdit(item)}
+                      tooltip="Edit"
+                    >
+                      Edit
+                    </Button>,
+                    <Popconfirm
+                      title="Are you sure you want to delete this playlist?"
+                      onConfirm={() => confirmDelete(item.id_play)} // Use the confirmDelete function
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                      <Button
+                        icon={<DeleteOutlined />}
+                        type="link"
+                        danger
+                        tooltip="Delete"
+                      >
+                        Delete
+                      </Button>
+                    </Popconfirm>,
+                  ]}
+                >
+                  <Text strong>Genre:</Text> {item.play_genre} <br />
+                  <Text strong>Description:</Text> {item.play_description}{" "}
+                  <br />
+                  <Text strong>URL:</Text>
+                  <a
+                    href={item.play_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="api-page-url"
+                  >
+                    {item.play_url}
+                  </a>
+                </Card>
+              </List.Item>
+            )}
+          />
+        ) : (
+          !isLoading && !error && <Text>No data available</Text>
+        )}
+
+        {/* Floating Button to Open Drawer */}
+        <FloatButton
+          type="primary"
+          tooltip={<div>Add New Playlist</div>}
+          icon={<PlusCircleOutlined />}
+          onClick={handleDrawerOpen}
+        />
+        {drawerSection()}
+
+        {/* Drawer with Form */}
+        
       </div>
     </div>
   );
