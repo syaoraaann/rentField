@@ -90,6 +90,88 @@ const ListLapangan = () => {
         { name: "Pro", additionalCharge: 20000 },
         { name: "Elite", additionalCharge: 40000 }
       ]
+    },
+
+    {
+      id: 4,
+      name: "Lapangan Basket FOK Undiksha",
+      category: "Basketball Field",
+      address: "FOK Undiksha, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116",
+      imageUrl: "https://fastly.4sqi.net/img/general/600x600/56404427_8Xi_V2yELZ4rs_plRH2Ra4IsX3wyZyDSJozKF9VUNbs.jpg",
+      basePrice: 15000,
+      operatingHours: {
+        start: 8,
+        end: 16,
+      },
+      fieldOptions: [
+        {name: "Student of Undiksha", additionalCharge: 0},
+        {name: "Public", additionalCharge: 20000}
+      ]
+    },
+    {
+      id: 5,
+      name: "Lapangan Futsal GOR Bhuana Patra",
+      category: "Soccer Field",
+      address: "Jl. Udayana No.6, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81114",
+      imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgV4j7qgXFdhThFDZgpAokU0lMu-Sfv858H_N_nCu80zSuZOwsJq5Z0nvMzgVQbLYBWIXAqwjm7ZYVM4QLvAD-RbJ3jVqUOD7fzupql5hJVQqVGrElb_g1TZfoFWU6sEZ57Cw-Gb0oLhuV_/s1600/GOR+Bhuana+Patra.JPG",
+      basePrice: 80000,
+      operatingHours: {
+        start: 7, // 24 hours
+        end: 23,
+      },
+      fieldOptions: [
+        { name: "Regular", additionalCharge: 0 },
+        { name: "Premium", additionalCharge: 15000 },
+        { name: "VIP", additionalCharge: 25000 }
+      ]
+    },
+    {
+      id: 6,
+      name: "KMS Futsal",
+      category: "Soccer Field",
+      address: "GOR KMS Futsal, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116",
+      imageUrl: "https://www.pdiperjuanganbali.id/uploads/berita/berita_220608090831_TutupKMSFutsalCupI,Kariyasa:TahunDepanKitaakanPerbesardanPerluas.JPG",
+      basePrice: 100000,
+      operatingHours: {
+        start: 7, // 07:00
+        end: 23, // 23:00
+      },
+      fieldOptions: [
+        { name: "Standard", additionalCharge: 0 },
+        { name: "Tournament", additionalCharge: 30000 }
+      ]
+    },
+    {
+      id: 7,
+      name: "Hall Badminton GOR Bhuana Patra",
+      category: "Badminton Field",
+      address: "Jl. Udayana No.6, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81114",
+      imageUrl: "https://fastly.4sqi.net/img/general/600x600/65082087_CeHma0kEplV_SMXojsTiy2aMObysEW9Q1XUvwwYSD1w.jpg",
+      basePrice: 80000,
+      operatingHours: {
+        start: 7, // 07:00
+        end: 23, // 23:00
+      },
+      fieldOptions: [
+        { name: "Basic", additionalCharge: 0 },
+        { name: "Pro", additionalCharge: 20000 },
+        { name: "Elite", additionalCharge: 40000 }
+      ]
+    },
+    {
+      id: 8,
+      name: "BISNIANI BASKET SINGARAJA",
+      category: "Basketball Field",
+      address: "FOK Undiksha, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116",
+      imageUrl: "https://i.ytimg.com/vi/suHJtzR9NC4/hqdefault.jpg",
+      basePrice: 75000,
+      operatingHours: {
+        start: 8,
+        end: 24,
+      },
+      fieldOptions: [
+        {name: "Standard", additionalCharge: 0}
+      ]
     }
   ];
 
@@ -141,7 +223,17 @@ const ListLapangan = () => {
   const renderCardMeta = (field) => (
     <Meta
       title={
-        <Text strong style={{ fontSize: "18px" }}>
+        <Text 
+          strong 
+          style={{ 
+            fontSize: "18px",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            display: "block",
+            width: "100%"
+          }}
+        >
           {field.name}
         </Text>
       }
@@ -154,7 +246,16 @@ const ListLapangan = () => {
             height: "120px",
           }}
         >
-          <Text strong style={{ color: "#000000", fontStyle: "italic" }}>
+          <Text 
+            strong 
+            style={{ 
+              color: "#000000", 
+              fontStyle: "italic",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap"
+            }}
+          >
             {field.category}
           </Text>
           <Text strong style={{ color: "#375D22", fontStyle: "bold" }}>
@@ -172,6 +273,7 @@ const ListLapangan = () => {
               WebkitBoxOrient: "vertical",
               WebkitLineClamp: 2,
               textOverflow: "ellipsis",
+              wordBreak: "break-word"
             }}
           >
             {field.address}

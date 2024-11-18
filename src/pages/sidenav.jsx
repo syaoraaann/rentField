@@ -61,10 +61,10 @@ const SideNav = () => {
           fontWeight: "bold",
         }}
       >
-        Jenis Lapangan
+        Field List
       </div>
       <Menu.Item key="/list-lapangan" icon={<StarOutlined />}>
-        <Link to="/list-lapangan">Futsal</Link>
+        <Link to="/list-lapangan">Find and Order Fields</Link>
       </Menu.Item>
 
       {/* User Management Section */}
