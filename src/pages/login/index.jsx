@@ -98,11 +98,11 @@ const LoginPage = () => {
               <Form.Item>
                 <Button
                 
-                  type="primary"
+                  
                   htmlType="submit"
                   disabled={!isFormValid}
                   block
-                  className="login-button"
+                  className="login-button login-btn"
                 >
                   Log In
                 </Button>

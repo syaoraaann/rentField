@@ -63,55 +63,55 @@ function LandingPage() {
       id: 1,
       image: basket,
       title: "Lapangan Bola Basket Kampus Tengah Undiksha",
-      description: "Lapangan bola basket Kampus Tengah Undiksha berada di jln. Udayana, Singaraja. Buka 24 jam untuk umum."
+      description: "Lapangan bola basket Kampus Tengah Undiksha located at jln. Udayana, Singaraja. Open 24 hours for the public."
     },
     {
       id: 2,
       image: bultang,
       title: "Lapangan Bola Tangkis Gor Undiksha",
-      description: "Lapangan bola tangkis Kampus Tengah Undiksha berada di jln. Udayana, Singaraja. Buka 24 jam untuk umum."
+      description: "Lapangan bola tangkis Kampus Tengah Undiksha located at jln. Udayana, Singaraja. Open 24 hours for the public."
     },
     {
       id: 3,
       image: futsal,
       title: "Lapangan Futsal Banyuasri",
-      description: "Lapangan futsal Banyuasri berada di jln. Udayana, Singaraja. Buka 24 jam untuk umum."
+      description: "Lapangan futsal Banyuasri located at jln. Udayana, Singaraja. Open 24 hours for the public."
     },
     {
       id: 4,
       image: voli,
       title: "Lapangan Voli Gor Undiksha Jineng Dalem",
-      description: "Lapangan bola voli Gor Undiksha Jineng Dalem berada di Desa Jineng Dalem. Buka 24 jam untuk mahasiswa Undiksha"
+      description: "Lapangan bola voli Gor Undiksha Jineng Dalem is in Jineng Dalem Village. Open 24 hours for Undiksha students"
     },
     {
       id: 5,
       image: biliard,
       title: "Billiard Singaraja",
-      description: "Biliard Singaraja berada di jln. A. Yani, Singaraja. Buka dari pukul 08.00 WITA-23.00 WITA"
+      description: "Biliard Singaraja located on jln. A. Yani, Singaraja. Open from 08.00 WITA-23.00 WITA"
     },
     {
       id: 6,
       image: voli,
       title: "Lapangan Voli Gor Undiksha Jineng Dalem",
-      description: "Lapangan bola voli Gor Undiksha Jineng Dalem berada di Desa Jineng Dalem. Buka 24 jam untuk mahasiswa Undiksha"
+      description: "Lapangan bola voli Gor Undiksha Jineng Dalem is in Jineng Dalem Village. Open 24 hours for Undiksha students"
     },
     {
       id: 7,
       image: biliard,
       title: "Billiard Singaraja",
-      description: "Biliard Singaraja berada di jln. A. Yani, Singaraja. Buka dari pukul 08.00 WITA-23.00 WITA"
+      description: "Biliard Singaraja located on jln. A. Yani, Singaraja. Open from 08.00 WITA-23.00 WITA"
     },
     {
       id: 8,
       image: voli,
       title: "Lapangan Voli Gor Undiksha Jineng Dalem",
-      description: "Lapangan bola voli Gor Undiksha Jineng Dalem berada di Desa Jineng Dalem. Buka 24 jam untuk mahasiswa Undiksha"
+      description: "Lapangan bola voli Gor Undiksha Jineng Dalem is in Jineng Dalem Village. Open 24 hours for Undiksha students"
     },
     {
       id: 9,
       image: biliard,
       title: "Billiard Singaraja",
-      description: "Biliard Singaraja berada di jln. A. Yani, Singaraja. Buka dari pukul 08.00 WITA-23.00 WITA"
+      description: "Biliard Singaraja located on jln. A. Yani, Singaraja. Open from 08.00 WITA-23.00 WITA"
     }
   ];
 
@@ -211,10 +211,11 @@ function LandingPage() {
             }}
           >
             <div >
-              <h2 style={{ fontFamily: "Poppins", fontSize: "3.5rem", fontWeight: "bold" }}>Sewa Lapangan Jadi Lebih Mudah</h2>
+              <h2 style={{ fontFamily: "Poppins", fontSize: "3.5rem", fontWeight: "bold" }}>Field Rental Made Easier For You</h2>
             </div>
             <div>
-                <p style={{ fontFamily: "Poppins", fontSize: "16px"}}>Selamat datang di platform sewa lapangan terlengkap! Nikmati kemudahan dalam mencari dan memesan lapangan favorit untuk berbagai jenis olahraga seperti futsal, basket, tenis, dan lainnya. Ciptakan pengalaman olahraga yang tak terlupakan dengan fasilitas terbaik yang tersedia kapan saja sesuai kebutuhan Anda. Yuk, mulai sekarang temukan lapangan ideal untuk pertandingan berikutnya!</p>
+                <p style={{ fontFamily: "Poppins", fontSize: "16px"}}>Welcome to the most comprehensive field rental platform! Enjoy the convenience of finding and booking your favorite field for various sports such as futsal, basketball, tennis, and more. Create an unforgettable sports experience with the best facilities available anytime according to your needs. Let's start now to find the ideal field for your next match!
+                </p>
             </div>
           </div>
             
@@ -256,7 +257,7 @@ function LandingPage() {
                   </h1>   
                   
                   <p style={{ fontSize: "16px", lineHeight: "1.8", color: "black"}}>
-                    RentField dikembangkan oleh tim yang terdiri dari lima mahasiswa dan mahasiswi Program Studi Sistem Informasi Universitas Pendidikan Ganesha. Kami memiliki tim yang berkompeten dalam bidang teknologi informasi dan berkomitmen untuk memberikan pengalaman terbaik bagi pengguna. Dengan pendekatan yang user-friendly dan fitur-fitur canggih, RentField siap melayani setiap kebutuhan penyewaan olahraga dengan layanan yang responsif dan efisien.
+                  RentField was developed by a team of five students from Ganesha University of Education's Information Systems Study Program. We have a team that is competent in the field of information technology and committed to providing the best experience for users. With a user-friendly approach and advanced features, RentField is ready to serve every sports rental need with responsive and efficient services.
                   </p >
                 </div> 
               </Col>
