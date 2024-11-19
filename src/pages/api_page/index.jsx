@@ -38,7 +38,13 @@ const ApiPage = () => {
   const [idSelected, setIdSelected] = useState(null);
   const [searchText, setSearchText] = useState("");
 
-  // Fetch the gallery data
+  const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + "...";
+    }
+    return text;
+  };
+
   const getDataGallery = async () => {
     setIsLoading(true);
     setError(null);
@@ -73,12 +79,10 @@ const ApiPage = () => {
     );
   });
 
-  // Call getDataGallery on component mount
   useEffect(() => {
     getDataGallery();
   }, []);
 
-  // Show alert notification
   const showAlert = (type, message, description) => {
     api[type]({
       message,
@@ -91,21 +95,20 @@ const ApiPage = () => {
       let url = `/api/playlist/${id_play}`;
       const resp = await deleteDataUTS(url);
 
-      console.log("Delete response:", resp);
-
-      if (resp.status === 200 || resp.status === 201 || resp.status === 204 || resp.message === "OK") {
-        // First, show success alert
+      if (
+        resp.status === 200 ||
+        resp.status === 201 ||
+        resp.status === 204 ||
+        resp.message === "OK"
+      ) {
         showAlert("success", "Data deleted", "Data berhasil terhapus");
-
-        // Then, refresh the gallery
         setTimeout(() => {
           getDataGallery();
         }, 500);
       } else {
         showAlert("error", "Failed to delete", "Data gagal terhapus");
       }
-    }  catch (err) {
-      console.error("Error during delete:", err);
+    } catch (err) {
       showAlert("error", "Error", "An error occurred while deleting the data");
     } finally {
       setIsLoading(false);
@@ -115,7 +118,7 @@ const ApiPage = () => {
   const handleDrawerOpen = () => {
     setIsDrawerVisible(true);
     setIsEdit(false);
-  }
+  };
 
   const handleDrawerClose = () => {
     if (isEdit) {
@@ -128,30 +131,21 @@ const ApiPage = () => {
     setIsDrawerVisible(true);
     setIsEdit(true);
     setIdSelected(record?.id_play);
-    form.setFieldValue("play_name", record?.play_name);
-    form.setFieldValue("play_genre", record?.play_genre);
-    form.setFieldValue("play_description", record?.play_description);
-    form.setFieldValue("play_url", record?.play_url);
-    form.setFieldValue("play_thumbnail", record?.play_thumbnail);
+    form.setFieldsValue({
+      play_name: record?.play_name,
+      play_genre: record?.play_genre,
+      play_description: record?.play_description,
+      play_url: record?.play_url,
+      play_thumbnail: record?.play_thumbnail,
+    });
   };
 
   const handleFormSubmit = () => {
-    // Get values from the form
-    let playName = form.getFieldValue("play_name");
-    let playGenre = form.getFieldValue("play_genre");
-    let playDescription = form.getFieldValue("play_description");
-    let playUrl = form.getFieldValue("play_url");
-    let playThumbnail = form.getFieldValue("play_thumbnail");
-
-    // Prepare FormData to send
     let formData = new FormData();
-    formData.append("play_name", playName);
-    formData.append("play_genre", playGenre);
-    formData.append("play_description", playDescription);
-    formData.append("play_url", playUrl);
-    formData.append("play_thumbnail", playThumbnail);
+    Object.keys(form.getFieldsValue()).forEach((key) => {
+      formData.append(key, form.getFieldValue(key));
+    });
 
-    // Use appropriate API endpoint based on whether it's an edit or new data
     let request = !isEdit
       ? sendDataUTS("/api/playlist/28", formData)
       : sendDataUTS(`/api/playlist/update/${idSelected}`, formData);
@@ -164,7 +158,7 @@ const ApiPage = () => {
           showAlert("success", "Data submitted", "Data berhasil disubmit");
           form.resetFields();
           setIsDrawerVisible(false);
-          getDataGallery(); // Fetch updated data
+          getDataGallery();
         } else {
           showAlert(
             "error",
@@ -174,8 +168,6 @@ const ApiPage = () => {
         }
       })
       .catch((err) => {
-        setIsEdit(false);
-        setIdSelected(null);
         showAlert("error", "Failed to send data", err.toString());
       });
   };
@@ -183,81 +175,66 @@ const ApiPage = () => {
   const drawerSection = () => {
     return (
       <Drawer
-          title="Add New Playlist"
-          width={400}
-          onClose={handleDrawerClose}
-          open={isDrawerVisible}
-          footer={
-            <Button
-              type="primary"
-              htmlType="submit"
-              onClick={() => handleFormSubmit()}
-              style={{
-                backgroundColor: isEdit ? "green" : "blue",
-                borderColor: isEdit ? "green" : "blue",
-              }}
-            >
-              {isEdit ? "Apply" : "Submit"}
-            </Button>
-          }
-        >
-          <Form layout="vertical" form={form}>
-            <Form.Item
-              name="play_name"
-              label="Play Name"
-              rules={[
-                { required: true, message: "Please enter the play name" },
-              ]}
-            >
-              <Input placeholder="Enter play name" />
-            </Form.Item>
+        title={isEdit ? "Edit Playlist" : "Add New Playlist"}
+        width={400}
+        onClose={handleDrawerClose}
+        open={isDrawerVisible}
+        footer={
+          <Button
+            type="primary"
+            onClick={handleFormSubmit}
+            style={{
+              backgroundColor: isEdit ? "green" : "blue",
+              borderColor: isEdit ? "green" : "blue",
+            }}
+          >
+            {isEdit ? "Update" : "Submit"}
+          </Button>
+        }
+      >
+        <Form layout="vertical" form={form}>
+          <Form.Item
+            name="play_name"
+            label="Play Name"
+            rules={[{ required: true }]}
+          >
+            <Input placeholder="Enter play name" />
+          </Form.Item>
+          <Form.Item
+            name="play_genre"
+            label="Genre"
+            rules={[{ required: true }]}
+          >
+            <Select placeholder="Select a genre">
+              <Option value="education">Education</Option>
+              <Option value="movie">Movie</Option>
+              <Option value="music">Music</Option>
+              <Option value="song">Song</Option>
+              <Option value="others">Others</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item
+            name="play_description"
+            label="Description"
+            rules={[{ required: true }]}
+          >
+            <Input.TextArea rows={4} placeholder="Enter description" />
+          </Form.Item>
+          <Form.Item name="play_url" label="URL" rules={[{ required: true }]}>
+            <Input placeholder="Enter URL" />
+          </Form.Item>
+          <Form.Item
+            name="play_thumbnail"
+            label="Thumbnail"
+            rules={[{ required: true }]}
+          >
+            <Input placeholder="Enter Thumbnail URL" />
+          </Form.Item>
+        </Form>
+      </Drawer>
+    );
+  };
 
-            <Form.Item
-              name="play_genre"
-              label="Genre"
-              rules={[{ required: true, message: "Please select a genre" }]}
-            >
-              <Select placeholder="Select a genre">
-                <Option value="education">Education</Option>
-                <Option value="movie">Movie</Option>
-                <Option value="music">Music</Option>
-                <Option value="song">Song</Option>
-                <Option value="others">Others</Option>
-              </Select>
-            </Form.Item>
-
-            <Form.Item
-              name="play_description"
-              label="Description"
-              rules={[
-                { required: true, message: "Please enter the description" },
-              ]}
-            >
-              <Input.TextArea rows={4} placeholder="Enter description" />
-            </Form.Item>
-
-            <Form.Item
-              name="play_url"
-              label="URL"
-              rules={[{ required: true, message: "Please enter the URL" }]}
-            >
-              <Input placeholder="Enter URL" />
-            </Form.Item>
-
-            <Form.Item
-              name="play_thumbnail"
-              label="Thumbnail"
-              rules={[
-                { required: true, message: "Please provide a thumbnail file" },
-              ]}
-            >
-              <Input placeholder="Enter URL" />
-            </Form.Item>
-          </Form>
-        </Drawer>
-    )
-  }
-  
   return (
     <div className="api-page-container">
       {contextHolder}
@@ -270,11 +247,9 @@ const ApiPage = () => {
           Explore your playlists below!
         </Text>
 
-        {/*Search bar*/}
         <Input
           prefix={<SearchOutlined />}
           placeholder="Input search text"
-          className="header-search"
           allowClear
           size="large"
           onChange={(e) => handleSearch(e.target.value)}
@@ -282,13 +257,7 @@ const ApiPage = () => {
 
         {isLoading && <Skeleton active />}
         {error && (
-          <Alert
-            message="Error"
-            description={error}
-            type="error"
-            showIcon
-            className="api-page-alert"
-          />
+          <Alert message="Error" description={error} type="error" showIcon />
         )}
 
         {!isLoading && !error && dataSource.length > 0 ? (
@@ -305,7 +274,11 @@ const ApiPage = () => {
             renderItem={(item) => (
               <List.Item>
                 <Card
-                  title={item.play_name}
+                  title={
+                    <span className="card-title">
+                      {truncateText(item.play_name, 30)}
+                    </span>
+                  }
                   bordered={true}
                   cover={<img src={item.play_thumbnail} alt={item.play_name} />}
                   className="api-page-card wider-card"
@@ -314,59 +287,49 @@ const ApiPage = () => {
                       icon={<EditOutlined />}
                       type="link"
                       onClick={() => handleDrawerEdit(item)}
-                      tooltip="Edit"
                     >
                       Edit
                     </Button>,
                     <Popconfirm
                       title="Are you sure you want to delete this playlist?"
-                      onConfirm={() => confirmDelete(item.id_play)} // Use the confirmDelete function
+                      onConfirm={() => confirmDelete(item.id_play)}
                       okText="Yes"
                       cancelText="No"
                     >
-                      <Button
-                        icon={<DeleteOutlined />}
-                        type="link"
-                        danger
-                        tooltip="Delete"
-                      >
+                      <Button icon={<DeleteOutlined />} type="link" danger>
                         Delete
                       </Button>
                     </Popconfirm>,
                   ]}
                 >
                   <Text strong>Genre:</Text> {item.play_genre} <br />
-                  <Text strong>Description:</Text> {item.play_description}{" "}
+                  <Text strong>Description:</Text>{" "}
+                  <span className="card-description">
+                    {truncateText(item.play_description, 100)}
+                  </span>
                   <br />
-                  <Text strong>URL:</Text>
+                  <Text strong>URL:</Text>{" "}
                   <a
                     href={item.play_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="api-page-url"
+                    className="card-url"
                   >
-                    {item.play_url}
+                    {truncateText(item.play_url, 50)}
                   </a>
                 </Card>
               </List.Item>
             )}
           />
-        ) : (
-          !isLoading && !error && <Text>No data available</Text>
-        )}
-
-        {/* Floating Button to Open Drawer */}
-        <FloatButton
-          type="primary"
-          tooltip={<div>Add New Playlist</div>}
-          icon={<PlusCircleOutlined />}
-          onClick={handleDrawerOpen}
-        />
-        {drawerSection()}
-
-        {/* Drawer with Form */}
-        
+        ) : null}
       </div>
+      <FloatButton
+        icon={<PlusCircleOutlined />}
+        type="primary"
+        onClick={handleDrawerOpen}
+        className="floating-button"
+      />
+      {drawerSection()}
     </div>
   );
 };
