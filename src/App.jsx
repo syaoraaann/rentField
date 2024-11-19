@@ -8,7 +8,7 @@ import "antd/dist/reset.css";
 import LandingPage from "./pages/landing_page";
 import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
-import ListLapangan from "./list_lapangan";
+import ListLapangan from "./pages/list_lapangan";
 import Profile from "./pages/profile/index";
 import ApiPage from "./pages/api_page/index";
 

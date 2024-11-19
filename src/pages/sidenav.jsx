@@ -35,8 +35,10 @@ const SideNav = () => {
       <div
         style={{
           padding: "20px",
+          cursor: "pointer",
           textAlign: "center",
         }}
+        onClick={() => navigate("/")}
       >
         <img
           src="../src/assets/images/rentfield1.png" // Adjust path as needed
@@ -59,10 +61,10 @@ const SideNav = () => {
           fontWeight: "bold",
         }}
       >
-        Jenis Lapangan
+        Field List
       </div>
       <Menu.Item key="/list-lapangan" icon={<StarOutlined />}>
-        <Link to="/list-lapangan">Futsal</Link>
+        <Link to="/list-lapangan">Find and Order Fields</Link>
       </Menu.Item>
 
       {/* User Management Section */}

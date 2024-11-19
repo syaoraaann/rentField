@@ -2,10 +2,11 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-image: url('../../assets/images/landingbg7.png');
-    background-size: cover;
+    
+    background-color: #A6CE39 !important;
+    /* background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
   }
 
 /* .home-menu {
@@ -24,10 +25,12 @@
     color: black !important; /* Warna teks putih agar kontras dengan latar belakang */
     /* border: 1px solid rgba(255, 255, 255, 0.3) !important; Batas semi-transparan untuk efek glass */
     box-shadow: none !important;
-    position: relative !important;
-    z-index: 10 !important; /* Tetapkan z-index agar konten tetap di atas background */
+    position: fixed !important;
+    z-index: 1000 !important; /* Tetapkan z-index agar konten tetap di atas background */
     height: 60px !important;
     overflow: hidden;
+    top: 0;
+    width: 100%;
 
   }
 
@@ -89,13 +92,12 @@
 }
   
 .header-nav a.active-link {
-    background-color: rgba(177, 177, 177, 0.797); /* Putih semi-transparan */
+    color: blue !important;
     font-weight: bold;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    
 }
   
 .header-nav nav a {
@@ -176,6 +178,243 @@
   font-family: 'Poppins';
 }
 
+.image-hover-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-hover-container img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-hover-container:hover img {
+  transform: scale(1.1); /* Memperbesar gambar sedikit saat dihover */
+  opacity: 0.8; /* Mengurangi opacity sedikit untuk efek halus */
+}
+
+.img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.img:hover {
+  transform: scale(1.2);
+}
+
+
+.button {
+  padding-top: 50ox;
+  padding-bottom: 50px;
+}
+
+.button:hover {
+  background-color: #f0f0f0;
+}
+
+.button-position {
+  position: relative;
+  width: 300px; /* Sesuaikan dengan lebar gambar */
+  height: 200px; /* Sesuaikan dengan tinggi gambar */
+}
+
+.cards {
+  transition: transform 0.3s ease-in-out;
+}
+
+.card-hover {
+  transform: scale(1.0);
+}
+
+.card-img {
+  width: 100%;
+  height: 200px; /* Tentukan tinggi gambar yang diinginkan */
+  object-fit: cover; /* Menjaga proporsi gambar agar tidak terdistorsi */
+}
+
+/* contact us */
+ul {
+  list-style: none;
+}
+
+.example-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.example-2 .icon-content {
+  margin: 0 10px;
+  position: relative;
+}
+.example-2 .icon-content .tooltip {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 5px;
+  opacity: 0;
+  visibility: hidden;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+.example-2 .icon-content:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  top: -50px;
+}
+.example-2 .icon-content a {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: #4d4d4d;
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+.example-2 .icon-content a:hover {
+  box-shadow: 3px 2px 45px 0px rgb(0 0 0 / 12%);
+}
+.example-2 .icon-content a svg {
+  position: relative;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+}
+.example-2 .icon-content a:hover {
+  color: white;
+}
+.example-2 .icon-content a .filled {
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: #000;
+  transition: all 0.3s ease-in-out;
+}
+.example-2 .icon-content a:hover .filled {
+  height: 100%;
+}
+
+.example-2 .icon-content a[data-social="linkedin"] .filled,
+.example-2 .icon-content a[data-social="linkedin"] ~ .tooltip {
+  background-color: #0274b3;
+}
+
+.example-2 .icon-content a[data-social="github"] .filled,
+.example-2 .icon-content a[data-social="github"] ~ .tooltip {
+  background-color: #24262a;
+}
+.example-2 .icon-content a[data-social="instagram"] .filled,
+.example-2 .icon-content a[data-social="instagram"] ~ .tooltip {
+  background: linear-gradient(
+    45deg,
+    #405de6,
+    #5b51db,
+    #b33ab4,
+    #c135b4,
+    #e1306c,
+    #fd1f1f
+  );
+}
+.example-2 .icon-content a[data-social="youtube"] .filled,
+.example-2 .icon-content a[data-social="youtube"] ~ .tooltip {
+  background-color: #ff0000;
+}
+
+
+/* Card */
+.cards-title {
+  color: #262626;
+  font-size: 1.5em;
+  line-height: normal;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
+.small-desc {
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.5em;
+  color: #452c2c;
+}
+
+.small-desc {
+  font-size: 1em;
+}
+
+.go-corner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  background: linear-gradient(135deg, #90be0f, #587800);
+  border-radius: 0 4px 0 32px;
+}
+
+.go-arrow {
+  margin-top: -4px;
+  margin-right: -4px;
+  color: white;
+  font-family: courier, sans;
+}
+
+.cards {
+  display: block;
+  position: relative;
+  max-width: 300px;
+  max-height: 320px;
+  height: 400px;
+  background-color: #f2f8f9;
+  border-radius: 10px;
+  padding: 2em 1.2em;
+  margin: 12px;
+  text-decoration: none;
+  z-index: 0;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #f2f4f5, #a7d1d9);
+  font-family: Arial, Helvetica, sans-serif;
+  border: none;
+}
+
+.cards:before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -16px;
+  right: -16px;
+  background: linear-gradient(135deg, #364a60, #A6CE39);
+  height: 32px;
+  width: 32px;
+  border-radius: 32px;
+  transform: scale(1);
+  transform-origin: 50% 50%;
+  transition: transform 0.35s ease-out;
+}
+
+.cards:hover:before {
+  transform: scale(28);
+}
+
+.cards:hover .small-desc {
+  transition: all 0.5s ease-out;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.cards:hover .card-title {
+  transition: all 0.5s ease-out;
+  color: #ffffff;
+}
 
 
 
