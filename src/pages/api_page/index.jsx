@@ -317,6 +317,10 @@ const ApiPage = () => {
                   >
                     {truncateText(item.play_url, 50)}
                   </a>
+                  <DeleteOutlined
+                    style={{ color: "red", marginTop: 10, cursor: "pointer" }}
+                    onClick={() => deleteData(item.id)}
+                  />
                 </Card>
               </List.Item>
             )}

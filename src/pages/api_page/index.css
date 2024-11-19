@@ -12,12 +12,20 @@
 .api-page-title {
   text-align: center;
   font-weight: 700;
+  margin-bottom: 16px;
 }
 
 .api-page-description {
   font-size: 1.2em;
   color: #666;
   text-align: center;
+  margin-bottom: 24px;
+  display: block;
+}
+
+/* Add spacing after search input */
+.ant-input-affix-wrapper {
+  margin-bottom: 24px;
 }
 
 .api-page-spinner {
@@ -38,7 +46,7 @@
   justify-content: space-between;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 8px;
-  margin-bottom: 0px; /* This adds space between each card */
+  margin-bottom: 16px;
 }
 
 .api-page-card:hover {
@@ -46,11 +54,17 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Updated image styles with padding */
+.api-page-card .ant-card-cover {
+  padding: 12px 12px 0 12px; /* Add padding to the image container */
+}
+
 .api-page-card img {
   width: 100%;
   height: 300px;
   object-fit: cover;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds subtle shadow to image */
 }
 
 /* URL text with ellipsis */
@@ -68,6 +82,11 @@
   text-decoration: underline;
 }
 
+/* Hide redundant delete button */
+.card-url + .anticon-delete {
+  display: none;
+}
+
 /* Title style for cards */
 .api-page-card .ant-card-head {
   font-size: 1.1em;
@@ -78,22 +97,18 @@
 .ant-list-item {
   display: flex;
   justify-content: center;
+  margin-bottom: 16px;
 }
 
-/* Responsiveness */
-@media (max-width: 768px) {
-  .api-page-card {
-    width: 180px;
-    height: 300px;
-  }
-
-  .api-page-title {
-    font-size: 1.5em;
-  }
+.ant-list {
+  margin-top: 24px;
 }
 
+/* Make cards take full width in their grid cell */
 .api-page-card.wider-card {
-  width: 100%; /* Make the card take full width of the container */
+  width: 100%;
+  height: fix;
+  min-height: 500px;
 }
 
 .floating-button {
@@ -110,9 +125,33 @@
   color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
 }
 
 .floating-button:hover {
   transform: scale(1.1);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .api-page-sidenav {
+    margin-left: 0;
+    padding: 16px;
+  }
+
+  .api-page-card {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+  }
+
+  .api-page-title {
+    font-size: 1.5em;
+  }
+  
+  /* Adjust padding for mobile */
+  .api-page-card .ant-card-cover {
+    padding: 8px 8px 0 8px;
+  }
 }
