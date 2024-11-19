@@ -13,10 +13,21 @@ import {
   notification,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import SideNav from "../sidenav";
 import "@fontsource/poppins";
+import { useEffect } from "react";
+
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+});
 
 const { Title, Text } = Typography;
 const { Meta } = Card;
@@ -43,13 +54,14 @@ const ListLapangan = () => {
   const fields = [
     {
       id: 1,
-      name: "Singaraja Futsal",
+      name: "Singaraja Soccer",
       category: "Soccer Field",
       address: "Jl. Udayana, Banjar Jawa, Kec. Buleleng, Kabupaten Buleleng, Bali 81113",
+      coordinates: [-8.115001271274899, 115.09062769800654], // Singaraja coordinates
       imageUrl: "https://fastly.4sqi.net/img/general/600x600/58082938_ZBAJ3Wcn-B_m8pP16l42N0uVIgxWSdnNIQG36_ff0Nk.jpg",
       basePrice: 50000,
       operatingHours: {
-        start: 0, // 24 hours
+        start: 0,
         end: 24,
       },
       fieldOptions: [
@@ -60,14 +72,15 @@ const ListLapangan = () => {
     },
     {
       id: 2,
-      name: "GOR Bulutangkis UNDIKSHA",
+      name: "Badminton Hall UNDIKSHA",
       category: "Badminton Field",
       address: "GOR BULUTANGKIS UNDIKSHA, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116",
+      coordinates: [-8.11820868948884, 115.08833486487808], // Jakarta coordinates
       imageUrl: "https://cdn.undiksha.ac.id/wp-content/uploads/2022/09/01123108/GOR-Bulutangkis-Undiksha.jpg",
       basePrice: 70000,
       operatingHours: {
-        start: 7, // 07:00
-        end: 23, // 23:00
+        start: 7,
+        end: 23,
       },
       fieldOptions: [
         { name: "Standard", additionalCharge: 0 },
@@ -76,14 +89,15 @@ const ListLapangan = () => {
     },
     {
       id: 3,
-      name: "Lapangan Basket GOR Bhuana Patra",
+      name: "Basketball Field GOR Bhuana Patra",
       category: "Basketball Field",
       address: "Jl. Udayana No.6, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81114",
+      coordinates: [-8.114191831843618, 115.08984725935848], // Surabaya coordinates
       imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlo9Y32JrsrMnXiPbH9Xzfbf8126C2Q1Kpkg&s",
       basePrice: 80000,
       operatingHours: {
-        start: 7, // 07:00
-        end: 23, // 23:00
+        start: 7,
+        end: 23,
       },
       fieldOptions: [
         { name: "Basic", additionalCharge: 0 },
@@ -91,12 +105,12 @@ const ListLapangan = () => {
         { name: "Elite", additionalCharge: 40000 }
       ]
     },
-
     {
       id: 4,
-      name: "Lapangan Basket FOK Undiksha",
+      name: "Basketball Field FOK UNDIKSHA",
       category: "Basketball Field",
       address: "FOK Undiksha, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116",
+      coordinates: [-8.117842604017683, 115.08771641608371], // Bandung coordinates
       imageUrl: "https://fastly.4sqi.net/img/general/600x600/56404427_8Xi_V2yELZ4rs_plRH2Ra4IsX3wyZyDSJozKF9VUNbs.jpg",
       basePrice: 15000,
       operatingHours: {
@@ -104,73 +118,42 @@ const ListLapangan = () => {
         end: 16,
       },
       fieldOptions: [
-        {name: "Student of Undiksha", additionalCharge: 0},
-        {name: "Public", additionalCharge: 20000}
+        {name: "Standard", additionalCharge: 0},
+        {name: "Premium", additionalCharge: 20000}
       ]
     },
     {
       id: 5,
-      name: "Lapangan Futsal GOR Bhuana Patra",
+      name: "Soccer Field GOR Bhuana Patra",
       category: "Soccer Field",
       address: "Jl. Udayana No.6, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81114",
+      coordinates: [-8.114986566938121, 115.08926312164766], // Yogyakarta coordinates
       imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgV4j7qgXFdhThFDZgpAokU0lMu-Sfv858H_N_nCu80zSuZOwsJq5Z0nvMzgVQbLYBWIXAqwjm7ZYVM4QLvAD-RbJ3jVqUOD7fzupql5hJVQqVGrElb_g1TZfoFWU6sEZ57Cw-Gb0oLhuV_/s1600/GOR+Bhuana+Patra.JPG",
       basePrice: 80000,
       operatingHours: {
-        start: 7, // 24 hours
+        start: 7,
         end: 23,
       },
       fieldOptions: [
         { name: "Regular", additionalCharge: 0 },
-        { name: "Premium", additionalCharge: 15000 },
-        { name: "VIP", additionalCharge: 25000 }
+        { name: "Premium", additionalCharge: 15000 }
       ]
     },
     {
       id: 6,
-      name: "KMS Futsal",
+      name: "Metro Sport Singaraja Soccer",
       category: "Soccer Field",
-      address: "GOR KMS Futsal, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116",
+      address: "Baktiseraga, Kec. Buleleng, Kabupaten Buleleng, Bali 81119",
+      coordinates: [-8.122833347105876, 115.07260318559653], // Semarang coordinates
       imageUrl: "https://www.pdiperjuanganbali.id/uploads/berita/berita_220608090831_TutupKMSFutsalCupI,Kariyasa:TahunDepanKitaakanPerbesardanPerluas.JPG",
       basePrice: 100000,
       operatingHours: {
-        start: 7, // 07:00
-        end: 23, // 23:00
+        start: 7,
+        end: 23,
       },
       fieldOptions: [
         { name: "Standard", additionalCharge: 0 },
         { name: "Tournament", additionalCharge: 30000 }
-      ]
-    },
-    {
-      id: 7,
-      name: "Hall Badminton GOR Bhuana Patra",
-      category: "Badminton Field",
-      address: "Jl. Udayana No.6, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81114",
-      imageUrl: "https://fastly.4sqi.net/img/general/600x600/65082087_CeHma0kEplV_SMXojsTiy2aMObysEW9Q1XUvwwYSD1w.jpg",
-      basePrice: 80000,
-      operatingHours: {
-        start: 7, // 07:00
-        end: 23, // 23:00
-      },
-      fieldOptions: [
-        { name: "Basic", additionalCharge: 0 },
-        { name: "Pro", additionalCharge: 20000 },
-        { name: "Elite", additionalCharge: 40000 }
-      ]
-    },
-    {
-      id: 8,
-      name: "BISNIANI BASKET SINGARAJA",
-      category: "Basketball Field",
-      address: "FOK Undiksha, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116",
-      imageUrl: "https://i.ytimg.com/vi/suHJtzR9NC4/hqdefault.jpg",
-      basePrice: 75000,
-      operatingHours: {
-        start: 8,
-        end: 24,
-      },
-      fieldOptions: [
-        {name: "Standard", additionalCharge: 0}
       ]
     }
   ];
@@ -220,7 +203,7 @@ const ListLapangan = () => {
     return `${formatHour(hours.start)} - ${formatHour(hours.end)}`;
   };
 
-  const renderCardMeta = (field) => (
+ const renderCardMeta = (field) => (
     <Meta
       title={
         <Text 
@@ -283,6 +266,39 @@ const ListLapangan = () => {
     />
   );
 
+  const RecenterMap = ({ coordinates }) => {
+    const map = useMap();
+  
+    useEffect(() => {
+      map.setView(coordinates); // Set ulang view ke coordinates
+      map.invalidateSize(); // Pastikan ukuran map valid
+    }, [map, coordinates]);
+  
+    return null;
+  };
+
+  const MapComponent = ({ coordinates, zoom = 13 }) => (
+    <MapContainer 
+      zoom={zoom} 
+      style={{ height: "400px", width: "100%" }}
+      scrollWheelZoom={false}
+      center={coordinates} 
+    >
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <Marker position={coordinates}>
+        <Popup>
+          Field Location
+        </Popup>
+      </Marker>
+      <RecenterMap coordinates={coordinates} />
+    </MapContainer>
+  );
+  
+
+  
   const showDrawer = (field) => {
     setSelectedField(field);
     setDrawerVisible(true);
@@ -450,23 +466,18 @@ const ListLapangan = () => {
         ))}
       </Row>
 
-          <Drawer
+      <Drawer
             title={`Order Field ${selectedField?.name || ""}`}
             placement="right"
             width={320}
             onClose={closeDrawer}
             open={drawerVisible}
           >
-            <img
-              src={selectedField?.imageUrl}
-              alt={selectedField?.name}
-              style={{ width: "100%", height: "200px", objectFit: "cover" }}
-            />
-            <Text strong style={{ fontSize: "18px" }}>
+            {selectedField && (
+              <MapComponent coordinates={selectedField.coordinates} zoom={15} />
+            )}
+            <Text strong style={{ fontSize: "18px", display: "block", marginTop: "16px" }}>
               {`Rent ${selectedField?.name}`}
-            </Text>
-            <Text type="secondary" style={{ display: "block", marginBottom: "16px" }}>
-              {selectedField?.address}
             </Text>
 
             <Text strong>Choose Date:</Text>
