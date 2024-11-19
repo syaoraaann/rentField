@@ -38,7 +38,7 @@
   justify-content: space-between;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 8px;
-  margin-bottom: 70px; /* This adds space between each card */
+  margin-bottom: 0px; /* This adds space between each card */
 }
 
 .api-page-card:hover {
