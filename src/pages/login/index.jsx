@@ -101,7 +101,7 @@ const LoginPage = () => {
                 <Input.Password placeholder="Password" />
               </Form.Item>
               <Form.Item>
-                <Button type="primary" htmlType="submit" block>
+                <Button className="login-button login-btn" disabled={!isFormValid} htmlType="submit" block>
                   Register
                 </Button>
               </Form.Item>

@@ -350,7 +350,7 @@ export const showThumbnailGDrive = (fileID, size = "w100") => {
 
 export const ellipsisGenerator = (play_description) => {
   return {
-    rows: 2,
+    rows: 1,
     expandable: true,
     symbol: "more",
     tooltip: play_description,

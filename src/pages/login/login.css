@@ -63,16 +63,16 @@
   border: none;
 }
 
-.login-btn:hover {
+/* .login-btn:hover {
   background-color: #b2d12d !important;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   font-size: 16px !important;
   font-weight: bold;
   color: white !important;
-  background: linear-gradient(90deg, #00C9FF, #92FE9D) !important;
+  background: linear-gradient(90deg, #00C9FF, #92FE9D);
   cursor: pointer;
   border: none;
-}
+} */
 
 .register-link {
   margin-left: 5px;
