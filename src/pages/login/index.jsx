@@ -146,6 +146,7 @@ const LoginPage = () => {
                   <Button
                     
                     htmlType="submit"
+                    disabled={!isFormValid}
                     block
                     className="login-button login-btn"
                   >
