@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Card, Row, Col, Typography, List, Carousel } from "antd";
+import {
+  Layout,
+  Card,
+  Row,
+  Col,
+  Typography,
+  List,
+  Carousel,
+  Progress,
+} from "antd";
 import { Link } from "react-router-dom";
 import SideNav from "../sidenav";
 import "./index.css";
@@ -12,7 +21,7 @@ const cardStyle = {
   textAlign: "center",
   borderRadius: "8px",
   boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)", // Softer shadow
-  height: "auto",
+  minHeight: "360px", // Adjust this value to make the cards longer vertically
   transition: "transform 0.3s ease, box-shadow 0.3s ease", // Transition effect
 };
 
@@ -76,6 +85,24 @@ const upcomingEvents = [
   },
 ];
 
+// Dummy data for top booked fields
+const topBookedFields = [
+  { id: 1, fieldName: "Main Stadium", bookings: 120 },
+  { id: 2, fieldName: "City Arena", bookings: 95 },
+  { id: 3, fieldName: "Park Field", bookings: 80 },
+  { id: 4, fieldName: "Sports Complex", bookings: 75 },
+  { id: 5, fieldName: "River Stadium", bookings: 70 },
+];
+
+// Dummy data for history of booked fields
+const historyBookedFields = [
+  { id: 1, fieldName: "Main Stadium", date: "2024-11-18", bookings: 5 },
+  { id: 2, fieldName: "City Arena", date: "2024-11-17", bookings: 3 },
+  { id: 3, fieldName: "Park Field", date: "2024-11-16", bookings: 7 },
+  { id: 4, fieldName: "Sports Complex", date: "2024-11-15", bookings: 2 },
+  { id: 5, fieldName: "River Stadium", date: "2024-11-14", bookings: 6 },
+];
+
 // List of images for the carousel (place images in the public/assets/images folder)
 const imageList = [
   "/assets/images/cmgsoon.png",
@@ -134,7 +161,8 @@ const Dashboard = () => {
 
           {/* Cards Layout */}
           <Row gutter={[16, 16]}>
-            <Col span={8}>
+            {/* First row: 2 cards */}
+            <Col xs={24} sm={12} md={8} lg={8} xl={12}>
               <Link to="/mypoint" style={{ color: "inherit" }}>
                 <Card
                   bordered={false}
@@ -159,10 +187,11 @@ const Dashboard = () => {
                   <Title level={1} style={cardContentTitleStyle}>
                     12
                   </Title>
+                  <Progress percent={50} status="active" />
                 </Card>
               </Link>
             </Col>
-            <Col span={8}>
+            <Col span={12}>
               <Link to="/history" style={{ color: "inherit" }}>
                 <Card
                   bordered={false}
@@ -184,13 +213,55 @@ const Dashboard = () => {
                   <Title className="card-title" style={titleStyle}>
                     History
                   </Title>
-                  <Title level={1} style={cardContentTitleStyle}>
-                    25
-                  </Title>
+                  <div
+                    style={{
+                      maxHeight: "250px",
+                      overflowY: "auto",
+                      padding: "10px",
+                      backgroundColor: "#f9f9f9",
+                      borderRadius: "8px",
+                    }}
+                  >
+                    <List
+                      bordered={false}
+                      dataSource={historyBookedFields}
+                      renderItem={(item) => (
+                        <List.Item
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            padding: "10px",
+                            background: "#fff",
+                            borderRadius: "8px",
+                            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                            marginBottom: "10px",
+                          }}
+                        >
+                          <Text
+                            style={{
+                              fontSize: "1.2em",
+                              fontWeight: "bold",
+                              color: "#333",
+                            }}
+                          >
+                            {item.fieldName}
+                          </Text>
+                          <Text style={{ fontSize: "1em", color: "#666" }}>
+                            {item.date}
+                          </Text>
+                          <Text style={{ fontSize: "1em", color: "#999" }}>
+                            {item.bookings} bookings
+                          </Text>
+                        </List.Item>
+                      )}
+                    />
+                  </div>
                 </Card>
               </Link>
             </Col>
-            <Col span={8}>
+
+            {/* Baris kedua: Top Booked Fields */}
+            <Col span={12}>
               <Link to="/upcoming-event" style={{ color: "inherit" }}>
                 <Card
                   bordered={false}
@@ -210,10 +281,8 @@ const Dashboard = () => {
                   onMouseLeave={handleMouseLeave}
                 >
                   <Title className="card-title" style={titleStyle}>
-                    Upcoming Events
+                    Upcoming Schedule
                   </Title>
-
-                  {/* Scrollable list for upcoming events */}
                   <div
                     style={{
                       maxHeight: "250px",
@@ -229,13 +298,30 @@ const Dashboard = () => {
                       renderItem={(item) => (
                         <List.Item
                           style={{
-                            padding: "8px 0",
-                            borderBottom: "1px solid #f0f0f0",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-start",
+                            padding: "10px",
+                            background: "#fff",
+                            borderRadius: "8px",
+                            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                            marginBottom: "10px",
                           }}
                         >
-                          <Text style={{ fontSize: "1.1em", color: "#666" }}>
-                            <strong>{item.title}</strong> - {item.date} (
-                            {item.location})
+                          <Text
+                            style={{
+                              fontSize: "1.2em",
+                              fontWeight: "bold",
+                              color: "#333",
+                            }}
+                          >
+                            {item.title}
+                          </Text>
+                          <Text style={{ fontSize: "1em", color: "#666" }}>
+                            {item.date}
+                          </Text>
+                          <Text style={{ fontSize: "1em", color: "#999" }}>
+                            {item.location}
                           </Text>
                         </List.Item>
                       )}
@@ -244,10 +330,6 @@ const Dashboard = () => {
                 </Card>
               </Link>
             </Col>
-          </Row>
-
-          {/* More Cards (Top Booked, Events) */}
-          <Row gutter={[16, 16]} style={{ marginTop: "16px" }}>
             <Col span={12}>
               <Link to="/topbooked" style={{ color: "inherit" }}>
                 <Card
@@ -270,37 +352,46 @@ const Dashboard = () => {
                   <Title className="card-title" style={titleStyle}>
                     Top Booked
                   </Title>
-                  <Title level={1} style={cardContentTitleStyle}>
-                    10
-                  </Title>
-                </Card>
-              </Link>
-            </Col>
-            <Col span={12}>
-              <Link to="/events" style={{ color: "inherit" }}>
-                <Card
-                  bordered={false}
-                  style={{
-                    ...cardStyle,
-                    transform:
-                      hoveredCard === "events"
-                        ? "translateY(-10px)"
-                        : "translateY(0)",
-                    boxShadow:
-                      hoveredCard === "events"
-                        ? "0 6px 12px rgba(0, 0, 0, 0.15)"
-                        : "0 2px 6px rgba(0, 0, 0, 0.1)",
-                  }}
-                  hoverable
-                  onMouseEnter={() => handleMouseEnter("events")}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <Title className="card-title" style={titleStyle}>
-                    Events
-                  </Title>
-                  <Title level={1} style={cardContentTitleStyle}>
-                    20
-                  </Title>
+                  <div
+                    style={{
+                      maxHeight: "250px",
+                      overflowY: "auto",
+                      padding: "10px",
+                      backgroundColor: "#f9f9f9",
+                      borderRadius: "8px",
+                    }}
+                  >
+                    <List
+                      bordered={false}
+                      dataSource={topBookedFields}
+                      renderItem={(item) => (
+                        <List.Item
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            padding: "10px",
+                            background: "#fff",
+                            borderRadius: "8px",
+                            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                            marginBottom: "10px",
+                          }}
+                        >
+                          <Text
+                            style={{
+                              fontSize: "1.2em",
+                              fontWeight: "bold",
+                              color: "#333",
+                            }}
+                          >
+                            {item.fieldName}
+                          </Text>
+                          <Text style={{ fontSize: "1em", color: "#666" }}>
+                            {item.bookings} bookings
+                          </Text>
+                        </List.Item>
+                      )}
+                    />
+                  </div>
                 </Card>
               </Link>
             </Col>
