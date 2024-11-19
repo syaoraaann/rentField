@@ -13,7 +13,7 @@ import {
   notification,
   FloatButton,
 } from "antd";
-import { PlusCircleOutlined } from "@ant-design/icons";
+import { PlusCircleOutlined, DeleteOutlined } from "@ant-design/icons";
 import SideNav from "../sidenav";
 import "./index.css"; // Import the external CSS
 
@@ -111,6 +111,30 @@ const ApiPage = () => {
       });
   };
 
+  const deleteData = (id) => {
+    sendDataUTS(`/api/playlist/28/${id}`, null, "DELETE")
+      .then((resp) => {
+        if (resp?.message === "OK") {
+          api.success({
+            message: "Success",
+            description: "Data successfully deleted!",
+          });
+          getDataGallery(); // Refresh data after deletion
+        } else {
+          api.error({
+            message: "Failed to delete data",
+            description: "Cannot delete data",
+          });
+        }
+      })
+      .catch((err) => {
+        api.error({
+          message: "Failed to delete data",
+          description: err.toString(),
+        });
+      });
+  };
+
   return (
     <div className="api-page-container">
       {contextHolder}
@@ -154,8 +178,7 @@ const ApiPage = () => {
                   className="api-page-card wider-card"
                 >
                   <Text strong>Genre:</Text> {item.play_genre} <br />
-                  <Text strong>Description:</Text> {item.play_description}{" "}
-                  <br />
+                  <Text strong>Description:</Text> {item.play_description} <br />
                   <Text strong>URL:</Text>
                   <a
                     href={item.play_url}
@@ -165,6 +188,10 @@ const ApiPage = () => {
                   >
                     {item.play_url}
                   </a>
+                  <DeleteOutlined
+                    style={{ color: "red", marginTop: 10, cursor: "pointer" }}
+                    onClick={() => deleteData(item.id)}
+                  />
                 </Card>
               </List.Item>
             )}
@@ -197,9 +224,7 @@ const ApiPage = () => {
             <Form.Item
               name="play_name"
               label="Play Name"
-              rules={[
-                { required: true, message: "Please enter the play name" },
-              ]}
+              rules={[{ required: true, message: "Please enter the play name" }]}
             >
               <Input placeholder="Enter play name" />
             </Form.Item>

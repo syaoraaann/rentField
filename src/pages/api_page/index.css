@@ -32,12 +32,13 @@
 /* Card styles */
 .api-page-card {
   width: 220px;
-  height: 500px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 8px;
+  margin-bottom: 0px; /* This adds space between each card */
 }
 
 .api-page-card:hover {

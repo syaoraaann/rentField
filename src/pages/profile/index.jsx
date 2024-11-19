@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Layout, Typography, Input, Radio, Button, Upload, message, Form } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import React, { useState } from "react";
+import { Layout, Typography, Input, Radio, Button, Upload, message, Form } from "antd";
+import { UploadOutlined, UserOutlined, CameraOutlined } from "@ant-design/icons";
 import "@fontsource/poppins";
 import { useNavigate } from "react-router-dom";
-import SideNav from '../../pages/sidenav';// Make sure this path matches your project structure
+import SideNav from '../../pages/sidenav';
 
 const { Title, Text } = Typography;
 const { Header, Content } = Layout;
@@ -11,23 +11,62 @@ const { Header, Content } = Layout;
 const Profile = () => {
     const [form] = Form.useForm();
     const [gender, setGender] = useState('Laki-laki');
+    const [imageUrl, setImageUrl] = useState(null);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleGenderChange = e => {
         setGender(e.target.value);
     };
 
-    const handleImageUpload = info => {
-        if (info.file.status === 'done') {
-            message.success(`${info.file.name} berhasil diunggah.`);
-        } else if (info.file.status === 'error') {
-            message.error(`${info.file.name} gagal diunggah.`);
+    const getBase64 = (img, callback) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => callback(reader.result));
+        reader.readAsDataURL(img);
+    };
+
+    const beforeUpload = (file) => {
+        const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+        if (!isJpgOrPng) {
+            message.error('Anda hanya dapat mengunggah file JPG/PNG!');
+            return false;
+        }
+        const isLt1M = file.size / 1024 / 1024 < 1;
+        if (!isLt1M) {
+            message.error('Gambar harus lebih kecil dari 1MB!');
+            return false;
+        }
+        return true;
+    };
+
+    const handleChange = (info) => {
+        if (info.file.status === 'uploading') {
+            setLoading(true);
+            return;
+        }
+        
+        if (info.file.originFileObj) {
+            getBase64(info.file.originFileObj, (url) => {
+                setLoading(false);
+                setImageUrl(url);
+                message.success('Foto profil berhasil diperbarui!');
+            });
         }
     };
 
     const handleSubmit = (values) => {
-        console.log('Form values:', values);
-        message.success('Profile updated successfully!');
+        const formData = new FormData();
+        Object.keys(values).forEach(key => {
+            if (values[key]) {
+                formData.append(key, values[key]);
+            }
+        });
+        if (imageUrl) {
+            formData.append('profilePicture', imageUrl);
+        }
+        
+        console.log('Form values:', Object.fromEntries(formData));
+        message.success('Profil berhasil diperbarui!');
     };
 
     return (
@@ -42,25 +81,98 @@ const Profile = () => {
                     lineHeight: '1.5',
                     boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
                 }}>
-                    <Title level={2} style={{ margin: '0 0 8px 0' }}>My Profile</Title>
-                    <Text style={{ fontSize: '16px' }}>
-                        Manage your profile information to control, protect, and secure your account
-                    </Text>
+                    <Title level={2} style={{ margin: '0 0 8px 0' }}>Profil Saya</Title>
                 </Header>
                 
-                <Content style={{ 
-                    padding: '24px',
-                    background: '#f5f5f5',
-                    minHeight: 'calc(100vh - 64px)'
-                }}>
+                <Content style={{ padding: '24px', background: '#f5f5f5', minHeight: 'calc(100vh - 64px)' }}>
                     <div style={{ 
                         maxWidth: '600px',
                         margin: '0 auto',
                         background: '#fff',
-                        padding: '24px',
-                        borderRadius: '8px',
+                        padding: '32px',
+                        borderRadius: '12px',
                         boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
                     }}>
+                        {/* Profile Picture Section */}
+                        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+                            <Upload
+                                name="avatar"
+                                listType="picture-circle"
+                                showUploadList={false}
+                                beforeUpload={beforeUpload}
+                                onChange={handleChange}
+                                className="avatar-uploader"
+                            >
+                                <div style={{
+                                    width: '120px',
+                                    height: '120px',
+                                    borderRadius: '60px',
+                                    margin: '0 auto',
+                                    position: 'relative',
+                                    cursor: 'pointer',
+                                    overflow: 'hidden',
+                                    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                                    border: '3px solid #ffffff',
+                                    transition: 'all 0.3s ease'
+                                }}>
+                                    {imageUrl ? (
+                                        <>
+                                            <img
+                                                src={imageUrl}
+                                                alt="Profile"
+                                                style={{
+                                                    width: '100%',
+                                                    height: '100%',
+                                                    objectFit: 'cover'
+                                                }}
+                                            />
+                                            <div style={{
+                                                position: 'absolute',
+                                                top: 0,
+                                                left: 0,
+                                                right: 0,
+                                                bottom: 0,
+                                                background: 'rgba(0,0,0,0.5)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                opacity: 0,
+                                                transition: 'opacity 0.3s ease',
+                                                ':hover': { opacity: 1 }
+                                            }}>
+                                                <CameraOutlined style={{ fontSize: '24px', color: '#fff' }} />
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <div style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            height: '100%',
+                                            background: '#f5f5f5'
+                                        }}>
+                                            <CameraOutlined style={{ fontSize: '32px', color: '#999' }} />
+                                            <span style={{ 
+                                                fontSize: '12px',
+                                                color: '#666',
+                                                marginTop: '4px'
+                                            }}>
+                                                Upload Photo
+                                            </span>
+                                        </div>
+                                    )}
+                                </div>
+                            </Upload>
+                            <Text type="secondary" style={{ 
+                                display: 'block',
+                                marginTop: '12px',
+                                fontSize: '14px'
+                            }}>
+                                Click to {imageUrl ? 'upload' : 'upload'} profile picture
+                            </Text>
+                        </div>
+
                         <Form
                             form={form}
                             layout="vertical"
@@ -81,9 +193,9 @@ const Profile = () => {
                             </Form.Item>
 
                             <Form.Item 
-                                label={<span style={{ fontWeight: 600 }}>Nama</span>} 
+                                label={<span style={{ fontWeight: 600 }}>Name</span>} 
                                 name="name"
-                                rules={[{ required: true, message: 'Please input your name!' }]}
+                                rules={[{ required: true, message: 'Silakan masukkan nama Anda!' }]}
                             >
                                 <Input placeholder="Masukkan nama Anda" />
                             </Form.Item>
@@ -91,82 +203,52 @@ const Profile = () => {
                             <Form.Item 
                                 label={<span style={{ fontWeight: 600 }}>Email</span>} 
                                 name="email"
+                                rules={[{ required: true, message: 'Silakan masukkan email Anda!', type: 'email' }]}
                             >
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <Text>sy************@gmail.com</Text>
-                                    <Button type="link" style={{ marginLeft: '8px' }}>Ubah</Button>
-                                </div>
+                                <Input placeholder="Masukkan email Anda" />
                             </Form.Item>
 
                             <Form.Item 
-                                label={<span style={{ fontWeight: 600 }}>Nomor Telepon</span>} 
+                                label={<span style={{ fontWeight: 600 }}>Telephone Number</span>} 
                                 name="phone"
+                                rules={[{ required: true, message: 'Silakan masukkan nomor telepon Anda!' }]}
                             >
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <Text>**********29</Text>
-                                    <Button type="link" style={{ marginLeft: '8px' }}>Ubah</Button>
-                                </div>
+                                <Input placeholder="Masukkan nomor telepon Anda" />
                             </Form.Item>
 
                             <Form.Item 
-                                label={<span style={{ fontWeight: 600 }}>Nama Toko</span>} 
-                                name="shopName"
-                            >
-                                <Input placeholder="Masukkan nama toko Anda" />
-                            </Form.Item>
-
-                            <Form.Item 
-                                label={<span style={{ fontWeight: 600 }}>Jenis Kelamin</span>} 
+                                label={<span style={{ fontWeight: 600 }}>Gender</span>} 
                                 name="gender"
                             >
                                 <Radio.Group onChange={handleGenderChange} value={gender}>
-                                    <Radio value="Laki-laki">Laki-laki</Radio>
-                                    <Radio value="Perempuan">Perempuan</Radio>
+                                    <Radio value="Laki-laki">Man</Radio>
+                                    <Radio value="Perempuan">Women</Radio>
                                 </Radio.Group>
                             </Form.Item>
 
                             <Form.Item 
-                                label={<span style={{ fontWeight: 600 }}>Tanggal Lahir</span>} 
+                                label={<span style={{ fontWeight: 600 }}>Birthday Date</span>} 
                                 name="birthDate"
+                                rules={[{ required: true, message: 'Silakan masukkan tanggal lahir Anda!' }]}
                             >
-                                <Text>**/02/20**</Text>
+                                <Input placeholder="Masukkan tanggal lahir Anda" />
                             </Form.Item>
 
-                            <Form.Item 
-                                label={<span style={{ fontWeight: 600 }}>Foto Profil</span>}
-                            >
-                                <Upload
-                                    name="profilePicture"
-                                    listType="picture"
-                                    maxCount={1}
-                                    beforeUpload={() => false}
-                                    onChange={handleImageUpload}
-                                >
-                                    <Button icon={<UploadOutlined />} style={{ borderRadius: '4px' }}>
-                                        Pilih Gambar
-                                    </Button>
-                                </Upload>
-                                <Text type="secondary" style={{ display: 'block', marginTop: '8px' }}>
-                                    Ukuran gambar: maks. 1 MB
-                                </Text>
-                                <Text type="secondary" style={{ display: 'block' }}>
-                                    Format gambar: .JPEG, .PNG
-                                </Text>
-                            </Form.Item>
-
-                            <Form.Item>
+                            <Form.Item style={{ marginTop: '24px' }}>
                                 <Button 
                                     type="primary" 
                                     htmlType="submit" 
                                     style={{ 
                                         width: '100%',
                                         height: '40px',
-                                        borderRadius: '4px',
+                                        borderRadius: '8px',
                                         fontWeight: 600,
-                                        backgroundColor: '#4CAF50'
+                                        backgroundColor: '#4CAF50',
+                                        border: 'none',
+                                        boxShadow: '0 2px 4px rgba(76,175,80,0.2)'
                                     }}
                                 >
-                                    Simpan
+                                    Simpan Perubahan
                                 </Button>
                             </Form.Item>
                         </Form>
