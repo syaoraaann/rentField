@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import SideNav from "../sidenav";
 import "./index.css";
 
-const { Content } = Layout;
+const { Content, Footer } = Layout;
 const { Title, Text } = Typography;
 
 // Style constants for reuse
@@ -48,7 +48,9 @@ const dashboardHeaderStyle = {
 const mainContentStyle = {
   margin: "24px 16px 0",
   padding: 24,
+  minHeight: "calc(100vh - 80px)", // Pastikan footer tidak menempel di tengah
   background: "#FFFFFF",
+  paddingBottom: "40px",
 };
 
 // Dummy data for upcoming events
@@ -397,6 +399,21 @@ const Dashboard = () => {
             </Col>
           </Row>
         </Content>
+        {/* Footer */}
+        <Footer
+          style={{
+            textAlign: "center",
+            background: "#f9f9f9",
+            borderTop: "1px solid #ddd",
+            padding: "12px 24px",
+            fontSize: "14px",
+            color: "#666",
+            position: "relative", // Gunakan relative untuk posisi footer
+          }}
+        >
+          Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
+          Pendidikan Ganesha
+        </Footer>
       </Layout>
     </Layout>
   );
