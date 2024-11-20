@@ -32,7 +32,7 @@ L.Icon.Default.mergeOptions({
 
 const { Title, Text } = Typography;
 const { Meta } = Card;
-const { Header, Content } = Layout;
+const { Content, Footer } = Layout;
 const { Option } = Select;
 const WeatherDisplay = () => {
   const [weather, setWeather] = useState(null);
@@ -176,6 +176,7 @@ const ListLapangan = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isRentButtonVisible, setIsRentButtonVisible] = useState(false);
+
 
   // Updated fields data structure with fieldOptions
   const fields = [
@@ -676,6 +677,20 @@ const ListLapangan = () => {
             )}
           </Drawer>
         </Content>
+        <Footer
+          style={{
+            textAlign: "center",
+            background: "#f9f9f9",
+            borderTop: "1px solid #ddd",
+            padding: "12px 24px",
+            fontSize: "14px",
+            color: "#666",
+            position: "relative", // Gunakan relative untuk posisi footer
+          }}
+        >
+          Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
+          Pendidikan Ganesha
+        </Footer>
       </Layout>
     </Layout>
   );
