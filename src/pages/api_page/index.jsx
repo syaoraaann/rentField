@@ -328,6 +328,7 @@ const ApiPage = () => {
                       </span>
                     </Tooltip>
                   ) : (
+                    <span className="card-description">{highlightText(item.play_description, searchText)}</span>
                   )}
                   <br />
                   <Text strong>URL:</Text>{" "}
