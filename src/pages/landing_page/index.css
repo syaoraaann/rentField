@@ -358,7 +358,7 @@ ul {
   overflow: hidden;
   top: 0;
   right: 0;
-  background: linear-gradient(135deg, #90be0f, #587800);
+  background: linear-gradient(135deg, #0f8fbe, #004c78);
   border-radius: 0 4px 0 32px;
 }
 
@@ -393,7 +393,7 @@ ul {
   z-index: -1;
   top: -16px;
   right: -16px;
-  background: linear-gradient(135deg, #364a60, #A6CE39);
+  background: linear-gradient(135deg, #edf8ff, #08607b);
   height: 32px;
   width: 32px;
   border-radius: 32px;
