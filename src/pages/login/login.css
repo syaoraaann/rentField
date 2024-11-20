@@ -109,8 +109,27 @@ form > .ant-form-item {
 
 .login-button {
   background-color: #9db53e;
-  border-color: #a3b846;
-  border-color: #a3b846;
   color: #000;
-  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  background: linear-gradient(90deg, #b2d12d, #dcf764);
+  border: none;
+}
+
+/* .login-btn:hover {
+  background-color: #b2d12d !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 16px !important;
+  font-weight: bold;
+  color: white !important;
+  background: linear-gradient(90deg, #00C9FF, #92FE9D);
+  cursor: pointer;
+  border: none;
+} */
+
+.register-link {
+  margin-left: 5px;
+  text-decoration: underline;
+  color: #000;
+  cursor: pointer;
 }

@@ -348,11 +348,11 @@ export const showThumbnailGDrive = (fileID, size = "w100") => {
   return url;
 };
 
-export const ellipsisGenerator = (description) => {
+export const ellipsisGenerator = (play_description) => {
   return {
-    rows: 2,
+    rows: 1,
     expandable: true,
     symbol: "more",
-    tooltip: description,
+    tooltip: play_description,
   };
 };

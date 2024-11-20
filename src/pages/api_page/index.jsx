@@ -14,6 +14,7 @@ import {
   FloatButton,
   Skeleton,
   Popconfirm,
+  Tooltip
 } from "antd";
 import {
   PlusCircleOutlined,
@@ -23,6 +24,7 @@ import {
 } from "@ant-design/icons";
 import SideNav from "../sidenav";
 import "./index.css"; // Import the external CSS
+
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -78,6 +80,21 @@ const ApiPage = () => {
       item?.play_url?.toLowerCase().includes(searchText.toLowerCase())
     );
   });
+
+  const highlightText = (text, search) => {
+    if (!search) return text;
+
+    const parts = text.split(new RegExp(`(${search})`, "gi"));
+    return parts.map((part, index) =>
+      part.toLowerCase() === search.toLowerCase() ? (
+        <mark key={index} style={{ backgroundColor: "yellow" }}>
+          {part}
+        </mark>
+      ) : (
+        part
+      )
+    );
+  };
 
   useEffect(() => {
     getDataGallery();
@@ -276,7 +293,7 @@ const ApiPage = () => {
                 <Card
                   title={
                     <span className="card-title">
-                      {truncateText(item.play_name, 30)}
+                      {highlightText(truncateText(item.play_name, 30), searchText)}
                     </span>
                   }
                   bordered={true}
@@ -302,11 +319,17 @@ const ApiPage = () => {
                     </Popconfirm>,
                   ]}
                 >
-                  <Text strong>Genre:</Text> {item.play_genre} <br />
+                  <Text strong>Genre:</Text> {highlightText(item.play_genre, searchText)} <br />
                   <Text strong>Description:</Text>{" "}
-                  <span className="card-description">
-                    {truncateText(item.play_description, 100)}
-                  </span>
+                  {item.play_description.length > 40 ? (
+                    <Tooltip title={item.play_description}>
+                      <span className="card-description">
+                        {highlightText(truncateText(item.play_description, 40), searchText)}
+                      </span>
+                    </Tooltip>
+                  ) : (
+                    <span className="card-description">{highlightText(item.play_description, searchText)}</span>
+                  )}
                   <br />
                   <Text strong>URL:</Text>{" "}
                   <a
@@ -315,11 +338,11 @@ const ApiPage = () => {
                     rel="noopener noreferrer"
                     className="card-url"
                   >
-                    {truncateText(item.play_url, 50)}
+                    {highlightText(truncateText(item.play_url, 50), searchText)}
                   </a>
                   <DeleteOutlined
                     style={{ color: "red", marginTop: 10, cursor: "pointer" }}
-                    onClick={() => deleteData(item.id)}
+                    onClick={() => deleteDataUTS(item.id)}
                   />
                 </Card>
               </List.Item>
