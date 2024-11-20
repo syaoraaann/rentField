@@ -403,7 +403,13 @@ const ListLapangan = () => {
             : "Available Fields at Singaraja"}
         </Title>
 
-        <Content style={{ margin: "10px", padding: "20px", backgroundColor: "#fff" }}>
+        <Content style={{ 
+          margin: "10px",
+           padding: "20px", 
+           backgroundColor: "#fff",
+           paddingBottom: "40px" // Added padding at bottom
+            }}>
+            
           <Row gutter={16} align="middle" style={{ marginBottom: "20px" }}>
             <Col>
               <Input
@@ -429,15 +435,19 @@ const ListLapangan = () => {
             </Col>
           </Row>
 
-          <Row gutter={16}>
+          <Row gutter={[24, 24]}>
         {filteredFields.map((field) => (
           <Col span={8} key={field.id} style={{ marginBottom: "16px" }}>
             <Card
               hoverable
               style={{
-                height: "450px",
+                minHeight: "450px", // Changed from fixed height to minHeight
+                height: "100%", // Added to ensure full height
                 display: "flex",
                 flexDirection: "column",
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)", // Slightly enhanced shadow
+                transition: "box-shadow 0.3s ease",
+                borderRadius: "8px",
               }}
               cover={
                 <img
@@ -447,6 +457,8 @@ const ListLapangan = () => {
                     width: "100%",
                     height: "200px",
                     objectFit: "cover",
+                    borderTopLeftRadius: "8px", // Optional: matching border radius
+                    borderTopRightRadius: "8px", // Optional: matching border radius
                   }}
                 />
               }
