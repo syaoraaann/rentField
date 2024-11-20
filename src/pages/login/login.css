@@ -108,13 +108,15 @@ form > .ant-form-item {
 }
 
 .login-button {
-  bottom: 25px;
+  bottom: 15px;
+  position: relative;
+  margin-top: 15px;
   background-color: #9db53e;
-  border-color: #a3b846;
   border-color: #a3b846;
   color: #000;
   border-radius: 8px;
-  margin-bottom: -10px;
+  margin-bottom: -35px;
+  
 }
 
 /* form > .ant-form-item .ant-form-item-explain {
@@ -136,6 +138,15 @@ form > .ant-form-item {
   
 .forgot-password-text {
   display: block;
-  margin-bottom: 20px;
+  position: relative;
+  margin-top: -20px;
   cursor: pointer; 
+  z-index: 1;
+}
+
+.register-btn {
+  /* padding-top: 0px; */
+  margin-bottom: -15px;
+  top: -15px;
+
 }

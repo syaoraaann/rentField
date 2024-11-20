@@ -80,7 +80,7 @@ const LoginPage = () => {
                   return (
                     <Popconfirm
                       title="Upcoming Features"
-                      description="Sorry, this is an upcoming feature."
+                      description="This feature will be develop in the future!"
                       okText="OK"
                       placement="top"
                       cancelButtonProps={{ style: { display: "none" } }}
@@ -153,7 +153,27 @@ const LoginPage = () => {
                       .filter(({ errors }) => errors.length).length;
 
                   return (
+                    <Popconfirm
+                      title="Upcoming Features"
+                      description="This feature will be develop in the future!"
+                      okText="OK"
+                      placement="top"
+                      cancelButtonProps={{ style: { display: "none" } }}
+                      okButtonProps={{
+                        style: {
+                          backgroundColor: "#b3cf3a",
+                          borderColor: "#b3cf3a",
+                        },
+                      }}
+                      onConfirm={() => {
+                        if (isFormValid) {
+                          signupForm.submit();
+                        }
+                      }}
+                      >
+
                     <Button
+                    className="register-btn"
                       type="default"
                       htmlType="submit"
                       block
@@ -165,6 +185,7 @@ const LoginPage = () => {
                     >
                       Register
                     </Button>
+                    </Popconfirm>
                   );
                 }}
               </Form.Item>
