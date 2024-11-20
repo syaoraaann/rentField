@@ -10,7 +10,7 @@
 
 .login-container {
   display: flex;
-  background-color: #ffffff;
+  background-color: #FAF9F6;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0.8, 0.8, 0.8, 0.7);
   overflow: hidden;
@@ -20,7 +20,7 @@
 .login-box {
   flex: 1;
   background-color: #FAF9F6;
-  padding: 40px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,14 +34,14 @@
 .logo {
   width: 220px;
   height: auto;
-  margin: -10px;
+  margin: -5px;
   align-self: center;
 }
 
 .logo-title {
   color: #000;
   font-size: 36px;
-  margin: 0;
+  margin: -10px;
   text-align: center;
   font-weight: bold;
 
@@ -63,10 +63,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 }
 
 form > .ant-form-item {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .login-illustration {
@@ -108,6 +109,7 @@ form > .ant-form-item {
 
 .login-button {
   background-color: #9db53e;
+  border-color: #a3b846;
   border-color: #a3b846;
   color: #000;
   border-radius: 8px;
