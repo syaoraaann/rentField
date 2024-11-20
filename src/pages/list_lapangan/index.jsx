@@ -424,7 +424,7 @@ const ListLapangan = () => {
               <Select
                 placeholder="Select Category"
                 onChange={setSelectedCategory}
-                style={{ width: 200 }}
+                style={{ height: 71, width: 200, paddingBottom: 21, }}
                 value={selectedCategory}
               >
                 <Option value="">All Categories</Option>
