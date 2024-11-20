@@ -21,6 +21,7 @@ import dayjs from "dayjs";
 import SideNav from "../sidenav";
 import "@fontsource/poppins";
 import { useEffect } from "react";
+import { Cloud, Sun, CloudRain, CloudLightning, CloudSnow, CloudDrizzle } from 'lucide-react';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -33,6 +34,132 @@ const { Title, Text } = Typography;
 const { Meta } = Card;
 const { Header, Content } = Layout;
 const { Option } = Select;
+const WeatherDisplay = () => {
+  const [weather, setWeather] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        // Reset states at the start of fetch
+        setLoading(true);
+        setError(null);
+        
+        // Singaraja coordinates
+        const lat = -8.112;
+        const lon = 115.0892;
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=f2b0f2287357aef64f177803eccea2db&units=metric`
+        );
+
+        if (!response.ok) {
+          throw new Error(`Weather API error: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log('Weather data received:', data); // Debug log
+        setWeather(data);
+      } catch (error) {
+        console.error('Error fetching weather:', error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchWeather();
+  }, []);
+
+  const getWeatherIcon = (weatherCode) => {
+    // Add color styles to icons
+    const iconProps = { size: 24, strokeWidth: 2 };
+    
+    if (!weatherCode) return <Cloud {...iconProps} className="text-gray-400" />;
+    
+    if (weatherCode >= 200 && weatherCode < 300) 
+      return <CloudLightning {...iconProps} className="text-yellow-500" />;
+    if (weatherCode >= 300 && weatherCode < 400) 
+      return <CloudDrizzle {...iconProps} className="text-blue-300" />;
+    if (weatherCode >= 500 && weatherCode < 600) 
+      return <CloudRain {...iconProps} className="text-blue-500" />;
+    if (weatherCode >= 600 && weatherCode < 700) 
+      return <CloudSnow {...iconProps} className="text-gray-300" />;
+    if (weatherCode === 800) 
+      return <Sun {...iconProps} className="text-yellow-400" />;
+    
+    return <Cloud {...iconProps} className="text-gray-400" />;
+  };
+
+  if (loading) {
+    return (
+      <Card style={{ width: '100%', marginBottom: 20, backgroundColor: '#f8f9fa' }}>
+        <Row>
+          <Col>
+            <Text>Loading weather information...</Text>
+          </Col>
+        </Row>
+      </Card>
+    );
+  }
+
+  if (error) {
+    return (
+      <Card style={{ width: '100%', marginBottom: 20, backgroundColor: '#fff0f0' }}>
+        <Row>
+          <Col>
+            <Text type="danger">Error loading weather: {error}</Text>
+          </Col>
+        </Row>
+      </Card>
+    );
+  }
+
+  if (!weather || !weather.weather) {
+    return null;
+  }
+
+  return (
+    <Card 
+      style={{ 
+        width: '100%', 
+        marginBottom: 20,
+        backgroundColor: '#f8f9fa',
+        borderRadius: 8
+      }}
+    >
+      <Row align="middle" justify="space-between">
+        <Col>
+          <Text strong style={{ fontSize: 18, marginRight: 16 }}>
+            Current Weather in Singaraja
+          </Text>
+        </Col>
+        <Col>
+          <Row align="middle" gutter={16}>
+            <Col>
+              {getWeatherIcon(weather.weather[0]?.id)}
+            </Col>
+            <Col>
+              <Text strong style={{ fontSize: 16 }}>
+                {Math.round(weather.main?.temp)}°C
+              </Text>
+            </Col>
+            <Col>
+              <Text style={{ fontSize: 14 }}>
+                {weather.weather[0]?.description}
+              </Text>
+            </Col>
+            <Col>
+              <Text style={{ fontSize: 14 }}>
+                Humidity: {weather.main?.humidity}%
+              </Text>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </Card>
+  );
+};
 
 const ListLapangan = () => {
   const navigate = useNavigate();
@@ -409,6 +536,8 @@ const ListLapangan = () => {
            backgroundColor: "#fff",
            paddingBottom: "40px" // Added padding at bottom
             }}>
+              {/* 1. Komponen Cuaca */}
+        <WeatherDisplay />
             
           <Row gutter={16} align="middle" style={{ marginBottom: "20px" }}>
             <Col>
@@ -424,7 +553,7 @@ const ListLapangan = () => {
               <Select
                 placeholder="Select Category"
                 onChange={setSelectedCategory}
-                style={{ height: 71, width: 200, paddingBottom: 21, }}
+                style={{ height: 71, width: 200, paddingBottom: 22 }}
                 value={selectedCategory}
               >
                 <Option value="">All Categories</Option>
