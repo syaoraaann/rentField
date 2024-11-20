@@ -7,17 +7,15 @@ import { Link, useNavigate } from "react-router-dom";
 import "../../pages/landing_page/index.css";
 
 //Images
-import rentfield1 from "../../assets/images/rentfield1.png";
 import rentfieldlogo from "../../assets/images/rentfieldlogo.png";
-import basket from "../../assets/images/basket.jpg";
+import soccer2 from "../../assets/images/soccer2.jpg";
 import bultang from "../../assets/images/bultang.jpg";
 import futsal from "../../assets/images/futsal.jpg";
 import voli from "../../assets/images/voli.jpg";
 import biliard from "../../assets/images/biliard.jpg";
 import ourteam from "../../assets/images/ourteam.png";
-import status from "../../assets/images/status.png";
-import forrent from "../../assets/images/forrent.jpg";
-import efficient from "../../assets/images/efficient.jpg";
+import basket from "../../assets/images/basket.jpg";
+import basket3 from "../../assets/images/basket3.jpg";
 
 const { Title } = Typography;
 const { Header, Footer, Content } = Layout;
@@ -61,15 +59,15 @@ function LandingPage() {
   const galleryData = [
     {
       id: 1,
-      image: basket,
-      title: "Lapangan Bola Basket Kampus Tengah Undiksha",
-      description: "Lapangan bola basket Kampus Tengah Undiksha located at jln. Udayana, Singaraja. Open 24 hours for the public."
+      image: soccer2,
+      title: "Singaraja Soccer",
+      description: "Singaraja Soccer located at Jl. Udayana, Banjar Jawa, Kec. Buleleng, Kabupaten Buleleng, Bali 81113"
     },
     {
       id: 2,
       image: bultang,
-      title: "Lapangan Bola Tangkis Gor Undiksha",
-      description: "Lapangan bola tangkis Kampus Tengah Undiksha located at jln. Udayana, Singaraja. Open 24 hours for the public."
+      title: "Badminton Hall UNDIKSHA",
+      description: "Badminton Hall UNDIKSHA located at GOR BULUTANGKIS UNDIKSHA, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116"
     },
     {
       id: 3,
@@ -91,27 +89,27 @@ function LandingPage() {
     },
     {
       id: 6,
-      image: voli,
-      title: "Lapangan Voli Gor Undiksha Jineng Dalem",
-      description: "Lapangan bola voli Gor Undiksha Jineng Dalem is in Jineng Dalem Village. Open 24 hours for Undiksha students"
+      image: soccer2,
+      title: "Soccer Field GOR Bhuana Patra",
+      description: "Soccer Field GOR Bhuana Patra located at Jl. Udayana No.6, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81114"
     },
     {
       id: 7,
-      image: biliard,
-      title: "Billiard Singaraja",
-      description: "Biliard Singaraja located on jln. A. Yani, Singaraja. Open from 08.00 WITA-23.00 WITA"
+      image: voli,
+      title: "Basketball Field GOR Bhuana Patra",
+      description: "Basketball Field GOR Bhuana Patra located at Jl. Udayana No.6, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81114. Open from 08.00 WITA-23.00 WITA"
     },
     {
       id: 8,
-      image: voli,
-      title: "Lapangan Voli Gor Undiksha Jineng Dalem",
-      description: "Lapangan bola voli Gor Undiksha Jineng Dalem is in Jineng Dalem Village. Open 24 hours for Undiksha students"
+      image: basket3,
+      title: "Basketball Field FOK UNDIKSHA",
+      description: "Basketball Field FOK UNDIKSHA is in FOK Undiksha, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116. Open 24 hours for Undiksha students"
     },
     {
       id: 9,
-      image: biliard,
-      title: "Billiard Singaraja",
-      description: "Biliard Singaraja located on jln. A. Yani, Singaraja. Open from 08.00 WITA-23.00 WITA"
+      image: basket,
+      title: "Basketball Field Teleng",
+      description: "Basketball Field Teleng located at Kec. Buleleng, Kabupaten Buleleng, Bali 81116. Open 24 hours"
     }
   ];
 
