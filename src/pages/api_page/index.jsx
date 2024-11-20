@@ -258,10 +258,10 @@ const ApiPage = () => {
       <SideNav />
       <div className="api-page-sidenav">
         <Title level={1} className="api-page-title">
-          Playlist Gallery
+          Review Field
         </Title>
         <Text className="api-page-description">
-          Explore your playlists below!
+          Explore our service reviews below!
         </Text>
 
         <Input

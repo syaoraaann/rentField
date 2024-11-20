@@ -14,20 +14,17 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
-  
-  // Form instances
+
   const [loginForm] = Form.useForm();
   const [signupForm] = Form.useForm();
   const [forgotPasswordForm] = Form.useForm();
-
-  const isFormValid = username.trim() !== "" && password.trim() !== "";
 
   const handleLogin = () => {
     if (username && password) {
       sessionStorage.setItem("username", username);
       navigate("/dashboard");
     } else {
-      alert("Please fill in both email and password.");
+      alert("Please fill in both username and password.");
     }
   };
 
@@ -59,12 +56,9 @@ const LoginPage = () => {
 
           {/* Forgot Password Form */}
           {isForgotPassword && (
-            <Form 
+            <Form
               form={forgotPasswordForm}
               onFinish={handlePasswordReset}
-              onValuesChange={(_, allValues) => {
-                forgotPasswordForm.validateFields().catch(() => {});
-              }}
             >
               <Form.Item
                 name="email"
@@ -77,26 +71,29 @@ const LoginPage = () => {
               </Form.Item>
               <Form.Item shouldUpdate>
                 {() => {
-                  const isFormValid = forgotPasswordForm.isFieldsTouched(true) && 
-                    !forgotPasswordForm.getFieldsError().filter(({ errors }) => errors.length).length;
-                  
+                  const isFormValid =
+                    forgotPasswordForm.isFieldsTouched(true) &&
+                    !forgotPasswordForm
+                      .getFieldsError()
+                      .filter(({ errors }) => errors.length).length;
+
                   return (
                     <Popconfirm
-                      title="Upcoming features"
-                      description="Sorry, this is an upcoming feature"
+                      title="Upcoming Features"
+                      description="This feature will be develop in the future!"
                       okText="OK"
                       placement="top"
-                      cancelButtonProps={{ style: { display: 'none' } }}
+                      cancelButtonProps={{ style: { display: "none" } }}
                       okButtonProps={{
                         style: {
-                          backgroundColor: '#b3cf3a',
-                          borderColor: '#b3cf3a'
-                        }
+                          backgroundColor: "#b3cf3a",
+                          borderColor: "#b3cf3a",
+                        },
                       }}
                     >
-                      <Button 
-                        type="default" 
-                        htmlType="submit" 
+                      <Button
+                        type="default"
+                        htmlType="submit"
                         block
                         style={{
                           backgroundColor: "#b3cf3a",
@@ -110,7 +107,7 @@ const LoginPage = () => {
                   );
                 }}
               </Form.Item>
-              <Text type="primary">
+              <Text>
                 Remembered your password?{" "}
                 <a onClick={() => setIsForgotPassword(false)}>Log In</a>
               </Text>
@@ -119,7 +116,7 @@ const LoginPage = () => {
 
           {/* Signup Form */}
           {isSignup && (
-            <Form 
+            <Form
               form={signupForm}
               onFinish={handleSignup}
             >
@@ -140,46 +137,59 @@ const LoginPage = () => {
               </Form.Item>
               <Form.Item
                 name="password"
+                // layout="vertical"
+                // style={{ maxwidth: -50}}
+                className="password-item"
                 rules={[{ required: true, message: "Please input your Password!" }]}
               >
                 <Input.Password placeholder="Password" />
               </Form.Item>
               <Form.Item shouldUpdate>
                 {() => {
-                  const isFormValid = signupForm.isFieldsTouched(true) && 
-                    !signupForm.getFieldsError().filter(({ errors }) => errors.length).length;
-                  
+                  const isFormValid =
+                    signupForm.isFieldsTouched(true) &&
+                    !signupForm
+                      .getFieldsError()
+                      .filter(({ errors }) => errors.length).length;
+
                   return (
                     <Popconfirm
-                      title="Upcoming features"
-                      description="Sorry, this is an upcoming feature"
+                      title="Upcoming Features"
+                      description="This feature will be develop in the future!"
                       okText="OK"
                       placement="top"
-                      cancelButtonProps={{ style: { display: 'none' } }}
+                      cancelButtonProps={{ style: { display: "none" } }}
                       okButtonProps={{
                         style: {
-                          backgroundColor: '#b3cf3a',
-                          borderColor: '#b3cf3a'
+                          backgroundColor: "#b3cf3a",
+                          borderColor: "#b3cf3a",
+                        },
+                      }}
+                      onConfirm={() => {
+                        if (isFormValid) {
+                          signupForm.submit();
                         }
                       }}
-                    >
-                      <Button 
-                        type="default" 
-                        htmlType="submit" 
-                        block
-                        style={{
-                          backgroundColor: "#b3cf3a",
-                          color: isFormValid ? "#000000" : "#808080",
-                        }}
-                        disabled={!isFormValid}
                       >
-                        Register
-                      </Button>
+
+                    <Button
+                    className="register-btn"
+                      type="default"
+                      htmlType="submit"
+                      block
+                      style={{
+                        backgroundColor: "#b3cf3a",
+                        color: isFormValid ? "#000000" : "#808080",
+                      }}
+                      disabled={!isFormValid}
+                    >
+                      Register
+                    </Button>
                     </Popconfirm>
                   );
                 }}
               </Form.Item>
-              <Text type="primary">
+              <Text>
                 Already have an account?{" "}
                 <a onClick={() => setIsSignup(false)}>Log In</a>
               </Text>
@@ -188,15 +198,10 @@ const LoginPage = () => {
 
           {/* Login Form */}
           {!isForgotPassword && !isSignup && (
-            <Form 
-              form={loginForm}
-              onFinish={handleLogin}
-            >
+            <Form form={loginForm} onFinish={handleLogin}>
               <Form.Item
                 name="username"
-                rules={[
-                  { required: true, message: "Please input your Username!" },
-                ]}
+                rules={[{ required: true, message: "Please input your Username!" }]}
               >
                 <Input
                   value={username}
@@ -206,6 +211,9 @@ const LoginPage = () => {
               </Form.Item>
               <Form.Item
                 name="password"
+                className="password-item"
+                // layout="vertical"
+                // style={{ marginBottom: -50}}
                 rules={[
                   { required: true, message: "Please input your Password!" },
                 ]}
@@ -216,9 +224,10 @@ const LoginPage = () => {
                   placeholder="Password"
                 />
               </Form.Item>
-              <Text type="primary">
+              <Text className="forgot-password-text">
                 <a onClick={() => setIsForgotPassword(true)}>Forgot Password?</a>
               </Text>
+              
               <Form.Item>
                 <Button
                   type="default"
@@ -226,22 +235,28 @@ const LoginPage = () => {
                   block
                   style={{
                     backgroundColor: "#b3cf3a",
-                    color: isFormValid ? "#000000" : "#808080",
+                    color: username && password ? "#000000" : "#808080",
                   }}
-                  disabled={!isFormValid}
+                  className="login-button"
+                  disabled={!username || !password}
                 >
                   Log In
                 </Button>
               </Form.Item>
-              <Text type="primary">
-                Don't have an account?{" "}
-                <a onClick={() => setIsSignup(true)}>Register here</a>
-              </Text>
             </Form>
           )}
+
+          <Text>
+            {!isForgotPassword && !isSignup && (
+              <>
+                Don't have an account?{" "}
+                <a onClick={() => setIsSignup(true)}>Register here</a>
+              </>
+            )}
+          </Text>
         </div>
 
-        {/* Right Section with Illustration */}
+        {/* Right Section */}
         <div className="login-illustration">
           <div className="illustration-card">
             <img src={Login1} alt="Field illustration" className="field-image" />

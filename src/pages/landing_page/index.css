@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     
-    background-color: #A6CE39 !important;
+    background-color: #B7D058 !important;
     /* background-size: cover;
     background-position: center;
     background-repeat: no-repeat; */
@@ -358,7 +358,7 @@ ul {
   overflow: hidden;
   top: 0;
   right: 0;
-  background: linear-gradient(135deg, #0f8fbe, #004c78);
+  background: linear-gradient(135deg, #8fab13, #788f15);
   border-radius: 0 4px 0 32px;
 }
 
@@ -382,7 +382,7 @@ ul {
   text-decoration: none;
   z-index: 0;
   overflow: hidden;
-  background: linear-gradient(to bottom, #f2f4f5, #a7d1d9);
+  background: linear-gradient(to bottom, #f2f4f5, #eaff8d);
   font-family: Arial, Helvetica, sans-serif;
   border: none;
 }
@@ -393,7 +393,7 @@ ul {
   z-index: -1;
   top: -16px;
   right: -16px;
-  background: linear-gradient(135deg, #edf8ff, #08607b);
+  background: linear-gradient(135deg, #7f9810, #354101);
   height: 32px;
   width: 32px;
   border-radius: 32px;
