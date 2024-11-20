@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Layout, Typography, Input, Radio, Button, Upload, message, Form } from "antd";
+import { Layout, Typography, Input, Radio, Button, Upload, message, Form, DatePicker } from "antd";
 import { UploadOutlined, UserOutlined, CameraOutlined } from "@ant-design/icons";
 import "@fontsource/poppins";
 import { useNavigate } from "react-router-dom";
 import SideNav from '../../pages/sidenav';
+import moment from 'moment';
 
 const { Title, Text } = Typography;
 const { Header, Content } = Layout;
@@ -56,9 +57,20 @@ const Profile = () => {
 
     const handleSubmit = (values) => {
         const formData = new FormData();
-        Object.keys(values).forEach(key => {
-            if (values[key]) {
-                formData.append(key, values[key]);
+        // Format phone number to include +62
+        const fullPhoneNumber = values.phone ? `+62${values.phone}` : '';
+        // Format date to desired format
+        const formattedDate = values.birthDate ? values.birthDate.format('DD/MM/YYYY') : '';
+        
+        const processedValues = {
+            ...values,
+            phone: fullPhoneNumber,
+            birthDate: formattedDate
+        };
+
+        Object.keys(processedValues).forEach(key => {
+            if (processedValues[key]) {
+                formData.append(key, processedValues[key]);
             }
         });
         if (imageUrl) {
@@ -67,6 +79,19 @@ const Profile = () => {
         
         console.log('Form values:', Object.fromEntries(formData));
         message.success('Profil berhasil diperbarui!');
+    };
+
+    // Function to validate phone number
+    const validatePhoneNumber = (_, value) => {
+        if (!value) {
+            return Promise.reject('Silakan masukkan nomor telepon Anda!');
+        }
+        // Remove any non-digit characters
+        const cleanNumber = value.replace(/\D/g, '');
+        if (cleanNumber.length < 9 || cleanNumber.length > 12) {
+            return Promise.reject('Nomor telepon harus antara 9-12 digit!');
+        }
+        return Promise.resolve();
     };
 
     return (
@@ -79,15 +104,21 @@ const Profile = () => {
                     textAlign: 'center',
                     height: 'auto',
                     lineHeight: '1.5',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                    marginBottom: '48px'
                 }}>
-                    <Title level={2} style={{ margin: '0 0 8px 0' }}>Profil Saya</Title>
+                    <Title level={2} style={{ margin: '0' }}>Profil Saya</Title>
                 </Header>
                 
-                <Content style={{ padding: '24px', background: '#f5f5f5', minHeight: 'calc(100vh - 64px)' }}>
+                <Content style={{ 
+                    padding: '24px', 
+                    background: '#f5f5f5', 
+                    minHeight: 'calc(100vh - 64px)',
+                    marginTop: '24px'
+                }}>
                     <div style={{ 
                         maxWidth: '600px',
-                        margin: '0 auto',
+                        margin: '48px auto 0',
                         background: '#fff',
                         padding: '32px',
                         borderRadius: '12px',
@@ -169,7 +200,7 @@ const Profile = () => {
                                 marginTop: '12px',
                                 fontSize: '14px'
                             }}>
-                                Click to {imageUrl ? 'upload' : 'upload'} profile picture
+                                Click to {imageUrl ? 'change' : 'upload'} profile picture
                             </Text>
                         </div>
 
@@ -181,7 +212,6 @@ const Profile = () => {
                                 username: 'syarifabdllh',
                                 email: 'sy************@gmail.com',
                                 phone: '**********29',
-                                birthDate: '**/02/20**',
                                 gender: 'Laki-laki'
                             }}
                         >
@@ -211,9 +241,14 @@ const Profile = () => {
                             <Form.Item 
                                 label={<span style={{ fontWeight: 600 }}>Telephone Number</span>} 
                                 name="phone"
-                                rules={[{ required: true, message: 'Silakan masukkan nomor telepon Anda!' }]}
+                                rules={[{ validator: validatePhoneNumber }]}
                             >
-                                <Input placeholder="Masukkan nomor telepon Anda" />
+                                <Input 
+                                    addonBefore="+62"
+                                    placeholder="8xxxxxxxxxx"
+                                    style={{ width: '100%' }}
+                                    maxLength={12}
+                                />
                             </Form.Item>
 
                             <Form.Item 
@@ -229,9 +264,18 @@ const Profile = () => {
                             <Form.Item 
                                 label={<span style={{ fontWeight: 600 }}>Birthday Date</span>} 
                                 name="birthDate"
-                                rules={[{ required: true, message: 'Silakan masukkan tanggal lahir Anda!' }]}
+                                rules={[{ required: true, message: 'Silakan pilih tanggal lahir Anda!' }]}
                             >
-                                <Input placeholder="Masukkan tanggal lahir Anda" />
+                                <DatePicker 
+                                    style={{ width: '100%' }}
+                                    format="DD/MM/YYYY"
+                                    placeholder="Pilih tanggal lahir"
+                                    disabledDate={(current) => {
+                                        // Disable future dates and dates more than 100 years ago
+                                        return current && (current > moment().endOf('day') || 
+                                               current < moment().subtract(100, 'years'));
+                                    }}
+                                />
                             </Form.Item>
 
                             <Form.Item style={{ marginTop: '24px' }}>

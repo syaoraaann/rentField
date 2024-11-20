@@ -39,3 +39,18 @@
 .card-title:hover {
   color: #2e7d32;
 }
+
+/* Footer styles */
+.footer {
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  color: black;
+  text-align: center;
+  position: fixed; /* Ensure footer sticks to the bottom */
+  bottom: 0; /* Attach to the bottom of the viewport */
+  left: 0;
+  width: 100%; /* Stretch across the full width */
+  z-index: 10;
+  border-top: 1px solid #ddd;
+}
