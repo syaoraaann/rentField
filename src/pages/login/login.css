@@ -67,7 +67,7 @@
 }
 
 form > .ant-form-item {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .login-illustration {
@@ -108,9 +108,34 @@ form > .ant-form-item {
 }
 
 .login-button {
+  bottom: 25px;
   background-color: #9db53e;
   border-color: #a3b846;
   border-color: #a3b846;
   color: #000;
   border-radius: 8px;
+  margin-bottom: -10px;
+}
+
+/* form > .ant-form-item .ant-form-item-explain {
+  margin-bottom: -10px;
+} */
+
+/* .password-item .ant-form-item-explain {
+  margin-top: 4px; /* Sesuaikan jarak agar lebih dekat */
+  /* position: relative; Pastikan posisinya teratur */
+
+  .password-item .ant-form-item-explain {
+    margin-top: -25px !important; /* Jarak kecil antara input dan pesan */
+    position: relative; /* Pastikan posisi relatif terhadap elemen atasnya */
+  }
+  
+  .password-item .ant-form-item-control-input-content {
+    margin-bottom: 0; /* Hindari margin bawah tambahan di input */
+  }
+  
+.forgot-password-text {
+  display: block;
+  margin-bottom: 20px;
+  cursor: pointer; 
 }

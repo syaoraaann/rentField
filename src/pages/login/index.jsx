@@ -137,6 +137,8 @@ const LoginPage = () => {
               </Form.Item>
               <Form.Item
                 name="password"
+                // layout="vertical"
+                // style={{ maxwidth: -50}}
                 className="password-item"
                 rules={[{ required: true, message: "Please input your Password!" }]}
               >
@@ -189,6 +191,8 @@ const LoginPage = () => {
               <Form.Item
                 name="password"
                 className="password-item"
+                // layout="vertical"
+                // style={{ marginBottom: -50}}
                 rules={[
                   { required: true, message: "Please input your Password!" },
                 ]}
@@ -199,9 +203,10 @@ const LoginPage = () => {
                   placeholder="Password"
                 />
               </Form.Item>
-              <Text>
+              <Text className="forgot-password-text">
                 <a onClick={() => setIsForgotPassword(true)}>Forgot Password?</a>
               </Text>
+              
               <Form.Item>
                 <Button
                   type="default"
