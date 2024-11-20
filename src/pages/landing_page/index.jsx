@@ -1,8 +1,25 @@
-import { Layout, Button, Row, Col, Typography, Form, Input, Avatar, Card, Flex } from "antd";
-import { EditOutlined, EllipsisOutlined, SettingOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import {
+  Layout,
+  Button,
+  Row,
+  Col,
+  Typography,
+  Form,
+  Input,
+  Avatar,
+  Card,
+  Flex,
+} from "antd";
+import {
+  EditOutlined,
+  EllipsisOutlined,
+  SettingOutlined,
+  LeftOutlined,
+  RightOutlined,
+} from "@ant-design/icons";
 
 import { useState, useEffect } from "react";
-import { Settings, Edit, MoreHorizontal } from 'lucide-react';
+import { Settings, Edit, MoreHorizontal } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../pages/landing_page/index.css";
 
@@ -32,7 +49,7 @@ function LandingPage() {
       prevIndex === galleryData.length - 1 ? 0 : prevIndex + 1
     );
   };
-  
+
   const handlePrev = () => {
     setActiveIndex((prevIndex) =>
       prevIndex === 0 ? galleryData.length - 1 : prevIndex - 1
@@ -42,7 +59,7 @@ function LandingPage() {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
       setActiveSection(sectionId);
     }
   };
@@ -61,56 +78,65 @@ function LandingPage() {
       id: 1,
       image: soccer2,
       title: "Singaraja Soccer",
-      description: "Singaraja Soccer located at Jl. Udayana, Banjar Jawa, Kec. Buleleng, Kabupaten Buleleng, Bali 81113"
+      description:
+        "Singaraja Soccer located at Jl. Udayana, Banjar Jawa, Kec. Buleleng, Kabupaten Buleleng, Bali 81113",
     },
     {
       id: 2,
       image: bultang,
       title: "Badminton Hall UNDIKSHA",
-      description: "Badminton Hall UNDIKSHA located at GOR BULUTANGKIS UNDIKSHA, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116"
+      description:
+        "Badminton Hall UNDIKSHA located at GOR BULUTANGKIS UNDIKSHA, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116",
     },
     {
       id: 3,
       image: futsal,
       title: "Lapangan Futsal Banyuasri",
-      description: "Lapangan futsal Banyuasri located at jln. Udayana, Singaraja. Open 24 hours for the public."
+      description:
+        "Lapangan futsal Banyuasri located at jln. Udayana, Singaraja. Open 24 hours for the public.",
     },
     {
       id: 4,
       image: voli,
       title: "Lapangan Voli Gor Undiksha Jineng Dalem",
-      description: "Lapangan bola voli Gor Undiksha Jineng Dalem is in Jineng Dalem Village. Open 24 hours for Undiksha students"
+      description:
+        "Lapangan bola voli Gor Undiksha Jineng Dalem is in Jineng Dalem Village. Open 24 hours for Undiksha students",
     },
     {
       id: 5,
       image: biliard,
       title: "Billiard Singaraja",
-      description: "Biliard Singaraja located on jln. A. Yani, Singaraja. Open from 08.00 WITA-23.00 WITA"
+      description:
+        "Biliard Singaraja located on jln. A. Yani, Singaraja. Open from 08.00 WITA-23.00 WITA",
     },
     {
       id: 6,
       image: soccer2,
       title: "Soccer Field GOR Bhuana Patra",
-      description: "Soccer Field GOR Bhuana Patra located at Jl. Udayana No.6, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81114"
+      description:
+        "Soccer Field GOR Bhuana Patra located at Jl. Udayana No.6, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81114",
     },
     {
       id: 7,
       image: voli,
       title: "Basketball Field GOR Bhuana Patra",
-      description: "Basketball Field GOR Bhuana Patra located at Jl. Udayana No.6, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81114. Open from 08.00 WITA-23.00 WITA"
+      description:
+        "Basketball Field GOR Bhuana Patra located at Jl. Udayana No.6, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81114. Open from 08.00 WITA-23.00 WITA",
     },
     {
       id: 8,
       image: basket3,
       title: "Basketball Field FOK UNDIKSHA",
-      description: "Basketball Field FOK UNDIKSHA is in FOK Undiksha, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116. Open 24 hours for Undiksha students"
+      description:
+        "Basketball Field FOK UNDIKSHA is in FOK Undiksha, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116. Open 24 hours for Undiksha students",
     },
     {
       id: 9,
       image: basket,
       title: "Basketball Field Teleng",
-      description: "Basketball Field Teleng located at Kec. Buleleng, Kabupaten Buleleng, Bali 81116. Open 24 hours"
-    }
+      description:
+        "Basketball Field Teleng located at Kec. Buleleng, Kabupaten Buleleng, Bali 81116. Open 24 hours",
+    },
   ];
 
   const [activePhoto, setActivePhoto] = useState(galleryData[0]);
@@ -125,7 +151,7 @@ function LandingPage() {
         if (element) {
           const { offsetTop, offsetHeight } = element;
           if (
-            scrollPosition >= offsetTop - 100 && 
+            scrollPosition >= offsetTop - 100 &&
             scrollPosition < offsetTop + offsetHeight - 100
           ) {
             setActiveSection(sectionId);
@@ -135,35 +161,66 @@ function LandingPage() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <Layout className="layout-signin layout-default">
       <Header className="content-animation">
-        <div className="header-col header-brand" style={{paddingLeft: "20px"}}>
+        <div
+          className="header-col header-brand"
+          style={{ paddingLeft: "20px" }}
+        >
           <img
             src={rentfieldlogo}
             alt="Rent Field Logo"
-            style={{ maxWidth: "55px", width: "100%", borderRadius: "60px"}}
+            style={{ maxWidth: "55px", width: "100%", borderRadius: "60px" }}
           />
-          <span style={{paddingLeft: "10px", fontFamily: "Poppins", fontWeight: "bold"}}>RentField</span>
+          <span
+            style={{
+              paddingLeft: "10px",
+              fontFamily: "Poppins",
+              fontWeight: "bold",
+            }}
+          >
+            RentField
+          </span>
         </div>
         <div className="header-col header-nav">
           <nav>
-            <Link 
+            <Link
               onClick={() => scrollToSection("Home")}
-              className={`px-4 py-2 ${activeSection === "Home" ? "active-link" : 'text-gray-600'}`}>Home</Link>
-            <Link 
+              className={`px-4 py-2 ${
+                activeSection === "Home" ? "active-link" : "text-gray-600"
+              }`}
+            >
+              Home
+            </Link>
+            <Link
               onClick={() => scrollToSection("About Us")}
-              className={`px-4 py-2 ${activeSection === "About Us" ? "active-link" : 'text-gray-600'}`}>About Us</Link>
-            <Link 
+              className={`px-4 py-2 ${
+                activeSection === "About Us" ? "active-link" : "text-gray-600"
+              }`}
+            >
+              About Us
+            </Link>
+            <Link
               onClick={() => scrollToSection("Services")}
-              className={`px-4 py-2 ${activeSection === "Services" ? "active-link" : 'text-gray-600'}`}>Services</Link>
-            <Link 
+              className={`px-4 py-2 ${
+                activeSection === "Services" ? "active-link" : "text-gray-600"
+              }`}
+            >
+              Services
+            </Link>
+            <Link
               onClick={() => scrollToSection("Contact")}
-              className={`px-4 py-2 ${activeSection === "Contact" ? "active-link" : 'text-gray-600'}`}>Contact</Link>
+              className={`px-4 py-2 ${
+                activeSection === "Contact" ? "active-link" : "text-gray-600"
+              }`}
+            >
+              Contact
+            </Link>
           </nav>
         </div>
         <div className="header-col header-btn">
@@ -178,57 +235,73 @@ function LandingPage() {
         </Row>
       </Content> */}
 
-<main>
+      <main>
         {/* Home Section */}
-        <section id="Home" 
+        <section
+          id="Home"
           style={{
-              backgroundImage: `url('/src/assets/images/landingbg7.png')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center center",
-              backgroundRepeat: "no-repeat",
-              maxWidth: "100%", 
-              margin: "0 auto",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "white",
-              textAlign: "center",
-              minHeight: "100vh",
+            backgroundImage: `url('/src/assets/images/landingbg7.png')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center center",
+            backgroundRepeat: "no-repeat",
+            maxWidth: "100%",
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "white",
+            textAlign: "center",
+            minHeight: "100vh",
           }}
         >
           <div
-              style={{
-                padding: "30px",
-                maxWidth: "700px",
-                color: "white",
-                textAlign: "center",
-                
-                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)"
-                // border: "1px solid rgba(255, 255, 255, 0.3)",
+            style={{
+              padding: "30px",
+              maxWidth: "700px",
+              color: "white",
+              textAlign: "center",
+
+              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+              // border: "1px solid rgba(255, 255, 255, 0.3)",
             }}
           >
-            <div >
-              <h2 style={{ fontFamily: "Poppins", fontSize: "3.5rem", fontWeight: "bold" }}>Field Rental Made Easier For You</h2>
+            <div>
+              <h2
+                style={{
+                  fontFamily: "Poppins",
+                  fontSize: "3.5rem",
+                  fontWeight: "bold",
+                }}
+              >
+                Field Rental Made Easier For You
+              </h2>
             </div>
             <div>
-                <p style={{ fontFamily: "Poppins", fontSize: "16px"}}>Welcome to the most comprehensive field rental platform! Enjoy the convenience of finding and booking your favorite field for various sports such as futsal, basketball, tennis, and more. Create an unforgettable sports experience with the best facilities available anytime according to your needs. Let's start now to find the ideal field for your next match!
-                </p>
+              <p style={{ fontFamily: "Poppins", fontSize: "16px" }}>
+                Welcome to the most comprehensive field rental platform! Enjoy
+                the convenience of finding and booking your favorite field for
+                various sports such as futsal, basketball, tennis, and more.
+                Create an unforgettable sports experience with the best
+                facilities available anytime according to your needs. Let's
+                start now to find the ideal field for your next match!
+              </p>
             </div>
           </div>
-            
-          <div className="header-col header-btn" style={{paddingTop: "15px"}}>
-              <Button type="primary" onClick={handleLoginClick}>
-                Get Started
-              </Button>
+
+          <div className="header-col header-btn" style={{ paddingTop: "15px" }}>
+            <Button type="primary" onClick={handleLoginClick}>
+              Get Started
+            </Button>
           </div>
         </section>
 
         {/* About Section */}
-        <section id="About Us" 
+        <section
+          id="About Us"
           style={{
             minHeight: "100vh",
-            maxWidth: "100%", 
+            maxWidth: "100%",
             margin: "0 auto",
             display: "flex",
             flexDirection: "row",
@@ -236,59 +309,80 @@ function LandingPage() {
             justifyContent: "center",
           }}
         >
-        <Row gutter={[0, 48]} justify="center" style={{color: "white", height: "100vh"}}>
-              <Col xs={8} lg={32} style={{height: "100%", padding: 0}}>
-                <div
-                  style={{ 
-                    height: "100%", 
-                    textAlign: "center",
-                    fontFamily: "Poppins",
-                    maxWidth: "600px",
-                    backgroundColor: "white",
-                    maxHeight: "100vh",
-                    padding: "60px",
-                    paddingTop: "160px",
-                    
-                  }}>
-                  <h1 style={{ color: "#A6CE39", fontWeight: "bold", fontSize: "64px", paddingRight: "18px"}}> 
-                    About <b style={{ color: "black"}}>Us</b>
-                  </h1>   
-                  
-                  <p style={{ fontSize: "16px", lineHeight: "1.8", color: "black"}}>
-                  RentField was developed by a team of five students from Ganesha University of Education's Information Systems Study Program. We have a team that is competent in the field of information technology and committed to providing the best experience for users. With a user-friendly approach and advanced features, RentField is ready to serve every sports rental need with responsive and efficient services.
-                  </p >
-                </div> 
-              </Col>
-      
-              <Col xs={16} lg={32}>
-                <div style={{ backgroundColor: "#A6CE39", height: "100vh"}}>
-                  <img
-                    src={ourteam} // Ganti dengan path logo Anda
-                    alt="CodeBlue Team"
-                    style={{ 
-                     
-                     
-                      width: "100%",           // Membuat gambar menyesuaikan lebar kolom
-                      height: "100%", 
-                      objectFit: "cover",      // Memastikan gambar memenuhi ruang tanpa terdistorsi   
-                      }}
-                  />
-                </div>
-              </Col>
-            </Row>
+          <Row
+            gutter={[0, 48]}
+            justify="center"
+            style={{ color: "white", height: "100vh" }}
+          >
+            <Col xs={8} lg={32} style={{ height: "100%", padding: 0 }}>
+              <div
+                style={{
+                  height: "100%",
+                  textAlign: "center",
+                  fontFamily: "Poppins",
+                  maxWidth: "600px",
+                  backgroundColor: "white",
+                  maxHeight: "100vh",
+                  padding: "60px",
+                  paddingTop: "160px",
+                }}
+              >
+                <h1
+                  style={{
+                    color: "#A6CE39",
+                    fontWeight: "bold",
+                    fontSize: "64px",
+                    paddingRight: "18px",
+                  }}
+                >
+                  About <b style={{ color: "black" }}>Us</b>
+                </h1>
+
+                <p
+                  style={{
+                    fontSize: "16px",
+                    lineHeight: "1.8",
+                    color: "black",
+                  }}
+                >
+                  RentField was developed by a team of five students from
+                  Ganesha University of Education's Information Systems Study
+                  Program. We have a team that is competent in the field of
+                  information technology and committed to providing the best
+                  experience for users. With a user-friendly approach and
+                  advanced features, RentField is ready to serve every sports
+                  rental need with responsive and efficient services.
+                </p>
+              </div>
+            </Col>
+
+            <Col xs={16} lg={32}>
+              <div style={{ backgroundColor: "#A6CE39", height: "100vh" }}>
+                <img
+                  src={ourteam} // Ganti dengan path logo Anda
+                  alt="CodeBlue Team"
+                  style={{
+                    width: "100%", // Membuat gambar menyesuaikan lebar kolom
+                    height: "100%",
+                    objectFit: "cover", // Memastikan gambar memenuhi ruang tanpa terdistorsi
+                  }}
+                />
+              </div>
+            </Col>
+          </Row>
         </section>
 
         {/* Services Section */}
-        <section id="Services" 
+        <section
+          id="Services"
           style={{
             minHeight: "100vh",
-            maxWidth: "100%", 
+            maxWidth: "100%",
             margin: "0 auto",
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "center",
-
           }}
         >
           <Col style={{ width: "100%" }}>
@@ -298,143 +392,220 @@ function LandingPage() {
                 textAlign: "center",
                 fontFamily: "Poppins",
                 paddingTop: "90px",
-                display: "flex",           // Tambahkan
-                flexDirection: "column",   // Tambahkan
+                display: "flex", // Tambahkan
+                flexDirection: "column", // Tambahkan
                 alignItems: "center",
-                paddingBottom: "90px" 
+                paddingBottom: "90px",
                 // border: "1px solid rgba(255, 255, 255, 0.3)",
-              }} 
+              }}
             >
-              <h2 style={{ fontFamily: "Poppins", fontSize: "2.5rem", fontWeight: "bold", paddingBottom: "10px" }}>Our Services</h2>
-              <Row gutter={[24,24]} xs={24} md={12}>
-              <Card className="cards">
-                <p className="cards-title">Rent Field Services</p>
+              <h2
+                style={{
+                  fontFamily: "Poppins",
+                  fontSize: "2.5rem",
+                  fontWeight: "bold",
+                  paddingBottom: "10px",
+                }}
+              >
+                Our Services
+              </h2>
+              <Row gutter={[24, 24]} xs={24} md={12}>
+                <Card className="cards">
+                  <p className="cards-title">Rent Field Services</p>
                   <p className="small-desc">
                     Provide several rental field or place for rent.
                   </p>
                   <div className="go-corner">
                     <div className="go-arrow">→</div>
                   </div>
-              </Card> 
-              <Card className="cards">
-                <p className="cards-title">Effectiveness & Efficientcy</p>
+                </Card>
+                <Card className="cards">
+                  <p className="cards-title">Effectiveness & Efficientcy</p>
                   <p className="small-desc">
-                    Provide effectiveness and efficientcy for user who want to rent field or place.
+                    Provide effectiveness and efficientcy for user who want to
+                    rent field or place.
                   </p>
                   <div className="go-corner">
                     <div className="go-arrow">→</div>
                   </div>
-              </Card> 
-              <Card className="cards">
-                <p className="cards-title">Provide Status Field</p>
+                </Card>
+                <Card className="cards">
+                  <p className="cards-title">Provide Status Field</p>
                   <p className="small-desc">
-                    We provide information about status field or place, so user can check easyly the field or place already booked or not.
+                    We provide information about status field or place, so user
+                    can check easyly the field or place already booked or not.
                   </p>
                   <div className="go-corner">
                     <div className="go-arrow">→</div>
                   </div>
-              </Card>              
-              </Row>    
+                </Card>
+              </Row>
             </div>
 
-            <div style={{
-                  paddingTop:"80px",  
-                  maxWidth: "100%", 
-                  width: "100%",           // Ubah dari 250vh ke 100%
-                  display: "flex",         // Tambahkan
-                  flexDirection: "column", // Tambahkan
-                  alignItems: "center",
-                  animation: "fadeIn 1s ease-in",
-                  backgroundColor: "white",
-                  paddingBottom: "90px"
-            }}>
-              <h2 style={{ fontFamily: "Poppins", fontSize: "2.5rem", fontWeight: "bold", paddingBottom: "10px", color: "#A6CE39"}}>Available For Rent</h2>
-                  <Row style={{paddingBottom: "30px", animation: "slideIn 0.8s ease-out",}}>
-                    <div className="image-hover-container" style={{maxWidth: "400px", flexShrink: 0, }}>
+            <div
+              style={{
+                paddingTop: "80px",
+                maxWidth: "100%",
+                width: "100%", // Ubah dari 250vh ke 100%
+                display: "flex", // Tambahkan
+                flexDirection: "column", // Tambahkan
+                alignItems: "center",
+                animation: "fadeIn 1s ease-in",
+                backgroundColor: "white",
+                paddingBottom: "90px",
+              }}
+            >
+              <h2
+                style={{
+                  fontFamily: "Poppins",
+                  fontSize: "2.5rem",
+                  fontWeight: "bold",
+                  paddingBottom: "10px",
+                  color: "#A6CE39",
+                }}
+              >
+                Available For Rent
+              </h2>
+              <Row
+                style={{
+                  paddingBottom: "30px",
+                  animation: "slideIn 0.8s ease-out",
+                }}
+              >
+                <div
+                  className="image-hover-container"
+                  style={{ maxWidth: "400px", flexShrink: 0 }}
+                >
+                  <img src={activePhoto.image} alt={activePhoto.title} />
+                </div>
+                <div
+                  style={{
+                    paddingLeft: "20px",
+                    width: "400px",
+                    flexShrink: 0,
+                    overflow: "hidden",
+                  }}
+                >
+                  <h4
+                    style={{
+                      fontFamily: "Poppins",
+                      fontSize: "24px",
+                      fontWeight: "bold",
+                      wordWrap: "break-word", // Memungkinkan text untuk wrap
+                      overflowWrap: "break-word", // Memastikan text panjang bisa wrap
+                    }}
+                  >
+                    {activePhoto.title}
+                  </h4>
+                  <p
+                    style={{
+                      fontFamily: "Poppins",
+                      fontWeight: "bold",
+                      wordWrap: "break-word", // Memungkinkan text untuk wrap
+                      overflowWrap: "break-word", // Memastikan text panjang bisa wrap
+                    }}
+                  >
+                    {activePhoto.description}
+                  </p>
+                </div>
+              </Row>
+              <Row
+                className="relative overflow-hidden flex items-center"
+                style={{
+                  display: "flex",
+                  flexWrap: "nowrap",
+                  gap: "10px",
+                  paddingLeft: "110px",
+                  paddingRight: "110px",
+                  paddingBottom: "20px",
+                }}
+              >
+                {activeIndex > 0 && (
+                  <Button icon={<LeftOutlined />} onClick={handlePrev} />
+                )}
+                {/* Bagian bawah - Preview foto kecil */}
+                <div
+                  className="flex flex-row"
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    overflow: "hidden",
+                  }}
+                >
+                  {galleryData.map((photo) => (
+                    <div
+                      style={{
+                        maxWidth: "200px",
+                        transform: `translateX(-${activeIndex * 200}px)`,
+                        flexShrink: 0,
+                        padding: "5px",
+                        border:
+                          activePhoto.id === photo.id
+                            ? "4px solid #3B82F6"
+                            : "none",
+                        overflowX: "auto",
+                        transform: `translateX(-${activeIndex * 200}px)`,
+                      }}
+                      key={photo.id}
+                      className={`transition-transform duration-300 flex-none snap-start cursor-pointer w-48 h-48 ${
+                        activePhoto.id === photo.id
+                          ? "scale-105"
+                          : "opacity-60 hover:opacity-100"
+                      }`}
+                      onClick={() => setActivePhoto(photo)}
+                    >
+                      <div className="w-full h-full relative img">
                         <img
-                          
-                          src={activePhoto.image}
-                          alt={activePhoto.title}
+                          src={photo.image}
+                          alt={photo.title}
+                          className="w-full h-full object-cover absolute inset-0"
                         />
-                    </div>
-                    <div style={{paddingLeft: "20px", width: "400px", flexShrink: 0, overflow: "hidden"}}>
-                      <h4 style={{
-                            fontFamily: "Poppins", 
-                            fontSize: "24px", 
-                            fontWeight: "bold", 
-                            wordWrap: "break-word",    // Memungkinkan text untuk wrap
-                            overflowWrap: "break-word" // Memastikan text panjang bisa wrap
-                          }}>{activePhoto.title}</h4>
-                      <p  style={{
-                            fontFamily: "Poppins", 
-                            fontWeight: "bold",
-                            wordWrap: "break-word",    // Memungkinkan text untuk wrap
-                            overflowWrap: "break-word" // Memastikan text panjang bisa wrap
-                          }}>{activePhoto.description}</p>
-                    </div>
-                  </Row>
-                  <Row className="relative overflow-hidden flex items-center" style={{ display: 'flex', flexWrap: 'nowrap', gap: '10px', paddingLeft: "110px", paddingRight: "110px", paddingBottom: "20px"}}
-                  > 
-                      {activeIndex > 0 && (
-                        <Button icon={<LeftOutlined />} onClick={handlePrev} />
-                      )}
-                      {/* Bagian bawah - Preview foto kecil */}
-                      <div className="flex flex-row" style={{display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
-                        {galleryData.map((photo) => (
-                                <div
-                                  style={{maxWidth: "200px", transform: `translateX(-${activeIndex * 200}px)`,  flexShrink: 0, padding: "5px", border: activePhoto.id === photo.id ? "4px solid #3B82F6" : "none", overflowX: 'auto', transform: `translateX(-${activeIndex * 200}px)`}}
-                                  key={photo.id}
-                                  className={`transition-transform duration-300 flex-none snap-start cursor-pointer w-48 h-48 ${
-                                    activePhoto.id === photo.id
-                                      ? 'scale-105'
-                                      : 'opacity-60 hover:opacity-100'
-                                  }`}
-                                  onClick={() => setActivePhoto(photo)}
-                                >
-                                  <div className="w-full h-full relative img">
-                                    <img
-                                      src={photo.image}
-                                      alt={photo.title}
-                                      className="w-full h-full object-cover absolute inset-0"
-                                    />
-                                  </div>           
-                                </div>
-                              ))}
                       </div>
-                      {activeIndex < galleryData.length - 6 && (
-                        <Button icon={<RightOutlined />} onClick={handleNext} />
-                      )}      
-                  </Row>              
-                    <p>Want to see more? <Link to="/login"> Sign In</Link></p>                   
+                    </div>
+                  ))}
+                </div>
+                {activeIndex < galleryData.length - 6 && (
+                  <Button icon={<RightOutlined />} onClick={handleNext} />
+                )}
+              </Row>
+              <p>
+                Want to see more? <Link to="/login"> Sign In</Link>
+              </p>
             </div>
-          </Col>      
+          </Col>
         </section>
 
         {/* Contact Section */}
-        <section id="Contact"
+        <section
+          id="Contact"
           style={{
             minHeight: "60vh",
-            maxWidth: "100%", 
+            maxWidth: "100%",
             margin: "0 auto",
             display: "flex",
             flexDirection: "column",
-            paddingTop: "90px"
+            paddingTop: "90px",
           }}
         >
           <div
             style={{
-              display: "flex",         // Tambahkan
+              display: "flex", // Tambahkan
               flexDirection: "column", // Tambahkan
               alignItems: "center",
               animation: "fadeIn 1s ease-in",
-              fontFamily: "Poppins"
+              fontFamily: "Poppins",
             }}
           >
-            <h2 style={{fontSize: "2.5rem", fontWeight: "bold", color: "white"}}>Contact <b style={{color: "black"}}>Us</b></h2>
-            <p style={{paddingBottom: "50px"}}>
-              Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+            <h2
+              style={{ fontSize: "2.5rem", fontWeight: "bold", color: "white" }}
+            >
+              Contact <b style={{ color: "black" }}>Us</b>
+            </h2>
+            <p style={{ paddingBottom: "50px" }}>
+              Have questions? We'd love to hear from you. Send us a message and
+              we'll respond as soon as possible.
             </p>
-            <ul className="example-2" style={{paddingRight: "40px"}}>
+            <ul className="example-2" style={{ paddingRight: "40px" }}>
               <li className="icon-content">
                 <a
                   href="https://linkedin.com/"
@@ -460,7 +631,11 @@ function LandingPage() {
                 <div className="tooltip">LinkedIn</div>
               </li>
               <li className="icon-content">
-                <a href="https://www.github.com/" aria-label="GitHub" data-social="github">
+                <a
+                  href="https://www.github.com/"
+                  aria-label="GitHub"
+                  data-social="github"
+                >
                   <div className="filled" />
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -504,7 +679,11 @@ function LandingPage() {
                 <div className="tooltip">Instagram</div>
               </li>
               <li className="icon-content">
-                <a href="https://youtube.com/" aria-label="Youtube" data-social="youtube">
+                <a
+                  href="https://youtube.com/"
+                  aria-label="Youtube"
+                  data-social="youtube"
+                >
                   <div className="filled" />
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -528,17 +707,22 @@ function LandingPage() {
         </section>
       </main>
 
-      <Footer className="footer content-animation">
-        <p className="copyright font-color">
-          {" "}
-          Copyright © 2024 RentField.com - Powered by CodeBlue Universitas Pendidikan
-          Ganesha
-        </p>
+      <Footer
+        style={{
+          textAlign: "center",
+          background: "#f9f9f9",
+          borderTop: "1px solid #ddd",
+          padding: "12px 24px",
+          fontSize: "14px",
+          color: "#666",
+          position: "relative", // Gunakan relative untuk posisi footer
+        }}
+      >
+        Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
+        Pendidikan Ganesha
       </Footer>
     </Layout>
   );
 }
 
 export default LandingPage;
-
-
