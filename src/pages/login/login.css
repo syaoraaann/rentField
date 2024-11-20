@@ -105,8 +105,10 @@ form > .ant-form-item {
   width: 500px;
   height: auto;
 }
-form{
-  width: 100%;
-  max-width: 220px;
-  min-heigh: 100px;
+
+.login-button {
+  background-color: #9db53e;
+  border-color: #a3b846;
+  color: #000;
+  border-radius: 8px;
 }

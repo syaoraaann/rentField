@@ -63,13 +63,7 @@ const LoginPage = () => {
               form={forgotPasswordForm}
               onFinish={handlePasswordReset}
               onValuesChange={(_, allValues) => {
-                forgotPasswordForm.validateFields()
-                  .then(() => {
-                    // Validasi berhasil - form valid
-                  })
-                  .catch(() => {
-                    // Validasi gagal - form tidak valid
-                  });
+                forgotPasswordForm.validateFields().catch(() => {});
               }}
             >
               <Form.Item
@@ -89,7 +83,7 @@ const LoginPage = () => {
                   return (
                     <Popconfirm
                       title="Upcoming features"
-                      description="Sorry, this is an upcoming features"
+                      description="Sorry, this is an upcoming feature"
                       okText="OK"
                       placement="top"
                       cancelButtonProps={{ style: { display: 'none' } }}
@@ -158,7 +152,7 @@ const LoginPage = () => {
                   return (
                     <Popconfirm
                       title="Upcoming features"
-                      description="Sorry, this is an upcoming features"
+                      description="Sorry, this is an upcoming feature"
                       okText="OK"
                       placement="top"
                       cancelButtonProps={{ style: { display: 'none' } }}
@@ -239,20 +233,15 @@ const LoginPage = () => {
                   Log In
                 </Button>
               </Form.Item>
-            </Form>
-          )}
-
-          <Text>
-            {!isForgotPassword && !isSignup && (
-              <>
+              <Text type="primary">
                 Don't have an account?{" "}
                 <a onClick={() => setIsSignup(true)}>Register here</a>
-              </>
-            )}
-          </Text>
+              </Text>
+            </Form>
+          )}
         </div>
 
-        {/* Right Section with Nested Card Effect */}
+        {/* Right Section with Illustration */}
         <div className="login-illustration">
           <div className="illustration-card">
             <img src={Login1} alt="Field illustration" className="field-image" />
