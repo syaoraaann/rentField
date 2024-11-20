@@ -261,7 +261,7 @@ function LandingPage() {
               </Col>
       
               <Col xs={16} lg={32}>
-                <div style={{ backgroundColor: "#A6CE39", height: "100vh"}}>
+                <div style={{ backgroundColor: "#B7D058", height: "100vh"}}>
                   <img
                     src={ourteam} // Ganti dengan path logo Anda
                     alt="CodeBlue Team"
