@@ -24,10 +24,49 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  width: 600px;
+  height: 600px;
+  box-sizing: border-box;
+  border-radius: 20px;
 }
 
 .logo {
-  width: 200px;
+  width: 220px;
+  height: auto;
+  margin: -10px;
+  align-self: center;
+}
+
+.logo-title {
+  color: #000;
+  font-size: 36px;
+  margin: 0;
+  text-align: center;
+  font-weight: bold;
+
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: ceneter;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.login-form-wrapper {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+form > .ant-form-item {
+  margin-bottom: 16px;
 }
 
 .login-illustration {
@@ -35,10 +74,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: transparent;
-  padding: 25px;
+  background-color: #b3cf3a;
   border-radius: 20px;
-  background-color: #D8E795;
 }
 
 .illustration-card {
@@ -47,10 +84,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 20px;
 }
 
+/* .login-button {
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+  background: #b3cf3a;
+  border: none;
+} */
+
+/* .custom-button:hover {
+  background-color: #f0f0f0;
+  color: black;
+
+} */
+
 .field-image {
-  width: 2000px;
+  width: 500px;
   height: auto;
 }
 
