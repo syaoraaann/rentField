@@ -10,7 +10,7 @@
 
 .login-container {
   display: flex;
-  background-color: #ffffff;
+  background-color: #FAF9F6;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0.8, 0.8, 0.8, 0.7);
   overflow: hidden;
@@ -20,7 +20,7 @@
 .login-box {
   flex: 1;
   background-color: #FAF9F6;
-  padding: 40px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,14 +34,14 @@
 .logo {
   width: 220px;
   height: auto;
-  margin: -10px;
+  margin: -5px;
   align-self: center;
 }
 
 .logo-title {
   color: #000;
   font-size: 36px;
-  margin: 0;
+  margin: -10px;
   text-align: center;
   font-weight: bold;
 
@@ -63,6 +63,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 }
 
 form > .ant-form-item {
@@ -107,16 +108,45 @@ form > .ant-form-item {
 }
 
 .login-button {
+  bottom: 15px;
+  position: relative;
+  margin-top: 15px;
+  background-color: #9db53e;
+  border-color: #a3b846;
   color: #000;
-  font-size: 16px;
-  cursor: pointer;
-  background: linear-gradient(90deg, #b2d12d, #dcf764);
-  border: none;
+  border-radius: 8px;
+  margin-bottom: -35px;
+  
 }
 
-.register-link {
-  margin-left: 5px;
-  text-decoration: underline;
-  color: #000;
-  cursor: pointer;
+/* form > .ant-form-item .ant-form-item-explain {
+  margin-bottom: -10px;
+} */
+
+/* .password-item .ant-form-item-explain {
+  margin-top: 4px; /* Sesuaikan jarak agar lebih dekat */
+  /* position: relative; Pastikan posisinya teratur */
+
+  .password-item .ant-form-item-explain {
+    margin-top: -25px !important; /* Jarak kecil antara input dan pesan */
+    position: relative; /* Pastikan posisi relatif terhadap elemen atasnya */
+  }
+  
+  .password-item .ant-form-item-control-input-content {
+    margin-bottom: 0; /* Hindari margin bawah tambahan di input */
+  }
+  
+.forgot-password-text {
+  display: block;
+  position: relative;
+  margin-top: -20px;
+  cursor: pointer; 
+  z-index: 1;
+}
+
+.register-btn {
+  /* padding-top: 0px; */
+  margin-bottom: -15px;
+  top: -15px;
+
 }

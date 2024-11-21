@@ -26,7 +26,7 @@ const cardStyle = {
 };
 
 const titleStyle = {
-  color: "#4CAF50",
+  color: "#375D22",
   fontSize: "1.8em",
   fontWeight: "bold",
 };

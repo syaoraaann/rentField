@@ -58,7 +58,7 @@ const SideNav = () => {
       <div
         style={{
           padding: "15px 20px 5px",
-          color: "#4CAF50",
+          color: "#375D22",
           fontSize: "1em",
           fontWeight: "bold",
         }}
@@ -73,7 +73,7 @@ const SideNav = () => {
       <div
         style={{
           padding: "15px 20px 5px",
-          color: "#4CAF50",
+          color: "#375D22",
           fontSize: "1em",
           fontWeight: "bold",
         }}
@@ -94,7 +94,7 @@ const SideNav = () => {
       <div
         style={{
           padding: "15px 20px 5px",
-          color: "#4CAF50",
+          color: "#375D22",
           fontSize: "1em",
           fontWeight: "bold",
         }}
