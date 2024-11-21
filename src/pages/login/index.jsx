@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography, Form, Input, Popconfirm } from "antd";
-import "./login.css";
+import "../../pages/login/login.css";
 import rentfieldlogo from "../../assets/images/rentfield1.png";
 import Login1 from "../../assets/images/Login1.png";
 import "@fontsource/poppins";
@@ -45,7 +45,7 @@ const LoginPage = () => {
             <img
               src={rentfieldlogo}
               alt="Logo"
-              className="logo"
+              className="logo-img"
               onClick={() => navigate("/")}
               style={{ cursor: "pointer" }}
             />
