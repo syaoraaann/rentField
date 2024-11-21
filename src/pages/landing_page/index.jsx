@@ -677,7 +677,7 @@ function LandingPage() {
         </section>
       </main>
 
-      <Footer className="footer content-animation">
+      <Footer className="footer-landing content-animation">
         <p className="copyright font-color">
           {" "}
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas Pendidikan
