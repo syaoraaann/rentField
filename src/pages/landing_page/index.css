@@ -1,52 +1,36 @@
+.layout-signin {
+  background-color: #f0f2f5;
+}
+
 .layout-default {
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    
+    flex-direction: column; 
     background-color: #B7D058 !important;
-    /* background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; */
   }
 
-/* .home-menu {
-    background-image: url('../../assets/images/landingbg6.png');
-    
-}
-
-.other-menus {
-    background-image: url('../../assets/images/face-1.jpg');
-} */
-
 .ant-layout-header {
-    background: white !important; /* Latar belakang putih semi-transparan */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; /* Bayangan lembut */
-    padding: 10px 20px !important; /* Padding untuk header dan footer */
-    color: black !important; /* Warna teks putih agar kontras dengan latar belakang */
-    /* border: 1px solid rgba(255, 255, 255, 0.3) !important; Batas semi-transparan untuk efek glass */
+    background: white !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    padding: 10px 20px !important;
+    color: black !important;
     box-shadow: none !important;
     position: fixed !important;
-    z-index: 1000 !important; /* Tetapkan z-index agar konten tetap di atas background */
+    z-index: 1000 !important;
     height: 60px !important;
     overflow: hidden;
     top: 0;
     width: 100%;
-
   }
 
-.ant-layout-content {
-    
-    flex: 1; /* Biarkan content mengambil ruang yang tersisa */
+.ant-layout-content { 
+    flex: 1; /* Supaya content mengambil ruang yang tersisa */
 }
-  
-.layout-signin {
-    background-color: #f0f2f5;
-  }
 
 .header {
     display: flex;
-    justify-content: space-between; /* Membuat elemen di dalam header tersebar */
-    align-items: center; /* Memusatkan elemen secara vertikal */
+    justify-content: space-between;
+    align-items: center; 
     padding: 0 20px;
     height: 60px;
   }
@@ -56,6 +40,7 @@
     align-items: center;
     justify-content: end;
     padding-right: 30px;
+    padding-left: 20px;
   }
   
 /* Gaya untuk brand (logo atau nama website) */
@@ -111,6 +96,18 @@
     color: #b2d12d;
   }
 
+.logo {
+  max-width: 55px;
+  width: 100%;
+  border-radius: 60px;
+}
+
+.span-text {
+  padding-left: 15px;
+  font-family: "Poppins";
+  font-weight: bold;
+}
+
 .active-menu {
     background-color: #b2d12d; /* Warna latar belakang saat aktif */
     color: white; /* Warna teks saat aktif (opsional) */
@@ -141,7 +138,7 @@
     border: none;
   }
 
-.footer{
+.footer-landing{
     background: white !important; /* Latar belakang putih semi-transparan */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
     padding: 10px 20px; /* Padding untuk header dan footer */

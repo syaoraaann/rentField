@@ -192,7 +192,7 @@ const ApiPage = () => {
   const drawerSection = () => {
     return (
       <Drawer
-        title={isEdit ? "Edit Playlist" : "Add New Playlist"}
+        title={isEdit ? "Edit Review" : "Add New Review"}
         width={400}
         onClose={handleDrawerClose}
         open={isDrawerVisible}
@@ -212,10 +212,10 @@ const ApiPage = () => {
         <Form layout="vertical" form={form}>
           <Form.Item
             name="play_name"
-            label="Play Name"
+            label="Review Name"
             rules={[{ required: true }]}
           >
-            <Input placeholder="Enter play name" />
+            <Input placeholder="Enter review name" />
           </Form.Item>
           <Form.Item
             name="play_genre"

@@ -1,8 +1,6 @@
-import { Layout, Button, Row, Col, Typography, Form, Input, Avatar, Card, Flex } from "antd";
-import { EditOutlined, EllipsisOutlined, SettingOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
-
+import { Layout, Button, Row, Col, Typography, Card } from "antd";
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { useState, useEffect } from "react";
-import { Settings, Edit, MoreHorizontal } from 'lucide-react';
 import { Link, useNavigate } from "react-router-dom";
 import "../../pages/landing_page/index.css";
 
@@ -18,15 +16,14 @@ import basket from "../../assets/images/basket.jpg";
 import basket3 from "../../assets/images/basket3.jpg";
 
 const { Title } = Typography;
-const { Header, Footer, Content } = Layout;
-const { Meta } = Card;
+const { Header, Footer } = Layout;
 
 function LandingPage() {
   const navigate = useNavigate();
-  // const [activeMenu, setActiveMenu] = useState("Home");
   const [activeSection, setActiveSection] = useState("Home");
   const [activeIndex, setActiveIndex] = useState(0);
 
+  //Handle preview field 
   const handleNext = () => {
     setActiveIndex((prevIndex) =>
       prevIndex === galleryData.length - 1 ? 0 : prevIndex + 1
@@ -39,6 +36,7 @@ function LandingPage() {
     );
   };
 
+  //Scroll to section
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -47,15 +45,12 @@ function LandingPage() {
     }
   };
 
-  // const handleMenuClick = (menu) => {
-  //   setActiveMenu(menu);
-  //   navigate(menu);
-  // };
-
+  //Handle login button
   const handleLoginClick = () => {
-    navigate("/login"); // Change this path to your login route
+    navigate("/login");
   };
 
+  //Gallery data for preview image field
   const galleryData = [
     {
       id: 1,
@@ -113,6 +108,7 @@ function LandingPage() {
     }
   ];
 
+  //state for handling active photo
   const [activePhoto, setActivePhoto] = useState(galleryData[0]);
 
   useEffect(() => {
@@ -142,13 +138,13 @@ function LandingPage() {
   return (
     <Layout className="layout-signin layout-default">
       <Header className="content-animation">
-        <div className="header-col header-brand" style={{paddingLeft: "20px"}}>
+        <div className="header-col header-brand">
           <img
             src={rentfieldlogo}
             alt="Rent Field Logo"
-            style={{ maxWidth: "55px", width: "100%", borderRadius: "60px"}}
+            className="logo"
           />
-          <span style={{paddingLeft: "10px", fontFamily: "Poppins", fontWeight: "bold"}}>RentField</span>
+          <span className="span-text">RentField</span>
         </div>
         <div className="header-col header-nav">
           <nav>
@@ -528,7 +524,7 @@ function LandingPage() {
         </section>
       </main>
 
-      <Footer className="footer content-animation">
+      <Footer className="footer-landing content-animation">
         <p className="copyright font-color">
           {" "}
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas Pendidikan

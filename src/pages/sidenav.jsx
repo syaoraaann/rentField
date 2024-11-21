@@ -8,6 +8,7 @@ import {
   StarOutlined,
   SettingOutlined,
   QuestionCircleOutlined,
+  ApiFilled,
 } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -106,7 +107,7 @@ const SideNav = () => {
       <Menu.Item key="/help-center" icon={<QuestionCircleOutlined />}>
         <Link to="/help-center">Help Center</Link>
       </Menu.Item>
-      <Menu.Item key="/api-page" icon={<QuestionCircleOutlined />}>
+      <Menu.Item key="/api-page" icon={<ApiFilled/>}>
         <Link to="/api-page">Api Page</Link>
       </Menu.Item>
 
