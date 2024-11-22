@@ -6,7 +6,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column; 
-    background-color: #B7D058 !important;
+    background-color: white !important;
   }
 
 .ant-layout-header {
@@ -231,6 +231,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  background-color: #B7D058 !important;
 }
 
 .div-services {
