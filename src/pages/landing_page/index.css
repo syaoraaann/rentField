@@ -271,6 +271,7 @@
   display: flex;
   flex-direction: column;
   padding-top: 90px;
+  background-color: #B7D058;
 }
 
 .div-contact {
