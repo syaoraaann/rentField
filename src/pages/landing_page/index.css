@@ -96,14 +96,14 @@
     color: #b2d12d;
   }
 
-.logo {
+.logo-landing {
   max-width: 55px;
   width: 100%;
   border-radius: 60px;
 }
 
 .span-text {
-  padding-left: 15px;
+  padding-left: 10px;
   font-family: "Poppins";
   font-weight: bold;
 }
@@ -149,6 +149,135 @@
 
 .font-color{
   color: black !important;
+}
+
+/* Home section css*/
+.home-section {
+  background-image: url('/src/assets/images/landingbg7.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.div-wrapper {
+  padding: 30px;
+  max-width: 700px;
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.h2-homesection {
+  font-family: "Poppins";
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+
+.paragraph-home {
+  font-family: "Poppins";
+  font-size: 16px;
+}
+
+/* about us section css */
+.about-section {
+  min-height: 100vh;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.div-aboutus {
+  height: 100%;
+  text-align: center;
+  font-family: "Poppins";
+  max-width: 600px;
+  background-color: white;
+  max-height: 100vh;
+  padding: 60px;
+  padding-top: 160px;
+}
+
+.h1-aboutus {
+  color: #A6CE39;
+  font-weight: bold;
+  font-size: 64px;
+  padding-right: 18px;
+}
+
+.paragraph-aboutus {
+  font-size: 16px;
+  line-height: 1.8;
+  color: black;
+}
+
+/* Services section css */
+.services-section {
+  min-height: 100vh;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.div-services {
+  color: white;
+  text-align: center;
+  font-family: "Poppins";
+  padding-top: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 90px;
+}
+
+.div2-services {
+  padding-top: 80px;
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding-bottom: 90px;
+}
+
+.h2-services {
+  font-family: "Poppins";
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+/* Contact section css */
+.contact-section {
+  min-height: 60vh;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 90px;
+}
+
+.div-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 1s ease-in;
+  font-family: "Poppins";
 }
 
 .content-animation {

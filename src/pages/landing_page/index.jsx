@@ -1,8 +1,7 @@
-import { Layout, Button, Row, Col, Typography, Form, Input, Avatar, Card, Flex } from "antd";
-import { EditOutlined, EllipsisOutlined, SettingOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { Layout, Button, Row, Col, Typography, Card } from "antd";
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 import { useState, useEffect } from "react";
-import { Settings, Edit, MoreHorizontal } from 'lucide-react';
 import { Link, useNavigate } from "react-router-dom";
 import "../../pages/landing_page/index.css";
 
@@ -148,14 +147,14 @@ function LandingPage() {
 
   return (
     <Layout className="layout-signin layout-default">
-      <Header className="content-animation">
-        <div className="header-col header-brand" style={{paddingLeft: "20px"}}>
+      <Header>
+        <div className="header-col header-brand">
           <img
             src={rentfieldlogo}
             alt="Rent Field Logo"
-            style={{ maxWidth: "55px", width: "100%", borderRadius: "60px"}}
+            className="logo-landing"
           />
-          <span style={{paddingLeft: "10px", fontFamily: "Poppins", fontWeight: "bold"}}>RentField</span>
+          <span className="span-text">RentField</span>
         </div>
         <div className="header-col header-nav">
           <nav>
@@ -199,56 +198,20 @@ function LandingPage() {
           </Button>
         </div>
       </Header>
-      {/* <Content className="content-animation">
-        <Row gutter={[24, 0]} justify="space-around">
-          <Col>{renderContent()}</Col>
-        </Row>
-      </Content> */}
 
       <main>
-        {/* Home Section */}
         <section
           id="Home"
-          style={{
-            backgroundImage: `url('/src/assets/images/landingbg7.png')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
-            backgroundRepeat: "no-repeat",
-            maxWidth: "100%",
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "white",
-            textAlign: "center",
-            minHeight: "100vh",
-          }}
+          className="home-section"
         >
-          <div
-            style={{
-              padding: "30px",
-              maxWidth: "700px",
-              color: "white",
-              textAlign: "center",
-
-              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-              // border: "1px solid rgba(255, 255, 255, 0.3)",
-            }}
-          >
+          <div className="div-wrapper content-animation">
             <div>
-              <h2
-                style={{
-                  fontFamily: "Poppins",
-                  fontSize: "3.5rem",
-                  fontWeight: "bold",
-                }}
-              >
+              <h2 className="h2-homesection">
                 Field Rental Made Easier For You
               </h2>
             </div>
             <div>
-              <p style={{ fontFamily: "Poppins", fontSize: "16px" }}>
+              <p className="paragraph-home">
                 Welcome to the most comprehensive field rental platform! Enjoy
                 the convenience of finding and booking your favorite field for
                 various sports such as futsal, basketball, tennis, and more.
@@ -258,26 +221,16 @@ function LandingPage() {
               </p>
             </div>
           </div>
-
-          <div className="header-col header-btn" style={{ paddingTop: "15px" }}>
+          <div className="header-col header-btn content-animation" style={{ paddingTop: "15px" }}>
             <Button type="primary" onClick={handleLoginClick}>
               Get Started
             </Button>
           </div>
         </section>
 
-        {/* About Section */}
         <section
           id="About Us"
-          style={{
-            minHeight: "100vh",
-            maxWidth: "100%",
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          className="about-section"
         >
           <Row
             gutter={[0, 48]}
@@ -285,36 +238,11 @@ function LandingPage() {
             style={{ color: "white", height: "100vh" }}
           >
             <Col xs={8} lg={32} style={{ height: "100%", padding: 0 }}>
-              <div
-                style={{
-                  height: "100%",
-                  textAlign: "center",
-                  fontFamily: "Poppins",
-                  maxWidth: "600px",
-                  backgroundColor: "white",
-                  maxHeight: "100vh",
-                  padding: "60px",
-                  paddingTop: "160px",
-                }}
-              >
-                <h1
-                  style={{
-                    color: "#A6CE39",
-                    fontWeight: "bold",
-                    fontSize: "64px",
-                    paddingRight: "18px",
-                  }}
-                >
+              <div className="div-aboutus">
+                <h1 className="h1-aboutus content-animation">
                   About <b style={{ color: "black" }}>Us</b>
                 </h1>
-
-                <p
-                  style={{
-                    fontSize: "16px",
-                    lineHeight: "1.8",
-                    color: "black",
-                  }}
-                >
+                <p className="paragraph-aboutus content-animation">
                   RentField was developed by a team of five students from
                   Ganesha University of Education's Information Systems Study
                   Program. We have a team that is competent in the field of
@@ -325,16 +253,15 @@ function LandingPage() {
                 </p>
               </div>
             </Col>
-
             <Col xs={16} lg={32}>
               <div style={{ backgroundColor: "#A6CE39", height: "100vh" }}>
                 <img
-                  src={ourteam} // Ganti dengan path logo Anda
+                  src={ourteam}
                   alt="CodeBlue Team"
                   style={{
-                    width: "100%", // Membuat gambar menyesuaikan lebar kolom
+                    width: "100%",
                     height: "100%",
-                    objectFit: "cover", // Memastikan gambar memenuhi ruang tanpa terdistorsi
+                    objectFit: "cover",
                   }}
                 />
               </div>
@@ -342,41 +269,13 @@ function LandingPage() {
           </Row>
         </section>
 
-        {/* Services Section */}
         <section
           id="Services"
-          style={{
-            minHeight: "100vh",
-            maxWidth: "100%",
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          className="services-section"
         >
           <Col style={{ width: "100%" }}>
-            <div
-              style={{
-                color: "white",
-                textAlign: "center",
-                fontFamily: "Poppins",
-                paddingTop: "90px",
-                display: "flex", // Tambahkan
-                flexDirection: "column", // Tambahkan
-                alignItems: "center",
-                paddingBottom: "90px",
-                // border: "1px solid rgba(255, 255, 255, 0.3)",
-              }}
-            >
-              <h2
-                style={{
-                  fontFamily: "Poppins",
-                  fontSize: "2.5rem",
-                  fontWeight: "bold",
-                  paddingBottom: "10px",
-                }}
-              >
+            <div className="div-services">
+              <h2 className="h2-services">
                 Our Services
               </h2>
               <Row gutter={[24, 24]} xs={24} md={12}>
@@ -385,9 +284,6 @@ function LandingPage() {
                   <p className="small-desc">
                     Provide several rental field or place for rent.
                   </p>
-                  <div className="go-corner">
-                    <div className="go-arrow">→</div>
-                  </div>
                 </Card>
                 <Card className="cards">
                   <p className="cards-title">Effectiveness & Efficientcy</p>
@@ -395,9 +291,6 @@ function LandingPage() {
                     Provide effectiveness and efficientcy for user who want to
                     rent field or place.
                   </p>
-                  <div className="go-corner">
-                    <div className="go-arrow">→</div>
-                  </div>
                 </Card>
                 <Card className="cards">
                   <p className="cards-title">Provide Status Field</p>
@@ -405,41 +298,17 @@ function LandingPage() {
                     We provide information about status field or place, so user
                     can check easyly the field or place already booked or not.
                   </p>
-                  <div className="go-corner">
-                    <div className="go-arrow">→</div>
-                  </div>
                 </Card>
               </Row>
             </div>
 
-            <div
-              style={{
-                paddingTop: "80px",
-                maxWidth: "100%",
-                width: "100%", // Ubah dari 250vh ke 100%
-                display: "flex", // Tambahkan
-                flexDirection: "column", // Tambahkan
-                alignItems: "center",
-                animation: "fadeIn 1s ease-in",
-                backgroundColor: "white",
-                paddingBottom: "90px",
-              }}
-            >
-              <h2
-                style={{
-                  fontFamily: "Poppins",
-                  fontSize: "2.5rem",
-                  fontWeight: "bold",
-                  paddingBottom: "10px",
-                  color: "#A6CE39",
-                }}
-              >
+            <div className="div2-services">
+              <h2 className="h2-services" style={{color: "#B7D058"}}>
                 Available For Rent
               </h2>
               <Row
                 style={{
                   paddingBottom: "30px",
-                  animation: "slideIn 0.8s ease-out",
                 }}
               >
                 <div
@@ -461,8 +330,8 @@ function LandingPage() {
                       fontFamily: "Poppins",
                       fontSize: "24px",
                       fontWeight: "bold",
-                      wordWrap: "break-word", // Memungkinkan text untuk wrap
-                      overflowWrap: "break-word", // Memastikan text panjang bisa wrap
+                      wordWrap: "break-word",
+                      overflowWrap: "break-word",
                     }}
                   >
                     {activePhoto.title}
@@ -471,8 +340,8 @@ function LandingPage() {
                     style={{
                       fontFamily: "Poppins",
                       fontWeight: "bold",
-                      wordWrap: "break-word", // Memungkinkan text untuk wrap
-                      overflowWrap: "break-word", // Memastikan text panjang bisa wrap
+                      wordWrap: "break-word",
+                      overflowWrap: "break-word",
                     }}
                   >
                     {activePhoto.description}
@@ -548,24 +417,9 @@ function LandingPage() {
         {/* Contact Section */}
         <section
           id="Contact"
-          style={{
-            minHeight: "60vh",
-            maxWidth: "100%",
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: "column",
-            paddingTop: "90px",
-          }}
+          className="contact-section"
         >
-          <div
-            style={{
-              display: "flex", // Tambahkan
-              flexDirection: "column", // Tambahkan
-              alignItems: "center",
-              animation: "fadeIn 1s ease-in",
-              fontFamily: "Poppins",
-            }}
-          >
+          <div className="div-contact">
             <h2
               style={{ fontSize: "2.5rem", fontWeight: "bold", color: "white" }}
             >
@@ -677,7 +531,7 @@ function LandingPage() {
         </section>
       </main>
 
-      <Footer className="footer-landing content-animation">
+      <Footer className="footer-landing">
         <p className="copyright font-color">
           {" "}
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas Pendidikan

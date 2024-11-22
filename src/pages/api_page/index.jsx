@@ -144,6 +144,7 @@ const ApiPage = () => {
     setIsDrawerVisible(false);
   };
 
+  //Handle drawer when we edit data
   const handleDrawerEdit = (record) => {
     setIsDrawerVisible(true);
     setIsEdit(true);
@@ -157,6 +158,7 @@ const ApiPage = () => {
     });
   };
 
+  //Handle form submit
   const handleFormSubmit = () => {
     let formData = new FormData();
     Object.keys(form.getFieldsValue()).forEach((key) => {
