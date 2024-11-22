@@ -46,6 +46,30 @@ function LandingPage() {
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["Home", "About Us", "Services", "Contact"];
+      const scrollPosition = window.scrollY;
+
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (
+            scrollPosition >= offsetTop - 100 &&
+            scrollPosition < offsetTop + offsetHeight - 100
+          ) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   //Handle login button
   const handleLoginClick = () => {
     navigate("/login");
@@ -120,30 +144,6 @@ function LandingPage() {
 
   //state for handling active photo
   const [activePhoto, setActivePhoto] = useState(galleryData[0]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ["Home", "About Us", "Services", "Contact"];
-      const scrollPosition = window.scrollY;
-
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (
-            scrollPosition >= offsetTop - 100 &&
-            scrollPosition < offsetTop + offsetHeight - 100
-          ) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <Layout className="layout-signin layout-default">
