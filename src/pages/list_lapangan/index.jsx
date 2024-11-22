@@ -161,6 +161,15 @@ const WeatherDisplay = () => {
   );
 };
 
+const RequiredLabel = ({ children }) => (
+  <div style={{ marginBottom: '8px' }}>
+    <Text strong>
+      {children}
+      <span style={{ color: '#ff4d4f', marginLeft: '4px' }}>*</span>
+    </Text>
+  </div>
+);
+
 const ListLapangan = () => {
   const navigate = useNavigate();
   const [drawerVisible, setDrawerVisible] = useState(false);
@@ -622,7 +631,7 @@ const ListLapangan = () => {
               {`Rent ${selectedField?.name}`}
             </Text>
 
-            <Text strong>Choose Date:</Text>
+            <RequiredLabel>Choose Date</RequiredLabel>
             <DatePicker
               value={selectedDate}
               onChange={handleDateChange}
@@ -630,7 +639,7 @@ const ListLapangan = () => {
               style={{ width: "100%", marginBottom: "16px" }}
             />
 
-            <Text strong>Choose Hours:</Text>
+            <RequiredLabel>Choose Hours</RequiredLabel>
             <Select
               mode="multiple"
               placeholder="Select Hours"
@@ -641,7 +650,7 @@ const ListLapangan = () => {
               options={getAvailableHours()}
             />
 
-            <Text strong>Select Field Option:</Text>
+            <RequiredLabel>Select Field Option</RequiredLabel> 
             <Select
               placeholder="Select Field Option"
               value={selectedFieldOption}
