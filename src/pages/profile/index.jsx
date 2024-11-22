@@ -9,6 +9,7 @@ import moment from 'moment';
 const { Title, Text } = Typography;
 const { Header, Content } = Layout;
 
+
 const Profile = () => {
     const [form] = Form.useForm();
     const [gender, setGender] = useState('Laki-laki');
@@ -29,12 +30,12 @@ const Profile = () => {
     const beforeUpload = (file) => {
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
-            message.error('Anda hanya dapat mengunggah file JPG/PNG!');
+            message.error('You can only upload JPG/PNG files!');
             return false;
         }
         const isLt1M = file.size / 1024 / 1024 < 1;
         if (!isLt1M) {
-            message.error('Gambar harus lebih kecil dari 1MB!');
+            message.error('Images must be smaller than 1MB!');
             return false;
         }
         return true;
@@ -50,7 +51,7 @@ const Profile = () => {
             getBase64(info.file.originFileObj, (url) => {
                 setLoading(false);
                 setImageUrl(url);
-                message.success('Foto profil berhasil diperbarui!');
+                message.success('Profile photo updated successfully!');
             });
         }
     };
@@ -78,18 +79,18 @@ const Profile = () => {
         }
         
         console.log('Form values:', Object.fromEntries(formData));
-        message.success('Profil berhasil diperbarui!');
+        message.success('Profile updated successfully!');
     };
 
     // Function to validate phone number
     const validatePhoneNumber = (_, value) => {
         if (!value) {
-            return Promise.reject('Silakan masukkan nomor telepon Anda!');
+            return Promise.reject('Please enter your phone number!');
         }
         // Remove any non-digit characters
         const cleanNumber = value.replace(/\D/g, '');
         if (cleanNumber.length < 9 || cleanNumber.length > 12) {
-            return Promise.reject('Nomor telepon harus antara 9-12 digit!');
+            return Promise.reject('Phone numbers must be between 9-12 digits!');
         }
         return Promise.resolve();
     };
@@ -104,10 +105,9 @@ const Profile = () => {
                     textAlign: 'center',
                     height: 'auto',
                     lineHeight: '1.5',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
                     marginBottom: '48px'
                 }}>
-                    <Title level={2} style={{ margin: '0' }}>Profil Saya</Title>
+                    <Title level={2} style={{ margin: '0' }}>My Profile</Title>
                 </Header>
                 
                 <Content style={{ 
@@ -225,17 +225,17 @@ const Profile = () => {
                             <Form.Item 
                                 label={<span style={{ fontWeight: 600 }}>Name</span>} 
                                 name="name"
-                                rules={[{ required: true, message: 'Silakan masukkan nama Anda!' }]}
+                                rules={[{ required: true, message: 'Please enter your name!' }]}
                             >
-                                <Input placeholder="Masukkan nama Anda" />
+                                <Input placeholder="Enter Your Name!" />
                             </Form.Item>
 
                             <Form.Item 
                                 label={<span style={{ fontWeight: 600 }}>Email</span>} 
                                 name="email"
-                                rules={[{ required: true, message: 'Silakan masukkan email Anda!', type: 'email' }]}
+                                rules={[{ required: true, message: 'Please enter your email!', type: 'email' }]}
                             >
-                                <Input placeholder="Masukkan email Anda" />
+                                <Input placeholder="Enter your email" />
                             </Form.Item>
 
                             <Form.Item 
@@ -264,12 +264,12 @@ const Profile = () => {
                             <Form.Item 
                                 label={<span style={{ fontWeight: 600 }}>Birthday Date</span>} 
                                 name="birthDate"
-                                rules={[{ required: true, message: 'Silakan pilih tanggal lahir Anda!' }]}
+                                rules={[{ required: true, message: 'Please select your date of birth!' }]}
                             >
                                 <DatePicker 
                                     style={{ width: '100%' }}
                                     format="DD/MM/YYYY"
-                                    placeholder="Pilih tanggal lahir"
+                                    placeholder="Choose Birth date"
                                     disabledDate={(current) => {
                                         // Disable future dates and dates more than 100 years ago
                                         return current && (current > moment().endOf('day') || 
@@ -292,7 +292,7 @@ const Profile = () => {
                                         boxShadow: '0 2px 4px rgba(76,175,80,0.2)'
                                     }}
                                 >
-                                    Simpan Perubahan
+                                    Save
                                 </Button>
                             </Form.Item>
                         </Form>
