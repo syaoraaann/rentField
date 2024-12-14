@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Typography, Form, Input, Popconfirm, message } from "antd";
+import { Button, Typography, Form, Input, Select, message } from "antd";
 import "../../pages/login/login.css";
 import rentfieldlogo from "../../assets/images/rentfield1.png";
 import Login1 from "../../assets/images/Login1.png";
 import "@fontsource/poppins";
 
 const { Text } = Typography;
+const { Option } = Select;
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -19,7 +20,6 @@ const LoginPage = () => {
   const [signupForm] = Form.useForm();
   const [forgotPasswordForm] = Form.useForm();
 
-  // Handle Login
   const handleLogin = async () => {
     const formData = new FormData();
     formData.append("username", username);
@@ -28,15 +28,31 @@ const LoginPage = () => {
     try {
       const response = await fetch("http://127.0.0.1:5000/api/v1/auth/login", {
         method: "POST",
-        body: formData, // FormData automatically sets the Content-Type header
+        body: formData,
       });
 
       const result = await response.json();
 
       if (response.ok) {
+        const { role } = result; // Asumsikan server mengembalikan role
+
+        // Simpan role di session storage
         sessionStorage.setItem("username", username);
+        sessionStorage.setItem("role", role);
+
         message.success("Login successful!");
-        navigate("/dashboard");
+
+        // Arahkan pengguna berdasarkan role
+        if (role === "Admin") {
+          navigate("/admin-page");
+        } else if (role === "Penyewa") {
+          navigate("/dashboard");
+        } else if (role === "Owner") {
+          navigate("/owner-page");
+        } else {
+          message.error("Role not recognized. Contact support.");
+        }
+
         setUsername("");
         setPassword("");
       } else {
@@ -49,11 +65,12 @@ const LoginPage = () => {
 
   // Handle Signup
   const handleSignup = async (values) => {
-    const { username, password } = values;
+    const { username, password, role } = values;
 
     const formData = new FormData();
     formData.append("username", username);
     formData.append("password", password);
+    formData.append("role", role);
 
     try {
       const response = await fetch(
@@ -130,19 +147,39 @@ const LoginPage = () => {
 
           {/* Signup Form */}
           {isSignup && (
-            <Form form={signupForm} onFinish={handleSignup}>
+            <Form
+              form={signupForm}
+              onFinish={handleSignup}
+              layout="vertical"
+              style={{ maxWidth: "400px", margin: "0 auto" }}
+            >
               <Form.Item
                 name="username"
+                label="Username"
                 rules={[{ required: true, message: "Username is required!" }]}
+                style={{ marginBottom: "4px" }}
               >
                 <Input placeholder="Username" />
               </Form.Item>
               <Form.Item
                 name="password"
+                label="Password"
                 className="password-item"
                 rules={[{ required: true, message: "Password is required!" }]}
+                style={{ marginBottom: "-20px" }}
               >
                 <Input.Password placeholder="Password" />
+              </Form.Item>
+              <Form.Item
+                name="role"
+                label="Role"
+                rules={[{ required: true, message: "Role is required!" }]}
+                style={{ marginBottom: "12px" }}
+              >
+                <Select placeholder="Select Role">
+                  <Option value="Penyewa">Penyewa</Option>
+                  <Option value="Owner">Owner</Option>
+                </Select>
               </Form.Item>
               <Form.Item>
                 <Button
