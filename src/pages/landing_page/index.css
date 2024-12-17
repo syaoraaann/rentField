@@ -1,19 +1,21 @@
 .layout-signin {
-  background-color: #f0f2f5;
+  background-color: #090909;
 }
 
 .layout-default {
     min-height: 100vh;
     display: flex;
     flex-direction: column; 
-    background-color: white !important;
-  }
+    background-image: url('../../assets/images/bgnew.jpg') !important;
+    background-size: cover;
+    background-position: center;
+  } 
 
 .ant-layout-header {
-    background: white !important;
+    background: transparent !important;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
     padding: 10px 20px !important;
-    color: black !important;
+    color: white !important;
     box-shadow: none !important;
     position: fixed !important;
     z-index: 1000 !important;
@@ -41,6 +43,7 @@
     justify-content: end;
     padding-right: 30px;
     padding-left: 20px;
+    padding-top: 15px;
   }
   
 /* Gaya untuk brand (logo atau nama website) */
@@ -54,7 +57,7 @@
 .header-nav nav {
     display: flex;
     font-family: 'Poppins', sans-serif;
-    color: white;
+    color: #d9d9d9;
     align-items: center;
     height: 100%;
   }
@@ -62,10 +65,11 @@
 .header-nav a {
     padding: 10px 15px;
     /* border-radius: 5px; */
-    color: black !important;
+    color: #d9d9d9 !important;
+    font-size: 18px !important;
     text-decoration: none;
     display: flex;
-    width: 100px; /* Tentukan lebar tetap yang sesuai untuk setiap link */
+    width: 110px; /* Tentukan lebar tetap yang sesuai untuk setiap link */
     padding: 0; /* Atur padding untuk memastikan ketinggian yang sama */
     text-align: center; /* Agar teks berada di tengah */
     margin: 0; /* Berikan jarak antar link jika diperlukan */  
@@ -77,7 +81,7 @@
 }
   
 .header-nav a.active-link {
-    color: blue !important;
+    color: #ABFD13 !important;
     font-weight: bold;
     height: 60px;
     display: flex;
@@ -97,7 +101,7 @@
   }
 
 .logo-landing {
-  max-width: 55px;
+  max-width: 90px;
   width: 100%;
   border-radius: 60px;
 }
@@ -117,29 +121,29 @@
   
 /* Gaya untuk tombol login di header */
 .header-btn .ant-btn-primary {
-    background-color: #b2d12d !important;
+    background-color: #ABFD13 !important;
     font-weight: bold;
-    color: black;
-    font-size: 16px !important;
+    color: #090909;
+    font-size: 18px !important;
     padding: 20px 15px !important;  
-    background: linear-gradient(90deg, #b2d12d, #dcf764); /* Gradasi dari biru ke hijau */
     cursor: pointer;  
     border: none;
+    border-radius: 12px !important;
+    width: 95px !important;
   }
   
 .header-btn .ant-btn-primary:hover {
-    background-color: #b2d12d !important;
+    background-color: #ABFD13 !important;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-size: 16px !important;
+    font-size: 18px !important;
     font-weight: bold;
     padding: 20px 15px !important;
-    background: linear-gradient(90deg, #00C9FF, #92FE9D) !important;
     cursor: pointer;  
     border: none;
   }
 
 .footer-landing{
-    background: white !important; /* Latar belakang putih semi-transparan */
+    background: #ABFD13 !important; /* Latar belakang putih semi-transparan */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
     padding: 10px 20px; /* Padding untuk header dan footer */
     color: black; /* Warna teks putih agar kontras dengan latar belakang */
@@ -153,7 +157,6 @@
 
 /* Home section css*/
 .home-section {
-  background-image: url('/src/assets/images/landingbg7.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -161,18 +164,17 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   color: white;
-  text-align: center;
-  min-height: 100vh;
+  min-height: 80vh;
+  padding-left: 150px;
+  padding-right: 150px;
+  padding-top: 30px;
 }
 
 .div-wrapper {
-  padding: 30px;
-  max-width: 700px;
   color: white;
-  text-align: center;
+  text-align: left;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -180,61 +182,133 @@
   font-family: "Poppins";
   font-size: 3.5rem;
   font-weight: bold;
+  text-align: left;
+  margin: 5px 0; /* Jarak vertikal 5px */
+  line-height: 1.3; /* Tinggi baris lebih rapat */
 }
 
 .paragraph-home {
   font-family: "Poppins";
   font-size: 16px;
-}
-
-/* about us section css */
-.about-section {
-  min-height: 100vh;
-  max-width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-.div-aboutus {
-  height: 100%;
-  text-align: center;
-  font-family: "Poppins";
   max-width: 600px;
-  background-color: white;
-  max-height: 100vh;
-  padding: 60px;
-  padding-top: 160px;
 }
 
-.h1-aboutus {
-  color: #A6CE39;
-  font-weight: bold;
-  font-size: 64px;
-  padding-right: 18px;
-}
-
-.paragraph-aboutus {
-  font-size: 16px;
-  line-height: 1.8;
-  color: black;
-}
-
-/* Services section css */
+/* services section css */
 .services-section {
   min-height: 100vh;
   max-width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: #B7D058 !important;
+  /* align-items: center; */
+  justify-content: start;
+  padding-left: 150px;
+  padding-right: 150px;
+  padding-top: 80px;
 }
 
-.div-services {
+.h2-services {
+  color: #ABFD13;
+  font-weight: bold;
+  font-size: 36px;
+  padding-right: 18px;
+  font-family: "Poppins";
+  margin: 5px 0; 
+  line-height: 1.3; 
+  letter-spacing: 1.5px;
+}
+
+.paragraph-services {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #D9D9D9;
+  max-width: 700px;
+  padding-left: 200px;
+  font-family: "Poppins";
+}
+
+/* Card.css */
+.cards {
+  background: linear-gradient(150deg, #313131, #090909);
+  color: #D9D9D9;
+  padding: 30px;
+  border: 0.2px solid #d9d9d96f;
+  border-radius: 15px;
+  transition: all 0.6s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px;
+  height: 270px;
+  font-family: "Poppins";
+}
+
+.cards:hover {
+  width: 100%;
+  background: #ABFD13;
+  height: 370px;
+  color: #090909;
+  padding: 30px;
+  border: 2px solid #ABFD13;
+  font-family: "Poppins";
+  transform: scale(1.05); /* Membesar sedikit */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Bayangan lebih tebal */
+}
+
+.hovered {
+  background: #ABFD13;
+  width: 100%;
+  height: 370px;
+  color: #090909;
+  padding: 30px;
+  border: 2px solid #ABFD13;
+  font-family: "Poppins";
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Bayangan lebih tebal */
+  transform: scale(1.05); 
+}
+
+.cards-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: inherit;
+  font-family: "Poppins";
+}
+
+.cards-content {
+  font-size: 16px;
+  color: inherit;
+  font-family: "Poppins";
+}
+
+.cards-learn-more {
+  font-family: "Poppins";
+  padding-top: 40px;
+  font-weight: bold;
+  text-align: end;
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  height: 50%;
+}
+
+/* About section css */
+.about-section {
+  min-height: 200vh;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  /* align-items: start; */
+  justify-content: center;
+  padding-left: 150px;
+  padding-right: 150px;
+  padding-top: 100px;
+}
+
+.div-about {
   color: white;
   text-align: center;
   font-family: "Poppins";
@@ -245,7 +319,7 @@
   padding-bottom: 90px;
 }
 
-.div2-services {
+.div2-about {
   padding-top: 80px;
   max-width: 100%;
   width: 100%;
@@ -256,11 +330,36 @@
   padding-bottom: 90px;
 }
 
-.h2-services {
-  font-family: "Poppins";
-  font-size: 2.5rem;
+.h2-about {
+  color: #ABFD13;
   font-weight: bold;
-  padding-bottom: 10px;
+  font-size: 36px;
+  padding-right: 18px;
+  font-family: "Poppins";
+  margin: 5px 0; 
+  line-height: 1.3; 
+  letter-spacing: 1.5px;
+}
+
+.cards-about {
+  display: flex;
+  flex-direction: column;
+  height: 100%px;
+  max-height: 200px;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 15px;
+  background: linear-gradient(150deg, #090909, #313131);
+  color: #D9D9D9;
+  border: 0.2px solid #d9d9d96f;
+  transition: all 0.6s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-family: "Poppins";
+  font-size: 16px;
+}
+
+.cards-about:hover {
+  scale: 1.05;
 }
 
 /* Contact section css */
@@ -271,13 +370,20 @@
   display: flex;
   flex-direction: column;
   padding-top: 90px;
-  background-color: #B7D058;
+  background: rgba(255, 255, 255, 0.03); /* Translucent white background */
+  backdrop-filter: blur(10px); /* Apply blur effect to the background */
+  border-radius: 10px; /* Round the corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: "Poppins";
+  color: #d9d9d9;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .div-contact {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   animation: fadeIn 1s ease-in;
   font-family: "Poppins";
 }
@@ -328,6 +434,33 @@
   transform: scale(1.2);
 }
 
+.getstarted-button {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding-right: 30px;
+  padding-left: 20px;
+  padding-top: 15px;
+  background-color: #ABFD13 !important;
+  font-weight: bold;
+  color: #090909;
+  font-size: 18px !important;
+  padding: 20px 15px !important;  
+  cursor: pointer;  
+  border: none;
+  border-radius: 12px !important;
+  width: 127px !important;
+}
+
+.getstarted-button:hover {
+  background-color: #ABFD13 !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 18px !important;
+  font-weight: bold;
+  padding: 20px 15px !important;
+  cursor: pointer;  
+  border: none;
+}
 
 .button {
   padding-top: 50ox;
@@ -344,20 +477,6 @@
   height: 200px; /* Sesuaikan dengan tinggi gambar */
 }
 
-.cards {
-  transition: transform 0.3s ease-in-out;
-}
-
-.card-hover {
-  transform: scale(1.0);
-}
-
-.card-img {
-  width: 100%;
-  height: 200px; /* Tentukan tinggi gambar yang diinginkan */
-  object-fit: cover; /* Menjaga proporsi gambar agar tidak terdistorsi */
-}
-
 /* contact us */
 ul {
   list-style: none;
@@ -365,8 +484,8 @@ ul {
 
 .example-2 {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-items: start;
 }
 .example-2 .icon-content {
   margin: 0 10px;
@@ -436,7 +555,7 @@ ul {
 
 .example-2 .icon-content a[data-social="github"] .filled,
 .example-2 .icon-content a[data-social="github"] ~ .tooltip {
-  background-color: #24262a;
+  background-color: #6e40c9;
 }
 .example-2 .icon-content a[data-social="instagram"] .filled,
 .example-2 .icon-content a[data-social="instagram"] ~ .tooltip {
@@ -453,16 +572,6 @@ ul {
 .example-2 .icon-content a[data-social="youtube"] .filled,
 .example-2 .icon-content a[data-social="youtube"] ~ .tooltip {
   background-color: #ff0000;
-}
-
-
-/* Card */
-.cards-title {
-  color: #262626;
-  font-size: 1.5em;
-  line-height: normal;
-  font-weight: 700;
-  margin-bottom: 0.5em;
 }
 
 .small-desc {
@@ -497,52 +606,6 @@ ul {
   font-family: courier, sans;
 }
 
-.cards {
-  display: block;
-  position: relative;
-  max-width: 300px;
-  max-height: 320px;
-  height: 400px;
-  background-color: #f2f8f9;
-  border-radius: 10px;
-  padding: 2em 1.2em;
-  margin: 12px;
-  text-decoration: none;
-  z-index: 0;
-  overflow: hidden;
-  background: linear-gradient(to bottom, #f2f4f5, #eaff8d);
-  font-family: Arial, Helvetica, sans-serif;
-  border: none;
-}
-
-.cards:before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  top: -16px;
-  right: -16px;
-  background: linear-gradient(135deg, #7f9810, #354101);
-  height: 32px;
-  width: 32px;
-  border-radius: 32px;
-  transform: scale(1);
-  transform-origin: 50% 50%;
-  transition: transform 0.35s ease-out;
-}
-
-.cards:hover:before {
-  transform: scale(28);
-}
-
-.cards:hover .small-desc {
-  transition: all 0.5s ease-out;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.cards:hover .card-title {
-  transition: all 0.5s ease-out;
-  color: #ffffff;
-}
 
 
 
