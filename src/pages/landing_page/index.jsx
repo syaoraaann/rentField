@@ -1,5 +1,5 @@
 import { Layout, Button, Row, Col, Typography, Card } from "antd";
-import { LeftOutlined, RightOutlined, PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, ArrowRightOutlined } from '@ant-design/icons';
 
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -229,8 +229,8 @@ function LandingPage() {
           id="About"
           className="about-section"
         >
-          <Col>
-            <Row className="content-animation">
+          <Col className="content-animation">
+            <Row>
               <div style={{paddingRight: "80px", paddingTop: "150px"}}>
                 <h2 className="h2-about">
                   Vision &
@@ -256,40 +256,56 @@ function LandingPage() {
               </div>
               </Col>
             </Row>
-            <div style={{paddingTop: "190px", justifyContent: "center", display: "flex", paddingBottom: "50px"}}>
+            <div style={{paddingTop: "190px", justifyContent: "center", display: "flex", paddingBottom: "50px"}} className="content-animation">
               <h2 className="h2-about">
                 Available
                 <span style={{ color: "#D9D9D9" }}> For Rent</span>
               </h2>
             </div>
             <div>
-            <Row gutter={24}>
+            <Row gutter={36}>
               <Col span={8}>
                 <Card 
                   hoverable
-                  cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                  cover={<img alt="Singaraja Soccer" src= {soccer2} className="cards-image"/>}
+                  style={{fontFamily: "Poppins"}}
+                  className="cards-available-rent"
                 >
-                  <Meta title="Europe Street beat" description="www.instagram.com" />
+                  <Meta title={<span className="custom-title">Singaraja Soccer</span>} description={<span className="custom-desc">Jl. Udayana, Banjar Jawa, Kec. Buleleng, Kabupaten Buleleng, Bali 81113</span>} />
+                  <p 
+                  style={{textAlign: "end", paddingTop: "60px"}}
+                  >Lean More <ArrowRightOutlined/></p>
                 </Card>
               </Col>
               <Col span={8}>
                 <Card 
                   hoverable
-                  cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                  cover={<img alt="Badminton Hall UNDIKSHA" src= {bultang} className="cards-image"/>}
+                  style={{fontFamily: "Poppins"}}
+                  className="cards-available-rent"
                 >
-                  <Meta title="Europe Street beat" description="www.instagram.com" />
+                  <Meta title={<span className="custom-title">Badminton Hall UNDIKSHA</span>} description={<span className="custom-desc">GOR BULUTANGKIS UNDIKSHA, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81116.</span>} />
+                  <p
+                  style={{textAlign: "end", paddingTop: "60px"}}
+                  >Lean More <ArrowRightOutlined/></p>
                 </Card>
               </Col>
               <Col span={8}>
                 <Card 
                   hoverable
-                  cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                  cover={<img alt="Soccer Field GOR Bhuana Patra" src= {futsal} className="cards-image"/>}
+                  style={{fontFamily: "Poppins"}}
+                  className="cards-available-rent"
                 >
-                  <Meta title="Europe Street beat" description="www.instagram.com" />
+                  <Meta title={<span className="custom-title">GOR Bhuana Patra</span>} description={<span className="custom-desc">Jl. Udayana No.6, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81114.</span>} />
+                  <p
+                  style={{textAlign: "end", paddingTop: "60px"}}
+                  >Lean More <ArrowRightOutlined/></p>
                 </Card>
               </Col>
             </Row>
             </div>
+            <p style={{color: "#d9d9d9", textAlign: "center", paddingTop: "20px", fontFamily: "Poppins"}}>Want to see more? <a href="/login" style={{color: "#ABFD13", cursor: "pointer"}}>Sign In</a> </p>
           </Col>
         </section>
 
@@ -410,7 +426,7 @@ function LandingPage() {
                 </ul>
               </div>
             </Col>
-            <Col span={12} style={{paddingLeft: "90px"}}>
+            <Col span={12} style={{paddingLeft: "90px"}} className="content-animation">
               <div style={{fontSize: "16px", fontFamily: "Poppins"}}>
                 <p style={{lineHeight: "2", fontSize: "16px"}}>Help Center 
                   <br/>Terms & Conditions
