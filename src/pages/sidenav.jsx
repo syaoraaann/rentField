@@ -13,31 +13,46 @@ import {
 } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import bgImage from "../assets/images/bgnew.jpg"; // Correct import for image
 
 const StyledInput = styled(Input)`
   background-color: #2a2a2a;
-  color: #fff; /* Text color remains white */
-  border: 2px solid #abfd13; /* Outline color */
+  color: #fff;
+  border: 2px solid #abfd13;
   border-radius: 20px;
   padding: 5px 15px;
 
   ::placeholder {
-    color: #d9d9d9; /* Placeholder color */
+    color: #d9d9d9;
   }
 
-  /* Focus and hover should not change the background */
   &:focus,
   &:hover {
-    background-color: #2a2a2a !important; /* Keep the same background */
-    border-color: #abfd13 !important; /* Keep the same border color */
-    box-shadow: none !important; /* Remove any default focus ring */
+    background-color: #2a2a2a !important;
+    border-color: #abfd13 !important;
+    box-shadow: none !important;
   }
 
-  /* Prevent the background from changing even when not focused or hovered */
   &:not(:focus):not(:hover) {
     background-color: #2a2a2a;
     border-color: #abfd13;
   }
+`;
+
+// Updated background using Glassmorphism effect
+const SideNavContainer = styled.div`
+  width: 256px;
+  height: 100vh;
+  position: fixed;
+  background: rgba(42, 42, 42, 0.5); /* Transparency */
+  backdrop-filter: blur(10px); /* Blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Thin border */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Slight shadow */
+  color: #fff;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const SideNav = () => {
@@ -49,19 +64,7 @@ const SideNav = () => {
   };
 
   return (
-    <div
-      style={{
-        width: "256px",
-        height: "100vh",
-        position: "fixed",
-        backgroundColor: "#1A1A1A",
-        color: "#fff",
-        fontWeight: 600,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-      }}
-    >
+    <SideNavContainer>
       {/* User Info */}
       <div
         style={{
@@ -207,7 +210,7 @@ const SideNav = () => {
         <LogoutOutlined style={{ marginRight: "10px" }} />
         Logout
       </div>
-    </div>
+    </SideNavContainer>
   );
 };
 

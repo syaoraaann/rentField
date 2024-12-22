@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Layout, Card, Row, Col, Typography, Badge } from "antd";
 import { BellOutlined } from "@ant-design/icons";
 import SideNavPenyewa from "./sidenavpenyewa";
+import bgImage from "../../assets/images/bgnew.jpg"; // Import background image
 
 const { Content, Footer } = Layout;
 const { Title, Text } = Typography;
@@ -30,13 +31,21 @@ const OwnerDashboard = () => {
   }, []);
 
   return (
-    <Layout style={{ minHeight: "100vh", background: "#1A1A1A" }}>
+    <Layout
+      style={{
+        minHeight: "100vh",
+        backgroundImage: `url(${bgImage})`, // Set background image
+        backgroundSize: "cover", // Ensure the image covers the entire screen
+        backgroundPosition: "center", // Center the image
+        backgroundRepeat: "no-repeat", // Prevent repeating the image
+      }}
+    >
       {/* Sidebar */}
       <SideNavPenyewa />
 
       {/* Main content area */}
-      <Layout style={{ marginLeft: 256, background: "#000000" }}>
-        <Content style={{ padding: "24px", background: "#000000" }}>
+      <Layout style={{ marginLeft: 256, background: "transparent" }}>
+        <Content style={{ padding: "24px", background: "transparent" }}>
           {/* Header */}
           <div
             style={{
@@ -137,14 +146,14 @@ const OwnerDashboard = () => {
                   color: "#A3FF12",
                   borderRadius: "8px",
                   border: "2px solid #A3FF12",
-                  height: "500px", // Tinggi card diperpanjang
+                  height: "500px",
                 }}
               >
                 <Title
                   level={3}
                   style={{
                     color: "#A3FF12",
-                    fontSize: "36px", // Ukuran font lebih besar
+                    fontSize: "36px",
                     fontWeight: "bold",
                   }}
                 >
@@ -173,14 +182,14 @@ const OwnerDashboard = () => {
                   color: "#A3FF12",
                   borderRadius: "8px",
                   border: "2px solid #A3FF12",
-                  height: "500px", // Tinggi card diperpanjang
+                  height: "500px",
                 }}
               >
                 <Title
                   level={3}
                   style={{
                     color: "#A3FF12",
-                    fontSize: "36px", // Ukuran font lebih besar
+                    fontSize: "36px",
                     fontWeight: "bold",
                   }}
                 >
@@ -205,14 +214,14 @@ const OwnerDashboard = () => {
                   color: "#A3FF12",
                   borderRadius: "8px",
                   border: "2px solid #A3FF12",
-                  height: "500px", // Tinggi card diperpanjang
+                  height: "500px",
                 }}
               >
                 <Title
                   level={3}
                   style={{
                     color: "#A3FF12",
-                    fontSize: "36px", // Ukuran font lebih besar
+                    fontSize: "36px",
                     fontWeight: "bold",
                   }}
                 >
