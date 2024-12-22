@@ -2,14 +2,12 @@ import React from "react";
 import { Menu, Input } from "antd";
 import {
   HomeOutlined,
-  UserOutlined,
   LogoutOutlined,
   CalendarOutlined,
   StarOutlined,
   SettingOutlined,
   QuestionCircleOutlined,
   VideoCameraOutlined,
-  SearchOutlined,
 } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -40,7 +38,7 @@ const StyledInput = styled(Input)`
   }
 `;
 
-const SideNav = () => {
+const SideNavPenyewa = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -94,12 +92,8 @@ const SideNav = () => {
         </Link>
 
         {/* Search Bar */}
-        <div style={{ marginTop: "15px", marginBottom: "-60px" }}>
-          <StyledInput
-            placeholder="Search"
-            prefix={<SearchOutlined />}
-            allowClear
-          />
+        <div style={{ marginTop: "15px", marginBottom: "-50px" }}>
+          <StyledInput placeholder="Search" allowClear />
         </div>
       </div>
 
@@ -109,48 +103,53 @@ const SideNav = () => {
         style={{
           backgroundColor: "transparent",
           border: "none",
-          marginTop: "10px", // Reduced margin for tighter spacing
         }}
         selectedKeys={[location.pathname]}
         mode="inline"
         items={[
           {
-            key: "/dashboard",
-            icon: <HomeOutlined />,
-            label: <Link to="/dashboard">Dashboard</Link>,
-            style:
-              location.pathname === "/dashboard"
-                ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                : {},
-          },
-          {
-            key: "/mypoint",
-            icon: <StarOutlined />,
-            label: <Link to="/mypoint">My Point</Link>,
-            style:
-              location.pathname === "/mypoint"
-                ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                : {},
-          },
-          {
-            key: "/history",
-            icon: <CalendarOutlined />,
-            label: <Link to="/history">History</Link>,
-            style:
-              location.pathname === "/history"
-                ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                : {},
+            type: "group",
+            label: "General",
+            children: [
+              {
+                key: "/owner-page",
+                icon: <HomeOutlined />,
+                label: <Link to="/owner-page">Dashboard</Link>,
+                style:
+                  location.pathname === "/owner-page"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
+                    : {},
+              },
+              {
+                key: "/reservation-list",
+                icon: <CalendarOutlined />,
+                label: <Link to="/reservation-list">Reservation List</Link>,
+                style:
+                  location.pathname === "/reservation-list"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
+                    : {},
+              },
+              {
+                key: "/payment",
+                icon: <StarOutlined />,
+                label: <Link to="/payment">Payment</Link>,
+                style:
+                  location.pathname === "/payment"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
+                    : {},
+              },
+            ],
           },
           {
             type: "group",
-            label: "Field Available",
+            label: "Field Management",
             children: [
               {
                 key: "/list-field",
                 icon: <StarOutlined />,
-                label: <Link to="/list-lapangan">List Field</Link>,
+                label: <Link to="/list-field">List Field</Link>,
                 style:
-                  location.pathname === "/list-lapangan"
+                  location.pathname === "/list-field"
                     ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
                     : {},
               },
@@ -200,7 +199,6 @@ const SideNav = () => {
           display: "flex",
           alignItems: "center",
           color: "#fff",
-          marginTop: "20px", // Reduced spacing
         }}
         onClick={handleLogout}
       >
@@ -211,4 +209,4 @@ const SideNav = () => {
   );
 };
 
-export default SideNav;
+export default SideNavPenyewa;
