@@ -13,7 +13,7 @@ import ListLapangan from "./pages/list_lapangan";
 import Profile from "./pages/profile/index";
 import ApiPage from "./pages/api_page/index";
 import AdminPage from "./pages/admin";
-import OwnerPage from "./pages/penyewa";
+import OwnerDashboard from "./pages/penyewa";
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/api-page" element={<ApiPage />} />
         <Route path="/admin-page" element={<AdminPage />} />
-        <Route path="/owner-page" element={<OwnerPage />} />
+        <Route path="/owner-page" element={<OwnerDashboard />} />
       </Routes>
     </div>
   );
