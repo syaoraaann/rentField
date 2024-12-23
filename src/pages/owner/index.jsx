@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Layout, Card, Row, Col, Typography, Badge } from "antd";
 import { BellOutlined } from "@ant-design/icons";
-import SideNavPenyewa from "./sidenavpenyewa";
+import SideNavOwner from "./sidenavowner";
 import bgImage from "../../assets/images/bgnew.jpg"; // Import background image
 
 const { Content, Footer } = Layout;
@@ -41,7 +41,7 @@ const OwnerDashboard = () => {
       }}
     >
       {/* Sidebar */}
-      <SideNavPenyewa />
+      <SideNavOwner />
 
       {/* Main content area */}
       <Layout style={{ marginLeft: 256, background: "transparent" }}>
