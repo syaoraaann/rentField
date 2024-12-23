@@ -9,9 +9,17 @@ import {
   Carousel,
   Progress,
 } from "antd";
+import { BellOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import SideNav from "../sidenav";
 import "./index.css";
+
+import basketImage from "../../assets/images/basket_persegipanjang.jpg";
+import voliImage from "../../assets/images/voli_persegipanjang.jpg";
+import soccer1Image from "../../assets/images/soccer1_persegipanjang.jpg";
+import soccer2Image from "../../assets/images/soccer2_persegipanjang.jpg";
+
+const imageList = [basketImage, voliImage, soccer1Image, soccer2Image];
 
 const { Content, Footer } = Layout;
 const { Title, Text } = Typography;
@@ -20,15 +28,20 @@ const { Title, Text } = Typography;
 const cardStyle = {
   textAlign: "center",
   borderRadius: "8px",
-  boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)", // Softer shadow
-  minHeight: "360px", // Adjust this value to make the cards longer vertically
+  border: "0.2px solid #ABFD13",
+  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)", // Softer shadow
+  minHeight: "400px", // Adjust this value to make the cards longer vertically
   transition: "transform 0.3s ease, box-shadow 0.3s ease", // Transition effect
+  background: "linear-gradient(180deg, #313131, #090909)",
+  color: "#D9D9D9",
 };
 
 const titleStyle = {
-  color: "#375D22",
+  color: "#ABFD13",
   fontSize: "1.8em",
   fontWeight: "bold",
+  fonFamily: "Poppins",
+  paddingBottom: "20px",
 };
 
 const cardContentTitleStyle = {
@@ -36,21 +49,7 @@ const cardContentTitleStyle = {
   margin: 100,
   lineHeight: "1",
   fontWeight: "bold",
-  color: "#333",
-};
-
-const dashboardHeaderStyle = {
-  ...titleStyle,
-  fontSize: "2.5em",
-  marginBottom: "8px",
-};
-
-const mainContentStyle = {
-  margin: "24px 16px 0",
-  padding: 24,
-  minHeight: "calc(100vh - 80px)", // Pastikan footer tidak menempel di tengah
-  background: "#FFFFFF",
-  paddingBottom: "40px",
+  color: "#d9d9d9",
 };
 
 // Dummy data for upcoming events
@@ -105,14 +104,6 @@ const historyBookedFields = [
   { id: 5, fieldName: "River Stadium", date: "2024-11-14", bookings: 6 },
 ];
 
-// List of images for the carousel (place images in the public/assets/images folder)
-const imageList = [
-  "/assets/images/cmgsoon.png",
-  "/assets/images/cmgsoon.png",
-  "/assets/images/cmgsoon.png",
-  "/assets/images/cmgsoon.png",
-];
-
 const Dashboard = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [username, setUsername] = useState(null);
@@ -126,36 +117,47 @@ const Dashboard = () => {
   const handleMouseLeave = () => setHoveredCard(null);
 
   return (
-    <Layout style={{ minHeight: "100vh", background: "#FFFFFF" }}>
+    <Layout>
       {/* Sidebar */}
       <SideNav />
 
       {/* Main content area */}
-      <Layout style={{ marginLeft: 256, background: "#FFFFFF" }}>
-        <Content className="pageContent fadeIn" style={mainContentStyle}>
-          {/* Dashboard Header */}
-          <Title level={1} style={dashboardHeaderStyle}>
-            Ready to make the most of today, {username}?
-          </Title>
-          <Text style={{ fontSize: "1.5em", color: "#666" }}>
-            Here's an overview of your recent activities!
-          </Text>
-
+      <Layout 
+      style={{ marginLeft: 256}}
+      className="layout-main">
+        <Content className="pageContent fadeIn">
+          <Row>
+            <div>
+              {/* Dashboard Header */}
+              <Title level={1} className="dashboard-header">
+                Ready to make the most of today, {username}?
+              </Title>
+              <Text className="desc-header">
+                Here's an overview of your recent activities!
+              </Text>
+            </div>
+            <div style={{ width: "30%"}}>
+              <span class="notification-icon"><BellOutlined className="bell-icon"/></span>
+              <div class="notification-badge">5</div>
+            </div>
+          </Row>
+          <div style={{width: "100%", height: "100px", paddingTop: "40px", display: "flex", justifyContent: "flex-end", alignItems: "center", paddingRight: "30px"}}>
+            <p style={{width: "450px", color: "#d9d9d9", textAlign: "end", fontFamily: "Poppins", wordSpacing: "1.5px", fontSize: "14px"}}>
+              Create an unforgettable sports experience with the best facilities available anytime according to your needs. Let's start now to find the ideal field for your next match!
+            </p>
+          </div>
+      
           {/* Carousel Component */}
           <Carousel
             autoplay
-            style={{ marginTop: "24px", marginBottom: "24px" }}
+            style={{ marginTop: "40px", marginBottom: "60px"}}
           >
             {imageList.map((src, index) => (
               <div key={index}>
                 <img
                   src={src}
                   alt={`carousel-${index}`}
-                  style={{
-                    width: "100%",
-                    height: "400px",
-                    borderRadius: "8px",
-                  }}
+                  className="img-carousel"
                 />
               </div>
             ))}
@@ -165,7 +167,7 @@ const Dashboard = () => {
           <Row gutter={[16, 16]}>
             {/* First row: 2 cards */}
             <Col xs={24} sm={12} md={8} lg={8} xl={12}>
-              <Link to="/mypoint" style={{ color: "inherit" }}>
+              <Link to="/my-point" style={{ color: "inherit" }}>
                 <Card
                   bordered={false}
                   style={{
@@ -189,7 +191,7 @@ const Dashboard = () => {
                   <Title level={1} style={cardContentTitleStyle}>
                     12
                   </Title>
-                  <Progress percent={50} status="active" />
+                  <Progress percent={50} status="active" strokeColor="#ABFD13" trailColor="#8c8c8c" className="progress-bar"/>
                 </Card>
               </Link>
             </Col>
@@ -220,8 +222,8 @@ const Dashboard = () => {
                       maxHeight: "250px",
                       overflowY: "auto",
                       padding: "10px",
-                      backgroundColor: "#f9f9f9",
-                      borderRadius: "8px",
+                      backgroundColor: "#d9d9d9",
+                      
                     }}
                   >
                     <List
@@ -233,25 +235,29 @@ const Dashboard = () => {
                             display: "flex",
                             justifyContent: "space-between",
                             padding: "10px",
-                            background: "#fff",
+                            background: "linear-gradient(180deg, #313131, #090909)",
                             borderRadius: "8px",
                             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                             marginBottom: "10px",
+                            fontFamily: "Poppins",
                           }}
                         >
                           <Text
                             style={{
-                              fontSize: "1.2em",
+                              fontSize: "14px",
                               fontWeight: "bold",
-                              color: "#333",
+                              color: "#ABFD13",
+                              fontFamily: "Poppins",
+                              letterSpacing: "1.0px",
+                              paddingLeft: "10px",
                             }}
                           >
                             {item.fieldName}
                           </Text>
-                          <Text style={{ fontSize: "1em", color: "#666" }}>
+                          <Text style={{ fontSize: "1em", color: "#d9d9d9" }}>
                             {item.date}
                           </Text>
-                          <Text style={{ fontSize: "1em", color: "#999" }}>
+                          <Text style={{ fontSize: "1em", color: "#d9d9d9", paddingRight: "10px"}}>
                             {item.bookings} bookings
                           </Text>
                         </List.Item>
@@ -290,7 +296,7 @@ const Dashboard = () => {
                       maxHeight: "250px",
                       overflowY: "auto",
                       padding: "10px",
-                      backgroundColor: "#f9f9f9",
+                      backgroundColor: "#d9d9d9",
                       borderRadius: "8px",
                     }}
                   >
@@ -304,25 +310,28 @@ const Dashboard = () => {
                             flexDirection: "column",
                             alignItems: "flex-start",
                             padding: "10px",
-                            background: "#fff",
+                            background: "linear-gradient(180deg, #313131, #090909)",
                             borderRadius: "8px",
                             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                             marginBottom: "10px",
+                            paddingLeft: "20px",
+                            paddingRight: "10px",
+                            fontFamily: "Poppins"
                           }}
                         >
                           <Text
                             style={{
                               fontSize: "1.2em",
                               fontWeight: "bold",
-                              color: "#333",
+                              color: "#ABFD13",
                             }}
                           >
                             {item.title}
                           </Text>
-                          <Text style={{ fontSize: "1em", color: "#666" }}>
+                          <Text style={{ fontSize: "1em", color: "#d9d9d9" }}>
                             {item.date}
                           </Text>
-                          <Text style={{ fontSize: "1em", color: "#999" }}>
+                          <Text style={{ fontSize: "1em", color: "#d9d9d9"}}>
                             {item.location}
                           </Text>
                         </List.Item>
@@ -359,7 +368,7 @@ const Dashboard = () => {
                       maxHeight: "250px",
                       overflowY: "auto",
                       padding: "10px",
-                      backgroundColor: "#f9f9f9",
+                      backgroundColor: "#d9d9d9",
                       borderRadius: "8px",
                     }}
                   >
@@ -372,22 +381,25 @@ const Dashboard = () => {
                             display: "flex",
                             justifyContent: "space-between",
                             padding: "10px",
-                            background: "#fff",
+                            background: "linear-gradient(180deg, #313131, #090909)",
                             borderRadius: "8px",
                             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                             marginBottom: "10px",
+                            paddingLeft: "20px",
+                            paddingRight: "20px",
+                            fontFamily: "Poppins"
                           }}
                         >
                           <Text
                             style={{
                               fontSize: "1.2em",
                               fontWeight: "bold",
-                              color: "#333",
+                              color: "#ABFD13",
                             }}
                           >
                             {item.fieldName}
                           </Text>
-                          <Text style={{ fontSize: "1em", color: "#666" }}>
+                          <Text style={{ fontSize: "1em", color: "#d9d9d9" }}>
                             {item.bookings} bookings
                           </Text>
                         </List.Item>
@@ -401,15 +413,7 @@ const Dashboard = () => {
         </Content>
         {/* Footer */}
         <Footer
-          style={{
-            textAlign: "center",
-            background: "#f9f9f9",
-            borderTop: "1px solid #ddd",
-            padding: "12px 24px",
-            fontSize: "14px",
-            color: "#666",
-            position: "relative", // Gunakan relative untuk posisi footer
-          }}
+          className="footer"
         >
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
           Pendidikan Ganesha
