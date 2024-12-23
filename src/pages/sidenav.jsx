@@ -127,11 +127,11 @@ const SideNav = () => {
                 : {},
           },
           {
-            key: "/mypoint",
+            key: "/my-point",
             icon: <StarOutlined />,
-            label: <Link to="/mypoint">My Point</Link>,
+            label: <Link to="/my-point">My Point</Link>,
             style:
-              location.pathname === "/mypoint"
+              location.pathname === "/my-point"
                 ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
                 : {},
           },
