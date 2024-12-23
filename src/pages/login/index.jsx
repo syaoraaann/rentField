@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Typography, Form, Input, Popconfirm } from "antd";
+import { Button, Typography, Form, Input, Select, message } from "antd";
 import "../../pages/login/login.css";
 import rentfieldlogo from "../../assets/images/rentfield1.png";
 import Login1 from "../../assets/images/Login1.png";
 import "@fontsource/poppins";
 
 const { Text } = Typography;
+const { Option } = Select;
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -19,21 +20,78 @@ const LoginPage = () => {
   const [signupForm] = Form.useForm();
   const [forgotPasswordForm] = Form.useForm();
 
-  const handleLogin = () => {
-    if (username && password) {
-      sessionStorage.setItem("username", username);
-      navigate("/dashboard");
-    } else {
-      alert("Please fill in both username and password.");
+  const handleLogin = async () => {
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+
+    try {
+      const response = await fetch("http://127.0.0.1:5000/api/v1/auth/login", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        const { role } = result; // Asumsikan server mengembalikan role
+
+        // Simpan role di session storage
+        sessionStorage.setItem("username", username);
+        sessionStorage.setItem("role", role);
+
+        message.success("Login successful!");
+
+        // Arahkan pengguna berdasarkan role
+        if (role === "Admin") {
+          navigate("/admin-page");
+        } else if (role === "Penyewa") {
+          navigate("/dashboard");
+        } else if (role === "Owner") {
+          navigate("/owner-page");
+        } else {
+          message.error("Role not recognized. Contact support.");
+        }
+
+        setUsername("");
+        setPassword("");
+      } else {
+        message.error(result.message || "Invalid username or password.");
+      }
+    } catch (error) {
+      message.error("An error occurred. Please try again.");
     }
   };
 
-  const handlePasswordReset = (values) => {
-    console.log("Password reset for:", values.email);
-  };
+  // Handle Signup
+  const handleSignup = async (values) => {
+    const { username, password, role } = values;
 
-  const handleSignup = (values) => {
-    console.log("Sign Up Details:", values);
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+    formData.append("role", role);
+
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:5000/api/v1/auth/register",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const result = await response.json();
+
+      if (response.ok) {
+        message.success("Registration successful!");
+        setIsSignup(false); // Switch to login after successful registration
+      } else {
+        message.error(result.message || "Signup failed.");
+      }
+    } catch (error) {
+      message.error("An error occurred during signup.");
+    }
   };
 
   return (
@@ -50,16 +108,17 @@ const LoginPage = () => {
               style={{ cursor: "pointer" }}
             />
             <h2 className="logo-title">
-              {isSignup ? "Sign Up" : isForgotPassword ? "Reset Password" : "Log In"}
+              {isSignup
+                ? "Sign Up"
+                : isForgotPassword
+                ? "Reset Password"
+                : "Log In"}
             </h2>
           </div>
 
           {/* Forgot Password Form */}
           {isForgotPassword && (
-            <Form
-              form={forgotPasswordForm}
-              onFinish={handlePasswordReset}
-            >
+            <Form form={forgotPasswordForm} onFinish={handlePasswordReset}>
               <Form.Item
                 name="email"
                 rules={[
@@ -69,43 +128,15 @@ const LoginPage = () => {
               >
                 <Input placeholder="Email" />
               </Form.Item>
-              <Form.Item shouldUpdate>
-                {() => {
-                  const isFormValid =
-                    forgotPasswordForm.isFieldsTouched(true) &&
-                    !forgotPasswordForm
-                      .getFieldsError()
-                      .filter(({ errors }) => errors.length).length;
-
-                  return (
-                    <Popconfirm
-                      title="Upcoming Features"
-                      description="This feature will be develop in the future!"
-                      okText="OK"
-                      placement="top"
-                      cancelButtonProps={{ style: { display: "none" } }}
-                      okButtonProps={{
-                        style: {
-                          backgroundColor: "#b3cf3a",
-                          borderColor: "#b3cf3a",
-                        },
-                      }}
-                    >
-                      <Button
-                        type="default"
-                        htmlType="submit"
-                        block
-                        style={{
-                          backgroundColor: "#b3cf3a",
-                          color: isFormValid ? "#000000" : "#808080",
-                        }}
-                        disabled={!isFormValid}
-                      >
-                        Submit
-                      </Button>
-                    </Popconfirm>
-                  );
-                }}
+              <Form.Item>
+                <Button
+                  type="default"
+                  htmlType="submit"
+                  block
+                  style={{ backgroundColor: "#b3cf3a" }}
+                >
+                  Submit
+                </Button>
               </Form.Item>
               <Text>
                 Remembered your password?{" "}
@@ -119,75 +150,46 @@ const LoginPage = () => {
             <Form
               form={signupForm}
               onFinish={handleSignup}
+              layout="vertical"
+              style={{ maxWidth: "400px", margin: "0 auto" }}
             >
               <Form.Item
                 name="username"
-                rules={[{ required: true, message: "The Username cannot be empty!" }]}
+                label="Username"
+                rules={[{ required: true, message: "Username is required!" }]}
+                style={{ marginBottom: "4px" }}
               >
                 <Input placeholder="Username" />
               </Form.Item>
               <Form.Item
-                name="email"
-                rules={[
-                  { required: true, message: "Please input your Email!" },
-                  { type: "email", message: "Please enter a valid Email!" },
-                ]}
-              >
-                <Input placeholder="Email" />
-              </Form.Item>
-              <Form.Item
                 name="password"
-                // layout="vertical"
-                // style={{ maxwidth: -50}}
+                label="Password"
                 className="password-item"
-                rules={[{ required: true, message: "Please input your Password!" }]}
+                rules={[{ required: true, message: "Password is required!" }]}
+                style={{ marginBottom: "-20px" }}
               >
                 <Input.Password placeholder="Password" />
               </Form.Item>
-              <Form.Item shouldUpdate>
-                {() => {
-                  const isFormValid =
-                    signupForm.isFieldsTouched(true) &&
-                    !signupForm
-                      .getFieldsError()
-                      .filter(({ errors }) => errors.length).length;
-
-                  return (
-                    <Popconfirm
-                      title="Upcoming Features"
-                      description="This feature will be develop in the future!"
-                      okText="OK"
-                      placement="top"
-                      cancelButtonProps={{ style: { display: "none" } }}
-                      okButtonProps={{
-                        style: {
-                          backgroundColor: "#b3cf3a",
-                          borderColor: "#b3cf3a",
-                        },
-                      }}
-                      onConfirm={() => {
-                        if (isFormValid) {
-                          signupForm.submit();
-                        }
-                      }}
-                      >
-
-                    <Button
-                    className="register-btn"
-                      type="default"
-                      htmlType="submit"
-                      block
-                      style={{
-                        backgroundColor: "#b3cf3a",
-                        color: isFormValid ? "#000000" : "#808080",
-                      }}
-                      disabled={!isFormValid}
-                    >
-                      Register
-                    </Button>
-                    </Popconfirm>
-                  );
-                }}
+              <Form.Item
+                name="role"
+                label="Role"
+                rules={[{ required: true, message: "Role is required!" }]}
+                style={{ marginBottom: "12px" }}
+              >
+                <Select placeholder="Select Role">
+                  <Option value="Penyewa">Penyewa</Option>
+                  <Option value="Owner">Owner</Option>
+                </Select>
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  type="default"
+                  htmlType="submit"
+                  block
+                  style={{ backgroundColor: "#b3cf3a" }}
+                >
+                  Register
+                </Button>
               </Form.Item>
               <Text>
                 Already have an account?{" "}
@@ -201,7 +203,7 @@ const LoginPage = () => {
             <Form form={loginForm} onFinish={handleLogin}>
               <Form.Item
                 name="username"
-                rules={[{ required: true, message: "Please input your Username!" }]}
+                rules={[{ required: true, message: "Username is required!" }]}
               >
                 <Input
                   value={username}
@@ -212,11 +214,7 @@ const LoginPage = () => {
               <Form.Item
                 name="password"
                 className="password-item"
-                // layout="vertical"
-                // style={{ marginBottom: -50}}
-                rules={[
-                  { required: true, message: "Please input your Password!" },
-                ]}
+                rules={[{ required: true, message: "Password is required!" }]}
               >
                 <Input.Password
                   value={password}
@@ -225,9 +223,11 @@ const LoginPage = () => {
                 />
               </Form.Item>
               <Text className="forgot-password-text">
-                <a onClick={() => setIsForgotPassword(true)}>Forgot Password?</a>
+                <a onClick={() => setIsForgotPassword(true)}>
+                  Forgot Password?
+                </a>
               </Text>
-              
+
               <Form.Item>
                 <Button
                   type="default"
@@ -237,7 +237,6 @@ const LoginPage = () => {
                     backgroundColor: "#b3cf3a",
                     color: username && password ? "#000000" : "#808080",
                   }}
-                  className="login-button"
                   disabled={!username || !password}
                 >
                   Log In
@@ -259,7 +258,11 @@ const LoginPage = () => {
         {/* Right Section */}
         <div className="login-illustration">
           <div className="illustration-card">
-            <img src={Login1} alt="Field illustration" className="field-image" />
+            <img
+              src={Login1}
+              alt="Field illustration"
+              className="field-image"
+            />
           </div>
         </div>
       </div>

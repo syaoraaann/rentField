@@ -4,7 +4,7 @@ import "./assets/styles/main.css";
 import "./assets/styles/responsive.css";
 import "./assets/styles/adaptive.css";
 import "antd/dist/reset.css";
-import 'leaflet/dist/leaflet.css';
+import "leaflet/dist/leaflet.css";
 
 import LandingPage from "./pages/landing_page";
 import Login from "./pages/login";
@@ -12,7 +12,8 @@ import Dashboard from "./pages/dashboard";
 import ListLapangan from "./pages/list_lapangan";
 import Profile from "./pages/profile/index";
 import ApiPage from "./pages/api_page/index";
-
+import AdminPage from "./pages/admin";
+import OwnerDashboard from "./pages/penyewa";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
         <Route path="/list-lapangan" element={<ListLapangan />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/api-page" element={<ApiPage />} />
+        <Route path="/admin-page" element={<AdminPage />} />
+        <Route path="/owner-page" element={<OwnerDashboard />} />
       </Routes>
     </div>
   );
