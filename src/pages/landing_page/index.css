@@ -49,7 +49,7 @@
 /* Gaya untuk brand (logo atau nama website) */
 .header-brand h5 {
     font-size: 1.5rem;
-    color: #b2d12d;
+    color: #ABFD13;
     margin: 0;
   }
   
@@ -90,14 +90,14 @@
 }
   
 .header-nav nav a {
-    color: #b2d12d;
+    color: #ABFD13;
     text-decoration: none;
     font-size: 1rem;
     transition: color 0.3s ease;
   }
   
 .header-nav nav a:hover {
-    color: #b2d12d;
+    color: #ABFD13;
   }
 
 .logo-landing {
@@ -113,7 +113,7 @@
 }
 
 .active-menu {
-    background-color: #b2d12d; /* Warna latar belakang saat aktif */
+    background-color: #ABFD13; /* Warna latar belakang saat aktif */
     color: white; /* Warna teks saat aktif (opsional) */
     padding: 5px 10px; /* Padding untuk memperbesar area klik */
     border-radius: 5px; /* Menambahkan sudut yang membulat (opsional) */
@@ -146,13 +146,13 @@
     background: #ABFD13 !important; /* Latar belakang putih semi-transparan */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
     padding: 10px 20px; /* Padding untuk header dan footer */
-    color: black; /* Warna teks putih agar kontras dengan latar belakang */
+    color: #090909; /* Warna teks putih agar kontras dengan latar belakang */
     /* border: 1px solid rgba(255, 255, 255, 0.3); */
 
 }
 
 .font-color{
-  color: black !important;
+  color: #090909 !important;
 }
 
 /* Home section css*/
