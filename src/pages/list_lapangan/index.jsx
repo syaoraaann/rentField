@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import {
   Layout,
@@ -11,6 +12,7 @@ import {
   Select,
   DatePicker,
   notification,
+  Modal
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
@@ -22,6 +24,7 @@ import SideNav from "../sidenav";
 import "@fontsource/poppins";
 import { useEffect } from "react";
 import { Cloud, Sun, CloudRain, CloudLightning, CloudSnow, CloudDrizzle } from 'lucide-react';
+
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -39,7 +42,10 @@ const WeatherDisplay = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+
+//  const [paymentModalVisible, setPaymentModalVisible] = useState(false);
+
+ useEffect(() => {
     const fetchWeather = async () => {
       try {
         // Reset states at the start of fetch
@@ -69,31 +75,31 @@ const WeatherDisplay = () => {
     };
 
     fetchWeather();
-  }, []);
+ }, []);
 
   const getWeatherIcon = (weatherCode) => {
     // Add color styles to icons
-    const iconProps = { size: 24, strokeWidth: 2 };
+    const iconProps = { size: 24, strokeWidth: 2, color: "#fff" };
     
-    if (!weatherCode) return <Cloud {...iconProps} className="text-gray-400" />;
+    if (!weatherCode) return <Cloud {...iconProps} />;
     
     if (weatherCode >= 200 && weatherCode < 300) 
-      return <CloudLightning {...iconProps} className="text-yellow-500" />;
+      return <CloudLightning {...iconProps} />;
     if (weatherCode >= 300 && weatherCode < 400) 
-      return <CloudDrizzle {...iconProps} className="text-blue-300" />;
+      return <CloudDrizzle {...iconProps} />;
     if (weatherCode >= 500 && weatherCode < 600) 
-      return <CloudRain {...iconProps} className="text-blue-500" />;
+      return <CloudRain {...iconProps} />;
     if (weatherCode >= 600 && weatherCode < 700) 
-      return <CloudSnow {...iconProps} className="text-gray-300" />;
+      return <CloudSnow {...iconProps} />;
     if (weatherCode === 800) 
-      return <Sun {...iconProps} className="text-yellow-400" />;
+      return <Sun {...iconProps} />;
     
-    return <Cloud {...iconProps} className="text-gray-400" />;
+    return <Cloud {...iconProps} />;
   };
 
   if (loading) {
     return (
-      <Card style={{ width: '100%', marginBottom: 20, backgroundColor: '#f8f9fa' }}>
+      <Card style={{ width: '100%', marginBottom: 20, backgroundColor: '#090909' }}>
         <Row>
           <Col>
             <Text>Loading weather information...</Text>
@@ -105,7 +111,7 @@ const WeatherDisplay = () => {
 
   if (error) {
     return (
-      <Card style={{ width: '100%', marginBottom: 20, backgroundColor: '#fff0f0' }}>
+      <Card style={{ width: '100%', marginBottom: 20, backgroundColor: '#090909' }}>
         <Row>
           <Col>
             <Text type="danger">Error loading weather: {error}</Text>
@@ -124,34 +130,35 @@ const WeatherDisplay = () => {
       style={{ 
         width: '100%', 
         marginBottom: 20,
-        backgroundColor: '#f8f9fa',
-        borderRadius: 8
+        backgroundColor: '#090909',
+        borderRadius: 8,
+        border: '1px solid #fff'
       }}
     >
       <Row align="middle" justify="space-between">
         <Col>
-          <Text strong style={{ fontSize: 18, marginRight: 16 }}>
+          <Text strong style={{ fontSize: 18, marginRight: 16, color: '#fff' }}>
             Current Weather in Singaraja
           </Text>
         </Col>
         <Col>
           <Row align="middle" gutter={16}>
             <Col>
-              {getWeatherIcon(weather.weather[0]?.id)}
+              {getWeatherIcon(weather?.weather[0]?.id)}
             </Col>
             <Col>
-              <Text strong style={{ fontSize: 16 }}>
-                {Math.round(weather.main?.temp)}°C
+              <Text strong style={{ fontSize: 16, color: '#fff' }}>
+                {Math.round(weather?.main?.temp)}°C
               </Text>
             </Col>
             <Col>
-              <Text style={{ fontSize: 14 }}>
-                {weather.weather[0]?.description}
+              <Text style={{ fontSize: 14, color: '#fff' }}>
+                {weather?.weather[0]?.description}
               </Text>
             </Col>
             <Col>
-              <Text style={{ fontSize: 14 }}>
-                Humidity: {weather.main?.humidity}%
+              <Text style={{ fontSize: 14, color: '#fff' }}>
+                Humidity: {weather?.main?.humidity}%
               </Text>
             </Col>
           </Row>
@@ -159,6 +166,180 @@ const WeatherDisplay = () => {
       </Row>
     </Card>
   );
+};
+
+// Payment Modal Component
+const PaymentModal = ({ visible, onCancel, total, onConfirm }) => {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [bank, setBank] = useState("BRI");
+
+  const bankAccounts = {
+    BRI: {
+      number: "0952010040655088",
+      name: "GALIH YUNIAR PRAKOSO"
+    },
+    Gopay: {
+      number: "085694309831",
+      name: "GALIH YUNIAR PRAKOSO"
+    }
+  };
+
+  return (
+    <Modal
+      visible={visible}
+      onCancel={onCancel}
+      onConfirm={onConfirm}
+      footer={null}
+      title="Pay to Book"
+      style={{ 
+        top: 30,
+        fontFamily: 'Poppins',
+      }}
+      bodyStyle={{
+        backgroundColor: '#090909',
+        padding: '30px'
+      }}
+      width={500}
+    >
+      <div style={{ color: '#abfd13', marginBottom: '24px' }}>
+        <Text style={{ fontSize: '16px', color: '#fff' }}>Fill Your Name and Whatsapp Number:</Text>
+        <Input
+          placeholder="Full Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          style={{
+            marginTop: 8,
+            backgroundColor: '#fff',
+            borderColor: '#fff',
+            color: '#090909'
+          }}
+        />
+        <Input
+          placeholder="Whatsapp Number"
+          value={phone}
+          onChange={(e) => {
+            const onlyNums = e.target.value.replace(/[^0-9]/g, '');
+            setPhone(onlyNums);
+          }}
+          style={{
+            marginTop: 8,
+            backgroundColor: '#fff',
+            borderColor: '#fff',
+            color: '#090909'
+          }}
+        />
+      </div>
+
+      <div style={{ marginBottom: '24px' }}>
+        <Text style={{ color: '#fff' }}>Choose Your Preferred Payment Destination:</Text>
+        <Select
+          value={bank}
+          onChange={setBank}
+          style={{
+            width: '100%',
+            marginTop: 8
+          }}
+          dropdownStyle={{
+            backgroundColor: '#fff'
+          }}
+        >
+          {Object.keys(bankAccounts).map(bankName => (
+            <Option key={bankName} value={bankName}>{bankName}</Option>
+          ))}
+        </Select>
+
+        <Card
+          style={{
+            marginTop: 8,
+            backgroundColor: '#090909',
+            borderColor: '#abfd13'
+          }}
+        >
+          <Text style={{ color: '#fff', display: 'block', textAlign: 'center' }}>{bank}</Text>
+          <Text style={{ color: '#fff', display: 'block', textAlign: 'center' }}>{bankAccounts[bank].number}</Text>
+          <Text style={{ color: '#fff', display: 'block', textAlign: 'center' }}>{bankAccounts[bank].name}</Text>
+        </Card>
+      </div>
+
+      <Text style={{ color: '#fff', fontSize: '20px', display: 'block', marginBottom: '16px' }}>
+        Total: Rp. {total.toLocaleString()}
+      </Text>
+
+      <div style={{ color: '#fff', marginBottom: '24px' }}>
+        <p>1. Transfer to the listed account with the appropriate amount and click confirm.</p>
+        <p>2. You will receive a confirmation WhatsApp Message containing your booking information.</p>
+        <p>3. If the field booking fails, please fill out the refund form in the SMS or contact the help center at 08123456789.</p>
+      </div>
+
+      <Row gutter={16}>
+        <Col span={12}>
+          <Button
+            type="primary"
+            onClick={onConfirm}
+            style={{
+              width: '100%',
+              backgroundColor: '#abfd13',
+              borderColor: '#abfd13',
+              color: '#000'
+            }}
+          >
+            Confirm
+          </Button>
+        </Col>
+        <Col span={12}>
+          <Button
+            onClick={onCancel}
+            style={{
+              width: '100%',
+              backgroundColor: '#ff4d4f',
+              borderColor: '#ff4d4f',
+              color: '#fff'
+            }}
+          >
+            Cancel
+          </Button>
+        </Col>
+      </Row>
+    </Modal>
+  );
+};
+
+// Updated styles for dark theme
+const darkThemeStyles = {
+  layout: {
+    backgroundColor: '#090909',
+    minHeight: '100vh'
+  },
+  title: {
+    color: '#abfd13',
+    fontFamily: 'Poppins, sans-serif',
+  },
+  searchInput: {
+    backgroundColor: '#090909',
+    borderColor: '#fff',
+    color: '#fff'
+  },
+  input: {
+    backgroundColor: "#090909",
+    borderColor: "#abfd13",
+    color: "#fff",
+  },
+  categorySelect: {
+    backgroundColor: '#090909',
+    borderColor: '#abfd13'
+  },
+  card: {
+    backgroundColor: '#222222',
+    borderColor: '#222222'
+  },
+  drawer: {
+    backgroundColor: '#090909',
+    color: '#fff'
+  },
+  text:{
+    color: "#fff"
+  }
 };
 
 const RequiredLabel = ({ children }) => (
@@ -185,8 +366,9 @@ const ListLapangan = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isRentButtonVisible, setIsRentButtonVisible] = useState(false);
+  const [paymentModalVisible, setPaymentModalVisible] = useState(false);
 
-
+  
   // Updated fields data structure with fieldOptions
   const fields = [
     {
@@ -298,7 +480,7 @@ const ListLapangan = () => {
   const disabledDate = (current) => {
     return current && current < dayjs().startOf('day');
   };
-
+  
   const getAvailableHours = () => {
     if (!selectedDate || !selectedField) return [];
     
@@ -340,18 +522,29 @@ const ListLapangan = () => {
     return `${formatHour(hours.start)} - ${formatHour(hours.end)}`;
   };
 
- const renderCardMeta = (field) => (
+  const handlePaymentConfirm = () => {
+    setPaymentModalVisible(false);
+    notification.success({
+      message: "Payment Successful",
+      description: "Your booking has been confirmed. Check your WhatsApp/SMS for details.",
+    });
+    closeDrawer();
+  };
+  
+  const renderCardMeta = (field) => (
     <Meta
       title={
         <Text 
           strong 
           style={{ 
-            fontSize: "18px",
+            fontSize: "25px",
+            fontWeight: 'bold',
             overflow: "hidden",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
             display: "block",
-            width: "100%"
+            width: "100%",
+            color:"#fff",
           }}
         >
           {field.name}
@@ -363,41 +556,67 @@ const ListLapangan = () => {
             display: "flex",
             flexDirection: "column",
             gap: "8px",
-            height: "120px",
+            height: "250px",
           }}
         >
           <Text 
             strong 
             style={{ 
-              color: "#000000", 
+              color: "#f7f7af", 
               fontStyle: "italic",
               overflow: "hidden",
               textOverflow: "ellipsis",
-              whiteSpace: "nowrap"
+              whiteSpace: "nowrap",
+              fontSize: "15px"
             }}
           >
             {field.category}
           </Text>
-          <Text strong style={{ color: "#375D22", fontStyle: "bold" }}>
+  
+          <Text strong style={{ color: "#97f4a2", fontStyle: "bold", fontSize: "20px", }}>
             Base Price /Hr: Rp {field.basePrice.toLocaleString()}
           </Text>
-          <Text strong style={{ color: "#1890ff" }}>
+          <Text strong style={{ color: "#97f4a2", fontStyle: "bold", fontSize: "20px" }}>
             Operating Hours: {formatOperatingHours(field.operatingHours)}
           </Text>
           <Text
             type="secondary"
             style={{
-              fontSize: "12px",
+              fontSize: "15px",
               overflow: "hidden",
               display: "-webkit-box",
               WebkitBoxOrient: "vertical",
               WebkitLineClamp: 2,
               textOverflow: "ellipsis",
-              wordBreak: "break-word"
+              wordBreak: "break-word",
+              color: "#d9d9d9",
+              marginBottom: "10px"
             }}
           >
             {field.address}
           </Text>
+          
+          {/* Button ditambahkan di sini */}
+          <div style={{ 
+            backgroundColor: '#222222', 
+            width: '100%',
+            padding: '8px 0',
+            marginTop: 'auto' // Mendorong button ke bawah
+          }}>
+            <Button
+              type="primary"
+              onClick={() => showDrawer(field)}
+              style={{
+                backgroundColor: "#abfd13", 
+                color: "#090909",
+                fontSize: "25px",
+                fontWeight: "bold",
+                width: "100%"
+              }}
+            >
+              RENT
+            </Button>
+          </div>
         </div>
       }
     />
@@ -499,6 +718,7 @@ const ListLapangan = () => {
   };
 
   const handleRent = () => {
+    
     if (!selectedDate || selectedHours.length === 0 || !selectedFieldOption) {
       notification.error({
         message: "Incomplete Information",
@@ -506,33 +726,35 @@ const ListLapangan = () => {
       });
       return;
     }
-
-    notification.success({
-      message: "Field Order Success",
-      description: "Payment Page will be updated soon",
-    });
-    closeDrawer();
+    setPaymentModalVisible(true);
   };
 
   const filteredFields = fields.filter((field) => {
     const matchesSearch = field.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory ? field.category === selectedCategory : true;
     return matchesSearch && matchesCategory;
-  });
+  }
+);
+  
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout>
       <SideNav />
-      <Layout style={{ marginLeft: 256 }}>
+       <Layout style={{ 
+    marginLeft: 256, 
+    backgroundColor: '#090909',
+    minHeight: '100vh'
+  }}>
         <Title
           level={3}
           style={{
-            paddingLeft: "20px",
+            paddingLeft: "28px",
             fontFamily: "Poppins, sans-serif",
             fontWeight: "bold",
-            marginTop: "30px",
-            color: "#375D22",
-            fontSize: "60px",
+            marginTop: "60px",
+            marginBottom: "20px",
+            color: "#fff",
+            fontSize: "70px",
           }}
         >
           {selectedField
@@ -543,8 +765,8 @@ const ListLapangan = () => {
         <Content style={{ 
           margin: "10px",
            padding: "20px", 
-           backgroundColor: "#fff",
-           paddingBottom: "40px" // Added padding at bottom
+           backgroundColor: "#090909",
+           paddingBottom: "40px", // Added padding at bottom
             }}>
               {/* 1. Komponen Cuaca */}
         <WeatherDisplay />
@@ -555,32 +777,44 @@ const ListLapangan = () => {
                 placeholder="Search fields..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                style={{ width: 200 }}
-                prefix={<SearchOutlined />}
+                style={{ width: 200,
+                  backgroundColor: '#fff',
+                  borderColor: '#090909', }}
+                  prefix={<SearchOutlined style={{ color: '#090909' }} />}
               />
             </Col>
+            
             <Col>
-              <Select
-                placeholder="Select Category"
-                onChange={setSelectedCategory}
-                style={{ height: 71, width: 200, paddingBottom: 22 }}
-                value={selectedCategory}
-              >
-                <Option value="">All Categories</Option>
-                <Option value="Soccer Field">Soccer Field</Option>
-                <Option value="Badminton Field">Badminton Field</Option>
-                <Option value="Basketball Field">Basketball Field</Option>
-              </Select>
-            </Col>
+            <Select
+              placeholder="Select Category"
+              onChange={setSelectedCategory}
+              style={{ 
+                width: 200,
+                height: 71,
+                color: '#090909',
+                paddingBottom: 22
+              }}
+              dropdownStyle={{ 
+                backgroundColor: '#090909'
+              }}
+              value={selectedCategory}
+            >
+              <Option value="" style={{ backgroundColor: '#090909', color: '#fff' }}>All Categories</Option>
+              <Option value="Soccer Field" style={{ backgroundColor: '#090909', color: '#fff' }}>Soccer Field</Option>
+              <Option value="Badminton Field" style={{ backgroundColor: '#090909', color: '#fff' }}>Badminton Field</Option>
+              <Option value="Basketball Field" style={{ backgroundColor: '#090909', color: '#fff' }}>Basketball Field</Option>
+            </Select>
+          </Col>
           </Row>
 
           <Row gutter={[24, 24]}>
         {filteredFields.map((field) => (
-          <Col span={8} key={field.id} style={{ marginBottom: "16px" }}>
+          <Col span={8} key={field.id} style={{ marginBottom: "16px",}}>
             <Card
               hoverable
               style={{
-                minHeight: "450px", // Changed from fixed height to minHeight
+                ...darkThemeStyles.card,
+                minHeight: "550px", // Changed from fixed height to minHeight
                 height: "100%", // Added to ensure full height
                 display: "flex",
                 flexDirection: "column",
@@ -588,36 +822,41 @@ const ListLapangan = () => {
                 transition: "box-shadow 0.3s ease",
                 borderRadius: "8px",
               }}
+              bodyStyle={{
+                flex: 1,
+                backgroundColor: '#222222'
+              }}
+              
               cover={
                 <img
                   alt={field.name}
                   src={field.imageUrl}
                   style={{
                     width: "100%",
-                    height: "200px",
+                    height: "250px",
                     objectFit: "cover",
                     borderTopLeftRadius: "8px", // Optional: matching border radius
                     borderTopRightRadius: "8px", // Optional: matching border radius
+                    color: "#090909"
                   }}
                 />
               }
-              actions={[
-                <Button
-                  type="primary"
-                  onClick={() => showDrawer(field)}
-                  style={{ backgroundColor: "#D8E795", color: "#000000" }}
-                >
-                  Rent
-                </Button>,
-              ]}
             >
               {renderCardMeta(field)}
             </Card>
           </Col>
         ))}
       </Row>
-
+      <PaymentModal
+        visible={paymentModalVisible}
+        onConfirm={handlePaymentConfirm}
+        onCancel={() => setPaymentModalVisible(false)}
+        total={total}
+      />
       <Drawer
+            style={{
+              background: "#a6a6a6",
+            }}
             title={`Order Field ${selectedField?.name || ""}`}
             placement="right"
             width={320}
@@ -645,7 +884,7 @@ const ListLapangan = () => {
               placeholder="Select Hours"
               value={selectedHours}
               onChange={handleHoursChange}
-              style={{ width: "100%", marginBottom: "16px" }}
+              style={{ width: "100%", marginBottom: "16px"}}
               disabled={!selectedDate}
               options={getAvailableHours()}
             />
@@ -668,9 +907,9 @@ const ListLapangan = () => {
               type="primary"
               onClick={handleRent}
               disabled={!isRentButtonVisible || !selectedDate || selectedHours.length === 0}
-              style={{ marginTop: "20px" }}
+              style={{ marginTop: "20px", backgroundColor:'#abfd13', color:'#090909', width:'100px', fontWeight: 'bold', fontSize: '18px' }}
             >
-              Rent Now
+              RENT
             </Button>
 
             {selectedFieldOption && (
@@ -685,24 +924,25 @@ const ListLapangan = () => {
               </div>
             )}
           </Drawer>
+          
         </Content>
         <Footer
           style={{
             textAlign: "center",
-            background: "#f9f9f9",
+            background: "#090909",
             borderTop: "1px solid #ddd",
             padding: "12px 24px",
             fontSize: "14px",
-            color: "#666",
+            color: "#abfd13",
             position: "relative", // Gunakan relative untuk posisi footer
           }}
         >
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
           Pendidikan Ganesha
         </Footer>
-      </Layout>
     </Layout>
-  );
+  </Layout>
+);
 };
 
 export default ListLapangan;
