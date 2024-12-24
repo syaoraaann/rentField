@@ -104,7 +104,7 @@ const historyBookedFields = [
   { id: 5, fieldName: "River Stadium", date: "2024-11-14", bookings: 6 },
 ];
 
-const Dashboard = () => {
+const DashboardPenyewa = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [username, setUsername] = useState(null);
 
@@ -423,4 +423,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardPenyewa;

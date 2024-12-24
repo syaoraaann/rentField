@@ -8,13 +8,14 @@ import "leaflet/dist/leaflet.css";
 
 import LandingPage from "./pages/landing_page";
 import Login from "./pages/login";
-import Dashboard from "./pages/dashboard";
+import Dashboard from "./pages/dashboardpenyewa";
 import ListLapangan from "./pages/list_lapangan";
 import Profile from "./pages/profile/index";
 import ApiPage from "./pages/api_page/index";
 import AdminPage from "./pages/admin";
-import OwnerDashboard from "./pages/penyewa";
+import DashboardPenyewa from "./pages/dashboardpenyewa";
 import MyPoint from "./pages/my_point";
+import OwnerDashboard from "./pages/owner";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/admin-page" element={<AdminPage />} />
         <Route path="/owner-page" element={<OwnerDashboard />} />
         <Route path="/my-point" element={<MyPoint/>} />
+        <Route path="/penyewa-page" element={<DashboardPenyewa/>} />
       </Routes>
     </div>
   );
