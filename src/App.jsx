@@ -14,6 +14,7 @@ import Profile from "./pages/profile/index";
 import ApiPage from "./pages/api_page/index";
 import AdminPage from "./pages/admin";
 import DashboardPenyewa from "./pages/dashboardpenyewa";
+import OwnerDashboard from "./pages/owner";
 import MyPoint from "./pages/my_point";
 import OwnerDashboard from "./pages/owner";
 
@@ -31,7 +32,6 @@ function App() {
         <Route path="/admin-page" element={<AdminPage />} />
         <Route path="/owner-page" element={<OwnerDashboard />} />
         <Route path="/my-point" element={<MyPoint/>} />
-        <Route path="/penyewa-page" element={<DashboardPenyewa/>} />
       </Routes>
     </div>
   );
