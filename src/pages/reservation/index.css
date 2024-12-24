@@ -1,0 +1,38 @@
+/* pages/reservation/index.css */
+.ant-table {
+    background: transparent !important;
+  }
+  
+  .ant-table-thead > tr > th {
+    background: #161616 !important;
+    color: #ABFD13 !important;
+    border-bottom: 1px solid #ABFD13 !important;
+  }
+  
+  .ant-table-tbody > tr > td {
+    background: #161616 !important;
+    border-bottom: 1px solid #2a2a2a !important;
+  }
+  
+  .ant-table-tbody > tr:hover > td {
+    background: #2a2a2a !important;
+  }
+  
+  .ant-select-selector {
+    background: #161616 !important;
+    color: #fff !important;
+    border: 1px solid #ABFD13 !important;
+  }
+  
+  .ant-select-arrow {
+    color: #ABFD13 !important;
+  }
+  
+  .ant-input {
+    background: #161616 !important;
+    color: #fff !important;
+  }
+  
+  .ant-input-prefix {
+    color: #ABFD13 !important;
+  }

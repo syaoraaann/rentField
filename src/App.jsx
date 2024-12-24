@@ -16,6 +16,7 @@ import AdminPage from "./pages/admin";
 import DashboardPenyewa from "./pages/dashboardpenyewa";
 import MyPoint from "./pages/my_point";
 import OwnerDashboard from "./pages/owner";
+import ReservationList from "./pages/reservation";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/list-lapangan" element={<ListLapangan />} />
+        <Route path="/reservation-list" element={<ReservationList />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/api-page" element={<ApiPage />} />
         <Route path="/admin-page" element={<AdminPage />} />
