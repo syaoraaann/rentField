@@ -177,11 +177,11 @@ const PaymentModal = ({ visible, onCancel, total, onConfirm }) => {
   const bankAccounts = {
     BRI: {
       number: "0952010040655088",
-      name: "GALIH YUNIAR PRAKOSO"
+      name: "PT. Rentfield Indonesia"
     },
     Gopay: {
       number: "085694309831",
-      name: "GALIH YUNIAR PRAKOSO"
+      name: "PT. Rentfield Indonesia"
     }
   };
 
