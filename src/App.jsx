@@ -13,7 +13,7 @@ import ListLapangan from "./pages/list_lapangan";
 import Profile from "./pages/profile/index";
 import ApiPage from "./pages/api_page/index";
 import AdminPage from "./pages/admin";
-import OwnerDashboard from "./pages/penyewa";
+import OwnerDashboard from "./pages/owner";
 import MyPoint from "./pages/my_point";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
         <Route path="/api-page" element={<ApiPage />} />
         <Route path="/admin-page" element={<AdminPage />} />
         <Route path="/owner-page" element={<OwnerDashboard />} />
-        <Route path="/my-point" element={<MyPoint/>} />
+        <Route path="/my-point" element={<MyPoint />} />
       </Routes>
     </div>
   );

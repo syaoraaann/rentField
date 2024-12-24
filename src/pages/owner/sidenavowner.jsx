@@ -37,7 +37,6 @@ const StyledInput = styled(Input)`
   }
 `;
 
-// Styled component for the side nav container with Glassmorphism
 const SideNavContainer = styled.div`
   width: 256px;
   height: 100vh;
@@ -53,7 +52,7 @@ const SideNavContainer = styled.div`
   justify-content: space-between;
 `;
 
-const SideNavPenyewa = () => {
+const SideNavOwner = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -212,4 +211,4 @@ const SideNavPenyewa = () => {
   );
 };
 
-export default SideNavPenyewa;
+export default SideNavOwner;
