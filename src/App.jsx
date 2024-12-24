@@ -25,7 +25,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<DashboardPenyewa />} />
         <Route path="/list-lapangan" element={<ListLapangan />} />
-        <Route path="/reservation-list" element={<ReservationList />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/api-page" element={<ApiPage />} />
         <Route path="/admin-page" element={<AdminPage />} />
