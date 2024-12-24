@@ -14,6 +14,7 @@ import Profile from "./pages/profile/index";
 import ApiPage from "./pages/api_page/index";
 import AdminPage from "./pages/admin";
 import OwnerDashboard from "./pages/penyewa";
+import HelpCenter from "./pages/helpcenter";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/api-page" element={<ApiPage />} />
         <Route path="/admin-page" element={<AdminPage />} />
         <Route path="/owner-page" element={<OwnerDashboard />} />
+        <Route path="/help-center" element={<HelpCenter />} />
       </Routes>
     </div>
   );

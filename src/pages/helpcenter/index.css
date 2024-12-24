@@ -1,0 +1,244 @@
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .help-center {
+    font-family: Arial, sans-serif;
+    background: url('../../assets/images/loginbg.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header {
+    color: #d7ff00;
+    padding: 2rem 0;
+    margin-top: 35px;
+    justify-content: center;
+    font-size: 2rem;
+  }
+  
+  .search-bar {
+    width: 60%;
+    margin: 0 auto 2rem auto;
+  }
+  
+
+  .search-bar .ant-input-affix-wrapper {
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 0 2rem;
+    margin: 0 auto;
+    max-width: 1400px;
+    flex: 1;
+  }
+  
+  .card {
+    background-color: #222;
+    border: 1px solid #ABFD13;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: left;
+    height: 100%; 
+  }
+  
+  .card h2 {
+    color: #d7ff00;
+    margin-bottom: 1rem;
+  }
+  
+  .card p {
+    margin-bottom: 1rem;
+  }
+  
+  .card ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .card li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .card a {
+    color: #d7ff00;
+    text-decoration: none;
+  }
+  
+  .card a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer {
+    margin-top: auto;
+    padding: 1rem;
+    background-color: #ABFD13;
+    color: #000;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .search-bar {
+      width: 80%;
+    }
+    
+    .content-grid {
+      padding: 0 1rem;
+      gap: 1rem;
+    }
+    
+    .card {
+      padding: 1rem;
+    }
+  } */
+
+
+  /* index.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+  }
+  
+  .help-center-container {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .sidenav {
+    width: 250px;
+    background-color: #111;
+    padding: 20px;
+    border-right: 1px solid #333;
+  }
+  
+  .help-center-content {
+    flex: 1;
+    padding: 30px;
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .header {
+    color: #d7ff00;
+    font-size: 2rem;
+    margin-top: 35px;
+    justify-content: center;
+    font-size: 2rem;
+    text-align: center;
+  }
+  
+  .search-bar {
+    max-width: 600px;
+    margin: 0 auto 40px;
+  }
+  
+  .search-bar .ant-input-affix-wrapper {
+    background-color: #111 !important;
+    border: 1px solid #333 !important;
+  }
+  
+  .search-bar .ant-input {
+    background-color: #111 !important;
+    color: #fff !important;
+  }
+  
+  .content-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .card {
+    background-color: #111;
+    border: 1px solid #ABFD13;
+    border-radius: 10px;
+    padding: 25px;
+    height: 100%;
+  }
+  
+  .card h2 {
+    color: #d7ff00;
+    margin-bottom: 20px;
+  }
+  
+  .card p {
+    margin-bottom: 15px;
+  }
+  
+  .card ul {
+    list-style-position: inside;
+    margin-bottom: 15px;
+    padding-left: 15px;
+  }
+  
+  .card li {
+    margin-bottom: 8px;
+    color: #fff;
+  }
+  
+  .card a {
+    color: #d7ff00;
+    text-decoration: none;
+  }
+  
+  .social-links {
+    text-align: center;
+    margin: 40px 0;
+  }
+  
+  .footer {
+    text-align: center;
+    padding: 20px 0;
+    color: #ABFD13;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 1024px) {
+    .content-grid {
+      grid-template-columns: 1fr; /* Single column on smaller screens */
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .help-center-container {
+      flex-direction: column;
+    }
+    
+    .sidenav {
+      width: 100%;
+      height: auto;
+    }
+    
+    .help-center-content {
+      padding: 20px;
+    }
+  }
