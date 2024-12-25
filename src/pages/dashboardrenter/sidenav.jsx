@@ -151,9 +151,9 @@ const SideNav = () => {
               {
                 key: "/list-field",
                 icon: <StarOutlined />,
-                label: <Link to="/list-lapangan">List Field</Link>,
+                label: <Link to="/list-field">List Field</Link>,
                 style:
-                  location.pathname === "/list-lapangan"
+                  location.pathname === "/list-field"
                     ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
                     : {},
               },
