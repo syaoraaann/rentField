@@ -11,7 +11,7 @@ import {
 } from "antd";
 import { BellOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import SideNav from "../sidenav";
+import SideNav from "./sidenav";
 import "./index.css";
 
 import basketImage from "../../assets/images/basket_persegipanjang.jpg";
@@ -105,7 +105,7 @@ const historyBookedFields = [
   { id: 5, fieldName: "River Stadium", date: "2024-11-14", bookings: 6 },
 ];
 
-const DashboardPenyewa = () => {
+const DashboardRenter = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [username, setUsername] = useState(null);
 
@@ -465,4 +465,4 @@ const DashboardPenyewa = () => {
   );
 };
 
-export default DashboardPenyewa;
+export default DashboardRenter;

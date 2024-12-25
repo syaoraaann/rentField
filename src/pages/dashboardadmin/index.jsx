@@ -4,7 +4,7 @@ import "./index.css"; // Tambahkan CSS jika diperlukan
 
 const { Title } = Typography;
 
-const AdminPage = () => {
+const DashboardAdmin = () => {
   return (
     <div className="admin-page">
       <Title level={2} style={{ textAlign: "center", marginTop: "20px" }}>
@@ -17,4 +17,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default DashboardAdmin;
