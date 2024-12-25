@@ -15,6 +15,7 @@ import AdminPage from "./pages/admin";
 import DashboardPenyewa from "./pages/dashboardpenyewa";
 import OwnerDashboard from "./pages/owner";
 import MyPoint from "./pages/my_point";
+import ReservationList from "./pages/reservation";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/admin-page" element={<AdminPage />} />
         <Route path="/owner-page" element={<OwnerDashboard />} />
         <Route path="/my-point" element={<MyPoint />} />
+        <Route path="/reservation-list" element={<ReservationList />} />
       </Routes>
     </div>
   );
