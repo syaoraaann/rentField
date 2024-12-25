@@ -143,7 +143,7 @@ const DashboardPenyewa = () => {
                 Here's an overview of your recent activities!
               </Text>
             </div>
-            <div style={{ width: "30%" }}>
+            <div style={{ width: "25%" }}>
               <span class="notification-icon">
                 <BellOutlined className="bell-icon" />
               </span>
