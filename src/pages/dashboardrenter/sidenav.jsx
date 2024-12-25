@@ -118,11 +118,11 @@ const SideNav = () => {
         mode="inline"
         items={[
           {
-            key: "/dashboard",
+            key: "/dashboard-renter",
             icon: <HomeOutlined />,
-            label: <Link to="/dashboard">Dashboard</Link>,
+            label: <Link to="/dashboard-renter">Dashboard</Link>,
             style:
-              location.pathname === "/dashboard"
+              location.pathname === "/dashboard-renter"
                 ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
                 : {},
           },

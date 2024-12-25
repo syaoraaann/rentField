@@ -12,7 +12,7 @@ import {
 } from "antd";
 import { BellOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import SideNav from "../sidenav";
+import SideNav from "../dashboardrenter/sidenav";
 import "./index.css";
 import bgImage from "../../assets/images/bgnew.jpg";
 

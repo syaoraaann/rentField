@@ -8,14 +8,14 @@ import "leaflet/dist/leaflet.css";
 
 import LandingPage from "./pages/landing_page";
 import Login from "./pages/login";
-import ListLapangan from "./pages/list_lapangan";
 import Profile from "./pages/profile/index";
 import ApiPage from "./pages/api_page/index";
-import AdminPage from "./pages/admin";
-import DashboardPenyewa from "./pages/dashboardpenyewa";
-import OwnerDashboard from "./pages/owner";
+import DashboardRenter from "./pages/dashboardrenter";
 import MyPoint from "./pages/my_point";
 import ReservationList from "./pages/reservation";
+import DashboardOwner from "./pages/dashboardowner";
+import DashboardAdmin from "./pages/dashboardadmin";
+import ListField from "./pages/list_field";
 
 function App() {
   return (
@@ -24,12 +24,12 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/landing-page" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<DashboardPenyewa />} />
-        <Route path="/list-lapangan" element={<ListLapangan />} />
+        <Route path="/dashboard-renter" element={<DashboardRenter />} />
+        <Route path="/dashboard-owner" element={<DashboardOwner />} />
+        <Route path="/dashboard-admin" element={<DashboardAdmin />} />
+        <Route path="/list-field" element={<ListField />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/api-page" element={<ApiPage />} />
-        <Route path="/admin-page" element={<AdminPage />} />
-        <Route path="/owner-page" element={<OwnerDashboard />} />
         <Route path="/my-point" element={<MyPoint />} />
         <Route path="/reservation-list" element={<ReservationList />} />
       </Routes>

@@ -1,7 +1,16 @@
 import React, { useState } from "react";
-import { Layout, Input, Select, Table, Avatar, Modal, Button, Space } from "antd";
+import {
+  Layout,
+  Input,
+  Select,
+  Table,
+  Avatar,
+  Modal,
+  Button,
+  Space,
+} from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import SideNavOwner from "../owner/sidenavowner";
+import SideNavOwner from "../dashboardowner/sidenavowner";
 import bgImage from "../../assets/images/bgnew.jpg";
 import "./index.css";
 
@@ -13,33 +22,33 @@ const ReservationList = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [modalAction, setModalAction] = useState(null);
-  
+
   // Sample reservation data
   const [reservations, setReservations] = useState([
     {
-      key: '1',
+      key: "1",
       name: "John Doe",
       time: "2 hours ago",
-      status: "WAITING_CONFIRMATION"
+      status: "WAITING_CONFIRMATION",
     },
     {
-      key: '2',
-      name: "Jane Smith", 
+      key: "2",
+      name: "Jane Smith",
       time: "1 day ago",
-      status: "CONFIRMED"
+      status: "CONFIRMED",
     },
     {
-      key: '3',
+      key: "3",
       name: "Mike Johnson",
-      time: "30 minutes ago", 
-      status: "WAITING_CONFIRMATION"
+      time: "30 minutes ago",
+      status: "WAITING_CONFIRMATION",
     },
     {
-      key: '4',
+      key: "4",
       name: "Sarah Wilson",
       time: "5 days ago",
-      status: "COMPLETED"
-    }
+      status: "COMPLETED",
+    },
   ]);
 
   // Handle button click in the table
@@ -51,12 +60,12 @@ const ReservationList = () => {
 
   // Handle confirmation in modal
   const handleConfirmAction = () => {
-    setReservations(prevReservations => 
-      prevReservations.map(item => {
+    setReservations((prevReservations) =>
+      prevReservations.map((item) => {
         if (item.key === selectedRecord.key) {
           return {
             ...item,
-            status: modalAction
+            status: modalAction,
           };
         }
         return item;
@@ -73,11 +82,11 @@ const ReservationList = () => {
   // Get modal content based on action
   const getModalContent = () => {
     switch (modalAction) {
-      case 'CONFIRMED':
+      case "CONFIRMED":
         return "Are you sure you want to confirm this reservation?";
-      case 'CANCELLED':
+      case "CANCELLED":
         return "Are you sure you want to cancel this reservation?";
-      case 'COMPLETED':
+      case "COMPLETED":
         return "Are you sure you want to mark this reservation as completed?";
       default:
         return "Are you sure you want to proceed with this action?";
@@ -87,90 +96,90 @@ const ReservationList = () => {
   // Table columns configuration
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
       render: (text) => (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <Avatar style={{ backgroundColor: '#2A2A2A' }} />
-          <span style={{ color: '#fff' }}>{text}</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <Avatar style={{ backgroundColor: "#2A2A2A" }} />
+          <span style={{ color: "#fff" }}>{text}</span>
         </div>
       ),
     },
     {
-      title: 'Time',
-      dataIndex: 'time',
-      key: 'time',
-      render: (text) => <span style={{ color: '#fff' }}>{text}</span>,
+      title: "Time",
+      dataIndex: "time",
+      key: "time",
+      render: (text) => <span style={{ color: "#fff" }}>{text}</span>,
     },
     {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
       render: (status) => {
         let color;
-        let text = status.replace(/_/g, ' ').toLowerCase();
+        let text = status.replace(/_/g, " ").toLowerCase();
         text = text.charAt(0).toUpperCase() + text.slice(1);
-        
+
         switch (status) {
-          case 'WAITING_CONFIRMATION':
-            color = '#FFD700'; // Yellow
+          case "WAITING_CONFIRMATION":
+            color = "#FFD700"; // Yellow
             break;
-          case 'CONFIRMED':
-            color = '#A3FF12'; // Green
+          case "CONFIRMED":
+            color = "#A3FF12"; // Green
             break;
-          case 'COMPLETED':
-            color = '#1890ff'; // Blue
+          case "COMPLETED":
+            color = "#1890ff"; // Blue
             break;
-          case 'CANCELLED':
-            color = '#ff4d4f'; // Red
+          case "CANCELLED":
+            color = "#ff4d4f"; // Red
             break;
           default:
-            color = '#fff';
+            color = "#fff";
         }
         return <span style={{ color }}>{text}</span>;
       },
     },
     {
-      title: 'Actions',
-      key: 'action',
+      title: "Actions",
+      key: "action",
       render: (_, record) => {
         // Different action buttons based on status
-        if (record.status === 'WAITING_CONFIRMATION') {
+        if (record.status === "WAITING_CONFIRMATION") {
           return (
             <Space>
               <Button
-                onClick={() => handleActionClick(record, 'CONFIRMED')}
-                style={{ 
-                  backgroundColor: '#A3FF12',
-                  borderColor: '#A3FF12',
-                  color: 'black',
-                  fontWeight: 'medium'
+                onClick={() => handleActionClick(record, "CONFIRMED")}
+                style={{
+                  backgroundColor: "#A3FF12",
+                  borderColor: "#A3FF12",
+                  color: "black",
+                  fontWeight: "medium",
                 }}
               >
                 Confirm
               </Button>
               <Button
                 danger
-                onClick={() => handleActionClick(record, 'CANCELLED')}
+                onClick={() => handleActionClick(record, "CANCELLED")}
               >
                 Cancel
               </Button>
             </Space>
           );
-        } else if (record.status === 'CONFIRMED') {
+        } else if (record.status === "CONFIRMED") {
           return (
             <Space>
               <Button
                 type="primary"
-                onClick={() => handleActionClick(record, 'COMPLETED')}
-                style={{ fontWeight: 'medium' }}
+                onClick={() => handleActionClick(record, "COMPLETED")}
+                style={{ fontWeight: "medium" }}
               >
                 Complete
               </Button>
               <Button
                 danger
-                onClick={() => handleActionClick(record, 'CANCELLED')}
+                onClick={() => handleActionClick(record, "CANCELLED")}
               >
                 Cancel
               </Button>
@@ -183,25 +192,27 @@ const ReservationList = () => {
   ];
 
   return (
-      <Layout
-        style={{
-          minHeight: "100vh",
-          backgroundImage: `url(${bgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <SideNavOwner />
-      
-      <Layout style={{ marginLeft: 256, background: 'transparent' }}>
-        <Content style={{ padding: '24px', background: 'transparent' }}>
-          <h1 style={{ 
-            color: "#A3FF12", 
-            fontSize: "24px", 
-            marginBottom: "24px",
-            fontWeight: "bold" 
-          }}>
+    <Layout
+      style={{
+        minHeight: "100vh",
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <SideNavOwner />
+
+      <Layout style={{ marginLeft: 256, background: "transparent" }}>
+        <Content style={{ padding: "24px", background: "transparent" }}>
+          <h1
+            style={{
+              color: "#A3FF12",
+              fontSize: "24px",
+              marginBottom: "24px",
+              fontWeight: "bold",
+            }}
+          >
             Reservation List
           </h1>
 
@@ -212,18 +223,18 @@ const ReservationList = () => {
               style={{
                 flex: 1,
                 borderRadius: "8px",
-                background: '#2A2A2A',
-                color: '#fff'
+                background: "#2A2A2A",
+                color: "#fff",
               }}
             />
-            
-            <Select 
-              defaultValue="all" 
-              style={{ 
+
+            <Select
+              defaultValue="all"
+              style={{
                 width: 120,
-                borderRadius: "8px"
+                borderRadius: "8px",
               }}
-              dropdownStyle={{ background: '#2A2A2A' }}
+              dropdownStyle={{ background: "#2A2A2A" }}
             >
               <Option value="all">All Status</Option>
               <Option value="waiting">Waiting</Option>
@@ -237,7 +248,7 @@ const ReservationList = () => {
             columns={columns}
             dataSource={reservations}
             pagination={false}
-            style={{ background: 'transparent' }}
+            style={{ background: "transparent" }}
           />
 
           <Modal
@@ -245,10 +256,10 @@ const ReservationList = () => {
             open={modalVisible}
             onCancel={handleCancel}
             footer={[
-              <Button 
-                key="back" 
+              <Button
+                key="back"
                 onClick={handleCancel}
-                style={{ borderRadius: '4px' }}
+                style={{ borderRadius: "4px" }}
               >
                 Back
               </Button>,
@@ -256,13 +267,21 @@ const ReservationList = () => {
                 key="submit"
                 type="primary"
                 onClick={handleConfirmAction}
-                style={{ 
-                  backgroundColor: modalAction === 'CANCELLED' ? '#ff4d4f' : 
-                                 modalAction === 'COMPLETED' ? '#1890ff' : '#A3FF12',
-                  borderColor: modalAction === 'CANCELLED' ? '#ff4d4f' : 
-                              modalAction === 'COMPLETED' ? '#1890ff' : '#A3FF12',
-                  borderRadius: '4px',
-                  color: modalAction === 'CONFIRMED' ? '#090909' : '#fff'
+                style={{
+                  backgroundColor:
+                    modalAction === "CANCELLED"
+                      ? "#ff4d4f"
+                      : modalAction === "COMPLETED"
+                      ? "#1890ff"
+                      : "#A3FF12",
+                  borderColor:
+                    modalAction === "CANCELLED"
+                      ? "#ff4d4f"
+                      : modalAction === "COMPLETED"
+                      ? "#1890ff"
+                      : "#A3FF12",
+                  borderRadius: "4px",
+                  color: modalAction === "CONFIRMED" ? "#090909" : "#fff",
                 }}
               >
                 Confirm

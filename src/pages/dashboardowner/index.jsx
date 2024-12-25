@@ -22,7 +22,7 @@ const detailedStats = {
   favoriteTime: "6 PM - 8 PM",
 };
 
-const OwnerDashboard = () => {
+const DashboardOwner = () => {
   const [username, setUsername] = useState(null);
 
   useEffect(() => {
@@ -259,4 +259,4 @@ const OwnerDashboard = () => {
   );
 };
 
-export default OwnerDashboard;
+export default DashboardOwner;
