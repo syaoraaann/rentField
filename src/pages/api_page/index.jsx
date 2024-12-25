@@ -14,7 +14,7 @@ import {
   FloatButton,
   Skeleton,
   Popconfirm,
-  Tooltip
+  Tooltip,
 } from "antd";
 import {
   PlusCircleOutlined,
@@ -22,9 +22,8 @@ import {
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
-import SideNav from "../sidenav";
+import SideNav from "../dashboardrenter/sidenav";
 import "./index.css"; // Import the external CSS
-
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -295,7 +294,10 @@ const ApiPage = () => {
                 <Card
                   title={
                     <span className="card-title">
-                      {highlightText(truncateText(item.play_name, 30), searchText)}
+                      {highlightText(
+                        truncateText(item.play_name, 30),
+                        searchText
+                      )}
                     </span>
                   }
                   bordered={true}
@@ -321,16 +323,22 @@ const ApiPage = () => {
                     </Popconfirm>,
                   ]}
                 >
-                  <Text strong>Genre:</Text> {highlightText(item.play_genre, searchText)} <br />
+                  <Text strong>Genre:</Text>{" "}
+                  {highlightText(item.play_genre, searchText)} <br />
                   <Text strong>Description:</Text>{" "}
                   {item.play_description.length > 40 ? (
                     <Tooltip title={item.play_description}>
                       <span className="card-description">
-                        {highlightText(truncateText(item.play_description, 40), searchText)}
+                        {highlightText(
+                          truncateText(item.play_description, 40),
+                          searchText
+                        )}
                       </span>
                     </Tooltip>
                   ) : (
-                    <span className="card-description">{highlightText(item.play_description, searchText)}</span>
+                    <span className="card-description">
+                      {highlightText(item.play_description, searchText)}
+                    </span>
                   )}
                   <br />
                   <Text strong>URL:</Text>{" "}
