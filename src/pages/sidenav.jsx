@@ -13,7 +13,6 @@ import {
 } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import bgImage from "../assets/images/bgnew.jpg"; // Correct import for image
 
 const StyledInput = styled(Input)`
   background-color: #2a2a2a;
@@ -39,20 +38,21 @@ const StyledInput = styled(Input)`
   }
 `;
 
-// Updated background using Glassmorphism effect
 const SideNavContainer = styled.div`
   width: 256px;
   height: 100vh;
   position: fixed;
-  background: rgba(42, 42, 42, 0.5); /* Transparency */
-  backdrop-filter: blur(10px); /* Blur effect */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Thin border */
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Slight shadow */
+  background: rgba(42, 42, 42, 0.7); /* Transparan */
+  backdrop-filter: blur(10px); /* Efek blur */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Garis tipis */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Sedikit bayangan */
   color: #fff;
   font-weight: 600;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 1000;
+  padding: 10px 0;
 `;
 
 const SideNav = () => {
@@ -72,7 +72,7 @@ const SideNav = () => {
           textAlign: "center",
         }}
       >
-        {/* Profile photo and name as clickable */}
+        {/* Profile photo and name */}
         <Link to="/profile">
           <div
             style={{
@@ -112,7 +112,7 @@ const SideNav = () => {
         style={{
           backgroundColor: "transparent",
           border: "none",
-          marginTop: "10px", // Reduced margin for tighter spacing
+          marginTop: "10px",
         }}
         selectedKeys={[location.pathname]}
         mode="inline"
@@ -203,7 +203,7 @@ const SideNav = () => {
           display: "flex",
           alignItems: "center",
           color: "#fff",
-          marginTop: "20px", // Reduced spacing
+          marginTop: "20px",
         }}
         onClick={handleLogout}
       >

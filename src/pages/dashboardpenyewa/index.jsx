@@ -9,7 +9,7 @@ import {
   Carousel,
   Progress,
 } from "antd";
-import { BellOutlined } from '@ant-design/icons';
+import { BellOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import SideNav from "../sidenav";
 import "./index.css";
@@ -18,6 +18,7 @@ import basketImage from "../../assets/images/basket_persegipanjang.jpg";
 import voliImage from "../../assets/images/voli_persegipanjang.jpg";
 import soccer1Image from "../../assets/images/soccer1_persegipanjang.jpg";
 import soccer2Image from "../../assets/images/soccer2_persegipanjang.jpg";
+import bgImage from "../../assets/images/bgnew.jpg";
 
 const imageList = [basketImage, voliImage, soccer1Image, soccer2Image];
 
@@ -104,7 +105,7 @@ const historyBookedFields = [
   { id: 5, fieldName: "River Stadium", date: "2024-11-14", bookings: 6 },
 ];
 
-const Dashboard = () => {
+const DashboardPenyewa = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [username, setUsername] = useState(null);
 
@@ -117,14 +118,20 @@ const Dashboard = () => {
   const handleMouseLeave = () => setHoveredCard(null);
 
   return (
-    <Layout>
+    <Layout
+      style={{
+        minHeight: "100vh",
+        backgroundImage: `url(${bgImage})`, // Set background image
+        backgroundSize: "cover", // Ensure the image covers the entire screen
+        backgroundPosition: "center", // Center the image
+        backgroundRepeat: "no-repeat", // Prevent repeating the image
+      }}
+    >
       {/* Sidebar */}
       <SideNav />
 
       {/* Main content area */}
-      <Layout 
-      style={{ marginLeft: 256}}
-      className="layout-main">
+      <Layout style={{ marginLeft: 256 }} className="layout-main">
         <Content className="pageContent fadeIn">
           <Row>
             <div>
@@ -136,21 +143,44 @@ const Dashboard = () => {
                 Here's an overview of your recent activities!
               </Text>
             </div>
-            <div style={{ width: "30%"}}>
-              <span class="notification-icon"><BellOutlined className="bell-icon"/></span>
+            <div style={{ width: "30%" }}>
+              <span class="notification-icon">
+                <BellOutlined className="bell-icon" />
+              </span>
               <div class="notification-badge">5</div>
             </div>
           </Row>
-          <div style={{width: "100%", height: "100px", paddingTop: "40px", display: "flex", justifyContent: "flex-end", alignItems: "center", paddingRight: "30px"}}>
-            <p style={{width: "450px", color: "#d9d9d9", textAlign: "end", fontFamily: "Poppins", wordSpacing: "1.5px", fontSize: "14px"}}>
-              Create an unforgettable sports experience with the best facilities available anytime according to your needs. Let's start now to find the ideal field for your next match!
+          <div
+            style={{
+              width: "100%",
+              height: "100px",
+              paddingTop: "40px",
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "center",
+              paddingRight: "30px",
+            }}
+          >
+            <p
+              style={{
+                width: "450px",
+                color: "#d9d9d9",
+                textAlign: "end",
+                fontFamily: "Poppins",
+                wordSpacing: "1.5px",
+                fontSize: "14px",
+              }}
+            >
+              Create an unforgettable sports experience with the best facilities
+              available anytime according to your needs. Let's start now to find
+              the ideal field for your next match!
             </p>
           </div>
-      
+
           {/* Carousel Component */}
           <Carousel
             autoplay
-            style={{ marginTop: "40px", marginBottom: "60px"}}
+            style={{ marginTop: "40px", marginBottom: "60px" }}
           >
             {imageList.map((src, index) => (
               <div key={index}>
@@ -191,7 +221,13 @@ const Dashboard = () => {
                   <Title level={1} style={cardContentTitleStyle}>
                     12
                   </Title>
-                  <Progress percent={50} status="active" strokeColor="#ABFD13" trailColor="#8c8c8c" className="progress-bar"/>
+                  <Progress
+                    percent={50}
+                    status="active"
+                    strokeColor="#ABFD13"
+                    trailColor="#8c8c8c"
+                    className="progress-bar"
+                  />
                 </Card>
               </Link>
             </Col>
@@ -223,7 +259,6 @@ const Dashboard = () => {
                       overflowY: "auto",
                       padding: "10px",
                       backgroundColor: "#d9d9d9",
-                      
                     }}
                   >
                     <List
@@ -235,7 +270,8 @@ const Dashboard = () => {
                             display: "flex",
                             justifyContent: "space-between",
                             padding: "10px",
-                            background: "linear-gradient(180deg, #313131, #090909)",
+                            background:
+                              "linear-gradient(180deg, #313131, #090909)",
                             borderRadius: "8px",
                             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                             marginBottom: "10px",
@@ -257,7 +293,13 @@ const Dashboard = () => {
                           <Text style={{ fontSize: "1em", color: "#d9d9d9" }}>
                             {item.date}
                           </Text>
-                          <Text style={{ fontSize: "1em", color: "#d9d9d9", paddingRight: "10px"}}>
+                          <Text
+                            style={{
+                              fontSize: "1em",
+                              color: "#d9d9d9",
+                              paddingRight: "10px",
+                            }}
+                          >
                             {item.bookings} bookings
                           </Text>
                         </List.Item>
@@ -310,13 +352,14 @@ const Dashboard = () => {
                             flexDirection: "column",
                             alignItems: "flex-start",
                             padding: "10px",
-                            background: "linear-gradient(180deg, #313131, #090909)",
+                            background:
+                              "linear-gradient(180deg, #313131, #090909)",
                             borderRadius: "8px",
                             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                             marginBottom: "10px",
                             paddingLeft: "20px",
                             paddingRight: "10px",
-                            fontFamily: "Poppins"
+                            fontFamily: "Poppins",
                           }}
                         >
                           <Text
@@ -331,7 +374,7 @@ const Dashboard = () => {
                           <Text style={{ fontSize: "1em", color: "#d9d9d9" }}>
                             {item.date}
                           </Text>
-                          <Text style={{ fontSize: "1em", color: "#d9d9d9"}}>
+                          <Text style={{ fontSize: "1em", color: "#d9d9d9" }}>
                             {item.location}
                           </Text>
                         </List.Item>
@@ -381,13 +424,14 @@ const Dashboard = () => {
                             display: "flex",
                             justifyContent: "space-between",
                             padding: "10px",
-                            background: "linear-gradient(180deg, #313131, #090909)",
+                            background:
+                              "linear-gradient(180deg, #313131, #090909)",
                             borderRadius: "8px",
                             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                             marginBottom: "10px",
                             paddingLeft: "20px",
                             paddingRight: "20px",
-                            fontFamily: "Poppins"
+                            fontFamily: "Poppins",
                           }}
                         >
                           <Text
@@ -412,9 +456,7 @@ const Dashboard = () => {
           </Row>
         </Content>
         {/* Footer */}
-        <Footer
-          className="footer"
-        >
+        <Footer className="footer">
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
           Pendidikan Ganesha
         </Footer>
@@ -423,4 +465,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardPenyewa;

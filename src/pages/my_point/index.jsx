@@ -10,10 +10,11 @@ import {
   Progress,
   Table,
 } from "antd";
-import { BellOutlined } from '@ant-design/icons';
+import { BellOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import SideNav from "../sidenav";
 import "./index.css";
+import bgImage from "../../assets/images/bgnew.jpg";
 
 const { Content, Footer } = Layout;
 const { Title, Text } = Typography;
@@ -23,18 +24,18 @@ const MyPoint = ({ point }) => {
 
   function tentukanKategori(point) {
     if (point <= 1000) {
-      return 'Challenger';
+      return "Challenger";
     } else if (point <= 3000) {
-      return 'Athlete';
+      return "Athlete";
     } else {
-      return 'Explorer';
+      return "Explorer";
     }
   }
 
   const progressColor = {
-    Challenger: '#090909',
-    Athlete: '#090909',
-    Explorer: '#090909',
+    Challenger: "#090909",
+    Athlete: "#090909",
+    Explorer: "#090909",
   };
 
   const columns = [
@@ -70,9 +71,16 @@ const MyPoint = ({ point }) => {
     },
   ];
 
-
   return (
-    <Layout>
+    <Layout
+      style={{
+        minHeight: "100vh",
+        backgroundImage: `url(${bgImage})`, // Set background image
+        backgroundSize: "cover", // Ensure the image covers the entire screen
+        backgroundPosition: "center", // Center the image
+        backgroundRepeat: "no-repeat", // Prevent repeating the image
+      }}
+    >
       <SideNav />
 
       {/* Main content area */}
@@ -81,45 +89,88 @@ const MyPoint = ({ point }) => {
           <Col>
             <div className="box-style" style={{ paddingBottom: "40px" }}>
               <Row>
-                <div className={`box ${kategori === 'Explorer' ? 'active' : ''}`}>
-                  <Text style={{ color: progressColor.Explorer, fontSize: "28px", fontWeight: "bold", fontFamily: "Poppins" }}>Explorer</Text>
+                <div
+                  className={`box ${kategori === "Explorer" ? "active" : ""}`}
+                >
+                  <Text
+                    style={{
+                      color: progressColor.Explorer,
+                      fontSize: "28px",
+                      fontWeight: "bold",
+                      fontFamily: "Poppins",
+                    }}
+                  >
+                    Explorer
+                  </Text>
                 </div>
-                <div className={`box ${kategori === 'Challenger' ? 'active' : ''}`}>
-                  <Text style={{ color: progressColor.Challenger, fontSize: "28px", fontWeight: "bold", fontFamily: "Poppins"}}>Challenger</Text>
+                <div
+                  className={`box ${kategori === "Challenger" ? "active" : ""}`}
+                >
+                  <Text
+                    style={{
+                      color: progressColor.Challenger,
+                      fontSize: "28px",
+                      fontWeight: "bold",
+                      fontFamily: "Poppins",
+                    }}
+                  >
+                    Challenger
+                  </Text>
                 </div>
-                <div className={`box ${kategori === 'Athlete' ? 'active' : ''}`}>
-                  <Text style={{ color: progressColor.Athlete, fontSize: "28px", fontWeight: "bold", fontFamily: "Poppins" }}>Athlete</Text>
+                <div
+                  className={`box ${kategori === "Athlete" ? "active" : ""}`}
+                >
+                  <Text
+                    style={{
+                      color: progressColor.Athlete,
+                      fontSize: "28px",
+                      fontWeight: "bold",
+                      fontFamily: "Poppins",
+                    }}
+                  >
+                    Athlete
+                  </Text>
                 </div>
               </Row>
             </div>
-            <div style={{paddingBottom: "40px", display: "flex", justifyContent: "center  "}}>
-              <h2 style={{color: "#ABFD13", fontFamily: "Poppins", fontSize: "24px", fontWeight: "bold", wordSpacing: "2px"}}>
+            <div
+              style={{
+                paddingBottom: "40px",
+                display: "flex",
+                justifyContent: "center  ",
+              }}
+            >
+              <h2
+                style={{
+                  color: "#ABFD13",
+                  fontFamily: "Poppins",
+                  fontSize: "24px",
+                  fontWeight: "bold",
+                  wordSpacing: "2px",
+                }}
+              >
                 Your Current Level: {kategori}
               </h2>
             </div>
             <Row
-            style={{
-              display: "flex",
-              justifyContent: "center"
-            }}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
             >
               <div className="score-num">
-                <h1>
-                  500
-                </h1>
-                <h1>
-                  1000
-                </h1>
+                <h1>500</h1>
+                <h1>1000</h1>
               </div>
             </Row>
             <div
               style={{
-              display: 'flex',
-              justifyContent: 'center', // Horizontal center
-              alignItems: 'center', // Vertical center
-              height: '100%', // Sesuaikan dengan kebutuhan Anda
-              paddingBottom: "60px"
-            }}
+                display: "flex",
+                justifyContent: "center", // Horizontal center
+                alignItems: "center", // Vertical center
+                height: "100%", // Sesuaikan dengan kebutuhan Anda
+                paddingBottom: "60px",
+              }}
             >
               <Progress
                 percent={50}
@@ -129,11 +180,11 @@ const MyPoint = ({ point }) => {
                 className="progress-bar"
                 // Additional styles for customization (optional)
                 style={{
-                  width: '80%', // Mengurangi panjang progress bar
+                  width: "80%", // Mengurangi panjang progress bar
                   maxWidth: 800, // Membatasi panjang maksimal progress bar
                   height: 10, // Tinggi tetap
                   borderRadius: 5, // Menambahkan border radius untuk tampilan melengkung
-                  margin: '0 auto', // Agar progress bar berada di tengah
+                  margin: "0 auto", // Agar progress bar berada di tengah
                 }}
               />
             </div>
@@ -144,12 +195,13 @@ const MyPoint = ({ point }) => {
               bordered // Adds borders around the table
               className="table-style"
             />
-            <div style={{paddingTop: "40px", paddingLeft: "200px"}}>
+            <div style={{ paddingTop: "40px", paddingLeft: "200px" }}>
               <h3 className="text-bottom">
-                1. Points will be awarded upon completing the booking.  
+                1. Points will be awarded upon completing the booking.
               </h3>
-              <h3 className="text-bottom" >
-                2. The number of points is calculated based on the total payment/1000.
+              <h3 className="text-bottom">
+                2. The number of points is calculated based on the total
+                payment/1000.
               </h3>
               <h3 className="text-bottom">
                 3. Points cannot be redeemed for cash.

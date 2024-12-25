@@ -8,12 +8,12 @@ import "leaflet/dist/leaflet.css";
 
 import LandingPage from "./pages/landing_page";
 import Login from "./pages/login";
-import Dashboard from "./pages/dashboardpenyewa";
 import ListLapangan from "./pages/list_lapangan";
 import Profile from "./pages/profile/index";
 import ApiPage from "./pages/api_page/index";
 import AdminPage from "./pages/admin";
-import OwnerDashboard from "./pages/owner"; // Updated this line
+import DashboardPenyewa from "./pages/dashboardpenyewa";
+import OwnerDashboard from "./pages/owner";
 import MyPoint from "./pages/my_point";
 
 function App() {
@@ -23,13 +23,13 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/landing-page" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<DashboardPenyewa />} />
         <Route path="/list-lapangan" element={<ListLapangan />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/api-page" element={<ApiPage />} />
         <Route path="/admin-page" element={<AdminPage />} />
-        <Route path="/owner" element={<OwnerDashboard />} />
-        <Route path="/my-point" element={<MyPoint/>} />
+        <Route path="/owner-page" element={<OwnerDashboard />} />
+        <Route path="/my-point" element={<MyPoint />} />
       </Routes>
     </div>
   );
