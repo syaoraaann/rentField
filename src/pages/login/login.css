@@ -1,23 +1,28 @@
-.login-page {
+/* .login-page {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background: url('../../assets/images/BG.png') no-repeat center center fixed;
+  background: url('../../assets/images/loginbg.png') no-repeat center center fixed;
   background-size: cover;
-}
+  /* margin: 10px; */
 
-.login-container {
+
+/* .login-form {
+  background-color: #090909;
+} */ 
+
+/* .login-container {
   display: flex;
   background-color: #FAF9F6;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0.8, 0.8, 0.8, 0.7);
   overflow: hidden;
   width: 900px;
-}
+} */
 
-.login-box {
+/* .login-box {
   flex: 1;
   background-color: #FAF9F6;
   padding: 10px;
@@ -29,34 +34,35 @@
   height: 600px;
   box-sizing: border-box;
   border-radius: 20px;
-}
+} */
 
-.logo-img {
-  width: 220px;
+/* .logo-img {
+  width: 78px;
   height: auto;
-  margin: -5px;
+  margin: 8px;
+  margin-left:30px;
   align-self: center;
-}
+} */
 
-.logo-title {
+/* .logo-title {
   color: #000;
   font-size: 36px;
   margin: -10px;
   text-align: center;
   font-weight: bold;
 
-}
+} */
 
-.logo-container {
+/* .logo-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: ceneter;
   width: 100%;
   margin-bottom: 20px;
-}
+} */
 
-.login-form-wrapper {
+/* .login-form-wrapper {
   width: 100%;
   max-width: 300px;
   display: flex;
@@ -64,9 +70,9 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-}
+} */
 
-form > .ant-form-item {
+/* form > .ant-form-item {
   margin-bottom: 16px;
 }
 
@@ -86,7 +92,7 @@ form > .ant-form-item {
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-}
+} */
 
 /* .login-button {
   color: #000;
@@ -102,12 +108,12 @@ form > .ant-form-item {
 
 } */
 
-.field-image {
+/* .field-image {
   width: 500px;
   height: auto;
-}
+} */
 
-.login-button {
+/* .login-button {
   bottom: 15px;
   position: relative;
   margin-top: 15px;
@@ -117,26 +123,23 @@ form > .ant-form-item {
   border-radius: 8px;
   margin-bottom: -35px;
   
-}
+} */
 
 /* form > .ant-form-item .ant-form-item-explain {
   margin-bottom: -10px;
 } */
 
-/* .password-item .ant-form-item-explain {
+/* /* .password-item .ant-form-item-explain {
   margin-top: 4px; /* Sesuaikan jarak agar lebih dekat */
   /* position: relative; Pastikan posisinya teratur */
 
-  .password-item .ant-form-item-explain {
-    margin-top: -25px !important; /* Jarak kecil antara input dan pesan */
-    position: relative; /* Pastikan posisi relatif terhadap elemen atasnya */
-  }
+ 
   
-  .password-item .ant-form-item-control-input-content {
+  /* .password-item .ant-form-item-control-input-content {
     margin-bottom: 0; /* Hindari margin bawah tambahan di input */
-  }
+  /* } */
   
-.forgot-password-text {
+/* .forgot-password-text {
   display: block;
   position: relative;
   margin-top: -20px;
@@ -146,7 +149,482 @@ form > .ant-form-item {
 
 .register-btn {
   /* padding-top: 0px; */
-  margin-bottom: -15px;
-  top: -15px;
+  /* margin-bottom: -15px;
+  top: -15px; */
+
+ 
+
+  /* .login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('../../assets/images/loginbg.png') no-repeat center center fixed;
+    background-size: cover;
+    padding: 20px;
+  }
+  
+  .login-form {
+    background-color: #090909;
+    width: 100%;
+    max-width: 400px;
+    padding: 32px 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* .logo-container {
+    text-align: center;
+    margin-bottom: 24px;
+  } */
+  
+  /* .logo-img {
+    width: 78px;
+    height: auto;
+    cursor: pointer;
+  }
+  
+  .form-title {
+    color: white;
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 24px;
+  } */
+  
+  /* Form Items Styling */
+  /* .ant-form-item {
+    margin-bottom: 20px;
+  }
+  
+  .ant-form-item-label > label {
+    color: white !important;
+  }
+  
+  .ant-input,
+  .ant-input-password {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+  }
+  
+  .ant-select {
+    width: 100%;
+  }
+  
+ 
+  
+  
+  .submit-button:hover {
+    background-color: #8ca235;
+    border-color: #8ca235;
+  }
+  
+  .submit-button:disabled {
+    background-color: #9db53e;
+    opacity: 0.6;
+    color: #808080;
+  }
+  
+ 
+  .form-footer {
+    text-align: center;
+    margin-top: 16px;
+  }
+  
+  .form-footer a {
+    color: #9db53e;
+    cursor: pointer;
+  }
+  
+  .form-footer a:hover {
+    color: #8ca235;
+  }
+  
+  .forgot-password-container {
+    text-align: right;
+    margin: -10px 0 16px;
+  }
+  
+  .forgot-password-container a {
+    color: #9db53e;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  @media screen and (max-width: 480px) {
+    .login-form {
+      padding: 24px 16px;
+    }
+    
+    .form-title {
+      font-size: 20px;
+    }
+  } */ 
+
+  .login-page {
+    min-height: 100vh;
+    background: url('../../assets/images/loginbg.png') no-repeat center center fixed;
+    background-size: cover;
+    justify-content: center;
+    align-items: ceneter;
+    padding: 70px;
+    display: flex;
+
+  }
+  
+  /* Logo styling */
+  .logo-section {
+    position: absolute;
+    top: 1px;
+    left: 28px;
+    margin: 1px;
+    z-index: 2;
+  }
+  
+  .logo-img {
+    max-width: 77px;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+   border-radius: 60px;
+
+  }
+
+  .form-footer {
+    text-align: center;
+    margin-top: 16px;
+    color: #FFFFFF !important;
+  }
+
+  .form-footer a {
+    color: #ABFD13; /* Warna hijau untuk tautan */
+    text-decoration: none; /* Menghilangkan garis bawah */
+  }
+  
+  .form-footer a:hover {
+    color: #8ca235; /* Warna hijau lebih gelap saat hover */
+  }
+
+  .form-footer span {
+    color: white; /* Pastikan teks menjadi putih */
+  }
+  
+  /* Form container styling */
+  /* .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  } */
+  
+  .form-title {
+    color: #ABFD13;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .login-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    border-radius: 12px;
+    margin: 0 auto;
+
+  }
+
+
+/* Styling untuk input */
+.login-input {
+  background-color: transparent !important; /* Transparan */
+  border: 1px solid rgba(255, 255, 255, 0.6) !important; /* Border putih semi-transparan */
+  border-radius: 8px !important;
+  height: 45px;
+  color: white !important; /* Warna teks putih */
+}
+
+ .ant-input, .ant-input-password {
+  background-color: transparent !important; 
+  color: white !important; 
+  border-radius: 8px !important;
+  height: 45px;
 
 }
+
+
+/* Styling placeholder */
+.ant-input::placeholder, .ant-input-password::placeholder {
+  color: #ABFD13 ; 
+  
+ 
+}
+
+/* Hover dan focus */
+.ant-input:hover, .ant-input-password:hover,
+.ant-input:focus, .ant-input-password:focus {
+  border-color: #ABFD13 !important; /* Border hijau saat hover/fokus */
+  
+}
+
+/* Hapus background untuk input-wrapper
+.ant-input-affix-wrapper {
+  background-color: transparent !important;
+  
+} */
+
+/* Styling khusus saat password toggle diaktifkan */
+.ant-input-affix-wrapper:hover, .ant-input-affix-wrapper:focus {
+  border-color: #ABFD13 !important; /* Border hijau saat fokus/hover */
+  box-shadow: 0 0 5px rgba(171, 253, 19, 0.5) !important; /* Bayangan hijau */
+}
+
+.ant-input-password-icon {
+  color: #ABFD13 !important;
+}
+
+/* Styling saat input aktif atau di-hover */
+.login-input:focus,
+.login-input:hover {
+  border-color: #ABFD13 !important; /* Border berubah hijau saat fokus/hover */
+  box-shadow: 0 0 5px rgba(171, 253, 19, 0.5) !important; /* Efek bayangan */
+}
+  
+  /* Hide default Form label */
+  .ant-form-item-label {
+    display: block;
+    position: center;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  //Reset Password Button
+  .reset-password-btn {
+    height: 45px;
+    background-color: transparent !important; 
+    border: 2px solid #ABFD13 !important; /* Border hijau */
+    border-radius: 8px !important;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 20px;
+    color: #ABFD13 !important; /* Warna teks hijau */
+    transition: all 0.3s ease; /* Animasi halus untuk hover */
+  }
+  
+  .reset-password-btn:hover {
+    background-color: rgba(171, 253, 19, 0.1) !important; /* Warna latar saat hover */
+    color: #ABFD13 !important; /* Warna teks tetap hijau */
+    box-shadow: 0 4px 8px rgba(171, 253, 19, 0.5); /* Efek bayangan */
+  }
+  
+  .reset-password-btn {
+    color: rgba(171, 253, 19, 0.5) !important; /* Warna redup saat disabled */
+    border-color: rgba(171, 253, 19, 0.5) !important;
+    background-color: transparent !important;
+   
+  }
+  
+  /* Button styling */
+  .login-button {
+  height: 45px;
+  background-color: transparent !important; 
+  border: 2px solid #ABFD13 !important; /* Border hijau */
+  border-radius: 8px !important;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 20px;
+  color: #ABFD13 !important; /* Warna teks hijau */
+  transition: all 0.3s ease; /* Animasi halus untuk hover */
+}
+
+.login-button:hover {
+  background-color: rgba(171, 253, 19, 0.1) !important; /* Warna latar saat hover */
+  color: #ABFD13 !important; /* Warna teks tetap hijau */
+  box-shadow: 0 4px 8px rgba(171, 253, 19, 0.5); /* Efek bayangan */
+}
+
+.login-button:disabled {
+  color: rgba(171, 253, 19, 0.5) !important; /* Warna redup saat disabled */
+  border-color: rgba(171, 253, 19, 0.5) !important;
+  background-color: transparent !important;
+  cursor: not-allowed; /* Ikon kursor tidak aktif */
+}
+
+ /* Register Button styling */
+ .register-button {
+  height: 45px;
+  background-color: transparent !important; 
+  border: 2px solid #ABFD13 !important; /* Border hijau */
+  border-radius: 8px !important;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 20px;
+  color: #ABFD13 !important; /* Warna teks hijau */
+  transition: all 0.3s ease; /* Animasi halus untuk hover */
+}
+
+.register-button:hover {
+  background-color: rgba(171, 253, 19, 0.1) !important; /* Warna latar saat hover */
+  color: #ABFD13 !important; /* Warna teks tetap hijau */
+  box-shadow: 0 4px 8px rgba(171, 253, 19, 0.5); /* Efek bayangan */
+}
+
+.register-button:disabled {
+  color: rgba(171, 253, 19, 0.5) !important; /* Warna redup saat disabled */
+  border-color: rgba(171, 253, 19, 0.5) !important;
+  background-color: transparent !important;
+  
+}
+  
+  /* Forgot password link */
+  .forgot-password {
+    text-align: left;
+    margin: -10px 0 20px;
+    color: #ABFD13;
+  }
+  
+  .forgot-password a {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .forgot-password a:hover {
+    color: #9db53e;
+  }
+  
+  /* Register section */
+  .register-section {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .register-text {
+    color: rgba(255, 255, 255, 0.8);
+    margin-right: 5px;
+  }
+  
+  .register-link {
+    color: #9db53e;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .register-link:hover {
+    color: #8ca235;
+  }
+  
+  /* Ant Design form overrides */
+  .ant-form-item {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: transparent !important;
+    
+  }
+
+  /* Mengatur latar belakang Select menjadi transparan */
+  .ant-select {
+    background-color: transparent !important;
+    border-color: rgba(255, 255, 255, 0.6) !important; /* Border transparan dengan sedikit warna putih */
+  }
+
+/* Jika ingin agar teks dalam Select terlihat jelas, beri warna teks putih */
+  .ant-select-selector {
+    color: white !important;
+    background-color: transparent !important; /* Latar belakang selector transparan */
+  }
+
+  /* Targetkan placeholder Select dengan lebih spesifik */
+.ant-select .ant-select-selector .ant-select-selection-placeholder {
+  color: #ABFD13 !important;  /* Pastikan warna hijau */
+}
+
+
+.forgot-password-container {
+margin-bottom: -15px;
+margin-left: 1px;
+  color: #FFFFFF !important;
+}
+
+.forgot-password-container a {
+  color: #ABFD13; /* Warna hijau untuk tautan */
+  text-decoration: none; /* Menghilangkan garis bawah */
+}
+
+.forgot-password-container a:hover {
+  color: #8ca235; /* Warna hijau lebih gelap saat hover */
+}
+
+  /* Jika ingin mengubah warna placeholder dalam Select */
+  .ant-select-placeholder {
+  color: #ABFD13 !important;
+}
+
+/* Jika ada icon untuk dropdown, ubah warna icon */
+  .ant-select-arrow {
+    color: #ABFD13 !important;
+  }
+
+
+  
+  .ant-form-item-explain-error {
+    color: #ff4d4f;
+    margin-top: 0px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  .password-item-respass {
+    margin-bottom: 15px !important; /* Jarak kecil antara input dan pesan */
+    
+  }
+
+  .password-item-respass-password .ant-form-item-explain-error {
+    margin-bottom: 10px !important; /* Jarak kecil antara input dan pesan */
+    padding-top: -70px;
+    margin-top: -25px;
+    
+  }
+
+  .password-item .ant-form-item-explain {
+    margin-top: -25px !important; /* Jarak kecil antara input dan pesan */
+    position: relative; /* Pastikan posisi relatif terhadap elemen atasnya */
+  }
+
+  .explain-error-signup .ant-form-item-explain {
+    margin-top: -25px; /* Sesuaikan nilai ini agar lebih dekat */
+  }
+
+  .role-placeholder {
+    margin-top: -10px !important;
+  }
+  
+  /* For mobile devices */
+  @media screen and (max-width: 480px) {
+    .logo-section {
+      top: 10px;
+      left: 20px;
+    }
+  
+    .logo-img {
+      width: 60px;
+    }
+    
+    .
+  
+    .login-form {
+      padding: 20px;
+    }
+    
+    .form-title {
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+  }
