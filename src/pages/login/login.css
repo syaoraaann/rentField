@@ -424,7 +424,7 @@
     color: rgba(171, 253, 19, 0.5) !important; /* Warna redup saat disabled */
     border-color: rgba(171, 253, 19, 0.5) !important;
     background-color: transparent !important;
-    cursor: not-allowed; /* Ikon kursor tidak aktif */
+   
   }
   
   /* Button styling */
@@ -476,7 +476,7 @@
   color: rgba(171, 253, 19, 0.5) !important; /* Warna redup saat disabled */
   border-color: rgba(171, 253, 19, 0.5) !important;
   background-color: transparent !important;
-  cursor: not-allowed; /* Ikon kursor tidak aktif */
+  
 }
   
   /* Forgot password link */

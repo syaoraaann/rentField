@@ -94,6 +94,7 @@ const LoginPage = () => {
     }
   };
 
+
   //Handle Reset Password
   const handlePasswordReset = async (values) => {
     const { username, newPassword } = values;
@@ -345,10 +346,10 @@ const LoginPage = () => {
             type="default" 
             htmlType="submit" 
             className="reset-password-btn"
-            disabled={
-              !forgotPasswordForm.getFieldValue("username") || 
-              !forgotPasswordForm.getFieldValue("newPassword")
-            }
+            // disabled={
+            //   !forgotPasswordForm.getFieldValue("username") || 
+            //   !forgotPasswordForm.getFieldValue("newPassword")
+            // }
                   block
                 >
                   Reset Password
@@ -406,9 +407,13 @@ const LoginPage = () => {
                 htmlType="submit"
                 className="register-button"
                 block
-                disabled={  !signupForm.getFieldValue("username") || 
-                  !signupForm.getFieldValue("password") || 
-                  !signupForm.getFieldValue("role")}
+                // disabled={
+                //   !signupForm.getFieldValue("username") || 
+                //   !signupForm.getFieldValue("password") || 
+                //   !signupForm.getFieldValue("role") || 
+                //   !signupForm.isFieldsTouched(true) || // Pastikan semua field sudah diubah
+                //   signupForm.getFieldsError().filter(({ errors }) => errors.length > 0).length > 0
+                // }
               >
                 Register
               </Button>
