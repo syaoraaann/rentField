@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, Input } from "antd";
 import {
   HomeOutlined,
@@ -12,201 +12,184 @@ import {
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-// Styled Input for search bar
+// Styled Components for better structure and readability
+const SideNavContainer = styled.div`
+  width: 256px;
+  height: 100vh;
+  position: fixed;
+  background: rgba(42, 42, 42, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @media (max-width: 768px) {
+    width: 200px;
+  }
+`;
+
 const StyledInput = styled(Input)`
   background-color: #2a2a2a;
   color: #fff;
   border: 2px solid #abfd13;
   border-radius: 20px;
   padding: 5px 15px;
-
   ::placeholder {
     color: #d9d9d9;
   }
-
   &:focus,
   &:hover {
     background-color: #2a2a2a !important;
     border-color: #abfd13 !important;
     box-shadow: none !important;
   }
-
-  &:not(:focus):not(:hover) {
-    background-color: #2a2a2a;
-    border-color: #abfd13;
-  }
 `;
 
-const SideNavContainer = styled.div`
-  width: 256px;
-  height: 100vh;
-  position: fixed;
-  background: rgba(42, 42, 42, 0.5); /* Transparansi */
-  backdrop-filter: blur(10px); /* Efek blur */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Border tipis */
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Sedikit shadow */
-  color: #fff;
-  font-weight: 600;
+const UserInfoContainer = styled.div`
+  padding: 15px 20px;
+  text-align: center;
+`;
+
+const ProfileImage = styled.div`
+  background-color: #2a2a2a;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto;
+  cursor: pointer;
+`;
+
+const Username = styled.div`
+  margin-top: 10px;
+  font-size: 16px;
+  color: #d9d9d9;
+  cursor: pointer;
+`;
+
+const LogoutContainer = styled.div`
+  padding: 15px 20px;
+  cursor: pointer;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  &:hover {
+    background-color: #333;
+  }
 `;
 
 const SideNavOwner = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [username, setUsername] = useState(null);
+
+  useEffect(() => {
+    const storedUsername = sessionStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
 
   const handleLogout = () => {
-    navigate("/"); // Redirect to landing page
+    sessionStorage.removeItem("username");
+    navigate("/");
   };
+
+  const getMenuItemStyle = (path) =>
+    location.pathname === path
+      ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
+      : {};
 
   return (
     <SideNavContainer>
-      {/* User Info */}
-      <div
-        style={{
-          padding: "15px 20px",
-          textAlign: "center",
-        }}
-      >
-        {/* Profile photo and name as clickable */}
+      {/* User Info Section */}
+      <UserInfoContainer>
         <Link to="/profile">
-          <div
-            style={{
-              backgroundColor: "#2A2A2A",
-              width: "80px",
-              height: "80px",
-              borderRadius: "50%",
-              margin: "0 auto",
-              cursor: "pointer",
-            }}
-          ></div>
-          <div
-            style={{
-              marginTop: "10px",
-              fontSize: "16px",
-              cursor: "pointer",
-              color: "#d9d9d9",
-            }}
-          >
-            Kevin Pratama
-          </div>
+          <ProfileImage />
+          <Username>{username || "User"}</Username>
         </Link>
 
-        {/* Search Bar */}
         <div style={{ marginTop: "15px", marginBottom: "-50px" }}>
           <StyledInput placeholder="Search" allowClear />
         </div>
-      </div>
+      </UserInfoContainer>
 
       {/* Menu */}
       <Menu
         theme="dark"
-        style={{
-          backgroundColor: "transparent",
-          border: "none",
-        }}
+        style={{ backgroundColor: "transparent", border: "none" }}
         selectedKeys={[location.pathname]}
         mode="inline"
-        items={[
-          {
-            type: "group",
-            label: "General",
-            children: [
-              {
-                key: "/owner-page",
-                icon: <HomeOutlined />,
-                label: <Link to="/owner-page">Dashboard</Link>,
-                style:
-                  location.pathname === "/owner-page"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
-              },
-              {
-                key: "/reservation-list",
-                icon: <CalendarOutlined />,
-                label: <Link to="/reservation-list">Reservation List</Link>,
-                style:
-                  location.pathname === "/reservation-list"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
-              },
-              {
-                key: "/payment",
-                icon: <StarOutlined />,
-                label: <Link to="/payment">Payment</Link>,
-                style:
-                  location.pathname === "/payment"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
-              },
-            ],
-          },
-          {
-            type: "group",
-            label: "Field Management",
-            children: [
-              {
-                key: "/list-field",
-                icon: <StarOutlined />,
-                label: <Link to="/list-field">List Field</Link>,
-                style:
-                  location.pathname === "/list-field"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
-              },
-            ],
-          },
-          {
-            type: "group",
-            label: "Management",
-            children: [
-              {
-                key: "/settings",
-                icon: <SettingOutlined />,
-                label: <Link to="/settings">Setting</Link>,
-                style:
-                  location.pathname === "/settings"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
-              },
-              {
-                key: "/help-center",
-                icon: <QuestionCircleOutlined />,
-                label: <Link to="/help-center">Help Center</Link>,
-                style:
-                  location.pathname === "/help-center"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
-              },
-              {
-                key: "/video-review",
-                icon: <VideoCameraOutlined />,
-                label: <Link to="/video-review">Video Review</Link>,
-                style:
-                  location.pathname === "/video-review"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
-              },
-            ],
-          },
-        ]}
-      />
+      >
+        {/* General Group */}
+        <Menu.ItemGroup key="general" title="General">
+          <Menu.Item
+            key="/dashboard-owner"
+            icon={<HomeOutlined />}
+            style={getMenuItemStyle("/dashboard-owner")}
+          >
+            <Link to="/dashboard-owner">Dashboard</Link>
+          </Menu.Item>
+          <Menu.Item
+            key="/reservation-list"
+            icon={<CalendarOutlined />}
+            style={getMenuItemStyle("/reservation-list")}
+          >
+            <Link to="/reservation-list">Reservation List</Link>
+          </Menu.Item>
+          <Menu.Item
+            key="/payment"
+            icon={<StarOutlined />}
+            style={getMenuItemStyle("/payment")}
+          >
+            <Link to="/payment">Payment</Link>
+          </Menu.Item>
+        </Menu.ItemGroup>
+
+        {/* Field Management Group */}
+        <Menu.ItemGroup key="field-management" title="Field Management">
+          <Menu.Item
+            key="/list-field"
+            icon={<StarOutlined />}
+            style={getMenuItemStyle("/list-field")}
+          >
+            <Link to="/list-field">List Field</Link>
+          </Menu.Item>
+        </Menu.ItemGroup>
+
+        {/* Management Group */}
+        <Menu.ItemGroup key="management" title="Management">
+          <Menu.Item
+            key="/settings"
+            icon={<SettingOutlined />}
+            style={getMenuItemStyle("/settings")}
+          >
+            <Link to="/settings">Setting</Link>
+          </Menu.Item>
+          <Menu.Item
+            key="/help-center"
+            icon={<QuestionCircleOutlined />}
+            style={getMenuItemStyle("/help-center")}
+          >
+            <Link to="/help-center">Help Center</Link>
+          </Menu.Item>
+          <Menu.Item
+            key="/video-review"
+            icon={<VideoCameraOutlined />}
+            style={getMenuItemStyle("/video-review")}
+          >
+            <Link to="/video-review">Video Review</Link>
+          </Menu.Item>
+        </Menu.ItemGroup>
+      </Menu>
 
       {/* Logout */}
-      <div
-        style={{
-          padding: "15px 20px",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          color: "#fff",
-        }}
-        onClick={handleLogout}
-      >
+      <LogoutContainer onClick={handleLogout}>
         <LogoutOutlined style={{ marginRight: "10px" }} />
         Logout
-      </div>
+      </LogoutContainer>
     </SideNavContainer>
   );
 };

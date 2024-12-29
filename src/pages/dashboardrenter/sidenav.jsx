@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react"; // Perbaikan: mengimpor useState dan useEffect
 import { Menu, Input } from "antd";
 import {
   HomeOutlined,
-  UserOutlined,
   LogoutOutlined,
   CalendarOutlined,
   StarOutlined,
@@ -59,8 +58,19 @@ const SideNav = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [username, setUsername] = useState(null);
+
+  // Mengambil nama pengguna dari sessionStorage setelah komponen dimuat
+  useEffect(() => {
+    const storedUsername = sessionStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
+
   const handleLogout = () => {
-    navigate("/"); // Redirect to landing page
+    sessionStorage.removeItem("username"); // Hapus nama pengguna dari sessionStorage
+    navigate("/"); // Redirect ke halaman utama setelah logout
   };
 
   return (
@@ -82,6 +92,9 @@ const SideNav = () => {
               borderRadius: "50%",
               margin: "0 auto",
               cursor: "pointer",
+              backgroundImage: "url('path_to_profile_image.jpg')", // Ganti dengan gambar profil jika ada
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           ></div>
           <div
@@ -92,7 +105,8 @@ const SideNav = () => {
               color: "#d9d9d9",
             }}
           >
-            Kevin Pratama
+            {username ? username : "User"}{" "}
+            {/* Nama pengguna atau default "User" */}
           </div>
         </Link>
 
