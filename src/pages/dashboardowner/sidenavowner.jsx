@@ -151,11 +151,11 @@ const SideNavOwner = () => {
         {/* Field Management Group */}
         <Menu.ItemGroup key="field-management" title="Field Management">
           <Menu.Item
-            key="/list-field"
+            key="/list-field-owner"
             icon={<StarOutlined />}
-            style={getMenuItemStyle("/list-field")}
+            style={getMenuItemStyle("/list-field-owner")}
           >
-            <Link to="/list-field">List Field</Link>
+            <Link to="/list-field-owner">List Field</Link>
           </Menu.Item>
         </Menu.ItemGroup>
 
