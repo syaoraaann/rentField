@@ -204,10 +204,9 @@ const DashboardRenter = () => {
             </div>
             <div>
               {/* Notification Button */}
-              <Badge count={notifications.length} size="small">
+              <Badge count={notifications.length} size="small" className="notification-badge">
                 <BellOutlined
                   className="bell-icon"
-                  style={{ fontSize: "24px", color: "#fff", cursor: "pointer" }}
                   onClick={showNotificationModal}
                 />
               </Badge>

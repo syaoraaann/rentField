@@ -29,8 +29,9 @@
   color: #abfd13;
   float: right !important;
   font-size: 36px;
-  padding-top: 30px;
-  padding-right: 5px !important;
+  padding-top: 0px !important;
+  padding-right: 0px !important;
+  cursor: pointer; 
 }
 
 /* Simple Fade-In Animation */
@@ -85,18 +86,17 @@
   color: #2e7d32;
 }
 
-.notification-icon {
+/* .notification-icon {
   font-size: 24px;
   color: black;
   justify-content: end;
-}
+} */
 
 .notification-badge {
   position: absolute;
-  top: 60px;
+  top: 30px !important;
   right: 57px !important;
-  background-color: red;
-  color: white;
+  background-color: transparent !important;
   width: 20px;
   height: 20px;
   border-radius: 50%;
