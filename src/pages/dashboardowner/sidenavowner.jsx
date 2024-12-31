@@ -226,7 +226,7 @@ const SideNavOwner = () => {
       >
         <LogoutOutlined style={{ marginRight: "10px" }} />
         Logout
-      </LogoutContainer>
+      </div>
     </SideNavContainer>
   );
 };
