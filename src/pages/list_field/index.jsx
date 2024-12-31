@@ -143,9 +143,9 @@ const WeatherDisplay = () => {
       style={{
         width: "100%",
         marginBottom: 20,
-        backgroundColor: "#090909",
+        backgroundColor: "transparent",
         borderRadius: 8,
-        border: "1px solid #fff",
+        border: "1px solid #abfd13",
       }}
     >
       <Row align="middle" justify="space-between">
@@ -864,11 +864,19 @@ const ListField = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 style={{
                   width: 200,
-                  backgroundColor: "#fff",
-                  borderColor: "#090909",
+                  backgroundColor: "transparent",
+                  borderColor: "#abfd13",
+                  color: "#d9d9d9",
                 }}
-                prefix={<SearchOutlined style={{ color: "#090909" }} />}
+                prefix={<SearchOutlined style={{ color: "#d9d9d9", paddingRight: "10px" }} />}
               />
+              <style>
+                {`
+                  .ant-input::placeholder {
+                    color: #d9d9d9;
+                  }
+                `}
+              </style>
             </Col>
 
             <Col>
@@ -877,9 +885,11 @@ const ListField = () => {
                 onChange={setSelectedCategory}
                 style={{
                   width: 200,
-                  height: 71,
+                  height: 77,
                   color: "#090909",
-                  paddingBottom: 22,
+                  paddingBottom: 24,
+                  borderColor: "#abfd13",
+                  
                 }}
                 dropdownStyle={{
                   backgroundColor: "#090909",
@@ -1054,13 +1064,21 @@ const ListField = () => {
         </Content>
         <Footer
           style={{
+            background: "rgba(255, 255, 255, 0.03)", // Translucent white background
+            backdropFilter: "blur(10px)", // Apply blur effect
+            border: "1px solid rgba(255, 255, 255, 0.2)",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            padding: "10px 20px",
+            color: "#abfd13", // Text color
             textAlign: "center",
-            background: "#090909",
-            borderTop: "1px solid #ddd",
-            padding: "12px 24px",
+            position: "relative", // Ensure footer sticks to the bottom
+            bottom: 0, // Attach to the bottom of the viewport
+            left: 0,
+            width: "100%", // Stretch across the full width
+            zIndex: 10,
             fontSize: "14px",
-            color: "#abfd13",
-            position: "relative", // Gunakan relative untuk posisi footer
+            fontFamily: "Poppins",
+            paddingLeft: "210px",
           }}
         >
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas

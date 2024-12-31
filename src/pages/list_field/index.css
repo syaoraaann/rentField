@@ -45,17 +45,9 @@ html {
 }
 
 .search-input {
-  width: 200px;
-  background-color: #fff;
-  border-color: #090909;
+   color: #d9d9d9 !important;
 }
 
-.select-category {
-  width: 200px;
-  height: 71px;
-  color: #090909;
-  padding-bottom: 22px;
-}
 
 .select-category-option {
   background-color: #090909;
@@ -135,12 +127,20 @@ html {
   margin-top: 20px;
 }
 
-.footer {
+.footer-list-renter {
+  background: rgba(255, 255, 255, 0.03) !important; /* Translucent white background */
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  color: #abfd13 !important;
   text-align: center;
-  background: #090909;
-  border-top: 1px solid #ddd;
-  padding: 12px 24px;
+  position: relative; /* Ensure footer sticks to the bottom */
+  bottom: 0; /* Attach to the bottom of the viewport */
+  left: 0;
+  width: 100%; /* Stretch across the full width */
+  z-index: 10;
   font-size: 14px;
-  color: #abfd13;
-  position: relative;
+  font-family: "Poppins";
+  padding-left: 210px;
 }
