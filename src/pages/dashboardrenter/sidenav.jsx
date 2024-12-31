@@ -113,6 +113,9 @@ const SideNav = () => {
           backgroundColor: "transparent",
           border: "none",
           marginTop: "10px",
+          display: "flex", // Mengatur menu sebagai flex container
+          flexDirection: "column", // Atur elemen secara vertikal
+          alignItems: "center", // Memusatkan elemen secara horizontal
         }}
         selectedKeys={[location.pathname]}
         mode="inline"
@@ -123,8 +126,8 @@ const SideNav = () => {
             label: <Link to="/dashboard-renter">Dashboard</Link>,
             style:
               location.pathname === "/dashboard-renter"
-                ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                : {},
+                ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                : { width: "220px" },
           },
           {
             key: "/my-point",
@@ -132,8 +135,8 @@ const SideNav = () => {
             label: <Link to="/my-point">My Point</Link>,
             style:
               location.pathname === "/my-point"
-                ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                : {},
+                ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                : { width: "220px" },
           },
           {
             key: "/history",
@@ -141,8 +144,8 @@ const SideNav = () => {
             label: <Link to="/history">History</Link>,
             style:
               location.pathname === "/history"
-                ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                : {},
+                ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                : { width: "220px" },
           },
           {
             type: "group",
@@ -154,8 +157,8 @@ const SideNav = () => {
                 label: <Link to="/list-field">List Field</Link>,
                 style:
                   location.pathname === "/list-field"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px" },
               },
             ],
           },
@@ -169,8 +172,8 @@ const SideNav = () => {
                 label: <Link to="/settings">Setting</Link>,
                 style:
                   location.pathname === "/settings"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px" },
               },
               {
                 key: "/help-center",
@@ -178,17 +181,17 @@ const SideNav = () => {
                 label: <Link to="/help-center">Help Center</Link>,
                 style:
                   location.pathname === "/help-center"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px"}
+                    : { width: "220px" },
               },
               {
                 key: "/video-review",
                 icon: <VideoCameraOutlined />,
-                label: <Link to="/video-review">Video Review</Link>,
+                label: <Link to="/api-page">Video Review</Link>,
                 style:
-                  location.pathname === "/video-review"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
+                  location.pathname === "/api-page"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px"}
+                    : { width: "220px" },
               },
             ],
           },
@@ -204,6 +207,7 @@ const SideNav = () => {
           alignItems: "center",
           color: "#fff",
           marginTop: "20px",
+          paddingLeft: "27px"
         }}
         onClick={handleLogout}
       >

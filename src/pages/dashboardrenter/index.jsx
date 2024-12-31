@@ -124,15 +124,13 @@ const DashboardRenter = () => {
         backgroundImage: `url(${bgImage})`, // Set background image
         backgroundSize: "cover", // Ensure the image covers the entire screen
         backgroundPosition: "center", // Center the image
-        backgroundRepeat: "no-repeat", // Prevent repeating the image
+        backgroundRepeat: "no-repeat", // Prevent repeating the image  
       }}
+      className="layout-main-renter"
     >
       {/* Sidebar */}
       <SideNav />
-
-      {/* Main content area */}
-      <Layout style={{ marginLeft: 256 }} className="layout-main">
-        <Content className="pageContent fadeIn">
+        <Content style={{ marginLeft: "256px"}} className="pageContent fadeIn">
           <Row>
             <div>
               {/* Dashboard Header */}
@@ -150,37 +148,11 @@ const DashboardRenter = () => {
               <div class="notification-badge">5</div>
             </div>
           </Row>
-          <div
-            style={{
-              width: "100%",
-              height: "100px",
-              paddingTop: "40px",
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              paddingRight: "30px",
-            }}
-          >
-            <p
-              style={{
-                width: "450px",
-                color: "#d9d9d9",
-                textAlign: "end",
-                fontFamily: "Poppins",
-                wordSpacing: "1.5px",
-                fontSize: "14px",
-              }}
-            >
-              Create an unforgettable sports experience with the best facilities
-              available anytime according to your needs. Let's start now to find
-              the ideal field for your next match!
-            </p>
-          </div>
 
           {/* Carousel Component */}
           <Carousel
             autoplay
-            style={{ marginTop: "40px", marginBottom: "60px" }}
+            style={{ marginTop: "50px", marginBottom: "60px" }}
           >
             {imageList.map((src, index) => (
               <div key={index}>
@@ -456,11 +428,10 @@ const DashboardRenter = () => {
           </Row>
         </Content>
         {/* Footer */}
-        <Footer className="footer">
+        <Footer className="footer-dashboard-renter">
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
           Pendidikan Ganesha
         </Footer>
-      </Layout>
     </Layout>
   );
 };

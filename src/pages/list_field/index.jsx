@@ -827,13 +827,6 @@ const ListField = () => {
       }}
     >
       <SideNav />
-      <Layout
-        style={{
-          marginLeft: 256,
-          backgroundColor: "#090909",
-          minHeight: "100vh",
-        }}
-      >
         <Title
           level={3}
           style={{
@@ -844,6 +837,7 @@ const ListField = () => {
             marginBottom: "20px",
             color: "#fff",
             fontSize: "70px",
+            marginLeft: 256,
           }}
         >
           {selectedField
@@ -855,8 +849,8 @@ const ListField = () => {
           style={{
             margin: "10px",
             padding: "20px",
-            backgroundColor: "#090909",
             paddingBottom: "40px", // Added padding at bottom
+            marginLeft: 256,
           }}
         >
           {/* 1. Komponen Cuaca */}
@@ -1072,7 +1066,6 @@ const ListField = () => {
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
           Pendidikan Ganesha
         </Footer>
-      </Layout>
     </Layout>
   );
 };

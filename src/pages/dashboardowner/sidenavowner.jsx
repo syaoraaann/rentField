@@ -4,10 +4,11 @@ import {
   HomeOutlined,
   LogoutOutlined,
   CalendarOutlined,
-  StarOutlined,
   SettingOutlined,
   QuestionCircleOutlined,
   VideoCameraOutlined,
+  TableOutlined,
+  CreditCardOutlined
 } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -50,6 +51,7 @@ const SideNavContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  alignItems: "center";
 `;
 
 const SideNavOwner = () => {
@@ -105,6 +107,9 @@ const SideNavOwner = () => {
         style={{
           backgroundColor: "transparent",
           border: "none",
+          display: "flex", // Mengatur menu sebagai flex container
+          flexDirection: "column", // Atur elemen secara vertikal
+          alignItems: "center", // Memusatkan elemen secara horizontal
         }}
         selectedKeys={[location.pathname]}
         mode="inline"
@@ -114,13 +119,13 @@ const SideNavOwner = () => {
             label: "General",
             children: [
               {
-                key: "/owner-page",
+                key: "/dashboard-owner",
                 icon: <HomeOutlined />,
-                label: <Link to="/owner-page">Dashboard</Link>,
+                label: <Link to="/dashboard-owner">Dashboard</Link>,
                 style:
-                  location.pathname === "/owner-page"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
+                  location.pathname === "/dashboard-owner"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px"},
               },
               {
                 key: "/reservation-list",
@@ -128,17 +133,17 @@ const SideNavOwner = () => {
                 label: <Link to="/reservation-list">Reservation List</Link>,
                 style:
                   location.pathname === "/reservation-list"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px"},
               },
               {
                 key: "/payment",
-                icon: <StarOutlined />,
+                icon: <CreditCardOutlined />,
                 label: <Link to="/payment">Payment</Link>,
                 style:
                   location.pathname === "/payment"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px"},
               },
             ],
           },
@@ -147,13 +152,13 @@ const SideNavOwner = () => {
             label: "Field Management",
             children: [
               {
-                key: "/list-field",
-                icon: <StarOutlined />,
-                label: <Link to="/list-field">List Field</Link>,
+                key: "/list-fieldowner",
+                icon: <TableOutlined />,
+                label: <Link to="/list-fieldowner">List Field</Link>,
                 style:
-                  location.pathname === "/list-field"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
+                  location.pathname === "/list-fieldowner"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px" },
               },
             ],
           },
@@ -167,8 +172,8 @@ const SideNavOwner = () => {
                 label: <Link to="/settings">Setting</Link>,
                 style:
                   location.pathname === "/settings"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px" },
               },
               {
                 key: "/help-center",
@@ -176,8 +181,8 @@ const SideNavOwner = () => {
                 label: <Link to="/help-center">Help Center</Link>,
                 style:
                   location.pathname === "/help-center"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px" },
               },
               {
                 key: "/video-review",
@@ -185,8 +190,8 @@ const SideNavOwner = () => {
                 label: <Link to="/video-review">Video Review</Link>,
                 style:
                   location.pathname === "/video-review"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px" },
               },
             ],
           },
@@ -201,6 +206,7 @@ const SideNavOwner = () => {
           display: "flex",
           alignItems: "center",
           color: "#fff",
+          paddingLeft: "27px"
         }}
         onClick={handleLogout}
       >
