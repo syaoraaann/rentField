@@ -51,6 +51,33 @@ const ReservationList = () => {
     },
   ]);
 
+  // State for search query and selected status
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("all");
+
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Handle status change in dropdown
+  const handleStatusChange = (value) => {
+    setSelectedStatus(value);
+  };
+
+  // Filter reservations based on search query and selected status
+  const filteredReservations = reservations.filter((reservation) => {
+    const matchesSearchQuery = reservation.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+
+    if (selectedStatus === "all") {
+      return matchesSearchQuery;
+    }
+
+    return matchesSearchQuery && reservation.status === selectedStatus;
+  });
+
   // Handle button click in the table
   const handleActionClick = (record, action) => {
     setSelectedRecord(record);
@@ -208,7 +235,7 @@ const ReservationList = () => {
           <h1
             style={{
               color: "#A3FF12",
-              fontSize: "24px",
+              fontSize: "40px",
               marginBottom: "24px",
               fontWeight: "bold",
             }}
@@ -220,6 +247,8 @@ const ReservationList = () => {
             <Input
               placeholder="Search reservations..."
               prefix={<SearchOutlined />}
+              value={searchQuery}
+              onChange={handleSearchChange}
               style={{
                 flex: 1,
                 borderRadius: "8px",
@@ -229,7 +258,8 @@ const ReservationList = () => {
             />
 
             <Select
-              defaultValue="all"
+              value={selectedStatus}
+              onChange={handleStatusChange}
               style={{
                 width: 120,
                 borderRadius: "8px",
@@ -237,16 +267,16 @@ const ReservationList = () => {
               dropdownStyle={{ background: "#2A2A2A" }}
             >
               <Option value="all">All Status</Option>
-              <Option value="waiting">Waiting</Option>
-              <Option value="confirmed">Confirmed</Option>
-              <Option value="completed">Completed</Option>
-              <Option value="cancelled">Cancelled</Option>
+              <Option value="WAITING_CONFIRMATION">Waiting</Option>
+              <Option value="CONFIRMED">Confirmed</Option>
+              <Option value="COMPLETED">Completed</Option>
+              <Option value="CANCELLED">Cancelled</Option>
             </Select>
           </div>
 
           <Table
             columns={columns}
-            dataSource={reservations}
+            dataSource={filteredReservations}
             pagination={false}
             style={{ background: "transparent" }}
           />
@@ -301,7 +331,8 @@ const ReservationList = () => {
             fontWeight: "bold",
           }}
         >
-          Copyright © 2024 RentField.com
+          Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
+          Pendidikan Ganesha
         </Footer>
       </Layout>
     </Layout>

@@ -1,175 +1,150 @@
-/* Container styles */
-.api-page-container {
-    display: flex;
-    background-image: url("../../assets/images/bgnew.jpg") !important;
-  }
-  
-  .api-page-sidenav {
-    margin-left: 256px;
-    padding: 24px;
-    flex: 1;
-  }
-  
-  .api-page-title {
-    text-align: center;
-    font-weight: 700;
-    margin-bottom: 16px;
-    color: #abfd13 !important;
-  }
-  
-  .api-page-description {
-    font-size: 1.2em;
-    color: #d9d9d9;
-    text-align: center;
-    margin-bottom: 24px;
-    display: block;
-  }
+/* Layout styles */
+.layout-container {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-  .search-feature {
-    width: 80%;
-    background: transparent !important;
-    border-color: #abfd13;
-  }
-  
-  /* Add spacing after search input */
-  .ant-input-affix-wrapper {
-    margin-bottom: 24px;
-  }
-  
-  .api-page-spinner {
-    display: block;
-    margin-top: 20px;
-  }
-  
-  .api-page-alert {
-    margin-top: 20px;
-  }
-  
-  /* Card styles */
-  .api-page-card {
-    width: 220px;
-    height: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    background: linear-gradient(150deg, #313131, #090909);
-    color: #d9d9d9 !important;
-  }
-  
-  .api-page-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Updated image styles with padding */
-  .api-page-card .ant-card-cover {
-    padding: 12px 12px 0 12px; /* Add padding to the image container */
-  }
-  
-  .api-page-card img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds subtle shadow to image */
-  }
+/* Side Navigation */
+.layout-content {
+  margin-left: 256px;
+  background-color: #090909;
+  min-height: 100vh;
+}
 
-  .card-title {
-    color: #abfd13 !important;
-  }
+/* Title styles */
+.layout-content .page-title {
+  padding-left: 28px;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  margin-top: 60px;
+  margin-bottom: 20px;
+  color: #abfd13 !important; /* Warna hijau */
+  font-size: 70px;
+}
 
-  .card-description {
-    color: #d9d9d9;
-  }
-  
-  /* URL text with ellipsis */
-  .api-page-url {
-    display: block;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: #1890ff;
-    font-size: 0.9em;
-  }
-  
-  .api-page-url:hover {
-    text-decoration: underline;
-  }
-  
-  /* Hide redundant delete button */
-  .card-url + .anticon-delete {
-    display: none;
-  }
-  
-  /* Title style for cards */
-  .api-page-card .ant-card-head {
-    font-size: 1.1em;
-    font-weight: 600;
-  }
-  
-  /* Adjust the List layout for better spacing */
-  .ant-list-item {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 16px;
-  }
-  
-  .ant-list {
-    margin-top: 24px;
-  }
-  
-  /* Make cards take full width in their grid cell */
-  .api-page-card.wider-card {
-    width: 100%;
-    height: fix;
-    min-height: 500px;
-  }
-  
-  .floating-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #1890ff;
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    z-index: 1000;
-  }
-  
-  .floating-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Responsiveness */
-  @media (max-width: 768px) {
-    .api-page-sidenav {
-      margin-left: 0;
-      padding: 16px;
-    }
-  
-    .api-page-card {
-      width: 100%;
-      height: auto;
-      min-height: 300px;
-    }
-  
-    .api-page-title {
-      font-size: 1.5em;
-    }
-    
-    /* Adjust padding for mobile */
-    .api-page-card .ant-card-cover {
-      padding: 8px 8px 0 8px;
-    }
-  }
+/* Content styles */
+.content-wrapper {
+  margin: 10px;
+  padding: 20px;
+  background-color: #090909;
+  padding-bottom: 40px;
+}
+
+/* Search and Filter inputs */
+.search-input {
+  width: 250px; /* Lebar yang lebih konsisten */
+  height: 45px; /* Tinggi input */
+  background-color: #fff; /* Latar belakang putih */
+  color: #090909; /* Warna teks hitam untuk kontras */
+  border-color: #090909; /* Warna border */
+  align-items: center;
+  margin-top: 25px;
+  padding-left: 10px; /* Menambahkan padding agar teks tidak terlalu menempel di kiri */
+  font-size: 16px; /* Ukuran font yang lebih besar untuk kenyamanan */
+}
+
+.category-select {
+  width: 250px; /* Lebar yang lebih konsisten */
+  height: 45px; /* Tinggi input */
+  background-color: #fff;
+  border-color: #090909;
+  align-items: center;
+}
+
+.field-card {
+  background-color: #4753485f; /* Set the card background to black */
+  color: #abfd13; /* Set all text inside the card to the ABFD13 color */
+  border: none; /* Remove any border */
+  outline: none;
+  border-radius: 8px; /* Optional: round corners for a smoother look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add shadow for depth */
+}
+
+.field-card .ant-card-meta-title,
+.field-card .ant-card-meta-description {
+  color: #abfd13 !important; /* Apply text color to the title and description */
+  font-size: 20px; /* Adjust font size for both title and description */
+  align-items: left;
+}
+
+.field-card-text-color {
+  background-color: #4753485f; /* Set the card background to black */
+  color: #abfd13; /* Set all text inside the card to the ABFD13 color */
+  border-radius: 8px; /* Optional: round corners for a smoother look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add shadow for depth */
+}
+
+/* Field Cards */
+.field-card:hover {
+  transform: translateY(-8px); /* Efek hover naik */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4); /* Tambahkan shadow saat hover */
+}
+
+.field-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  background: #090909;
+}
+
+.page-title {
+  padding-left: 28px;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold !important; /* Membuat teks menjadi tebal */
+  margin-top: 60px;
+  margin-bottom: 20px;
+  color: #fff !important; /* Warna putih */
+  font-size: 50px !important; /* Ukuran teks lebih besar */
+  text-align: left; /* Opsional: untuk menengahkannya */
+}
+
+.floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1890ff;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
+}
+
+.floating-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure text inside inputs is visible only in form drawer */
+.form-drawer .ant-input,
+.form-drawer .ant-input:focus,
+.form-drawer .ant-input:hover,
+.form-drawer .ant-input-textarea,
+.form-drawer .ant-input-textarea:focus,
+.form-drawer .ant-input-textarea:hover,
+.form-drawer .ant-select-selector,
+.form-drawer .ant-select-selector:focus,
+.form-drawer .ant-select-selector:hover {
+  color: #000 !important; /* Ensure text is black */
+}
+
+/* Optional: Ensure placeholders are visible only in form drawer */
+.form-drawer .ant-input::placeholder,
+.form-drawer .ant-input-textarea::placeholder,
+.form-drawer .ant-select-selection-placeholder {
+  color: #a9a9a9 !important; /* Light gray for contrast */
+}

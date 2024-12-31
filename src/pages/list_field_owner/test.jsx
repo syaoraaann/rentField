@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Layout,
   Input,
@@ -20,6 +20,7 @@ import {
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
+import { AuthContext } from "../../providers/AuthProvider"; // Ensure correct context import
 import bgImage from "../../assets/images/bgnew.jpg";
 import SideNavOwner from "../dashboardowner/sidenavowner";
 import "./index.css";
@@ -29,7 +30,19 @@ const { Meta } = Card;
 const { Content, Footer } = Layout;
 const { Option } = Select;
 
-const ListFieldOwner = () => {
+const ListFieldOwnerTest = () => {
+  // Destructure AuthContext
+  const authContext = useContext(AuthContext);
+  if (!authContext) {
+    // If AuthContext is not provided
+    notification.error({
+      message: "Authentication Error",
+      description: "AuthContext is not available. Please check your setup.",
+    });
+    return <p>Error: Authentication context is missing!</p>;
+  }
+
+  const { userProfile, isLoggedIn } = authContext; // Use AuthContext safely
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [selectedField, setSelectedField] = useState(null);
   const [fields, setFields] = useState([]);
@@ -41,7 +54,7 @@ const ListFieldOwner = () => {
   const [form] = Form.useForm();
   const [api, contextHolder] = notification.useNotification();
 
-  // Fetch data from API
+  // Fetch fields from API
   useEffect(() => {
     const fetchFields = async () => {
       setLoading(true);
@@ -54,19 +67,23 @@ const ListFieldOwner = () => {
           throw new Error(`Failed to fetch fields: ${response.statusText}`);
         }
         const data = await response.json();
-        setFields(data.data || []); // Fallback if data.data is undefined
+        setFields(data.data || []); // Ensure fallback if no data
       } catch (err) {
         console.error("Error fetching fields:", err);
-        setError(err.message);
+        setError("Failed to load fields. Please try again later.");
+        api.error({
+          message: "Failed to Load Fields",
+          description: err.message,
+        });
       } finally {
         setLoading(false);
       }
     };
 
     fetchFields();
-  }, []);
+  }, [api]);
 
-  // Filter fields based on search and category
+  // Filter fields based on search term and category
   const filteredFields = fields.filter((field) => {
     const matchesSearch = field.field_name
       .toLowerCase()
@@ -115,28 +132,43 @@ const ListFieldOwner = () => {
   };
 
   const handleFormSubmit = () => {
-    // Create FormData from the form values
-    let formData = new FormData();
+    if (!isLoggedIn) {
+      api.error({
+        message: "User not logged in",
+        description: "You need to log in before submitting the field data.",
+      });
+      return;
+    }
+
+    const userId = userProfile?.id || userProfile?.user_id; // Ensure user ID is available
+    if (!userId) {
+      api.error({
+        message: "User ID Missing",
+        description: "Unable to submit data without a valid user ID.",
+      });
+      return;
+    }
+
+    const formData = new FormData();
     Object.keys(form.getFieldsValue()).forEach((key) => {
       formData.append(key, form.getFieldValue(key));
     });
 
-    // Determine the correct URL and method based on isEdit
+    formData.append("id_users", userId);
+
     const url = isEdit
       ? `http://127.0.0.1:5000/api/v1/list_field/update/${selectedField.id_field}`
       : "http://127.0.0.1:5000/api/v1/list_field/create";
     const method = isEdit ? "PUT" : "POST";
 
-    // Perform the request using fetch
     fetch(url, {
-      method: method,
+      method,
       body: formData,
     })
       .then((response) => response.json())
       .then((resp) => {
         if (resp?.message === "OK") {
-          // Successful submission
-          setFields(resp.data || fields); // Update the fields with the new data
+          setFields(resp.data || fields);
           api.success({
             message: isEdit
               ? "Field updated successfully"
@@ -145,17 +177,15 @@ const ListFieldOwner = () => {
           handleDrawerClose();
           form.resetFields();
         } else {
-          // Handle failure
           api.error({
-            message: "Failed to submit field data",
-            description: "Tidak dapat mengirim data",
+            message: "Submission Failed",
+            description: resp.message || "Unable to submit field data.",
           });
         }
       })
       .catch((err) => {
-        // Catch any error and show it
         api.error({
-          message: "Failed to submit field data",
+          message: "Submission Error",
           description: err.toString(),
         });
       });
@@ -173,7 +203,10 @@ const ListFieldOwner = () => {
 
         <Content className="content-wrapper">
           {loading && <p>Loading fields...</p>}
-          {error && <p style={{ color: "red" }}>Error: {error}</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          {!loading && !error && fields.length === 0 && (
+            <p>No fields available.</p>
+          )}
 
           {/* Search and Filter */}
           <Row gutter={16} align="middle" style={{ marginBottom: "20px" }}>
@@ -244,6 +277,7 @@ const ListFieldOwner = () => {
               </Col>
             ))}
           </Row>
+
           <FloatButton
             icon={<PlusCircleOutlined />}
             type="primary"
@@ -258,11 +292,7 @@ const ListFieldOwner = () => {
             onClose={handleDrawerClose}
             open={drawerVisible}
             footer={
-              <div
-                style={{
-                  textAlign: "right",
-                }}
-              >
+              <div style={{ textAlign: "right" }}>
                 <Button onClick={handleDrawerClose} style={{ marginRight: 8 }}>
                   Cancel
                 </Button>
@@ -271,15 +301,9 @@ const ListFieldOwner = () => {
                 </Button>
               </div>
             }
-            className="form-drawer" // Menambahkan class untuk scoping CSS
+            className="form-drawer"
           >
-            <Form
-              layout="vertical"
-              form={form}
-              initialValues={{
-                price: 0,
-              }}
-            >
+            <Form layout="vertical" form={form} initialValues={{ price: 0 }}>
               <Form.Item
                 name="field_name"
                 label="Field Name"
@@ -348,4 +372,4 @@ const ListFieldOwner = () => {
   );
 };
 
-export default ListFieldOwner;
+export default ListFieldOwnerTest;
