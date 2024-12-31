@@ -220,7 +220,7 @@ const SideNavOwner = () => {
           display: "flex",
           alignItems: "center",
           color: "#fff",
-          paddingLeft: "27px"
+          paddingLeft: "33px"  
         }}
         onClick={handleLogout}
       >

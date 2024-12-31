@@ -9,6 +9,7 @@ import {
   QuestionCircleOutlined,
   VideoCameraOutlined,
   SearchOutlined,
+  TableOutlined,
 } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -167,7 +168,7 @@ const SideNav = () => {
             children: [
               {
                 key: "/list-field",
-                icon: <StarOutlined />,
+                icon: <TableOutlined />,
                 label: <Link to="/list-field">List Field</Link>,
                 style:
                   location.pathname === "/list-field"
@@ -221,7 +222,7 @@ const SideNav = () => {
           alignItems: "center",
           color: "#fff",
           marginTop: "20px",
-          paddingLeft: "27px"
+          paddingLeft: "33px"
         }}
         onClick={handleLogout}
       >
