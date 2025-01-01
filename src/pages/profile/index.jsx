@@ -25,10 +25,16 @@ const { Header, Content } = Layout;
 
 const Profile = () => {
   const [form] = Form.useForm();
-  const [gender, setGender] = useState("Laki-laki");
+  const [gender, setGender] = useState("Male");
   const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  // Style constants
+  const LIME_GREEN = "#ABFD13";
+  const DARK_BG = "#121212";
+  const DARKER_BG = "#0A0A0A";
+  const INPUT_BG = "#1F1F1F";
 
   const handleGenderChange = (e) => {
     setGender(e.target.value);
@@ -71,9 +77,7 @@ const Profile = () => {
 
   const handleSubmit = (values) => {
     const formData = new FormData();
-    // Format phone number to include +62
     const fullPhoneNumber = values.phone ? `+62${values.phone}` : "";
-    // Format date to desired format
     const formattedDate = values.birthDate
       ? values.birthDate.format("DD/MM/YYYY")
       : "";
@@ -97,12 +101,10 @@ const Profile = () => {
     message.success("Profile updated successfully!");
   };
 
-  // Function to validate phone number
   const validatePhoneNumber = (_, value) => {
     if (!value) {
       return Promise.reject("Please enter your phone number!");
     }
-    // Remove any non-digit characters
     const cleanNumber = value.replace(/\D/g, "");
     if (cleanNumber.length < 9 || cleanNumber.length > 12) {
       return Promise.reject("Phone numbers must be between 9-12 digits!");
@@ -110,134 +112,140 @@ const Profile = () => {
     return Promise.resolve();
   };
 
-  return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <SideNav />
-      <Layout style={{ marginLeft: 256 }}>
-        <Header
-          style={{
-            background: "#fff",
-            padding: "20px",
-            textAlign: "center",
-            height: "auto",
-            lineHeight: "1.5",
-            marginBottom: "48px",
-          }}
-        >
-          <Title level={2} style={{ margin: "0" }}>
-            My Profile
-          </Title>
-        </Header>
+  // Custom styles
+  const styles = {
+    layout: {
+      minHeight: "100vh",
+      background: DARKER_BG,
+    },
+    mainLayout: {
+      marginLeft: 256, 
+      background: DARK_BG,
+      minHeight: "100vh",
+    },
+    content: {
+      padding: "24px",
+      background: DARK_BG,
+      minHeight: "calc(100vh - 64px)",
+    },
+    formContainer: {
+      maxWidth: "600px",
+      margin: "0 auto",
+      background: DARK_BG,
+      padding: "32px",
+      borderRadius: "12px",
+    },
+    title: {
+      color: LIME_GREEN,
+      margin: "0 0 40px 0",
+      fontWeight: "bold",
+      fontSize: "32px",
+      textAlign: "center",
+    },
+    uploadSection: {
+      textAlign: "center",
+      marginBottom: "32px",
+      marginTop: "20px",
+    },
+    uploadContainer: {
+      width: "120px",
+      height: "120px",
+      borderRadius: "60px",
+      margin: "0 auto 24px",
+      background: INPUT_BG,
+      border: `2px solid ${LIME_GREEN}`,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      cursor: "pointer",
+      position: "relative",
+    },
+    uploadIcon: {
+      fontSize: "32px",
+      color: LIME_GREEN,
+    },
+    uploadText: {
+      color: LIME_GREEN,
+      fontSize: "14px",
+      marginTop: "24px",
+      display: "block",
+    },
+    label: {
+      color: LIME_GREEN,
+      fontWeight: 600,
+      marginBottom: "8px",
+    },
+    input: {
+      background: INPUT_BG,
+      borderColor: LIME_GREEN,
+      color: "#fff",
+      height: "40px",
+    },
+    radioGroup: {
+      color: "#fff",
+    },
+    radio: {
+      color: "#fff",
+      marginRight: "24px",
+    },
+    datePicker: {
+      width: "100%",
+      height: "40px",
+      background: INPUT_BG,
+      borderColor: LIME_GREEN,
+    },
+    button: {
+      width: "100%",
+      height: "40px",
+      background: LIME_GREEN,
+      borderRadius: "8px",
+      border: "none",
+      color: DARK_BG,
+      fontWeight: "bold",
+      fontSize: "16px",
+      marginTop: "24px",
+    },
+    phoneAddon: {
+      background: INPUT_BG,
+      color: "#fff",
+      borderColor: LIME_GREEN,
+    },
+  };
 
-        <Content
-          style={{
-            padding: "24px",
-            background: "#f5f5f5",
-            minHeight: "calc(100vh - 64px)",
-            marginTop: "24px",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: "600px",
-              margin: "48px auto 0",
-              background: "#fff",
-              padding: "32px",
-              borderRadius: "12px",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-            }}
-          >
-            {/* Profile Picture Section */}
-            <div style={{ textAlign: "center", marginBottom: "32px" }}>
+  return (
+    <Layout style={styles.layout}>
+      <SideNav />
+      <Layout style={styles.mainLayout}>
+        <Content style={styles.content}>
+          <div style={styles.formContainer}>
+            <Title style={styles.title}>My Profile</Title>
+            
+            <div style={styles.uploadSection}>
               <Upload
                 name="avatar"
                 listType="picture-circle"
                 showUploadList={false}
                 beforeUpload={beforeUpload}
                 onChange={handleChange}
-                className="avatar-uploader"
               >
-                <div
-                  style={{
-                    width: "120px",
-                    height: "120px",
-                    borderRadius: "60px",
-                    margin: "0 auto",
-                    position: "relative",
-                    cursor: "pointer",
-                    overflow: "hidden",
-                    boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-                    border: "3px solid #ffffff",
-                    transition: "all 0.3s ease",
-                  }}
-                >
+                <div style={styles.uploadContainer}>
                   {imageUrl ? (
-                    <>
-                      <img
-                        src={imageUrl}
-                        alt="Profile"
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                        }}
-                      />
-                      <div
-                        style={{
-                          position: "absolute",
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          background: "rgba(0,0,0,0.5)",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          opacity: 0,
-                          transition: "opacity 0.3s ease",
-                          ":hover": { opacity: 1 },
-                        }}
-                      >
-                        <CameraOutlined
-                          style={{ fontSize: "24px", color: "#fff" }}
-                        />
-                      </div>
-                    </>
-                  ) : (
-                    <div
+                    <img
+                      src={imageUrl}
+                      alt="Profile"
                       style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
+                        width: "100%",
                         height: "100%",
-                        background: "#f5f5f5",
+                        objectFit: "cover",
+                        borderRadius: "50%",
                       }}
-                    >
-                      <CameraOutlined
-                        style={{ fontSize: "32px", color: "#999" }}
-                      />
-                      <span
-                        style={{
-                          fontSize: "12px",
-                          color: "#666",
-                          marginTop: "4px",
-                        }}
-                      >
-                        Upload Photo
-                      </span>
-                    </div>
+                    />
+                  ) : (
+                    <CameraOutlined style={styles.uploadIcon} />
                   )}
                 </div>
               </Upload>
-              <Text
-                type="secondary"
-                style={{
-                  display: "block",
-                  marginTop: "12px",
-                  fontSize: "14px",
-                }}
-              >
+              <Text style={styles.uploadText}>
                 Click to {imageUrl ? "change" : "upload"} profile picture
               </Text>
             </div>
@@ -248,28 +256,28 @@ const Profile = () => {
               onFinish={handleSubmit}
               initialValues={{
                 username: "syarifabdllh",
-                email: "sy************@gmail.com",
-                phone: "**********29",
-                gender: "Laki-laki",
+                email: "",
+                phone: "",
+                gender: "Male",
               }}
             >
               <Form.Item
-                label={<span style={{ fontWeight: 600 }}>Username</span>}
+                label={<span style={styles.label}>Username</span>}
                 name="username"
               >
-                <Text>syarifabdllh</Text>
+                <Input style={styles.input} disabled />
               </Form.Item>
 
               <Form.Item
-                label={<span style={{ fontWeight: 600 }}>Name</span>}
+                label={<span style={styles.label}>Full Name*</span>}
                 name="name"
                 rules={[{ required: true, message: "Please enter your name!" }]}
               >
-                <Input placeholder="Enter Your Name!" />
+                <Input style={styles.input} placeholder="Enter your full name" />
               </Form.Item>
 
               <Form.Item
-                label={<span style={{ fontWeight: 600 }}>Email</span>}
+                label={<span style={styles.label}>Email*</span>}
                 name="email"
                 rules={[
                   {
@@ -279,36 +287,36 @@ const Profile = () => {
                   },
                 ]}
               >
-                <Input placeholder="Enter your email" />
+                <Input style={styles.input} placeholder="Enter your email" />
               </Form.Item>
 
               <Form.Item
-                label={
-                  <span style={{ fontWeight: 600 }}>Telephone Number</span>
-                }
+                label={<span style={styles.label}>Telephone Number</span>}
                 name="phone"
                 rules={[{ validator: validatePhoneNumber }]}
               >
                 <Input
-                  addonBefore="+62"
-                  placeholder="8xxxxxxxxxx"
-                  style={{ width: "100%" }}
-                  maxLength={12}
+                  style={styles.input}
+                  placeholder="08xxxxxxxxxx"
                 />
               </Form.Item>
 
               <Form.Item
-                label={<span style={{ fontWeight: 600 }}>Gender</span>}
+                label={<span style={styles.label}>Gender</span>}
                 name="gender"
               >
-                <Radio.Group onChange={handleGenderChange} value={gender}>
-                  <Radio value="Laki-laki">Man</Radio>
-                  <Radio value="Perempuan">Women</Radio>
+                <Radio.Group 
+                  onChange={handleGenderChange} 
+                  value={gender}
+                  style={styles.radioGroup}
+                >
+                  <Radio value="Male" style={styles.radio}>Male</Radio>
+                  <Radio value="Female" style={styles.radio}>Female</Radio>
                 </Radio.Group>
               </Form.Item>
 
               <Form.Item
-                label={<span style={{ fontWeight: 600 }}>Birthday Date</span>}
+                label={<span style={styles.label}>Date of Birth</span>}
                 name="birthDate"
                 rules={[
                   {
@@ -318,11 +326,10 @@ const Profile = () => {
                 ]}
               >
                 <DatePicker
-                  style={{ width: "100%" }}
+                  style={styles.datePicker}
                   format="DD/MM/YYYY"
-                  placeholder="Choose Birth date"
+                  placeholder="Choose birth date"
                   disabledDate={(current) => {
-                    // Disable future dates and dates more than 100 years ago
                     return (
                       current &&
                       (current > moment().endOf("day") ||
@@ -332,21 +339,13 @@ const Profile = () => {
                 />
               </Form.Item>
 
-              <Form.Item style={{ marginTop: "24px" }}>
+              <Form.Item>
                 <Button
                   type="primary"
                   htmlType="submit"
-                  style={{
-                    width: "100%",
-                    height: "40px",
-                    borderRadius: "8px",
-                    fontWeight: 600,
-                    backgroundColor: "#4CAF50",
-                    border: "none",
-                    boxShadow: "0 2px 4px rgba(76,175,80,0.2)",
-                  }}
+                  style={styles.button}
                 >
-                  Save
+                  SAVE
                 </Button>
               </Form.Item>
             </Form>
