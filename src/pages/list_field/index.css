@@ -1,74 +1,146 @@
-.api-page-container {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .api-page-sidenav {
-    flex: 1;
-    padding: 20px;
-    background-color: #f0f2f5;
-  }
-  
-  .api-page-title {
-    color: #1890ff;
-  }
-  
-  .api-page-description {
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-  
-  .api-page-card {
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .api-page-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .api-page-card img {
-    max-height: 150px;
-    object-fit: cover;
-  }
-  
-  .api-page-card .ant-card-head-title {
-    font-size: 16px;
-  }
-  
-  .wider-card {
-    width: 100%;
-    max-width: 300px;
-  }
-  
-  .card-title {
-    font-weight: bold;
-    color: #1890ff;
-  }
-  
-  .card-description {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    color: #595959;
-  }
-  
-  .card-url {
-    color: #1890ff;
-    text-decoration: underline;
-  }
-  
-  .floating-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-  }
-  
-  .floating-button:hover {
-    transform: scale(1.1);
-    transition: transform 0.3s ease-in-out;
-  }
+/* Layout Styles */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background-color: #090909;
+  font-family: "Poppins", sans-serif;
+}
+
+.layout-main {
+  margin-left: 256px;
+  background-color: #090909;
+  min-height: 100vh;
+}
+
+.page-title {
+  padding-left: 28px;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  margin-top: 60px;
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 70px;
+}
+
+.content-container {
+  margin: 10px;
+  padding: 20px;
+  background-color: #090909;
+  padding-bottom: 40px;
+}
+
+.weather-card {
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: #090909;
+  border-radius: 8px;
+  border: 1px solid #fff;
+}
+
+.weather-text {
+  font-size: 18px;
+  margin-right: 16px;
+  color: #fff;
+}
+
+.search-input {
+   color: #d9d9d9 !important;
+}
+
+
+.select-category-option {
+  background-color: #090909;
+  color: #fff;
+}
+
+.card-container {
+  min-height: 550px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease;
+  border-radius: 8px;
+}
+
+.card-body {
+  flex: 1;
+  background-color: #222222;
+}
+
+.card-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.card-title {
+  font-size: 25px;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  width: 100%;
+  color: #fff;
+}
+
+.card-category {
+  color: #f7f7af;
+  font-style: italic;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 15px;
+}
+
+.card-price {
+  color: #97f4a2;
+  font-style: bold;
+  font-size: 20px;
+}
+
+.drawer-container {
+  background: #a6a6a6;
+}
+
+.drawer-title {
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+  margin-top: 16px;
+}
+
+.drawer-button {
+  margin-top: 20px;
+  background-color: #abfd13;
+  color: #090909;
+  width: 100px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.drawer-total {
+  margin-top: 20px;
+}
+
+.footer-list-renter {
+  background: rgba(255, 255, 255, 0.03) !important; /* Translucent white background */
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  color: #abfd13 !important;
+  text-align: center;
+  position: relative; /* Ensure footer sticks to the bottom */
+  bottom: 0; /* Attach to the bottom of the viewport */
+  left: 0;
+  width: 100%; /* Stretch across the full width */
+  z-index: 10;
+  font-size: 14px;
+  font-family: "Poppins";
+  padding-left: 210px;
+}

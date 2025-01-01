@@ -8,8 +8,14 @@ import {
   List,
   Carousel,
   Progress,
+  Modal,
+  Badge,
 } from "antd";
-import { BellOutlined } from "@ant-design/icons";
+import {
+  BellOutlined,
+  CheckCircleOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import SideNav from "./sidenav";
 import "./index.css";
@@ -108,14 +114,69 @@ const historyBookedFields = [
 const DashboardRenter = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [username, setUsername] = useState(null);
+  const [notifications, setNotifications] = useState([]); // State untuk daftar notifikasi
+  const [isNotificationModalVisible, setIsNotificationModalVisible] =
+    useState(false); // State untuk modal notifikasi
 
   useEffect(() => {
     const storedUsername = sessionStorage.getItem("username");
     if (storedUsername) setUsername(storedUsername);
+
+    // Dummy notifikasi
+    setNotifications([
+      {
+        id: 1,
+        message: "Top bookings this month are waiting for you!",
+        time: "10m ago",
+        type: "info",
+        isNew: true,
+      },
+      {
+        id: 2,
+        message:
+          "Thank you for renting Lapangan Tenis Singaraja. Check your points now!",
+        time: "2 hours ago",
+        type: "success",
+        isNew: false,
+      },
+      {
+        id: 3,
+        message:
+          "Don't miss Futsal Faculty Event at Gor Undiksha this weekend!",
+        time: "5 days ago",
+        type: "warning",
+        isNew: false,
+      },
+    ]);
   }, []);
 
   const handleMouseEnter = (card) => setHoveredCard(card);
   const handleMouseLeave = () => setHoveredCard(null);
+
+  const showNotificationModal = () => {
+    setIsNotificationModalVisible(true);
+  };
+
+  const hideNotificationModal = () => {
+    setIsNotificationModalVisible(false);
+  };
+
+  const getIconByType = (type) => {
+    switch (type) {
+      case "success":
+        return (
+          <CheckCircleOutlined style={{ color: "#4caf50", fontSize: 20 }} />
+        );
+      case "warning":
+        return (
+          <ExclamationCircleOutlined
+            style={{ color: "#ff9800", fontSize: 20 }}
+          />
+        );
+      default:
+        return <BellOutlined style={{ color: "#ABFD13", fontSize: 20 }} />;
+    }
+  };
 
   return (
     <Layout
@@ -124,15 +185,13 @@ const DashboardRenter = () => {
         backgroundImage: `url(${bgImage})`, // Set background image
         backgroundSize: "cover", // Ensure the image covers the entire screen
         backgroundPosition: "center", // Center the image
-        backgroundRepeat: "no-repeat", // Prevent repeating the image
+        backgroundRepeat: "no-repeat", // Prevent repeating the image  
       }}
+      className="layout-main-renter"
     >
       {/* Sidebar */}
       <SideNav />
-
-      {/* Main content area */}
-      <Layout style={{ marginLeft: 256 }} className="layout-main">
-        <Content className="pageContent fadeIn">
+        <Content style={{ marginLeft: "256px"}} className="pageContent fadeIn">
           <Row>
             <div>
               {/* Dashboard Header */}
@@ -143,44 +202,21 @@ const DashboardRenter = () => {
                 Here's an overview of your recent activities!
               </Text>
             </div>
-            <div style={{ width: "25%" }}>
-              <span class="notification-icon">
-                <BellOutlined className="bell-icon" />
-              </span>
-              <div class="notification-badge">5</div>
+            <div>
+              {/* Notification Button */}
+              <Badge count={notifications.length} size="small" className="notification-badge">
+                <BellOutlined
+                  className="bell-icon"
+                  onClick={showNotificationModal}
+                />
+              </Badge>
             </div>
           </Row>
-          <div
-            style={{
-              width: "100%",
-              height: "100px",
-              paddingTop: "40px",
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              paddingRight: "30px",
-            }}
-          >
-            <p
-              style={{
-                width: "450px",
-                color: "#d9d9d9",
-                textAlign: "end",
-                fontFamily: "Poppins",
-                wordSpacing: "1.5px",
-                fontSize: "14px",
-              }}
-            >
-              Create an unforgettable sports experience with the best facilities
-              available anytime according to your needs. Let's start now to find
-              the ideal field for your next match!
-            </p>
-          </div>
 
           {/* Carousel Component */}
           <Carousel
             autoplay
-            style={{ marginTop: "40px", marginBottom: "60px" }}
+            style={{ marginTop: "50px", marginBottom: "60px" }}
           >
             {imageList.map((src, index) => (
               <div key={index}>
@@ -192,6 +228,68 @@ const DashboardRenter = () => {
               </div>
             ))}
           </Carousel>
+
+          <Modal
+            title="Notifications"
+            visible={isNotificationModalVisible} // Terhubung dengan state modal
+            onCancel={hideNotificationModal}
+            footer={null}
+            centered
+            width={500}
+            style={{
+              borderRadius: "12px",
+              overflow: "hidden",
+              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)",
+            }}
+            bodyStyle={{
+              background: "linear-gradient(180deg, #222222, #111111)",
+              color: "#fff",
+              padding: "20px",
+              maxHeight: "500px",
+              overflowY: "auto",
+            }}
+          >
+            <List
+              dataSource={notifications}
+              renderItem={(item) => (
+                <List.Item
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    padding: "15px",
+                    marginBottom: "10px",
+                    background: "rgba(50, 50, 50, 0.9)",
+                    borderRadius: "8px",
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+                    cursor: "pointer",
+                  }}
+                >
+                  {getIconByType(item.type)}
+                  <div style={{ marginLeft: "15px", flex: 1 }}>
+                    <Text
+                      style={{
+                        color: "#fff",
+                        fontWeight: "bold",
+                        fontSize: "14px",
+                      }}
+                    >
+                      {item.message}
+                    </Text>
+                    <Text
+                      style={{
+                        color: "#d9d9d9",
+                        fontSize: "12px",
+                        marginTop: "5px",
+                        display: "block",
+                      }}
+                    >
+                      {item.time}
+                    </Text>
+                  </div>
+                </List.Item>
+              )}
+            />
+          </Modal>
 
           {/* Cards Layout */}
           <Row gutter={[16, 16]}>
@@ -456,11 +554,10 @@ const DashboardRenter = () => {
           </Row>
         </Content>
         {/* Footer */}
-        <Footer className="footer">
+        <Footer className="footer-dashboard-renter">
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
           Pendidikan Ganesha
         </Footer>
-      </Layout>
     </Layout>
   );
 };

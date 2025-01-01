@@ -143,16 +143,18 @@
   }
 
 .footer-landing{
-    background: #ABFD13 !important; /* Latar belakang putih semi-transparan */
+    background: rgba(255, 255, 255, 0.03) !important; /* Translucent white background */
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #abfd13 !important;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
     padding: 10px 20px; /* Padding untuk header dan footer */
-    color: #090909; /* Warna teks putih agar kontras dengan latar belakang */
-    /* border: 1px solid rgba(255, 255, 255, 0.3); */
-
+   
 }
 
 .font-color{
-  color: #090909 !important;
+  color: #ABFD13 !important;
 }
 
 /* Home section css*/

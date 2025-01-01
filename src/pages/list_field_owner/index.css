@@ -1,0 +1,150 @@
+/* Layout styles */
+.layout-container {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Side Navigation */
+.layout-content {
+  margin-left: 256px;
+  background-color: #090909;
+  min-height: 100vh;
+}
+
+/* Title styles */
+.layout-content .page-title {
+  padding-left: 28px;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  margin-top: 60px;
+  margin-bottom: 20px;
+  color: #abfd13 !important; /* Warna hijau */
+  font-size: 70px;
+}
+
+/* Content styles */
+.content-wrapper {
+  margin: 10px;
+  padding: 20px;
+  background-color: #090909;
+  padding-bottom: 40px;
+}
+
+/* Search and Filter inputs */
+.search-input {
+  width: 250px; /* Lebar yang lebih konsisten */
+  height: 45px; /* Tinggi input */
+  background-color: #fff; /* Latar belakang putih */
+  color: #090909; /* Warna teks hitam untuk kontras */
+  border-color: #090909; /* Warna border */
+  align-items: center;
+  margin-top: 25px;
+  padding-left: 10px; /* Menambahkan padding agar teks tidak terlalu menempel di kiri */
+  font-size: 16px; /* Ukuran font yang lebih besar untuk kenyamanan */
+}
+
+.category-select {
+  width: 250px; /* Lebar yang lebih konsisten */
+  height: 45px; /* Tinggi input */
+  background-color: #fff;
+  border-color: #090909;
+  align-items: center;
+}
+
+.field-card {
+  background-color: #4753485f; /* Set the card background to black */
+  color: #abfd13; /* Set all text inside the card to the ABFD13 color */
+  border: none; /* Remove any border */
+  outline: none;
+  border-radius: 8px; /* Optional: round corners for a smoother look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add shadow for depth */
+}
+
+.field-card .ant-card-meta-title,
+.field-card .ant-card-meta-description {
+  color: #abfd13 !important; /* Apply text color to the title and description */
+  font-size: 20px; /* Adjust font size for both title and description */
+  align-items: left;
+}
+
+.field-card-text-color {
+  background-color: #4753485f; /* Set the card background to black */
+  color: #abfd13; /* Set all text inside the card to the ABFD13 color */
+  border-radius: 8px; /* Optional: round corners for a smoother look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add shadow for depth */
+}
+
+/* Field Cards */
+.field-card:hover {
+  transform: translateY(-8px); /* Efek hover naik */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4); /* Tambahkan shadow saat hover */
+}
+
+.field-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  background: #090909;
+}
+
+.page-title {
+  padding-left: 28px;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold !important; /* Membuat teks menjadi tebal */
+  margin-top: 60px;
+  margin-bottom: 20px;
+  color: #fff !important; /* Warna putih */
+  font-size: 50px !important; /* Ukuran teks lebih besar */
+  text-align: left; /* Opsional: untuk menengahkannya */
+}
+
+.floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1890ff;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
+}
+
+.floating-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure text inside inputs is visible only in form drawer */
+.form-drawer .ant-input,
+.form-drawer .ant-input:focus,
+.form-drawer .ant-input:hover,
+.form-drawer .ant-input-textarea,
+.form-drawer .ant-input-textarea:focus,
+.form-drawer .ant-input-textarea:hover,
+.form-drawer .ant-select-selector,
+.form-drawer .ant-select-selector:focus,
+.form-drawer .ant-select-selector:hover {
+  color: #000 !important; /* Ensure text is black */
+}
+
+/* Optional: Ensure placeholders are visible only in form drawer */
+.form-drawer .ant-input::placeholder,
+.form-drawer .ant-input-textarea::placeholder,
+.form-drawer .ant-select-selection-placeholder {
+  color: #a9a9a9 !important; /* Light gray for contrast */
+}

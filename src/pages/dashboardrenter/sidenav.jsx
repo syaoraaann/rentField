@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react"; // Perbaikan: mengimpor useState dan useEffect
 import { Menu, Input } from "antd";
 import {
   HomeOutlined,
-  UserOutlined,
   LogoutOutlined,
   CalendarOutlined,
   StarOutlined,
@@ -10,6 +9,7 @@ import {
   QuestionCircleOutlined,
   VideoCameraOutlined,
   SearchOutlined,
+  TableOutlined,
 } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -59,8 +59,19 @@ const SideNav = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [username, setUsername] = useState(null);
+
+  // Mengambil nama pengguna dari sessionStorage setelah komponen dimuat
+  useEffect(() => {
+    const storedUsername = sessionStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
+
   const handleLogout = () => {
-    navigate("/"); // Redirect to landing page
+    sessionStorage.removeItem("username"); // Hapus nama pengguna dari sessionStorage
+    navigate("/"); // Redirect ke halaman utama setelah logout
   };
 
   return (
@@ -82,6 +93,9 @@ const SideNav = () => {
               borderRadius: "50%",
               margin: "0 auto",
               cursor: "pointer",
+              backgroundImage: "url('path_to_profile_image.jpg')", // Ganti dengan gambar profil jika ada
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           ></div>
           <div
@@ -92,7 +106,8 @@ const SideNav = () => {
               color: "#d9d9d9",
             }}
           >
-            Kevin Pratama
+            {username ? username : "User"}{" "}
+            {/* Nama pengguna atau default "User" */}
           </div>
         </Link>
 
@@ -113,6 +128,9 @@ const SideNav = () => {
           backgroundColor: "transparent",
           border: "none",
           marginTop: "10px",
+          display: "flex", // Mengatur menu sebagai flex container
+          flexDirection: "column", // Atur elemen secara vertikal
+          alignItems: "center", // Memusatkan elemen secara horizontal
         }}
         selectedKeys={[location.pathname]}
         mode="inline"
@@ -123,8 +141,8 @@ const SideNav = () => {
             label: <Link to="/dashboard-renter">Dashboard</Link>,
             style:
               location.pathname === "/dashboard-renter"
-                ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                : {},
+                ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                : { width: "220px" },
           },
           {
             key: "/my-point",
@@ -132,8 +150,8 @@ const SideNav = () => {
             label: <Link to="/my-point">My Point</Link>,
             style:
               location.pathname === "/my-point"
-                ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                : {},
+                ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                : { width: "220px" },
           },
           {
             key: "/history",
@@ -141,8 +159,8 @@ const SideNav = () => {
             label: <Link to="/history">History</Link>,
             style:
               location.pathname === "/history"
-                ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                : {},
+                ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                : { width: "220px" },
           },
           {
             type: "group",
@@ -150,12 +168,12 @@ const SideNav = () => {
             children: [
               {
                 key: "/list-field",
-                icon: <StarOutlined />,
+                icon: <TableOutlined />,
                 label: <Link to="/list-field">List Field</Link>,
                 style:
                   location.pathname === "/list-field"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px" },
               },
             ],
           },
@@ -169,8 +187,8 @@ const SideNav = () => {
                 label: <Link to="/settings">Setting</Link>,
                 style:
                   location.pathname === "/settings"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px" },
               },
               {
                 key: "/help-center",
@@ -178,17 +196,17 @@ const SideNav = () => {
                 label: <Link to="/help-center">Help Center</Link>,
                 style:
                   location.pathname === "/help-center"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px"}
+                    : { width: "220px" },
               },
               {
                 key: "/video-review",
                 icon: <VideoCameraOutlined />,
-                label: <Link to="/video-review">Video Review</Link>,
+                label: <Link to="/api-page">Video Review</Link>,
                 style:
-                  location.pathname === "/video-review"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
+                  location.pathname === "/api-page"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px"}
+                    : { width: "220px" },
               },
             ],
           },
@@ -204,6 +222,7 @@ const SideNav = () => {
           alignItems: "center",
           color: "#fff",
           marginTop: "20px",
+          paddingLeft: "33px"
         }}
         onClick={handleLogout}
       >
