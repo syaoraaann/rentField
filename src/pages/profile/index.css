@@ -1,0 +1,114 @@
+.layout {
+    min-height: 100vh;
+    background: #0A0A0A;
+  }
+  
+  .main-layout {
+    margin-left: 256px;
+    background: #121212;
+    min-height: 100vh;
+  }
+  
+  .content {
+    padding: 24px;
+    background: #121212;
+    min-height: calc(100vh - 64px);
+  }
+  
+  .form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #121212;
+    padding: 32px;
+    border-radius: 12px;
+  }
+  
+  .title {
+    color: #ABFD13;
+    margin: 0 0 40px 0;
+    font-weight: bold;
+    font-size: 32px;
+    text-align: center;
+  }
+  
+  .upload-section {
+    text-align: center;
+    margin-bottom: 32px;
+    margin-top: 20px;
+  }
+  
+  .upload-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 24px;
+    background: #1F1F1F;
+    border: 2px solid #ABFD13;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .upload-icon {
+    font-size: 32px;
+    color: #ABFD13;
+  }
+  
+  .upload-text {
+    color: #ABFD13;
+    font-size: 14px;
+    margin-top: 24px;
+    display: block;
+  }
+  
+  .label {
+    color: #ABFD13;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .input {
+    background: #1F1F1F;
+    border-color: #ABFD13;
+    color: #fff;
+    height: 40px;
+  }
+  
+  .radio-group {
+    color: #fff;
+  }
+  
+  .radio {
+    color: #fff;
+    margin-right: 24px;
+  }
+  
+  .date-picker {
+    width: 100%;
+    height: 40px;
+    background: #1F1F1F;
+    border-color: #ABFD13;
+  }
+  
+  .button {
+    width: 100%;
+    height: 40px;
+    background: #ABFD13;
+    border-radius: 8px;
+    border: none;
+    color: #121212;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 24px;
+  }
+  
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  

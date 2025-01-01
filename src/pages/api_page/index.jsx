@@ -237,13 +237,28 @@ const ApiPage = () => {
             <div className="category-tag">
               Category: {highlightText(item.play_genre, searchText)}
             </div>
-            <Text className="card-description">
-              {highlightText(truncateText(item.play_description, 100), searchText)}
-            </Text>
+            {item.play_description.length > 80 ? (
+              <Tooltip title={item.play_description}>
+                <Text className="card-description">
+                  {highlightText(
+                    truncateText(item.play_description, 40),
+                    searchText
+                  )}
+                </Text>
+              </Tooltip>
+            ) : (
+              <Text className="card-description">
+                {highlightText(item.play_description, searchText)}
+              </Text>
+            )}
             <div className="card-footer">
               <Space className="card-stats">
-                <span><MessageOutlined /> {item.comments || 18}</span>
-                <span><LikeOutlined /> {item.likes || 137}</span>
+                <span>
+                  <MessageOutlined /> {item.comments || 18}
+                </span>
+                <span>
+                  <LikeOutlined /> {item.likes || 137}
+                </span>
               </Space>
               <Space className="card-actions">
                 <Button
@@ -256,7 +271,9 @@ const ApiPage = () => {
                   onConfirm={() => confirmDelete(item.id_play)}
                   okText="Yes"
                   cancelText="No"
-                  okButtonProps={{ style: { backgroundColor: '#98FB98', color: '#000000' } }}
+                  okButtonProps={{
+                    style: { backgroundColor: "#98FB98", color: "#000000" },
+                  }}
                 >
                   <Button type="text" danger icon={<DeleteOutlined />} />
                 </Popconfirm>
@@ -266,7 +283,7 @@ const ApiPage = () => {
         }
       />
     </Card>
-  );
+  );  
 
   const drawerSection = () => (
     <Drawer

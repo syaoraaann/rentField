@@ -119,7 +119,7 @@ const Profile = () => {
       background: DARKER_BG,
     },
     mainLayout: {
-      marginLeft: 256, 
+      marginLeft: 256,
       background: DARK_BG,
       minHeight: "100vh",
     },
@@ -150,7 +150,7 @@ const Profile = () => {
     uploadContainer: {
       width: "120px",
       height: "120px",
-      borderRadius: "60px",
+      borderRadius: "50%", // Pastikan lingkaran sempurna
       margin: "0 auto 24px",
       background: INPUT_BG,
       border: `2px solid ${LIME_GREEN}`,
@@ -158,6 +158,7 @@ const Profile = () => {
       alignItems: "center",
       justifyContent: "center",
       cursor: "pointer",
+      overflow: "hidden", // Tambahkan ini untuk memastikan gambar terpotong
       position: "relative",
     },
     uploadIcon: {
@@ -219,7 +220,7 @@ const Profile = () => {
         <Content style={styles.content}>
           <div style={styles.formContainer}>
             <Title style={styles.title}>My Profile</Title>
-            
+
             <div style={styles.uploadSection}>
               <Upload
                 name="avatar"
@@ -305,13 +306,17 @@ const Profile = () => {
                 label={<span style={styles.label}>Gender</span>}
                 name="gender"
               >
-                <Radio.Group 
-                  onChange={handleGenderChange} 
+                <Radio.Group
+                  onChange={handleGenderChange}
                   value={gender}
                   style={styles.radioGroup}
                 >
-                  <Radio value="Male" style={styles.radio}>Male</Radio>
-                  <Radio value="Female" style={styles.radio}>Female</Radio>
+                  <Radio value="Male" style={styles.radio}>
+                    Male
+                  </Radio>
+                  <Radio value="Female" style={styles.radio}>
+                    Female
+                  </Radio>
                 </Radio.Group>
               </Form.Item>
 

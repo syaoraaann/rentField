@@ -1,4 +1,4 @@
-/* index.css */
+/* Base container styles */
 .dark-mode-container {
   display: flex;
   min-height: 100vh;
@@ -12,6 +12,7 @@
   padding: 24px;
 }
 
+/* Header section styles */
 .header-section {
   text-align: center;
   margin-bottom: 32px;
@@ -29,6 +30,7 @@
   font-size: 1.1em;
 }
 
+/* Search and filter section styles */
 .search-filter-section {
   display: flex;
   justify-content: space-between;
@@ -59,24 +61,27 @@
   gap: 12px;
 }
 
-.filter-button {
-  background-color: #1f1f1f !important;
-  border: 1px solid #333333 !important;
-  color: #ffffff !important;
-}
-
 .add-review-button {
   background-color: #98FB98 !important;
   border: none !important;
   color: #000000 !important;
 }
 
-/* Card Styles */
+.add-review-button:hover {
+  background-color: #7dcd7d !important;
+}
+
+/* Card styles */
 .review-card {
   background-color: #1f1f1f !important;
   border: 1px solid #333333 !important;
   border-radius: 12px !important;
   overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-2px);
 }
 
 .video-container {
@@ -101,11 +106,18 @@
   font-size: 48px;
   color: #98FB98;
   opacity: 0.9;
+  transition: all 0.2s ease;
+}
+
+.play-icon:hover {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
 .card-title {
   color: #98FB98 !important;
   font-size: 1.2em !important;
+  margin-bottom: 8px !important;
 }
 
 .category-tag {
@@ -117,28 +129,29 @@
 .card-description {
   color: #ffffff;
   opacity: 0.7;
+  margin-bottom: 16px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
 }
 
 .card-stats {
   display: flex;
   gap: 16px;
   color: #ffffff;
+  opacity: 0.8;
 }
 
-.card-author {
+.card-actions {
   display: flex;
-  align-items: center;
   gap: 8px;
-  color: #ffffff;
 }
 
-.author-avatar {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-}
-
-/* Drawer Styles */
+/* Ant Design component overrides */
 .ant-drawer {
   background-color: #1f1f1f !important;
 }
@@ -157,6 +170,7 @@
 }
 
 .ant-drawer-body {
+  background-color: #1f1f1f !important;
   color: #ffffff !important;
 }
 
@@ -165,25 +179,59 @@
 }
 
 .ant-input,
-.ant-select-selector {
+.ant-select-selector,
+.ant-input-textarea {
   background-color: #333333 !important;
   border: 1px solid #444444 !important;
   color: #ffffff !important;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .main-content {
-    margin-left: 0;
-    padding: 16px;
-  }
+.ant-select-dropdown {
+  background-color: #1f1f1f !important;
+  border: 1px solid #333333 !important;
+}
 
-  .search-filter-section {
-    flex-direction: column;
-  }
+.ant-select-item {
+  color: white !important;
+}
 
-  .filter-buttons {
-    width: 100%;
-    justify-content: space-between;
-  }
+.ant-select-item-option-selected {
+  background-color: #98FB98 !important;
+  color: black !important;
+}
+
+.ant-select-item-option-active {
+  background-color: #333333 !important;
+}
+
+.ant-btn-text {
+  color: #ffffff !important;
+}
+
+.ant-btn-text:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.ant-btn-dangerous {
+  color: #ff4d4f !important;
+}
+
+.ant-popconfirm-buttons .ant-btn-primary {
+  background-color: #98FB98 !important;
+  border: none !important;
+  color: #000000 !important;
+}
+
+.ant-popconfirm-buttons .ant-btn-primary:hover {
+  background-color: #7dcd7d !important;
+}
+
+/* Loading skeleton styles */
+.ant-skeleton {
+  background-color: #1f1f1f !important;
+}
+
+.ant-skeleton-title,
+.ant-skeleton-paragraph > li {
+  background-color: #333333 !important;
 }
