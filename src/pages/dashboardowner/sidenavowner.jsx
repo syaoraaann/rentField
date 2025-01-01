@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, Input } from "antd";
+import { Menu } from "antd";
 import {
   HomeOutlined,
   LogoutOutlined,
@@ -32,23 +32,6 @@ const SideNavContainer = styled.div`
   }
 `;
 
-const StyledInput = styled(Input)`
-  background-color: #2a2a2a;
-  color: #fff;
-  border: 2px solid #abfd13;
-  border-radius: 20px;
-  padding: 5px 15px;
-  ::placeholder {
-    color: #d9d9d9;
-  }
-  &:focus,
-  &:hover {
-    background-color: #2a2a2a !important;
-    border-color: #abfd13 !important;
-    box-shadow: none !important;
-  }
-`;
-
 const UserInfoContainer = styled.div`
   padding: 15px 20px;
   text-align: center;
@@ -68,15 +51,6 @@ const Username = styled.div`
   font-size: 16px;
   color: #d9d9d9;
   cursor: pointer;
-`;
-
-const LogoutContainer = styled.div`
-  padding: 15px 20px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  alignitems: "center";
 `;
 
 const SideNavOwner = () => {
@@ -104,7 +78,7 @@ const SideNavOwner = () => {
   return (
     <SideNavContainer>
       {/* User Info Section */}
-      <UserInfoContainer style={{ marginTop: "15px", marginBottom: "-150px" }}>
+      <UserInfoContainer>
         <Link to="/profile">
           <ProfileImage />
           <Username>{username || "User"}</Username>
@@ -117,60 +91,76 @@ const SideNavOwner = () => {
         style={{
           backgroundColor: "transparent",
           border: "none",
-          display: "flex", // Mengatur menu sebagai flex container
-          flexDirection: "column", // Atur elemen secara vertikal
-          alignItems: "center", // Memusatkan elemen secara horizontal
+          marginTop: "-180px",
         }}
         selectedKeys={[location.pathname]}
         mode="inline"
-      >
-        {/* General Group */}
-        <Menu.ItemGroup key="general" title="General">
-          <Menu.Item
-            key="/dashboard-owner"
-            icon={<HomeOutlined />}
-            style={getMenuItemStyle("/dashboard-owner")}
-          >
-            <Link to="/dashboard-owner">Dashboard</Link>
-          </Menu.Item>
-          <Menu.Item
-            key="/reservation-list"
-            icon={<CalendarOutlined />}
-            style={getMenuItemStyle("/reservation-list")}
-          >
-            <Link to="/reservation-list">Reservation List</Link>
-          </Menu.Item>
-          <Menu.Item
-            key="/payment"
-            icon={<StarOutlined />}
-            style={getMenuItemStyle("/payment")}
-          >
-            <Link to="/payment">Payment</Link>
-          </Menu.Item>
-        </Menu.ItemGroup>
-
-        {/* Field Management Group */}
-        <Menu.ItemGroup key="field-management" title="Field Management">
-          <Menu.Item
-            key="/list-field-owner"
-            icon={<StarOutlined />}
-            style={getMenuItemStyle("/list-field-owner")}
-          >
-            <Link to="/list-field-owner">List Field</Link>
-          </Menu.Item>
-        </Menu.ItemGroup>
-
-        {/* Management Group */}
-        <Menu.ItemGroup key="management" title="Management">
-          <Menu.Item
-            key="/help-center"
-            icon={<QuestionCircleOutlined />}
-            style={getMenuItemStyle("/help-center")}
-          >
-            <Link to="/help-center">Help Center</Link>
-          </Menu.Item>
-        </Menu.ItemGroup>
-      </Menu>
+        items={[
+          {
+            type: "group",
+            label: "General",
+            children: [
+              {
+                key: "/dashboard-owner",
+                icon: <HomeOutlined />,
+                label: <Link to="/dashboard-owner">Dashboard</Link>,
+                style: {
+                  ...getMenuItemStyle("/dashboard-owner"),
+                  width: "220px",
+                },
+              },
+              {
+                key: "/reservation-list",
+                icon: <CalendarOutlined />,
+                label: <Link to="/reservation-list">Reservation List</Link>,
+                style: {
+                  ...getMenuItemStyle("/reservation-list"),
+                  width: "220px",
+                },
+              },
+              {
+                key: "/payment",
+                icon: <CreditCardOutlined />,
+                label: <Link to="/payment">Payment</Link>,
+                style: {
+                  ...getMenuItemStyle("/payment"),
+                  width: "220px",
+                },
+              },
+            ],
+          },
+          {
+            type: "group",
+            label: "Field Management",
+            children: [
+              {
+                key: "/list-field-owner",
+                icon: <TableOutlined />,
+                label: <Link to="/list-field-owner">List Field</Link>,
+                style: {
+                  ...getMenuItemStyle("/list-field-owner"),
+                  width: "220px",
+                },
+              },
+            ],
+          },
+          {
+            type: "group",
+            label: "Management",
+            children: [
+              {
+                key: "/help-center",
+                icon: <QuestionCircleOutlined />,
+                label: <Link to="/help-center">Help Center</Link>,
+                style: {
+                  ...getMenuItemStyle("/help-center"),
+                  width: "220px",
+                },
+              },
+            ],
+          },
+        ]}
+      />
 
       {/* Logout */}
       <div
