@@ -8,7 +8,7 @@ import {
   QuestionCircleOutlined,
   VideoCameraOutlined,
   TableOutlined,
-  CreditCardOutlined
+  CreditCardOutlined,
 } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -76,7 +76,7 @@ const LogoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  alignItems: "center";
+  alignitems: "center";
 `;
 
 const SideNavOwner = () => {
@@ -104,15 +104,11 @@ const SideNavOwner = () => {
   return (
     <SideNavContainer>
       {/* User Info Section */}
-      <UserInfoContainer>
+      <UserInfoContainer style={{ marginTop: "15px", marginBottom: "-150px" }}>
         <Link to="/profile">
           <ProfileImage />
           <Username>{username || "User"}</Username>
         </Link>
-
-        <div style={{ marginTop: "15px", marginBottom: "-50px" }}>
-          <StyledInput placeholder="Search" allowClear />
-        </div>
       </UserInfoContainer>
 
       {/* Menu */}
@@ -127,90 +123,54 @@ const SideNavOwner = () => {
         }}
         selectedKeys={[location.pathname]}
         mode="inline"
-        items={[
-          {
-            type: "group",
-            label: "General",
-            children: [
-              {
-                key: "/dashboard-owner",
-                icon: <HomeOutlined />,
-                label: <Link to="/dashboard-owner">Dashboard</Link>,
-                style:
-                  location.pathname === "/dashboard-owner"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
-                    : { width: "220px"},
-              },
-              {
-                key: "/reservation-list",
-                icon: <CalendarOutlined />,
-                label: <Link to="/reservation-list">Reservation List</Link>,
-                style:
-                  location.pathname === "/reservation-list"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
-                    : { width: "220px"},
-              },
-              {
-                key: "/payment",
-                icon: <CreditCardOutlined />,
-                label: <Link to="/payment">Payment</Link>,
-                style:
-                  location.pathname === "/payment"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
-                    : { width: "220px"},
-              },
-            ],
-          },
-          {
-            type: "group",
-            label: "Field Management",
-            children: [
-              {
-                key: "/list-field-owner",
-                icon: <TableOutlined />,
-                label: <Link to="/list-field-owner">List Field</Link>,
-                style:
-                  location.pathname === "/list-field-owner"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
-                    : { width: "220px" },
-              },
-            ],
-          },
-          {
-            type: "group",
-            label: "Management",
-            children: [
-              {
-                key: "/settings",
-                icon: <SettingOutlined />,
-                label: <Link to="/settings">Setting</Link>,
-                style:
-                  location.pathname === "/settings"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
-                    : { width: "220px" },
-              },
-              {
-                key: "/help-center",
-                icon: <QuestionCircleOutlined />,
-                label: <Link to="/help-center">Help Center</Link>,
-                style:
-                  location.pathname === "/help-center"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
-                    : { width: "220px" },
-              },
-              {
-                key: "/video-review",
-                icon: <VideoCameraOutlined />,
-                label: <Link to="/video-review">Video Review</Link>,
-                style:
-                  location.pathname === "/video-review"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
-                    : { width: "220px" },
-              },
-            ],
-          },
-        ]}
-      />
+      >
+        {/* General Group */}
+        <Menu.ItemGroup key="general" title="General">
+          <Menu.Item
+            key="/dashboard-owner"
+            icon={<HomeOutlined />}
+            style={getMenuItemStyle("/dashboard-owner")}
+          >
+            <Link to="/dashboard-owner">Dashboard</Link>
+          </Menu.Item>
+          <Menu.Item
+            key="/reservation-list"
+            icon={<CalendarOutlined />}
+            style={getMenuItemStyle("/reservation-list")}
+          >
+            <Link to="/reservation-list">Reservation List</Link>
+          </Menu.Item>
+          <Menu.Item
+            key="/payment"
+            icon={<StarOutlined />}
+            style={getMenuItemStyle("/payment")}
+          >
+            <Link to="/payment">Payment</Link>
+          </Menu.Item>
+        </Menu.ItemGroup>
+
+        {/* Field Management Group */}
+        <Menu.ItemGroup key="field-management" title="Field Management">
+          <Menu.Item
+            key="/list-field-owner"
+            icon={<StarOutlined />}
+            style={getMenuItemStyle("/list-field-owner")}
+          >
+            <Link to="/list-field-owner">List Field</Link>
+          </Menu.Item>
+        </Menu.ItemGroup>
+
+        {/* Management Group */}
+        <Menu.ItemGroup key="management" title="Management">
+          <Menu.Item
+            key="/help-center"
+            icon={<QuestionCircleOutlined />}
+            style={getMenuItemStyle("/help-center")}
+          >
+            <Link to="/help-center">Help Center</Link>
+          </Menu.Item>
+        </Menu.ItemGroup>
+      </Menu>
 
       {/* Logout */}
       <div
@@ -220,7 +180,7 @@ const SideNavOwner = () => {
           display: "flex",
           alignItems: "center",
           color: "#fff",
-          paddingLeft: "33px"  
+          paddingLeft: "33px",
         }}
         onClick={handleLogout}
       >
