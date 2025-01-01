@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"; // Perbaikan: mengimpor useState dan useEffect
-import { Menu, Input } from "antd";
+import React, { useState, useEffect } from "react";
+import { Menu } from "antd";
 import {
   HomeOutlined,
   LogoutOutlined,
@@ -8,35 +8,10 @@ import {
   SettingOutlined,
   QuestionCircleOutlined,
   VideoCameraOutlined,
-  SearchOutlined,
   TableOutlined,
 } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
-const StyledInput = styled(Input)`
-  background-color: #2a2a2a;
-  color: #fff;
-  border: 2px solid #abfd13;
-  border-radius: 20px;
-  padding: 5px 15px;
-
-  ::placeholder {
-    color: #d9d9d9;
-  }
-
-  &:focus,
-  &:hover {
-    background-color: #2a2a2a !important;
-    border-color: #abfd13 !important;
-    box-shadow: none !important;
-  }
-
-  &:not(:focus):not(:hover) {
-    background-color: #2a2a2a;
-    border-color: #abfd13;
-  }
-`;
 
 const SideNavContainer = styled.div`
   width: 256px;
@@ -104,21 +79,12 @@ const SideNav = () => {
               fontSize: "16px",
               cursor: "pointer",
               color: "#d9d9d9",
+              marginBottom: "-100px",
             }}
           >
-            {username ? username : "User"}{" "}
-            {/* Nama pengguna atau default "User" */}
+            {username || "User"} {/* Nama pengguna atau default "User" */}
           </div>
         </Link>
-
-        {/* Search Bar */}
-        <div style={{ marginTop: "15px", marginBottom: "-60px" }}>
-          <StyledInput
-            placeholder="Search"
-            prefix={<SearchOutlined />}
-            allowClear
-          />
-        </div>
       </div>
 
       {/* Menu */}
@@ -127,91 +93,112 @@ const SideNav = () => {
         style={{
           backgroundColor: "transparent",
           border: "none",
-          marginTop: "10px",
-          display: "flex", // Mengatur menu sebagai flex container
-          flexDirection: "column", // Atur elemen secara vertikal
-          alignItems: "center", // Memusatkan elemen secara horizontal
         }}
         selectedKeys={[location.pathname]}
         mode="inline"
-        items={[
-          {
-            key: "/dashboard-renter",
-            icon: <HomeOutlined />,
-            label: <Link to="/dashboard-renter">Dashboard</Link>,
-            style:
+      >
+        {/* General Group */}
+        <Menu.ItemGroup key="general" title="General">
+          <Menu.Item
+            key="/dashboard-renter"
+            icon={<HomeOutlined />}
+            style={
               location.pathname === "/dashboard-renter"
-                ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
-                : { width: "220px" },
-          },
-          {
-            key: "/my-point",
-            icon: <StarOutlined />,
-            label: <Link to="/my-point">My Point</Link>,
-            style:
+                ? {
+                    backgroundColor: "#ABFD13",
+                    color: "#1A1A1A",
+                    width: "220px",
+                  }
+                : { width: "220px" }
+            }
+          >
+            <Link to="/dashboard-renter">Dashboard</Link>
+          </Menu.Item>
+          <Menu.Item
+            key="/my-point"
+            icon={<StarOutlined />}
+            style={
               location.pathname === "/my-point"
-                ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
-                : { width: "220px" },
-          },
-          {
-            key: "/history",
-            icon: <CalendarOutlined />,
-            label: <Link to="/history">History</Link>,
-            style:
+                ? {
+                    backgroundColor: "#ABFD13",
+                    color: "#1A1A1A",
+                    width: "220px",
+                  }
+                : { width: "220px" }
+            }
+          >
+            <Link to="/my-point">My Point</Link>
+          </Menu.Item>
+          <Menu.Item
+            key="/history"
+            icon={<CalendarOutlined />}
+            style={
               location.pathname === "/history"
-                ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
-                : { width: "220px" },
-          },
-          {
-            type: "group",
-            label: "Field Available",
-            children: [
-              {
-                key: "/list-field",
-                icon: <TableOutlined />,
-                label: <Link to="/list-field">List Field</Link>,
-                style:
-                  location.pathname === "/list-field"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
-                    : { width: "220px" },
-              },
-            ],
-          },
-          {
-            type: "group",
-            label: "Management",
-            children: [
-              {
-                key: "/settings",
-                icon: <SettingOutlined />,
-                label: <Link to="/settings">Setting</Link>,
-                style:
-                  location.pathname === "/settings"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
-                    : { width: "220px" },
-              },
-              {
-                key: "/help-center",
-                icon: <QuestionCircleOutlined />,
-                label: <Link to="/help-center">Help Center</Link>,
-                style:
-                  location.pathname === "/help-center"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px"}
-                    : { width: "220px" },
-              },
-              {
-                key: "/video-review",
-                icon: <VideoCameraOutlined />,
-                label: <Link to="/api-page">Video Review</Link>,
-                style:
-                  location.pathname === "/api-page"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px"}
-                    : { width: "220px" },
-              },
-            ],
-          },
-        ]}
-      />
+                ? {
+                    backgroundColor: "#ABFD13",
+                    color: "#1A1A1A",
+                    width: "220px",
+                  }
+                : { width: "220px" }
+            }
+          >
+            <Link to="/history">History</Link>
+          </Menu.Item>
+        </Menu.ItemGroup>
+
+        {/* Field Available Group */}
+        <Menu.ItemGroup key="field-available" title="Field Available">
+          <Menu.Item
+            key="/list-field"
+            icon={<TableOutlined />}
+            style={
+              location.pathname === "/list-field"
+                ? {
+                    backgroundColor: "#ABFD13",
+                    color: "#1A1A1A",
+                    width: "220px",
+                  }
+                : { width: "220px" }
+            }
+          >
+            <Link to="/list-field">List Field</Link>
+          </Menu.Item>
+        </Menu.ItemGroup>
+
+        {/* Management Group */}
+        <Menu.ItemGroup key="management" title="Management">
+          <Menu.Item
+            key="/help-center"
+            icon={<QuestionCircleOutlined />}
+            style={
+              location.pathname === "/help-center"
+                ? {
+                    backgroundColor: "#ABFD13",
+                    color: "#1A1A1A",
+                    width: "220px",
+                  }
+                : { width: "220px" }
+            }
+          >
+            <Link to="/help-center">Help Center</Link>
+          </Menu.Item>
+          <Menu.Item
+            key="/video-review"
+            icon={<VideoCameraOutlined />}
+            style={
+              location.pathname === "/video-review"
+                ? {
+                    backgroundColor: "#ABFD13",
+                    color: "#1A1A1A",
+                    width: "220px",
+                  }
+                : { width: "220px" }
+            }
+          >
+            <Link to="/video-review">Video Review</Link>
+          </Menu.Item>
+        </Menu.ItemGroup>
+      </Menu>
 
       {/* Logout */}
       <div
@@ -222,11 +209,11 @@ const SideNav = () => {
           alignItems: "center",
           color: "#fff",
           marginTop: "20px",
-          paddingLeft: "33px"
+          marginRight: "10px",
         }}
         onClick={handleLogout}
       >
-        <LogoutOutlined style={{ marginRight: "10px" }} />
+        <LogoutOutlined style={{ marginRight: "10px", marginLeft: "0px" }} />
         Logout
       </div>
     </SideNavContainer>

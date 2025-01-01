@@ -1,9 +1,16 @@
-/* Layout and Main Container */
+/* Layout Styles */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background-color: #090909;
+  font-family: "Poppins", sans-serif;
+}
+
 .layout-main {
+  margin-left: 256px;
+  background-color: #090909;
   min-height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .page-title {
@@ -14,95 +21,55 @@
   margin-bottom: 20px;
   color: #fff;
   font-size: 70px;
-  margin-left: 256px;
 }
 
-.content-wrapper {
+.content-container {
   margin: 10px;
-  padding: 20px 20px 40px;
-  margin-left: 256px !important;
-  background-color: transparent !important;
+  padding: 20px;
+  background-color: #090909;
+  padding-bottom: 40px;
 }
 
-/* Weather Card Styles */
 .weather-card {
   width: 100%;
   margin-bottom: 20px;
-  background-color: transparent;
+  background-color: #090909;
   border-radius: 8px;
-  border: 1px solid #abfd13;
+  border: 1px solid #fff;
 }
 
-.weather-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.weather-title {
+.weather-text {
   font-size: 18px;
   margin-right: 16px;
   color: #fff;
 }
 
-.weather-info {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.weather-temp {
-  font-size: 16px;
-  color: #fff;
-  font-weight: bold;
-}
-
-.weather-desc {
-  font-size: 14px;
-  color: #fff;
-}
-
-/* Search and Filter Section */
-.search-section {
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
 .search-input {
-  width: 200px;
+   color: #d9d9d9 !important;
+}
+
+
+.select-category-option {
   background-color: #090909;
-  border-color: #abfd13;
-  color: #d9d9d9;
+  color: #fff;
 }
 
-.search-input::placeholder {
-  color: #d9d9d9;
-}
-
-.category-select {
-  width: 200px;
-  margin-top: 21px;;
-  height: 66px !important ;
-  color: #090909;
-  padding-bottom: 24px;
-  border-color: #abfd13;
-}
-
-/* Field Card Styles */
-.field-card {
+.card-container {
   min-height: 550px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #222222;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.3s ease;
   border-radius: 8px;
 }
 
-.field-image {
+.card-body {
+  flex: 1;
+  background-color: #222222;
+}
+
+.card-image {
   width: 100%;
   height: 250px;
   object-fit: cover;
@@ -110,96 +77,41 @@
   border-top-right-radius: 8px;
 }
 
-.field-title {
+.card-title {
   font-size: 25px;
   font-weight: bold;
-  color: #fff;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   display: block;
   width: 100%;
+  color: #fff;
 }
 
-.field-category {
+.card-category {
   color: #f7f7af;
   font-style: italic;
-  font-size: 15px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.field-price {
-  color: #97f4a2;
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.field-hours {
-  color: #97f4a2;
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.field-address {
   font-size: 15px;
-  color: #d9d9d9;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  text-overflow: ellipsis;
-  word-break: break-word;
-  margin-bottom: 10px;
 }
 
-.rent-button-wrapper {
-  background-color: #222222;
-  width: 100%;
-  padding: 8px 0;
-  margin-top: auto;
+.card-price {
+  color: #97f4a2;
+  font-style: bold;
+  font-size: 20px;
 }
 
-.rent-button {
-  background-color: #abfd13;
-  color: #090909;
-  font-size: 25px;
-  font-weight: bold;
-  width: 100%;
-}
-
-/* Drawer Styles */
-.drawer-content {
-  background: #d9d9d9 !important;
-}
-
-.map-container {
-  height: 400px;
-  width: 100%;
-  margin-bottom: 16px;
+.drawer-container {
+  background: #a6a6a6;
 }
 
 .drawer-title {
   font-size: 18px;
+  font-weight: bold;
   display: block;
   margin-top: 16px;
-  font-weight: bold;
-}
-
-.required-label {
-  margin-bottom: 8px;
-  font-weight: bold;
-}
-
-.required-mark {
-  color: #ff4d4f;
-  margin-left: 4px;
-}
-
-.drawer-select {
-  width: 100%;
-  margin-bottom: 16px;
 }
 
 .drawer-button {
@@ -211,75 +123,22 @@
   font-size: 18px;
 }
 
-/* Payment Modal Styles */
-.payment-modal {
-  top: 30px;
-  font-family: "Poppins";
-}
-
-.payment-modal-body {
-  background-color: #090909 !important;
-  padding: 30px;
-}
-
-.payment-input-section {
-  color: #abfd13;
-  margin-bottom: 24px;
-}
-
-.payment-input {
-  margin-top: 8px;
-  background-color: #090909 !important;
-  border-color: #abfd13;
-  color: #090909;
-}
-
-.payment-select {
-  width: 100%;
-  margin-top: 8px;
-}
-
-.payment-card {
-  margin-top: 8px;
-  background-color: #090909 !important;
-  border-color: #abfd13;
-}
-
-.payment-text {
-  color: #fff;
-  display: block;
-  text-align: center;
-}
-
-.payment-total {
-  color: #090909;
-  font-size: 20px;
-  display: block;
-  margin-bottom: 16px;
-}
-
-.payment-instructions {
-  color: #090909;
-  margin-bottom: 24px;
-}
-
-.payment-totals {
+.drawer-total {
   margin-top: 20px;
 }
 
-/* Footer Styles */
-.footer {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.footer-list-renter {
+  background: rgba(255, 255, 255, 0.03) !important; /* Translucent white background */
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 10px 20px;
-  color: #abfd13;
+  color: #abfd13 !important;
   text-align: center;
-  position: relative;
-  bottom: 0;
+  position: relative; /* Ensure footer sticks to the bottom */
+  bottom: 0; /* Attach to the bottom of the viewport */
   left: 0;
-  width: 100%;
+  width: 100%; /* Stretch across the full width */
   z-index: 10;
   font-size: 14px;
   font-family: "Poppins";
