@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react"; // Perbaikan: mengimpor useState dan useEffect
+import React, { useState, useEffect } from "react"; // Import useState dan useEffect
 import { Menu, Input } from "antd";
 import {
   HomeOutlined,
   LogoutOutlined,
   CalendarOutlined,
   StarOutlined,
-  SettingOutlined,
   QuestionCircleOutlined,
   VideoCameraOutlined,
-  SearchOutlined,
 } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -29,11 +27,6 @@ const StyledInput = styled(Input)`
     background-color: #2a2a2a !important;
     border-color: #abfd13 !important;
     box-shadow: none !important;
-  }
-
-  &:not(:focus):not(:hover) {
-    background-color: #2a2a2a;
-    border-color: #abfd13;
   }
 `;
 
@@ -101,23 +94,13 @@ const SideNav = () => {
             style={{
               marginTop: "10px",
               fontSize: "16px",
-              cursor: "pointer",
               color: "#d9d9d9",
+              marginBottom: "-150px",
             }}
           >
-            {username ? username : "User"}{" "}
-            {/* Nama pengguna atau default "User" */}
+            {username || "User"}
           </div>
         </Link>
-
-        {/* Search Bar */}
-        <div style={{ marginTop: "15px", marginBottom: "-60px" }}>
-          <StyledInput
-            placeholder="Search"
-            prefix={<SearchOutlined />}
-            allowClear
-          />
-        </div>
       </div>
 
       {/* Menu */}
@@ -132,31 +115,37 @@ const SideNav = () => {
         mode="inline"
         items={[
           {
-            key: "/dashboard-renter",
-            icon: <HomeOutlined />,
-            label: <Link to="/dashboard-renter">Dashboard</Link>,
-            style:
-              location.pathname === "/dashboard-renter"
-                ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                : {},
-          },
-          {
-            key: "/my-point",
-            icon: <StarOutlined />,
-            label: <Link to="/my-point">My Point</Link>,
-            style:
-              location.pathname === "/my-point"
-                ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                : {},
-          },
-          {
-            key: "/history",
-            icon: <CalendarOutlined />,
-            label: <Link to="/history">History</Link>,
-            style:
-              location.pathname === "/history"
-                ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                : {},
+            type: "group",
+            label: "General",
+            children: [
+              {
+                key: "/dashboard-renter",
+                icon: <HomeOutlined />,
+                label: <Link to="/dashboard-renter">Dashboard</Link>,
+                style:
+                  location.pathname === "/dashboard-renter"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
+                    : {},
+              },
+              {
+                key: "/my-point",
+                icon: <StarOutlined />,
+                label: <Link to="/my-point">My Point</Link>,
+                style:
+                  location.pathname === "/my-point"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
+                    : {},
+              },
+              {
+                key: "/history",
+                icon: <CalendarOutlined />,
+                label: <Link to="/history">History</Link>,
+                style:
+                  location.pathname === "/history"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
+                    : {},
+              },
+            ],
           },
           {
             type: "group",
@@ -177,15 +166,6 @@ const SideNav = () => {
             type: "group",
             label: "Management",
             children: [
-              {
-                key: "/settings",
-                icon: <SettingOutlined />,
-                label: <Link to="/settings">Setting</Link>,
-                style:
-                  location.pathname === "/settings"
-                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A" }
-                    : {},
-              },
               {
                 key: "/help-center",
                 icon: <QuestionCircleOutlined />,

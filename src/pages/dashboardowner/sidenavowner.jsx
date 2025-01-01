@@ -105,15 +105,11 @@ const SideNavOwner = () => {
   return (
     <SideNavContainer>
       {/* User Info Section */}
-      <UserInfoContainer>
+      <UserInfoContainer style={{ marginTop: "15px", marginBottom: "-150px" }}>
         <Link to="/profile">
           <ProfileImage />
           <Username>{username || "User"}</Username>
         </Link>
-
-        <div style={{ marginTop: "15px", marginBottom: "-50px" }}>
-          <StyledInput placeholder="Search" allowClear />
-        </div>
       </UserInfoContainer>
 
       {/* Menu */}
@@ -162,25 +158,11 @@ const SideNavOwner = () => {
         {/* Management Group */}
         <Menu.ItemGroup key="management" title="Management">
           <Menu.Item
-            key="/settings"
-            icon={<SettingOutlined />}
-            style={getMenuItemStyle("/settings")}
-          >
-            <Link to="/settings">Setting</Link>
-          </Menu.Item>
-          <Menu.Item
             key="/help-center"
             icon={<QuestionCircleOutlined />}
             style={getMenuItemStyle("/help-center")}
           >
             <Link to="/help-center">Help Center</Link>
-          </Menu.Item>
-          <Menu.Item
-            key="/video-review"
-            icon={<VideoCameraOutlined />}
-            style={getMenuItemStyle("/video-review")}
-          >
-            <Link to="/video-review">Video Review</Link>
           </Menu.Item>
         </Menu.ItemGroup>
       </Menu>
