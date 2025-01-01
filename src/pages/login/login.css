@@ -265,6 +265,7 @@
   align-items: ceneter;
   padding: 70px;
   display: flex;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Logo styling */
@@ -288,11 +289,13 @@
   text-align: center;
   margin-top: 16px;
   color: #ffffff !important;
+  font-family: 'Poppins', sans-serif;
 }
 
 .form-footer a {
   color: #abfd13; /* Warna hijau untuk tautan */
   text-decoration: none; /* Menghilangkan garis bawah */
+  font-family: 'Poppins', sans-serif;
 }
 
 .form-footer a:hover {
@@ -301,6 +304,8 @@
 
 .form-footer span {
   color: white; /* Pastikan teks menjadi putih */
+  font-family: 'Poppins', sans-serif;
+  
 }
 
 /* Form container styling */
@@ -319,6 +324,7 @@
   font-weight: bold;
   margin-bottom: 30px;
   text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
 
 .login-form {
@@ -327,7 +333,9 @@
   padding: 40px;
   border-radius: 12px;
   margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
 }
+
 
 /* Styling untuk input */
 .login-input {
@@ -336,6 +344,7 @@
   border-radius: 8px !important;
   height: 45px;
   color: white !important; /* Warna teks putih */
+  font-family: 'Poppins', sans-serif;
 }
 
 .ant-input,
@@ -344,6 +353,7 @@
   color: white !important;
   border-radius: 8px !important;
   height: 45px;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Styling placeholder */
@@ -404,6 +414,7 @@
   margin-top: 20px;
   color: #abfd13 !important; /* Warna teks hijau */
   transition: all 0.3s ease; /* Animasi halus untuk hover */
+  font-family: 'Poppins', sans-serif;
 }
 
 .reset-password-btn:hover {
@@ -434,6 +445,7 @@
   margin-top: 20px;
   color: #abfd13 !important; /* Warna teks hijau */
   transition: all 0.3s ease; /* Animasi halus untuk hover */
+  font-family: 'Poppins', sans-serif;
 }
 
 .login-button:hover {
@@ -465,6 +477,7 @@
   margin-top: 20px;
   color: #abfd13 !important; /* Warna teks hijau */
   transition: all 0.3s ease; /* Animasi halus untuk hover */
+  font-family: 'Poppins', sans-serif;
 }
 
 .register-button:hover {
@@ -558,6 +571,7 @@
   margin-bottom: -15px;
   margin-left: 1px;
   color: #ffffff !important;
+  font-family: 'Poppins', sans-serif;
 }
 
 .forgot-password-container a {
@@ -585,16 +599,20 @@
   background-color: rgba(0, 0, 0, 0.6);
   padding: 4px 8px;
   border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .password-item-respass {
   margin-bottom: 15px !important; /* Jarak kecil antara input dan pesan */
+  
+  
 }
 
 .password-item-respass-password .ant-form-item-explain-error {
   margin-bottom: 10px !important; /* Jarak kecil antara input dan pesan */
   padding-top: -70px;
   margin-top: -25px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .password-item .ant-form-item-explain {

@@ -16,6 +16,7 @@ import ReservationList from "./pages/reservation";
 import DashboardOwner from "./pages/dashboardowner";
 import DashboardAdmin from "./pages/dashboardadmin";
 import ListField from "./pages/list_field";
+import ProfileOwner from "./pages/profile_owner";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/api-page" element={<ApiPage />} />
         <Route path="/my-point" element={<MyPoint />} />
         <Route path="/reservation-list" element={<ReservationList />} />
+        <Route path="/profile-owner" element={<ProfileOwner />} />
       </Routes>
     </div>
   );
