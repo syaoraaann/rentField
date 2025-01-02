@@ -35,10 +35,10 @@
   border: 1px solid #2a2a2a !important;
 }
 
-.reslis-layout .ant-input:hover,
+/* .reslis-layout .ant-input:hover,
 .reslis-layout .ant-input:focus {
   border-color: #ABFD13 !important;
-}
+} */
 
 .reslis-layout .ant-input-prefix {
   color: #ABFD13 !important;
