@@ -19,6 +19,7 @@ import ListField from "./pages/list_field";
 import ProfileOwner from "./pages/profile_owner";
 import ListFieldOwner from "./pages/list_field_owner";
 import History from "./pages/history";
+import HelpCenter from "./pages/helpcenter"
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/my-point" element={<MyPoint />} />
         <Route path="/reservation-list" element={<ReservationList />} />
         <Route path="/history" element={<History />} />
+        <Route path="/help-center" element={<HelpCenter />} />
       </Routes>
     </div>
   );

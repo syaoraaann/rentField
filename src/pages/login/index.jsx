@@ -34,7 +34,7 @@ const LoginPage = () => {
       const result = await response.json();
 
       if (response.ok) {
-        const { role } = result; 
+        const { role } = result; // Asumsikan server mengembalikan role
 
         // Simpan role di session storage
         sessionStorage.setItem("username", username);
