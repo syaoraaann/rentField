@@ -140,24 +140,35 @@ const ListFieldOwner = () => {
 
       const resp = await response.json();
 
-      if (resp?.message === "OK") {
+      if (
+        // Check exact "OK" string
+        resp?.message === "OK" ||
+        // Check HTTP status codes (200-299)
+        (resp?.status >= 200 && resp?.status < 300) ||
+        // Check common success message variations
+        resp?.message?.toLowerCase().includes('success') ||
+        // Check if response contains data
+        resp?.data ||
+        // Check if response itself is the data
+        (typeof resp === 'object' && Object.keys(resp).length > 0)
+      ) {
         // Notifikasi berhasil
-        api.success({ message: "Field created successfully" });
-
-        // Tutup Drawer dan reset form
+        api.success({ 
+          message: "Field created successfully",
+          // Optional: tampilkan detail dari response
+          // description: resp?.message || resp?.data?.message 
+        });
         handleDrawerClose();
-
-        // Fetch ulang data fields
         const newResponse = await fetch(
           "http://127.0.0.1:5000/api/v1/list_field/read"
         );
         const newData = await newResponse.json();
         setFields(newData.data || []);
       } else {
-        // Notifikasi gagal
+        // Handle error case
         api.error({
           message: "Failed to create field",
-          description: resp?.message || "Unable to create field",
+          description: resp?.message || "Unknown error occurred"
         });
       }
     } catch (err) {
@@ -169,45 +180,47 @@ const ListFieldOwner = () => {
     }
   };
 
-  const handleUpdateField = () => {
+  const handleUpdateField = async () => {
     const formData = new FormData();
     Object.keys(form.getFieldsValue()).forEach((key) => {
       formData.append(key, form.getFieldValue(key));
     });
-
-    fetch(
-      `http://127.0.0.1:5000/api/v1/list_field/update/${selectedField.id_field}`,
-      {
-        method: "PUT",
-        body: formData,
-      }
-    )
-      .then((response) => response.json())
-      .then((resp) => {
-        console.log("Update Field Response:", resp);
-        if (resp?.message === "OK") {
-          setFields((prevFields) =>
-            prevFields.map((field) =>
-              field.id_field === selectedField.id_field ? resp.data : field
-            )
-          );
-          api.success({ message: "Field updated successfully" });
-          handleDrawerClose();
-          form.resetFields();
-        } else {
-          api.error({
-            message: "Failed to update field",
-            description: resp?.message || "Unable to update field",
-          });
+  
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:5000/api/v1/list_field/update/${selectedField.id_field}`,
+        {
+          method: "PUT", 
+          body: formData,
         }
-      })
-      .catch((err) => {
-        console.error("Error updating field:", err);
+      );
+  
+      const resp = await response.json();
+      
+      if (response.ok) { // Cek status HTTP 200-299
+        // Fetch data terbaru
+        const newResponse = await fetch(
+          "http://127.0.0.1:5000/api/v1/list_field/read"
+        );
+        const newData = await newResponse.json();
+        setFields(newData.data || []);
+        
+        api.success({ message: "Field updated successfully" });
+        handleDrawerClose();
+        form.resetFields();
+      } else {
         api.error({
           message: "Failed to update field",
-          description: err.message || "An unexpected error occurred",
+          description: resp?.message || "Unable to update field",
         });
+      }
+    } catch (err) {
+      console.error("Error updating field:", err);
+      api.error({
+        message: "Failed to update field", 
+        description: err.message || "An unexpected error occurred",
       });
+    }
   };
 
   const handleFormSubmit = () => {
