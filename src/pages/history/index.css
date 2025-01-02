@@ -1,0 +1,53 @@
+/* pages/reservation/index.css */
+.ant-table {
+  background: transparent !important;
+}
+
+.ant-table-thead > tr > th {
+  background: #161616 !important;
+  color: #abfd13 !important;
+  border-bottom: 1px solid #abfd13 !important;
+}
+
+.ant-table-tbody > tr > td {
+  background: #161616 !important;
+  border-bottom: 1px solid #2a2a2a !important;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background: #2a2a2a !important;
+}
+
+.ant-select-selector {
+  background: #161616 !important;
+  color: #fff !important;
+  border: 1px solid #abfd13 !important;
+}
+
+.ant-select-arrow {
+  color: #abfd13 !important;
+}
+
+.ant-input {
+  background: transparent !important;
+  color: #fff !important;
+}
+
+.ant-input-prefix {
+  color: #abfd13 !important;
+}
+
+.footer {
+  background: #abfd13 !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  color: #090909;
+  text-align: center;
+  position: relative; /* Ensure footer sticks to the bottom */
+  bottom: 0; /* Attach to the bottom of the viewport */
+  left: 0;
+  width: 100%; /* Stretch across the full width */
+  z-index: 10;
+  font-size: 14px;
+  font-family: "Poppins";
+}

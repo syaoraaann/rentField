@@ -186,52 +186,19 @@
   color: #ffffff !important;
 }
 
-.ant-select-dropdown {
-  background-color: #1f1f1f !important;
-  border: 1px solid #333333 !important;
-}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 16px;
+  }
 
-.ant-select-item {
-  color: white !important;
-}
+  .search-filter-section {
+    flex-direction: column;
+  }
 
-.ant-select-item-option-selected {
-  background-color: #98FB98 !important;
-  color: black !important;
-}
-
-.ant-select-item-option-active {
-  background-color: #333333 !important;
-}
-
-.ant-btn-text {
-  color: #ffffff !important;
-}
-
-.ant-btn-text:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.ant-btn-dangerous {
-  color: #ff4d4f !important;
-}
-
-.ant-popconfirm-buttons .ant-btn-primary {
-  background-color: #98FB98 !important;
-  border: none !important;
-  color: #000000 !important;
-}
-
-.ant-popconfirm-buttons .ant-btn-primary:hover {
-  background-color: #7dcd7d !important;
-}
-
-/* Loading skeleton styles */
-.ant-skeleton {
-  background-color: #1f1f1f !important;
-}
-
-.ant-skeleton-title,
-.ant-skeleton-paragraph > li {
-  background-color: #333333 !important;
+  .filter-buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
