@@ -183,18 +183,16 @@ const DashboardRenter = () => {
       style={{
         minHeight: "100vh",
         backgroundImage: `url(${bgImage})`, // Set background image
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover", // Ensure the image covers the entire screen
+        backgroundPosition: "center", // Center the image
+        backgroundRepeat: "no-repeat", // Prevent repeating the image  
       }}
+      className="layout-main-renter"
     >
       {/* Sidebar */}
       <SideNav />
-
-      {/* Main content area */}
-      <Layout style={{ marginLeft: 256 }} className="layout-main">
-        <Content className="pageContent fadeIn">
-          <Row justify="space-between" align="middle">
+        <Content style={{ marginLeft: "256px"}} className="pageContent fadeIn">
+          <Row>
             <div>
               {/* Dashboard Header */}
               <Title level={1} className="dashboard-header">
@@ -206,10 +204,9 @@ const DashboardRenter = () => {
             </div>
             <div>
               {/* Notification Button */}
-              <Badge count={notifications.length} size="small">
+              <Badge count={notifications.length} size="small" className="notification-badge">
                 <BellOutlined
                   className="bell-icon"
-                  style={{ fontSize: "24px", color: "#fff", cursor: "pointer" }}
                   onClick={showNotificationModal}
                 />
               </Badge>
@@ -219,7 +216,7 @@ const DashboardRenter = () => {
           {/* Carousel Component */}
           <Carousel
             autoplay
-            style={{ marginTop: "40px", marginBottom: "60px" }}
+            style={{ marginTop: "50px", marginBottom: "60px" }}
           >
             {imageList.map((src, index) => (
               <div key={index}>
@@ -557,11 +554,10 @@ const DashboardRenter = () => {
           </Row>
         </Content>
         {/* Footer */}
-        <Footer className="footer">
+        <Footer className="footer-dashboard-renter">
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
           Pendidikan Ganesha
         </Footer>
-      </Layout>
     </Layout>
   );
 };

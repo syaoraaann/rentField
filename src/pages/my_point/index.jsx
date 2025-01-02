@@ -19,7 +19,7 @@ import bgImage from "../../assets/images/bgnew.jpg";
 const { Content, Footer } = Layout;
 const { Title, Text } = Typography;
 
-const MyPoint = ({ point }) => {
+const MyPoint = ({ point = 500 }) => {
   const [kategori, setKategori] = useState(tentukanKategori(point));
 
   function tentukanKategori(point) {
@@ -73,36 +73,14 @@ const MyPoint = ({ point }) => {
 
   return (
     <Layout
-      style={{
-        minHeight: "100vh",
-        backgroundImage: `url(${bgImage})`, // Set background image
-        backgroundSize: "cover", // Ensure the image covers the entire screen
-        backgroundPosition: "center", // Center the image
-        backgroundRepeat: "no-repeat", // Prevent repeating the image
-      }}
+      className="layout-main"
     >
       <SideNav />
-
       {/* Main content area */}
-      <Layout style={{ marginLeft: 256 }} className="layout-main">
-        <Content className="pageContent fadeIn">
+        <Content style={{ marginLeft: 256 }} className="pageContent fadeIn">
           <Col>
             <div className="box-style" style={{ paddingBottom: "40px" }}>
               <Row>
-                <div
-                  className={`box ${kategori === "Explorer" ? "active" : ""}`}
-                >
-                  <Text
-                    style={{
-                      color: progressColor.Explorer,
-                      fontSize: "28px",
-                      fontWeight: "bold",
-                      fontFamily: "Poppins",
-                    }}
-                  >
-                    Explorer
-                  </Text>
-                </div>
                 <div
                   className={`box ${kategori === "Challenger" ? "active" : ""}`}
                 >
@@ -129,6 +107,20 @@ const MyPoint = ({ point }) => {
                     }}
                   >
                     Athlete
+                  </Text>
+                </div>
+                <div
+                  className={`box ${kategori === "Explorer" ? "active" : ""}`}
+                >
+                  <Text
+                    style={{
+                      color: progressColor.Explorer,
+                      fontSize: "28px",
+                      fontWeight: "bold",
+                      fontFamily: "Poppins",
+                    }}
+                  >
+                    Explorer
                   </Text>
                 </div>
               </Row>
@@ -173,7 +165,7 @@ const MyPoint = ({ point }) => {
               }}
             >
               <Progress
-                percent={50}
+                percent={(point / 1000)* 100}
                 status="active"
                 strokeColor={"#ABFD13"} // Set color based on category
                 trailColor="#e0e0e0"
@@ -192,7 +184,7 @@ const MyPoint = ({ point }) => {
               columns={columns}
               dataSource={data}
               pagination={false} // Disable pagination for a small table
-              bordered // Adds borders around the table
+              
               className="table-style"
             />
             <div style={{ paddingTop: "40px", paddingLeft: "200px" }}>
@@ -210,11 +202,10 @@ const MyPoint = ({ point }) => {
           </Col>
         </Content>
 
-        <Footer className="footer">
+        <Footer className="footer-mypoint">
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
           Pendidikan Ganesha
         </Footer>
-      </Layout>
     </Layout>
   );
 };

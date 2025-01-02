@@ -14,6 +14,7 @@
         "@fontsource/poppins": "^5.1.0",
         "antd": "^5.22.6",
         "dayjs": "^1.11.13",
+        "encrypt-storage": "^2.14.6",
         "leaflet": "^1.9.4",
         "lucide-react": "^0.456.0",
         "moment": "^2.30.1",

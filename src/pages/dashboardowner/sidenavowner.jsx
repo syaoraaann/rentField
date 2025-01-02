@@ -4,10 +4,11 @@ import {
   HomeOutlined,
   LogoutOutlined,
   CalendarOutlined,
-  StarOutlined,
   SettingOutlined,
   QuestionCircleOutlined,
   VideoCameraOutlined,
+  TableOutlined,
+  CreditCardOutlined
 } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -73,11 +74,9 @@ const LogoutContainer = styled.div`
   padding: 15px 20px;
   cursor: pointer;
   display: flex;
-  align-items: center;
-  color: #fff;
-  &:hover {
-    background-color: #333;
-  }
+  flex-direction: column;
+  justify-content: space-between;
+  alignItems: "center";
 `;
 
 const SideNavOwner = () => {
@@ -119,77 +118,115 @@ const SideNavOwner = () => {
       {/* Menu */}
       <Menu
         theme="dark"
-        style={{ backgroundColor: "transparent", border: "none" }}
+        style={{
+          backgroundColor: "transparent",
+          border: "none",
+          display: "flex", // Mengatur menu sebagai flex container
+          flexDirection: "column", // Atur elemen secara vertikal
+          alignItems: "center", // Memusatkan elemen secara horizontal
+        }}
         selectedKeys={[location.pathname]}
         mode="inline"
-      >
-        {/* General Group */}
-        <Menu.ItemGroup key="general" title="General">
-          <Menu.Item
-            key="/dashboard-owner"
-            icon={<HomeOutlined />}
-            style={getMenuItemStyle("/dashboard-owner")}
-          >
-            <Link to="/dashboard-owner">Dashboard</Link>
-          </Menu.Item>
-          <Menu.Item
-            key="/reservation-list"
-            icon={<CalendarOutlined />}
-            style={getMenuItemStyle("/reservation-list")}
-          >
-            <Link to="/reservation-list">Reservation List</Link>
-          </Menu.Item>
-          <Menu.Item
-            key="/payment"
-            icon={<StarOutlined />}
-            style={getMenuItemStyle("/payment")}
-          >
-            <Link to="/payment">Payment</Link>
-          </Menu.Item>
-        </Menu.ItemGroup>
-
-        {/* Field Management Group */}
-        <Menu.ItemGroup key="field-management" title="Field Management">
-          <Menu.Item
-            key="/list-field"
-            icon={<StarOutlined />}
-            style={getMenuItemStyle("/list-field")}
-          >
-            <Link to="/list-field">List Field</Link>
-          </Menu.Item>
-        </Menu.ItemGroup>
-
-        {/* Management Group */}
-        <Menu.ItemGroup key="management" title="Management">
-          <Menu.Item
-            key="/settings"
-            icon={<SettingOutlined />}
-            style={getMenuItemStyle("/settings")}
-          >
-            <Link to="/settings">Setting</Link>
-          </Menu.Item>
-          <Menu.Item
-            key="/help-center"
-            icon={<QuestionCircleOutlined />}
-            style={getMenuItemStyle("/help-center")}
-          >
-            <Link to="/help-center">Help Center</Link>
-          </Menu.Item>
-          <Menu.Item
-            key="/video-review"
-            icon={<VideoCameraOutlined />}
-            style={getMenuItemStyle("/video-review")}
-          >
-            <Link to="/video-review">Video Review</Link>
-          </Menu.Item>
-        </Menu.ItemGroup>
-      </Menu>
+        items={[
+          {
+            type: "group",
+            label: "General",
+            children: [
+              {
+                key: "/dashboard-owner",
+                icon: <HomeOutlined />,
+                label: <Link to="/dashboard-owner">Dashboard</Link>,
+                style:
+                  location.pathname === "/dashboard-owner"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px"},
+              },
+              {
+                key: "/reservation-list",
+                icon: <CalendarOutlined />,
+                label: <Link to="/reservation-list">Reservation List</Link>,
+                style:
+                  location.pathname === "/reservation-list"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px"},
+              },
+              {
+                key: "/payment",
+                icon: <CreditCardOutlined />,
+                label: <Link to="/payment">Payment</Link>,
+                style:
+                  location.pathname === "/payment"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px"},
+              },
+            ],
+          },
+          {
+            type: "group",
+            label: "Field Management",
+            children: [
+              {
+                key: "/list-field-owner",
+                icon: <TableOutlined />,
+                label: <Link to="/list-field-owner">List Field</Link>,
+                style:
+                  location.pathname === "/list-field-owner"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px" },
+              },
+            ],
+          },
+          {
+            type: "group",
+            label: "Management",
+            children: [
+              {
+                key: "/settings",
+                icon: <SettingOutlined />,
+                label: <Link to="/settings">Setting</Link>,
+                style:
+                  location.pathname === "/settings"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px" },
+              },
+              {
+                key: "/help-center",
+                icon: <QuestionCircleOutlined />,
+                label: <Link to="/help-center">Help Center</Link>,
+                style:
+                  location.pathname === "/help-center"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px" },
+              },
+              {
+                key: "/video-review",
+                icon: <VideoCameraOutlined />,
+                label: <Link to="/video-review">Video Review</Link>,
+                style:
+                  location.pathname === "/video-review"
+                    ? { backgroundColor: "#ABFD13", color: "#1A1A1A", width: "220px" }
+                    : { width: "220px" },
+              },
+            ],
+          },
+        ]}
+      />
 
       {/* Logout */}
-      <LogoutContainer onClick={handleLogout}>
+      <div
+        style={{
+          padding: "15px 20px",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          color: "#fff",
+          paddingLeft: "33px"  
+        }}
+        onClick={handleLogout}
+      >
         <LogoutOutlined style={{ marginRight: "10px" }} />
         Logout
-      </LogoutContainer>
+      </div>
     </SideNavContainer>
   );
 };

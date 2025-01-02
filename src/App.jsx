@@ -17,6 +17,7 @@ import DashboardOwner from "./pages/dashboardowner";
 import DashboardAdmin from "./pages/dashboardadmin";
 import ListField from "./pages/list_field";
 import ProfileOwner from "./pages/profile_owner";
+import ListFieldOwner from "./pages/list_field_owner";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/dashboard-owner" element={<DashboardOwner />} />
         <Route path="/dashboard-admin" element={<DashboardAdmin />} />
         <Route path="/list-field" element={<ListField />} />
+        <Route path="/list-field-owner" element={<ListFieldOwner />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/api-page" element={<ApiPage />} />
         <Route path="/my-point" element={<MyPoint />} />
