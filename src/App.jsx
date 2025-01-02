@@ -18,6 +18,7 @@ import DashboardAdmin from "./pages/dashboardadmin";
 import ListField from "./pages/list_field";
 import ProfileOwner from "./pages/profile_owner";
 import ListFieldOwner from "./pages/list_field_owner";
+import History from "./pages/history";
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
         <Route path="/api-page" element={<ApiPage />} />
         <Route path="/my-point" element={<MyPoint />} />
         <Route path="/reservation-list" element={<ReservationList />} />
-        <Route path="/profile-owner" element={<ProfileOwner />} />
+        <Route path="/history" element={<History />} />
       </Routes>
     </div>
   );
