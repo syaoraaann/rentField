@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography, Form, Input, Select, message } from "antd";
 import "../../pages/login/login.css";
 import rentfieldlogo from "../../assets/images/rflogo.png";
 import loginbg from "../../assets/images/loginbg.png";
 import "@fontsource/poppins";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const { Text } = Typography;
 const { Option } = Select;
@@ -15,6 +16,10 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
+  
+  //provide login hooded
+  const { login, isLoggedIn} = useContext(AuthContext) ;
+  const [isUnAuthorized, setIsUnauthorized] = useState(false);
 
   const [loginForm] = Form.useForm();
   const [signupForm] = Form.useForm();
@@ -37,6 +42,9 @@ const LoginPage = () => {
         const { role } = result; // Asumsikan server mengembalikan role
 
         // Simpan role di session storage
+        // sessionStorage.setItem("access_token", access_token);
+
+        await jwtStorage.storeToken(access_token);
         sessionStorage.setItem("username", username);
         sessionStorage.setItem("role", role);
 

@@ -55,7 +55,7 @@ const ListFieldOwner = () => {
           throw new Error(`Failed to fetch fields: ${response.statusText}`);
         }
         const data = await response.json();
-        setFields(data.data || []); // Fallback if data.data is undefined
+        setFields(data.data || []);
       } catch (err) {
         console.error("Error fetching fields:", err);
         setError(err.message);
@@ -100,120 +100,139 @@ const ListFieldOwner = () => {
     setSelectedField(null);
   };
 
-  const handleDelete = async (fieldId) => {
+  const handleDelete = async (id_field) => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:5000/api/v1/list_field/delete/${fieldId}`,
+        `http://127.0.0.1:5000/api/v1/list_field/delete/${id_field}`,
         { method: "DELETE" }
       );
+      const responseData = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to delete field");
+        throw new Error(
+          responseData?.message ||
+            `Failed to delete field: ${response.statusText}`
+        );
       }
-      setFields(fields.filter((field) => field.id_field !== fieldId));
+
+      setFields((prevFields) =>
+        prevFields.filter((field) => field.id_field !== id_field)
+      );
       api.success({ message: "Field deleted successfully" });
     } catch (err) {
+      console.error("Error during delete operation:", err);
       api.error({
         message: "Failed to delete field",
-        description: err.message,
+        description: err.message || "An unexpected error occurred",
       });
     }
   };
 
-  // const handleFormSubmit = () => {
-  //   // Create FormData from the form values
-  //   let formData = new FormData();
-  //   Object.keys(form.getFieldsValue()).forEach((key) => {
-  //     formData.append(key, form.getFieldValue(key));
-  //   });
+  const handleCreateField = async () => {
+    const formData = new FormData();
+    Object.keys(form.getFieldsValue()).forEach((key) => {
+      formData.append(key, form.getFieldValue(key));
+    });
 
-  //   // Determine the correct URL and method based on isEdit
-  //   const url = isEdit
-  //     ? `http://127.0.0.1:5000/api/v1/list_field/update/${selectedField.id_field}`
-  //     : "http://127.0.0.1:5000/api/v1/list_field/create";
-  //   const method = isEdit ? "PUT" : "POST";
-
-  //   // Perform the request using fetch
-  //   fetch(url, {
-  //     method: method,
-  //     body: formData,
-  //   })
-  //     .then((response) => response.json())
-  //     .then((resp) => {
-  //       if (resp?.message === "OK") {
-  //         // Successful submission
-  //         setFields(resp.data || fields); // Update the fields with the new data
-  //         api.success({
-  //           message: isEdit
-  //             ? "Field updated successfully"
-  //             : "Field created successfully",
-  //         });
-  //         handleDrawerClose();
-  //         form.resetFields();
-  //       } else {
-  //         // Handle failure
-  //         api.error({
-  //           message: "Failed to submit field data",
-  //           description: "Tidak dapat mengirim data",
-  //         });
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       // Catch any error and show it
-  //       api.error({
-  //         message: "Failed to submit field data",
-  //         description: err.toString(),
-  //       });
-  //     });
-  // };
-
-  //Handle form submit
-  const handleFormSubmit = async () => {
-    const formData = form.getFieldsValue();
-    const url = isEdit
-      ? `http://127.0.0.1:5000/api/v1/list_field/update/${selectedField.id_field}`
-      : "http://127.0.0.1:5000/api/v1/list_field/create";
-    const method = isEdit ? "PUT" : "POST";
-
-    const token = localStorage.getItem('token');
-  
     try {
-      const response = await fetch(url, {
-        method: method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-  
-      if (!response.ok) {
-        throw new Error(`Failed to ${isEdit ? "update" : "create"} field`);
-      }
-  
-      const result = await response.json();
-      if (result.message === "OK") {
-        api.success({
-          message: isEdit ? "Field updated successfully" : "Field created successfully",
+      const response = await fetch(
+        "http://127.0.0.1:5000/api/v1/list_field/create",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const resp = await response.json();
+
+      if (
+        // Check exact "OK" string
+        resp?.message === "OK" ||
+        // Check HTTP status codes (200-299)
+        (resp?.status >= 200 && resp?.status < 300) ||
+        // Check common success message variations
+        resp?.message?.toLowerCase().includes('success') ||
+        // Check if response contains data
+        resp?.data ||
+        // Check if response itself is the data
+        (typeof resp === 'object' && Object.keys(resp).length > 0)
+      ) {
+        // Notifikasi berhasil
+        api.success({ 
+          message: "Field created successfully",
+          // Optional: tampilkan detail dari response
+          // description: resp?.message || resp?.data?.message 
         });
-        setDrawerVisible(false);
-        setIsEdit(false);
-        setSelectedField(null);
-        form.resetFields();
-        setFields((prevFields) => {
-          if (isEdit) {
-            return prevFields.map((field) =>
-              field.id_field === selectedField.id_field ? { ...field, ...formData } : field
-            );
-          }
-          return [...prevFields, result.data];
-        });
+        handleDrawerClose();
+        const newResponse = await fetch(
+          "http://127.0.0.1:5000/api/v1/list_field/read"
+        );
+        const newData = await newResponse.json();
+        setFields(newData.data || []);
       } else {
-        throw new Error(result.message || "Unknown error");
+        // Handle error case
+        api.error({
+          message: "Failed to create field",
+          description: resp?.message || "Unknown error occurred"
+        });
       }
     } catch (err) {
+      console.error("Error creating field:", err);
       api.error({
-        message: "Failed to submit field data",
-        description: err.message,
+        message: "Failed to create field",
+        description: err.message || "An unexpected error occurred",
       });
+    }
+  };
+
+  const handleUpdateField = async () => {
+    const formData = new FormData();
+    Object.keys(form.getFieldsValue()).forEach((key) => {
+      formData.append(key, form.getFieldValue(key));
+    });
+  
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:5000/api/v1/list_field/update/${selectedField.id_field}`,
+        {
+          method: "PUT", 
+          body: formData,
+        }
+      );
+  
+      const resp = await response.json();
+      
+      if (response.ok) { // Cek status HTTP 200-299
+        // Fetch data terbaru
+        const newResponse = await fetch(
+          "http://127.0.0.1:5000/api/v1/list_field/read"
+        );
+        const newData = await newResponse.json();
+        setFields(newData.data || []);
+        
+        api.success({ message: "Field updated successfully" });
+        handleDrawerClose();
+        form.resetFields();
+      } else {
+        api.error({
+          message: "Failed to update field",
+          description: resp?.message || "Unable to update field",
+        });
+      }
+    } catch (err) {
+      console.error("Error updating field:", err);
+      api.error({
+        message: "Failed to update field", 
+        description: err.message || "An unexpected error occurred",
+      });
+    }
+  };
+
+  const handleFormSubmit = () => {
+    if (isEdit) {
+      handleUpdateField();
+    } else {
+      handleCreateField();
     }
   };
   
@@ -246,7 +265,6 @@ const ListFieldOwner = () => {
           {loading && <p>Loading fields...</p>}
           {error && <p style={{ color: "red" }}>Error: {error}</p>}
 
-          {/* Search and Filter */}
           <Row gutter={16} align="middle" style={{ marginBottom: "20px" }}>
             <Col>
               <Input
@@ -272,7 +290,6 @@ const ListFieldOwner = () => {
             </Col>
           </Row>
 
-          {/* Field Cards */}
           <Row gutter={[24, 24]}>
             {filteredFields.map((field) => (
               <Col span={8} key={field.id_field}>
@@ -322,7 +339,6 @@ const ListFieldOwner = () => {
             className="floating-button"
           />
 
-          {/* Drawer */}
           <Drawer
             title={isEdit ? "Edit Field" : "Add New Field"}
             width={400}
@@ -342,7 +358,7 @@ const ListFieldOwner = () => {
                 </Button>
               </div>
             }
-            className="form-drawer" // Menambahkan class untuk scoping CSS
+            className="form-drawer"
           >
             <Form
               layout="vertical"

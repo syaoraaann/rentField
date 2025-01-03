@@ -34,11 +34,12 @@ function App() {
         <Route path="/list-field" element={<ListField />} />
         <Route path="/list-field-owner" element={<ListFieldOwner />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/api-page" element={<ApiPage />} />
+        {/* <Route path="/api-page" element={<ApiPage />} /> */}
         <Route path="/my-point" element={<MyPoint />} />
         <Route path="/reservation-list" element={<ReservationList />} />
         <Route path="/history" element={<History />} />
         <Route path="/help-center" element={<HelpCenter />} />
+        <Route path="/video-review" element={<ApiPage/>} />
       </Routes>
     </div>
   );

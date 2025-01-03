@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "../../pages/profile_owner/index.css";
+import SideNavOwner from './sidenav';
 
 const ProfileOwner = () => {
     const [formData, setFormData] = useState({
@@ -37,7 +38,9 @@ const ProfileOwner = () => {
     };
 
     return (
+        
         <div className="profile-page">
+           
             <div className="profile-container">
                 <h2 className="profile-title">My Profile</h2>
 
