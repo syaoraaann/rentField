@@ -18,8 +18,8 @@
 }
 
 .img-carousel {
-  width: 60% !important;
-  max-height: 400px;
+  width: 90% !important;
+  max-height: 450px;
   height: 100% !important;
   border-radius: 4px;
   margin: 0 auto;
@@ -104,6 +104,38 @@
   font-size: 12px;
   line-height: 20px;
   font-weight: bold;
+}
+
+.custom-modal-renter .ant-modal-content {
+  background: rgba(0, 0, 0, 0.7) !important; /* Translucent white background */
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px; /* Tetap mempertahankan border radius */
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.custom-title {
+  color: #abfd13; /* Warna font menjadi hijau */
+  font-weight: bold; /* Mempertegas teks */
+  font-size: 24px !important;
+}
+
+.custom-modal-renter .ant-modal-header {
+  background: transparent !important; /* Ensure transparency */
+  border-bottom: none !important; /* Remove border if necessary */
+}
+
+.custom-modal-renter .ant-modal-close {
+  color: #d9d9d9 !important; /* Ubah warna tombol */
+  font-size: 16px; /* Sesuaikan ukuran jika diperlukan */
+}
+
+/* Hover efek pada tombol X */
+.custom-modal-renter .ant-modal-close:hover {
+  color: #ffffff !important; /* Warna putih saat di-hover */
+  background-color: rgba(255, 255, 255, 0.1); /* Tambahkan sedikit latar belakang */
+  border-radius: 50%; /* Buat bentuk bulat */
 }
 
 /* Footer styles */

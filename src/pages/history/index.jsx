@@ -150,17 +150,10 @@ const History = () => {
           <div style={{ display: "flex", gap: "16px", marginBottom: "24px" }}>
             <Input
               placeholder="Search history..."
-              prefix={<SearchOutlined />}
+              prefix={<SearchOutlined style={{color: "#d9d9d9", paddingRight: "10px"}}/>}
               value={searchQuery}
               onChange={handleSearchChange}
-              style={{
-                flex: 1,
-                height: "55px",
-                borderRadius: "8px",
-                background: "#2A2A2A",
-                color: "#fff",
-                fontSize: "14px",
-              }}
+              className="custom-input-history"
             />
 
             <Select

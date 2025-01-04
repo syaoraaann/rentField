@@ -92,6 +92,9 @@ const SideNavOwner = () => {
           backgroundColor: "transparent",
           border: "none",
           marginTop: "-180px",
+          display: "flex", // Mengatur menu sebagai flex container
+          flexDirection: "column", // Atur elemen secara vertikal
+          alignItems: "center", // Memusatkan elemen secara horizontal
         }}
         selectedKeys={[location.pathname]}
         mode="inline"
@@ -170,11 +173,11 @@ const SideNavOwner = () => {
           display: "flex",
           alignItems: "center",
           color: "#fff",
-          paddingLeft: "33px",
+          paddingLeft: "28px",
         }}
         onClick={handleLogout}
       >
-        <LogoutOutlined style={{ marginRight: "10px" }} />
+        <LogoutOutlined style={{ marginRight: "10px"}} />
         Logout
       </div>
     </SideNavContainer>
