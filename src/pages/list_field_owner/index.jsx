@@ -23,6 +23,12 @@ import {
 import bgImage from "../../assets/images/bgnew.jpg";
 import SideNavOwner from "../dashboardowner/sidenavowner";
 import "./index.css";
+import {
+  getDataPrivate,
+  deleteDataPrivateJSON,
+  sendDataPrivate,
+  editDataPrivatePut,
+} from "../../utils/api";
 
 const { Title } = Typography;
 const { Meta } = Card;
@@ -43,30 +49,151 @@ const ListFieldOwner = () => {
 
   // Fetch data from API
   useEffect(() => {
-    const fetchFields = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await fetch(
-          "http://127.0.0.1:5000/api/v1/list_field/read"
-        );
-        if (!response.ok) {
-          throw new Error(`Failed to fetch fields: ${response.statusText}`);
-        }
-        const data = await response.json();
-        setFields(data.data || []);
-      } catch (err) {
-        console.error("Error fetching fields:", err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFields();
+    getFieldsOwner();
   }, []);
 
-  // Filter fields based on search and category
+  const getFieldsOwner = () => {
+    setLoading(true);
+    getDataPrivate("/api/v1/list_field/read")
+      .then((resp) => {
+        setLoading(false);
+        if (resp?.data) {
+          setFields(resp?.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  };
+
+  const handleCreateField = () => {
+    const formData = new FormData();
+    const formValues = form.getFieldsValue();
+
+    // Tambahkan semua field dari form ke formData
+    Object.entries(formValues).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    setLoading(true);
+
+    sendDataPrivate("/api/v1/list_field/create", formData)
+      .then((resp) => {
+        const isSuccess =
+          resp?.message === "OK" || // Pesan "OK"
+          (resp?.status >= 200 && resp?.status < 300) || // Status HTTP sukses
+          resp?.message?.toLowerCase().includes("success") || // Variasi pesan sukses
+          resp?.data || // Jika ada data
+          (typeof resp === "object" && Object.keys(resp).length > 0); // Respon valid
+
+        if (isSuccess) {
+          // Jika berhasil
+          setIsEdit(false);
+          setSelectedField(null);
+          notification.success({
+            message: "Success",
+            description: "Field created successfully.",
+          });
+          form.resetFields();
+          setDrawerVisible(false);
+          getFieldsOwner(); // Memperbarui daftar field
+        } else {
+          // Jika gagal
+          notification.error({
+            message: "Failed to create field",
+            description: "Tidak dapat membuat field baru.",
+          });
+        }
+      })
+      .catch((err) => {
+        // Tangani kesalahan
+        notification.error({
+          message: "Failed to create field",
+          description: err?.message || "An unexpected error occurred.",
+        });
+      })
+      .finally(() => {
+        // Selesai, hapus status loading
+        setLoading(false);
+      });
+  };
+
+  const handleUpdateField = () => {
+    setLoading(true);
+
+    // Mengambil nilai dari form
+    const formData = form.getFieldsValue();
+
+    // Menangani update data menggunakan API
+    editDataPrivatePut(
+      `/api/v1/list_field/update/${selectedField.id_field}`,
+      formData
+    )
+      .then((resp) => {
+        // Validasi respon sukses
+        const isSuccess =
+          resp?.message === "OK" || // Pesan "OK"
+          (resp?.status >= 200 && resp?.status < 300) || // Status HTTP sukses
+          resp?.message?.toLowerCase().includes("success") || // Variasi pesan sukses
+          resp?.data || // Jika ada data
+          (typeof resp === "object" && Object.keys(resp).length > 0); // Respon valid
+
+        if (isSuccess) {
+          notification.success({
+            message: "Success",
+            description: "Field updated successfully.",
+          });
+
+          // Reset form dan tutup drawer
+          form.resetFields();
+          handleDrawerClose();
+
+          // Memperbarui daftar field
+          getFieldsOwner();
+        } else {
+          notification.error({
+            message: "Failed to update field",
+            description: resp?.message || "Unable to update field.",
+          });
+        }
+      })
+      .catch((err) => {
+        // Menangani error
+        console.error("Error updating field:", err);
+        notification.error({
+          message: "Failed to update field",
+          description: err?.message || "An unexpected error occurred.",
+        });
+      })
+      .finally(() => {
+        // Hapus status loading
+        setLoading(false);
+      });
+  };
+
+  const handleDelete = (id_field) => {
+    setLoading(true);
+    deleteDataPrivateJSON(`/api/v1/list_field/delete/${id_field}`)
+      .then((resp) => {
+        api.success({ message: "Field deleted successfully" });
+        // Refresh or update the fields list
+        setFields((prevFields) =>
+          prevFields.filter((field) => field.id_field !== id_field)
+        );
+      })
+      .catch((err) => {
+        console.error("Error during delete operation:", err);
+        api.error({
+          message: "Failed to delete field",
+          description: err.message || "An unexpected error occurred",
+        });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   const filteredFields = fields.filter((field) => {
     const matchesSearch = field.field_name
       .toLowerCase()
@@ -93,134 +220,6 @@ const ListFieldOwner = () => {
   const handleDrawerClose = () => {
     setDrawerVisible(false);
     setSelectedField(null);
-  };
-
-  const handleDelete = async (id_field) => {
-    try {
-      const response = await fetch(
-        `http://127.0.0.1:5000/api/v1/list_field/delete/${id_field}`,
-        { method: "DELETE" }
-      );
-      const responseData = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          responseData?.message ||
-            `Failed to delete field: ${response.statusText}`
-        );
-      }
-
-      setFields((prevFields) =>
-        prevFields.filter((field) => field.id_field !== id_field)
-      );
-      api.success({ message: "Field deleted successfully" });
-    } catch (err) {
-      console.error("Error during delete operation:", err);
-      api.error({
-        message: "Failed to delete field",
-        description: err.message || "An unexpected error occurred",
-      });
-    }
-  };
-
-  const handleCreateField = async () => {
-    const formData = new FormData();
-    Object.keys(form.getFieldsValue()).forEach((key) => {
-      formData.append(key, form.getFieldValue(key));
-    });
-
-    try {
-      const response = await fetch(
-        "http://127.0.0.1:5000/api/v1/list_field/create",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-
-      const resp = await response.json();
-
-      if (
-        // Check exact "OK" string
-        resp?.message === "OK" ||
-        // Check HTTP status codes (200-299)
-        (resp?.status >= 200 && resp?.status < 300) ||
-        // Check common success message variations
-        resp?.message?.toLowerCase().includes('success') ||
-        // Check if response contains data
-        resp?.data ||
-        // Check if response itself is the data
-        (typeof resp === 'object' && Object.keys(resp).length > 0)
-      ) {
-        // Notifikasi berhasil
-        api.success({ 
-          message: "Field created successfully",
-          // Optional: tampilkan detail dari response
-          // description: resp?.message || resp?.data?.message 
-        });
-        handleDrawerClose();
-        const newResponse = await fetch(
-          "http://127.0.0.1:5000/api/v1/list_field/read"
-        );
-        const newData = await newResponse.json();
-        setFields(newData.data || []);
-      } else {
-        // Handle error case
-        api.error({
-          message: "Failed to create field",
-          description: resp?.message || "Unknown error occurred"
-        });
-      }
-    } catch (err) {
-      console.error("Error creating field:", err);
-      api.error({
-        message: "Failed to create field",
-        description: err.message || "An unexpected error occurred",
-      });
-    }
-  };
-
-  const handleUpdateField = async () => {
-    const formData = new FormData();
-    Object.keys(form.getFieldsValue()).forEach((key) => {
-      formData.append(key, form.getFieldValue(key));
-    });
-  
-    try {
-      const response = await fetch(
-        `http://127.0.0.1:5000/api/v1/list_field/update/${selectedField.id_field}`,
-        {
-          method: "PUT", 
-          body: formData,
-        }
-      );
-  
-      const resp = await response.json();
-      
-      if (response.ok) { // Cek status HTTP 200-299
-        // Fetch data terbaru
-        const newResponse = await fetch(
-          "http://127.0.0.1:5000/api/v1/list_field/read"
-        );
-        const newData = await newResponse.json();
-        setFields(newData.data || []);
-        
-        api.success({ message: "Field updated successfully" });
-        handleDrawerClose();
-        form.resetFields();
-      } else {
-        api.error({
-          message: "Failed to update field",
-          description: resp?.message || "Unable to update field",
-        });
-      }
-    } catch (err) {
-      console.error("Error updating field:", err);
-      api.error({
-        message: "Failed to update field", 
-        description: err.message || "An unexpected error occurred",
-      });
-    }
   };
 
   const handleFormSubmit = () => {

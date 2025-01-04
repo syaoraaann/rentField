@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography, Form, Input, Select, message } from "antd";
 import "../../pages/login/login.css";
 import rentfieldlogo from "../../assets/images/rflogo.png";
 import loginbg from "../../assets/images/loginbg.png";
 import "@fontsource/poppins";
+import { AuthContext } from "../../providers/AuthProvider";
+import { sendData } from "../../utils/api";
 
 const { Text } = Typography;
 const { Option } = Select;
@@ -16,6 +18,8 @@ const LoginPage = () => {
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
 
+  const { login } = useContext(AuthContext);
+
   const [loginForm] = Form.useForm();
   const [signupForm] = Form.useForm();
   const [forgotPasswordForm] = Form.useForm();
@@ -25,42 +29,18 @@ const LoginPage = () => {
     formData.append("username", username);
     formData.append("password", password);
 
-    try {
-      const response = await fetch("http://127.0.0.1:5000/api/v1/auth/login", {
-        method: "POST",
-        body: formData,
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        const { role } = result; // Asumsikan server mengembalikan role
-
-        // Simpan role di session storage
-        sessionStorage.setItem("username", username);
-        sessionStorage.setItem("role", role);
-
-        message.success("Login successful!");
-
-        // Arahkan pengguna berdasarkan role
-        if (role === "Admin") {
-          navigate("/dashboard-admin");
-        } else if (role === "Renter") {
-          navigate("/dashboard-renter");
-        } else if (role === "Owner") {
-          navigate("/dashboard-owner");
+    sendData("/api/v1/auth/login", formData)
+      .then((resp) => {
+        if (resp?.access_token) {
+          login(resp?.access_token, resp?.role);
         } else {
-          message.error("Role not recognized. Contact support.");
+          message.error("Access token not loaded");
         }
-
-        setUsername("");
-        setPassword("");
-      } else {
-        message.error(result.message || "Invalid username or password.");
-      }
-    } catch (error) {
-      message.error("An error occurred. Please try again.");
-    }
+      })
+      .catch((err) => {
+        console.log(err);
+        message.error("An error occurred. Please try again.");
+      });
   };
 
   // Handle Signup
