@@ -70,14 +70,17 @@ const ReservationList = () => {
 
   // Calculate total income using useMemo for better performance
   const totalIncome = useMemo(() => {
-    return reservations.reduce((sum, reservation) => sum + reservation.incomeValue, 0);
+    return reservations.reduce(
+      (sum, reservation) => sum + reservation.incomeValue,
+      0
+    );
   }, [reservations]);
 
   // Format number to currency
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amount);
@@ -103,7 +106,6 @@ const ReservationList = () => {
 
     return matchesSearchQuery && reservation.status === selectedStatus;
   });
-
 
   // Handle button click in the table
   const handleActionClick = (record, action) => {
@@ -308,8 +310,14 @@ const ReservationList = () => {
     >
       <SideNavOwner />
 
-      <Layout className="reslis-inner-layout" style={{ marginLeft: 256, background: "transparent" }}>
-        <Content className="reslis-content" style={{ padding: "24px", background: "transparent" }}>
+      <Layout
+        className="reslis-inner-layout"
+        style={{ marginLeft: 256, background: "transparent" }}
+      >
+        <Content
+          className="reslis-content"
+          style={{ padding: "24px", background: "transparent" }}
+        >
           <h1
             className="reslis-title"
             style={{
@@ -322,7 +330,10 @@ const ReservationList = () => {
             Reservation List
           </h1>
 
-          <div className="reslis-search-container" style={{ display: "flex", gap: "16px", marginBottom: "24px" }}>
+          <div
+            className="reslis-search-container"
+            style={{ display: "flex", gap: "16px", marginBottom: "24px" }}
+          >
             <Input
               className="reslis-search-input"
               placeholder="Search reservations..."
@@ -368,14 +379,18 @@ const ReservationList = () => {
             <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               <WalletOutlined style={{ fontSize: "24px", color: "#ABFD13" }} />
               <div>
-                <h3 style={{ color: "#fff", margin: 0, fontSize: "16px" }}>Total Income</h3>
-                <span style={{ 
-                  color: "#ABFD13", 
-                  fontSize: "24px", 
-                  fontWeight: "bold",
-                  display: "block",
-                  marginTop: "4px"
-                }}>
+                <h3 style={{ color: "#fff", margin: 0, fontSize: "16px" }}>
+                  Total Income
+                </h3>
+                <span
+                  style={{
+                    color: "#ABFD13",
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    display: "block",
+                    marginTop: "4px",
+                  }}
+                >
                   {formatCurrency(totalIncome)}
                 </span>
               </div>
@@ -451,31 +466,47 @@ const ReservationList = () => {
               <Form.Item
                 name="fullName"
                 label="Full Name"
-                rules={[{ required: true, message: "Please enter your full name" }]}
+                rules={[
+                  { required: true, message: "Please enter your full name" },
+                ]}
               >
-                <Input className="reslis-form-input" placeholder="Enter your full name" />
+                <Input
+                  className="reslis-form-input"
+                  placeholder="Enter your full name"
+                />
               </Form.Item>
 
               <Form.Item
                 name="whatsappNumber"
                 label="WhatsApp Number (Ex: 08123456789)"
                 rules={[
-                  { required: true, message: "Please enter your WhatsApp number" },
+                  {
+                    required: true,
+                    message: "Please enter your WhatsApp number",
+                  },
                   {
                     pattern: /^\d+$/,
                     message: "Please enter a valid phone number",
                   },
                 ]}
               >
-                <Input className="reslis-form-input" placeholder="Enter your WhatsApp number" />
+                <Input
+                  className="reslis-form-input"
+                  placeholder="Enter your WhatsApp number"
+                />
               </Form.Item>
 
               <Form.Item
                 name="bankName"
                 label="Bank Name (Ex: Bank Rakyat Indonesia/Bank Central Asia/Bank Mandiri)"
-                rules={[{ required: true, message: "Please enter your bank name" }]}
+                rules={[
+                  { required: true, message: "Please enter your bank name" },
+                ]}
               >
-                <Input className="reslis-form-input" placeholder="Enter your bank name" />
+                <Input
+                  className="reslis-form-input"
+                  placeholder="Enter your bank name"
+                />
               </Form.Item>
 
               <Form.Item
@@ -492,12 +523,18 @@ const ReservationList = () => {
                   },
                 ]}
               >
-                <Input className="reslis-form-input" placeholder="Enter your bank account number" />
+                <Input
+                  className="reslis-form-input"
+                  placeholder="Enter your bank account number"
+                />
               </Form.Item>
 
               <Form.Item className="reslis-form-buttons">
                 <Space style={{ width: "100%", justifyContent: "flex-end" }}>
-                  <Button className="reslis-cancel-button" onClick={handleWithdrawCancel}>
+                  <Button
+                    className="reslis-cancel-button"
+                    onClick={handleWithdrawCancel}
+                  >
                     Cancel
                   </Button>
                   <Button
