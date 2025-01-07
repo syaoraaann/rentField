@@ -10,11 +10,13 @@ const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userProfile, setUserProfile] = useState({});
   const [role, setRole] = useState(""); // Store the user's role
+  const [isLoadingScreen, setIsLoadingScreen] = useState(true);
   const navigate = useNavigate();
 
   const getDataProfile = () => {
     getDataPrivate("/api/v1/protected/data")
       .then((resp) => {
+        setIsLoadingScreen(false);
         if (resp?.user_logged) {
           setUserProfile(resp);
           setRole(resp?.roles || ""); // Store role (admin, owner, renter)
@@ -24,6 +26,7 @@ const AuthProvider = ({ children }) => {
         }
       })
       .catch((err) => {
+        setIsLoadingScreen(false);
         setIsLoggedIn(false);
         console.log(err);
       });
@@ -75,7 +78,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, login, logout, userProfile, role }}
+      value={{ isLoggedIn, login, logout, userProfile, role, setIsLoadingScreen }}
     >
       {children}
     </AuthContext.Provider>

@@ -9,6 +9,7 @@ import {
   QuestionCircleOutlined,
   VideoCameraOutlined,
   TableOutlined,
+  HistoryOutlined
 } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -62,7 +63,7 @@ const SideNav = () => {
         <Link to="/profile">
           <div
             style={{
-              backgroundColor: "#2A2A2A",
+              backgroundColor: "#515151",
               width: "80px",
               height: "80px",
               borderRadius: "50%",
@@ -93,6 +94,9 @@ const SideNav = () => {
         style={{
           backgroundColor: "transparent",
           border: "none",
+          display: "flex", // Mengatur menu sebagai flex container
+          flexDirection: "column", // Atur elemen secara vertikal
+          alignItems: "center", // Memusatkan elemen secara horizontal
         }}
         selectedKeys={[location.pathname]}
         mode="inline"
@@ -131,7 +135,7 @@ const SideNav = () => {
           </Menu.Item>
           <Menu.Item
             key="/history"
-            icon={<CalendarOutlined />}
+            icon={<HistoryOutlined />}
             style={
               location.pathname === "/history"
                 ? {
@@ -213,7 +217,7 @@ const SideNav = () => {
         }}
         onClick={handleLogout}
       >
-        <LogoutOutlined style={{ marginRight: "10px", marginLeft: "0px" }} />
+        <LogoutOutlined style={{ marginRight: "10px", marginLeft: "5px" }} />
         Logout
       </div>
     </SideNavContainer>

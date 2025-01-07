@@ -215,9 +215,13 @@ const ListFieldOwner = () => {
       form.resetFields();
     }
     setDrawerVisible(true);
+    setIsEdit(false);
   };
 
   const handleDrawerClose = () => {
+    if (isEdit) {
+      form.resetFields();
+    }
     setDrawerVisible(false);
     setSelectedField(null);
   };
@@ -229,6 +233,21 @@ const ListFieldOwner = () => {
       handleCreateField();
     }
   };
+  
+  const handleDrawerEdit = (field) => {
+    setSelectedField(field);
+    setIsEdit(true);
+    form.setFieldsValue({
+      field_name: field.field_name,
+      description: field.description,
+      field_type: field.field_type,
+      address: field.address,
+      price: field.price,
+      image_url: field.image_url,
+    });
+    setDrawerVisible(true);
+  };
+  
 
   return (
     <Layout
@@ -284,7 +303,7 @@ const ListFieldOwner = () => {
                   actions={[
                     <EditOutlined
                       key="edit"
-                      onClick={() => handleDrawerOpen(field)}
+                      onClick={() => handleDrawerEdit(field)}
                     />,
                     <Popconfirm
                       key="delete"

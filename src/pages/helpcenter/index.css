@@ -1,244 +1,211 @@
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body, html {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .help-center {
-    font-family: Arial, sans-serif;
-    background: url('../../assets/images/loginbg.png') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
-    text-align: center;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .header {
-    color: #d7ff00;
-    padding: 2rem 0;
-    margin-top: 35px;
-    justify-content: center;
-    font-size: 2rem;
-  }
-  
-  .search-bar {
-    width: 60%;
-    margin: 0 auto 2rem auto;
-  }
-  
-
-  .search-bar .ant-input-affix-wrapper {
-    width: 100%;
-    max-width: 600px;
-  }
-  
-  .content-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 0 2rem;
-    margin: 0 auto;
-    max-width: 1400px;
-    flex: 1;
-  }
-  
-  .card {
-    background-color: #222;
-    border: 1px solid #ABFD13;
-    border-radius: 10px;
-    padding: 1.5rem;
-    text-align: left;
-    height: 100%; 
-  }
-  
-  .card h2 {
-    color: #d7ff00;
-    margin-bottom: 1rem;
-  }
-  
-  .card p {
-    margin-bottom: 1rem;
-  }
-  
-  .card ul {
-    padding-left: 1.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .card li {
-    margin-bottom: 0.5rem;
-  }
-  
-  .card a {
-    color: #d7ff00;
-    text-decoration: none;
-  }
-  
-  .card a:hover {
-    text-decoration: underline;
-  }
-  
-  .footer {
-    margin-top: auto;
-    padding: 1rem;
-    background-color: #ABFD13;
-    color: #000;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .search-bar {
-      width: 80%;
-    }
-    
-    .content-grid {
-      padding: 0 1rem;
-      gap: 1rem;
-    }
-    
-    .card {
-      padding: 1rem;
-    }
-  } */
-
-
-  /* index.css */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  font-family: "Poppins";
+}
+
+.help-center {
+  padding: 0px;
+  min-height: 100vh;
+  color: #fff;
+}
+
+.header {
+  color: #abfd13;
+  font-size: 2.5rem;
+  margin: 35px 0;
+  text-align: center;
+  font-weight: bold;
+  justify-content: center;
+}
+
+.search-bar {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  background-color: transparent;
+  border-color: #abfd13;
+}
+
+.search-bar .ant-input-affix-wrapper {
+  background-color: #111 !important;
+  border: 1px solid #333 !important;
+}
+
+.search-bar .ant-input {
+  background-color: #111 !important;
+  color: #fff !important;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  background-color: transparent;
+}
+
+.card {
+  background-color: transparent;
+  border: 1px solid #ABFD13;
+  border-radius: 10px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-family: "Poppins";
+
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(171, 253, 19, 0.2);
+}
+
+.card h2 {
+  color: #abfd13;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: "Poppins";
+}
+
+.card p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  font-family: "Poppins";
   
-  body, html {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: #000;
-  }
+}
+
+.card-content {
+  flex: 1;
+  font-family: "Poppins";
+}
+
+.faq-section {
+  margin-bottom: 20px;
+  font-family: "Poppins";
+  color: #abfd13;
+}
+
+.faq-section:last-child {
+  margin-bottom: 0;
+  font-family: "Poppins";
+}
+
+.card ul {
+  list-style-position: inside;
+  margin-bottom: 15px;
+  padding-left: 15px;
+  font-family: "Poppins";
+}
+
+.card li {
+  margin-bottom: 8px;
+  color: #fff;
+  line-height: 1.6;
+  font-family: "Poppins";
+}
+
+.card a {
+  color: #d7ff00;
+  text-decoration: none;
+  transition: color 0.2s;
+  font-family: "Poppins";
+}
+
+.card a:hover {
+  color: #fff;
+}
+
+.contact-info p {
+  margin-bottom: 10px;
+  font-family: "Poppins";
   
-  .help-center-container {
-    display: flex;
-    min-height: 100vh;
-  }
-  
-  .sidenav {
-    width: 250px;
-    background-color: #111;
-    padding: 20px;
-    border-right: 1px solid #333;
-  }
-  
-  .help-center-content {
-    flex: 1;
-    padding: 30px;
-    background-color: #000;
-    color: #fff;
-  }
-  
-  .header {
-    color: #d7ff00;
-    font-size: 2rem;
-    margin-top: 35px;
-    justify-content: center;
-    font-size: 2rem;
-    text-align: center;
-  }
-  
-  .search-bar {
-    max-width: 600px;
-    margin: 0 auto 40px;
-  }
-  
-  .search-bar .ant-input-affix-wrapper {
-    background-color: #111 !important;
-    border: 1px solid #333 !important;
-  }
-  
-  .search-bar .ant-input {
-    background-color: #111 !important;
-    color: #fff !important;
-  }
-  
+}
+
+.email-link {
+  color: #abfd13;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.email-link:hover {
+  color: #abfd13;
+}
+
+.footer {
+  background: rgba(255, 255, 255, 0.03) !important; /* Translucent white background */
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 90px;
+  color: #abfd13 !important;
+  text-align: center;
+  position: relative; /* Ensure footer sticks to the bottom */
+  bottom: 0; /* Attach to the bottom of the viewport */
+  left: 0;
+  width: 100%; /* Stretch across the full width */
+  z-index: 10;
+  font-size: 14px;
+  font-family: "Poppins";
+  padding-left: 110px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
   .content-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
+    grid-template-columns: 1fr;
+    padding: 0 20px;
   }
-  
+
   .card {
-    background-color: #111;
-    border: 1px solid #ABFD13;
-    border-radius: 10px;
-    padding: 25px;
-    height: 100%;
+    min-height: auto;
   }
-  
-  .card h2 {
-    color: #d7ff00;
-    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .help-center {
+    padding: 20px;
+    margin-left: 0;
   }
-  
-  .card p {
-    margin-bottom: 15px;
+
+  .header {
+    font-size: 2rem;
+    margin: 25px 0;
   }
-  
-  .card ul {
-    list-style-position: inside;
-    margin-bottom: 15px;
-    padding-left: 15px;
+
+  .search-bar {
+    padding: 0 20px;
   }
-  
-  .card li {
-    margin-bottom: 8px;
-    color: #fff;
-  }
-  
-  .card a {
-    color: #d7ff00;
-    text-decoration: none;
-  }
-  
-  .social-links {
-    text-align: center;
-    margin: 40px 0;
-  }
-  
+
   .footer {
-    text-align: center;
-    padding: 20px 0;
-    color: #ABFD13;
-    font-size: 0.9rem;
+    margin-left: 0;
+    width: 100%;
+    padding: 10px;
   }
-  
-  /* Responsive Design */
-  @media screen and (max-width: 1024px) {
-    .content-grid {
-      grid-template-columns: 1fr; /* Single column on smaller screens */
-    }
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    font-size: 1.75rem;
   }
-  
-  @media screen and (max-width: 768px) {
-    .help-center-container {
-      flex-direction: column;
-    }
-    
-    .sidenav {
-      width: 100%;
-      height: auto;
-    }
-    
-    .help-center-content {
-      padding: 20px;
-    }
+
+  .card {
+    padding: 20px;
   }
+
+  .card h2 {
+    font-size: 1.25rem;
+  }
+}

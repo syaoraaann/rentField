@@ -16,8 +16,10 @@ import ReservationList from "./pages/reservation";
 import DashboardOwner from "./pages/dashboardowner";
 import DashboardAdmin from "./pages/dashboardadmin";
 import ListField from "./pages/list_field";
+import ProfileOwner from "./pages/profile_owner";
 import ListFieldOwner from "./pages/list_field_owner";
 import History from "./pages/history";
+import HelpCenter from "./pages/helpcenter"
 import AuthProvider from "./providers/AuthProvider";
 
 function App() {
