@@ -185,375 +185,373 @@ const DashboardRenter = () => {
         backgroundImage: `url(${bgImage})`, // Set background image
         backgroundSize: "cover", // Ensure the image covers the entire screen
         backgroundPosition: "center", // Center the image
-        backgroundRepeat: "no-repeat", // Prevent repeating the image  
+        backgroundRepeat: "no-repeat", // Prevent repeating the image
       }}
       className="layout-main-renter"
     >
       {/* Sidebar */}
       <SideNav />
-        <Content style={{ marginLeft: "256px"}} className="pageContent fadeIn">
-          <Row>
-            <div>
-              {/* Dashboard Header */}
-              <Title level={1} className="dashboard-header">
-                Ready to make the most of today, {username}?
-              </Title>
-              <Text className="desc-header">
-                Here's an overview of your recent activities!
-              </Text>
+      <Content style={{ marginLeft: "256px" }} className="pageContent fadeIn">
+        <Row>
+          <div>
+            {/* Dashboard Header */}
+            <Title level={1} className="dashboard-header">
+              Ready to make the most of today, {username}?
+            </Title>
+            <Text className="desc-header">
+              Here's an overview of your recent activities!
+            </Text>
+          </div>
+          <div>
+            {/* Notification Button */}
+            <Badge
+              count={notifications.length}
+              size="small"
+              className="notification-badge"
+            >
+              <BellOutlined
+                className="bell-icon"
+                onClick={showNotificationModal}
+              />
+            </Badge>
+          </div>
+        </Row>
+
+        {/* Carousel Component */}
+        <Carousel autoplay style={{ marginTop: "50px", marginBottom: "60px" }}>
+          {imageList.map((src, index) => (
+            <div key={index}>
+              <img
+                src={src}
+                alt={`carousel-${index}`}
+                className="img-carousel"
+              />
             </div>
-            <div>
-              {/* Notification Button */}
-              <Badge count={notifications.length} size="small" className="notification-badge">
-                <BellOutlined
-                  className="bell-icon"
-                  onClick={showNotificationModal}
-                />
-              </Badge>
-            </div>
-          </Row>
+          ))}
+        </Carousel>
 
-          {/* Carousel Component */}
-          <Carousel
-            autoplay
-            style={{ marginTop: "50px", marginBottom: "60px" }}
-          >
-            {imageList.map((src, index) => (
-              <div key={index}>
-                <img
-                  src={src}
-                  alt={`carousel-${index}`}
-                  className="img-carousel"
-                />
-              </div>
-            ))}
-          </Carousel>
-
-          <Modal
-            title={<span className="custom-title">Notifications</span>}
-            visible={isNotificationModalVisible} // Terhubung dengan state modal
-            onCancel={hideNotificationModal}
-            footer={null}
-            centered
-            width={500}
-            className="custom-modal-renter"
-            bodyStyle={{
-              background: "transparent",
-              color: "#d9d9d9",
-              padding: "20px",
-              maxHeight: "500px",
-              overflowY: "auto",
-            }}
-          >
-            <List
-              dataSource={notifications}
-              renderItem={(item) => (
-                <List.Item
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    padding: "15px",
-                    marginBottom: "10px",
-                    background: "rgba(50, 50, 50, 0.9)",
-                    borderRadius: "8px",
-                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-                    cursor: "pointer",
-                  }}
-                >
-                  {getIconByType(item.type)}
-                  <div style={{ marginLeft: "15px", flex: 1 }}>
-                    <Text
-                      style={{
-                        color: "#fff",
-                        fontWeight: "bold",
-                        fontSize: "14px",
-                      }}
-                    >
-                      {item.message}
-                    </Text>
-                    <Text
-                      style={{
-                        color: "#d9d9d9",
-                        fontSize: "12px",
-                        marginTop: "5px",
-                        display: "block",
-                      }}
-                    >
-                      {item.time}
-                    </Text>
-                  </div>
-                </List.Item>
-              )}
-            />
-          </Modal>
-
-          {/* Cards Layout */}
-          <Row gutter={[16, 16]}>
-            {/* First row: 2 cards */}
-            <Col xs={24} sm={12} md={8} lg={8} xl={12}>
-              <Link to="/my-point" style={{ color: "inherit" }}>
-                <Card
-                  bordered={false}
-                  style={{
-                    ...cardStyle,
-                    transform:
-                      hoveredCard === "mypoint"
-                        ? "translateY(-10px)"
-                        : "translateY(0)",
-                    boxShadow:
-                      hoveredCard === "mypoint"
-                        ? "0 6px 12px rgba(0, 0, 0, 0.15)"
-                        : "0 2px 6px rgba(0, 0, 0, 0.1)",
-                  }}
-                  hoverable
-                  onMouseEnter={() => handleMouseEnter("mypoint")}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <Title className="card-title" style={titleStyle}>
-                    MyPoint
-                  </Title>
-                  <Title level={1} style={cardContentTitleStyle}>
-                    12
-                  </Title>
-                  <Progress
-                    percent={50}
-                    status="active"
-                    strokeColor="#ABFD13"
-                    trailColor="#8c8c8c"
-                    className="progress-bar"
-                  />
-                </Card>
-              </Link>
-            </Col>
-            <Col span={12}>
-              <Link to="/history" style={{ color: "inherit" }}>
-                <Card
-                  bordered={false}
-                  style={{
-                    ...cardStyle,
-                    transform:
-                      hoveredCard === "history"
-                        ? "translateY(-10px)"
-                        : "translateY(0)",
-                    boxShadow:
-                      hoveredCard === "history"
-                        ? "0 6px 12px rgba(0, 0, 0, 0.15)"
-                        : "0 2px 6px rgba(0, 0, 0, 0.1)",
-                  }}
-                  hoverable
-                  onMouseEnter={() => handleMouseEnter("history")}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <Title className="card-title" style={titleStyle}>
-                    History
-                  </Title>
-                  <div
+        <Modal
+          title={<span className="custom-title">Notifications</span>}
+          visible={isNotificationModalVisible} // Terhubung dengan state modal
+          onCancel={hideNotificationModal}
+          footer={null}
+          centered
+          width={500}
+          className="custom-modal-renter"
+          bodyStyle={{
+            background: "transparent",
+            color: "#d9d9d9",
+            padding: "20px",
+            maxHeight: "500px",
+            overflowY: "auto",
+          }}
+        >
+          <List
+            dataSource={notifications}
+            renderItem={(item) => (
+              <List.Item
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "15px",
+                  marginBottom: "10px",
+                  background: "rgba(50, 50, 50, 0.9)",
+                  borderRadius: "8px",
+                  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+                  cursor: "pointer",
+                }}
+              >
+                {getIconByType(item.type)}
+                <div style={{ marginLeft: "15px", flex: 1 }}>
+                  <Text
                     style={{
-                      maxHeight: "250px",
-                      overflowY: "auto",
-                      padding: "10px",
-                      backgroundColor: "transparent",
+                      color: "#fff",
+                      fontWeight: "bold",
+                      fontSize: "14px",
                     }}
                   >
-                    <List
-                      bordered={false}
-                      dataSource={historyBookedFields}
-                      renderItem={(item) => (
-                        <List.Item
+                    {item.message}
+                  </Text>
+                  <Text
+                    style={{
+                      color: "#d9d9d9",
+                      fontSize: "12px",
+                      marginTop: "5px",
+                      display: "block",
+                    }}
+                  >
+                    {item.time}
+                  </Text>
+                </div>
+              </List.Item>
+            )}
+          />
+        </Modal>
+
+        {/* Cards Layout */}
+        <Row gutter={[16, 16]}>
+          {/* First row: 2 cards */}
+          <Col xs={24} sm={12} md={8} lg={8} xl={12}>
+            <Link to="/my-point" style={{ color: "inherit" }}>
+              <Card
+                bordered={false}
+                style={{
+                  ...cardStyle,
+                  transform:
+                    hoveredCard === "mypoint"
+                      ? "translateY(-10px)"
+                      : "translateY(0)",
+                  boxShadow:
+                    hoveredCard === "mypoint"
+                      ? "0 6px 12px rgba(0, 0, 0, 0.15)"
+                      : "0 2px 6px rgba(0, 0, 0, 0.1)",
+                }}
+                hoverable
+                onMouseEnter={() => handleMouseEnter("mypoint")}
+                onMouseLeave={handleMouseLeave}
+              >
+                <Title className="card-title" style={titleStyle}>
+                  MyPoint
+                </Title>
+                <Title level={1} style={cardContentTitleStyle}>
+                  12
+                </Title>
+                <Progress
+                  percent={50}
+                  status="active"
+                  strokeColor="#ABFD13"
+                  trailColor="#8c8c8c"
+                  className="progress-bar"
+                />
+              </Card>
+            </Link>
+          </Col>
+          <Col span={12}>
+            <Link to="/history" style={{ color: "inherit" }}>
+              <Card
+                bordered={false}
+                style={{
+                  ...cardStyle,
+                  transform:
+                    hoveredCard === "history"
+                      ? "translateY(-10px)"
+                      : "translateY(0)",
+                  boxShadow:
+                    hoveredCard === "history"
+                      ? "0 6px 12px rgba(0, 0, 0, 0.15)"
+                      : "0 2px 6px rgba(0, 0, 0, 0.1)",
+                }}
+                hoverable
+                onMouseEnter={() => handleMouseEnter("history")}
+                onMouseLeave={handleMouseLeave}
+              >
+                <Title className="card-title" style={titleStyle}>
+                  History
+                </Title>
+                <div
+                  style={{
+                    maxHeight: "250px",
+                    overflowY: "auto",
+                    padding: "10px",
+                    backgroundColor: "transparent",
+                  }}
+                >
+                  <List
+                    bordered={false}
+                    dataSource={historyBookedFields}
+                    renderItem={(item) => (
+                      <List.Item
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          padding: "10px",
+                          background: "rgba(55, 55, 55, 1)",
+                          borderRadius: "8px",
+                          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                          marginBottom: "10px",
+                          fontFamily: "Poppins",
+                        }}
+                      >
+                        <Text
                           style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            padding: "10px",
-                            background:
-                              "rgba(55, 55, 55, 1)",
-                            borderRadius: "8px",
-                            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                            marginBottom: "10px",
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            color: "#ABFD13",
                             fontFamily: "Poppins",
+                            letterSpacing: "1.0px",
+                            paddingLeft: "10px",
                           }}
                         >
-                          <Text
-                            style={{
-                              fontSize: "14px",
-                              fontWeight: "bold",
-                              color: "#ABFD13",
-                              fontFamily: "Poppins",
-                              letterSpacing: "1.0px",
-                              paddingLeft: "10px",
-                            }}
-                          >
-                            {item.fieldName}
-                          </Text>
-                          <Text style={{ fontSize: "1em", color: "#d9d9d9" }}>
-                            {item.date}
-                          </Text>
-                          <Text
-                            style={{
-                              fontSize: "1em",
-                              color: "#d9d9d9",
-                              paddingRight: "10px",
-                            }}
-                          >
-                            {item.bookings} bookings
-                          </Text>
-                        </List.Item>
-                      )}
-                    />
-                  </div>
-                </Card>
-              </Link>
-            </Col>
-
-            {/* Baris kedua: Top Booked Fields */}
-            <Col span={12}>
-              <Link to="/upcoming-event" style={{ color: "inherit" }}>
-                <Card
-                  bordered={false}
-                  style={{
-                    ...cardStyle,
-                    transform:
-                      hoveredCard === "upcoming"
-                        ? "translateY(-10px)"
-                        : "translateY(0)",
-                    boxShadow:
-                      hoveredCard === "upcoming"
-                        ? "0 6px 12px rgba(0, 0, 0, 0.15)"
-                        : "0 2px 6px rgba(0, 0, 0, 0.1)",
-                  }}
-                  hoverable
-                  onMouseEnter={() => handleMouseEnter("upcoming")}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <Title className="card-title" style={titleStyle}>
-                    Upcoming Schedule
-                  </Title>
-                  <div
-                    style={{
-                      maxHeight: "250px",
-                      overflowY: "auto",
-                      padding: "10px",
-                      backgroundColor: "transparent",
-                      borderRadius: "8px",
-                    }}
-                  >
-                    <List
-                      bordered={false}
-                      dataSource={upcomingEvents}
-                      renderItem={(item) => (
-                        <List.Item
+                          {item.fieldName}
+                        </Text>
+                        <Text style={{ fontSize: "1em", color: "#d9d9d9" }}>
+                          {item.date}
+                        </Text>
+                        <Text
                           style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "flex-start",
-                            padding: "10px",
-                            background:
-                              "rgba(55, 55, 55, 1)",
-                            borderRadius: "8px",
-                            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                            marginBottom: "10px",
-                            paddingLeft: "20px",
+                            fontSize: "1em",
+                            color: "#d9d9d9",
                             paddingRight: "10px",
-                            fontFamily: "Poppins",
                           }}
                         >
-                          <Text
-                            style={{
-                              fontSize: "1.2em",
-                              fontWeight: "bold",
-                              color: "#ABFD13",
-                            }}
-                          >
-                            {item.title}
-                          </Text>
-                          <Text style={{ fontSize: "1em", color: "#d9d9d9" }}>
-                            {item.date}
-                          </Text>
-                          <Text style={{ fontSize: "1em", color: "#d9d9d9" }}>
-                            {item.location}
-                          </Text>
-                        </List.Item>
-                      )}
-                    />
-                  </div>
-                </Card>
-              </Link>
-            </Col>
-            <Col span={12}>
-              <Link to="/topbooked" style={{ color: "inherit" }}>
-                <Card
-                  bordered={false}
+                          {item.bookings} bookings
+                        </Text>
+                      </List.Item>
+                    )}
+                  />
+                </div>
+              </Card>
+            </Link>
+          </Col>
+
+          {/* Baris kedua: Top Booked Fields */}
+          <Col span={12}>
+            <Link to="/upcoming-event" style={{ color: "inherit" }}>
+              <Card
+                bordered={false}
+                style={{
+                  ...cardStyle,
+                  transform:
+                    hoveredCard === "upcoming"
+                      ? "translateY(-10px)"
+                      : "translateY(0)",
+                  boxShadow:
+                    hoveredCard === "upcoming"
+                      ? "0 6px 12px rgba(0, 0, 0, 0.15)"
+                      : "0 2px 6px rgba(0, 0, 0, 0.1)",
+                }}
+                hoverable
+                onMouseEnter={() => handleMouseEnter("upcoming")}
+                onMouseLeave={handleMouseLeave}
+              >
+                <Title className="card-title" style={titleStyle}>
+                  Upcoming Schedule
+                </Title>
+                <div
                   style={{
-                    ...cardStyle,
-                    transform:
-                      hoveredCard === "topbooked"
-                        ? "translateY(-10px)"
-                        : "translateY(0)",
-                    boxShadow:
-                      hoveredCard === "topbooked"
-                        ? "0 6px 12px rgba(0, 0, 0, 0.15)"
-                        : "0 2px 6px rgba(0, 0, 0, 0.1)",
+                    maxHeight: "250px",
+                    overflowY: "auto",
+                    padding: "10px",
+                    backgroundColor: "transparent",
+                    borderRadius: "8px",
                   }}
-                  hoverable
-                  onMouseEnter={() => handleMouseEnter("topbooked")}
-                  onMouseLeave={handleMouseLeave}
                 >
-                  <Title className="card-title" style={titleStyle}>
-                    Top Booked
-                  </Title>
-                  <div
-                    style={{
-                      maxHeight: "250px",
-                      overflowY: "auto",
-                      padding: "10px",
-                      backgroundColor: "transparent",
-                      borderRadius: "8px",
-                    }}
-                  >
-                    <List
-                      bordered={false}
-                      dataSource={topBookedFields}
-                      renderItem={(item) => (
-                        <List.Item
+                  <List
+                    bordered={false}
+                    dataSource={upcomingEvents}
+                    renderItem={(item) => (
+                      <List.Item
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "flex-start",
+                          padding: "10px",
+                          background: "rgba(55, 55, 55, 1)",
+                          borderRadius: "8px",
+                          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                          marginBottom: "10px",
+                          paddingLeft: "20px",
+                          paddingRight: "10px",
+                          fontFamily: "Poppins",
+                        }}
+                      >
+                        <Text
                           style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            padding: "10px",
-                            background:
-                              "rgba(55, 55, 55, 1)",
-                            borderRadius: "8px",
-                            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                            marginBottom: "10px",
-                            paddingLeft: "20px",
-                            paddingRight: "20px",
-                            fontFamily: "Poppins",
+                            fontSize: "1.2em",
+                            fontWeight: "bold",
+                            color: "#ABFD13",
                           }}
                         >
-                          <Text
-                            style={{
-                              fontSize: "1.2em",
-                              fontWeight: "bold",
-                              color: "#ABFD13",
-                            }}
-                          >
-                            {item.fieldName}
-                          </Text>
-                          <Text style={{ fontSize: "1em", color: "#d9d9d9" }}>
-                            {item.bookings} bookings
-                          </Text>
-                        </List.Item>
-                      )}
-                    />
-                  </div>
-                </Card>
-              </Link>
-            </Col>
-          </Row>
-        </Content>
-        {/* Footer */}
-        <Footer className="footer-dashboard-renter">
-          Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
-          Pendidikan Ganesha
-        </Footer>
+                          {item.title}
+                        </Text>
+                        <Text style={{ fontSize: "1em", color: "#d9d9d9" }}>
+                          {item.date}
+                        </Text>
+                        <Text style={{ fontSize: "1em", color: "#d9d9d9" }}>
+                          {item.location}
+                        </Text>
+                      </List.Item>
+                    )}
+                  />
+                </div>
+              </Card>
+            </Link>
+          </Col>
+          <Col span={12}>
+            <Link to="/topbooked" style={{ color: "inherit" }}>
+              <Card
+                bordered={false}
+                style={{
+                  ...cardStyle,
+                  transform:
+                    hoveredCard === "topbooked"
+                      ? "translateY(-10px)"
+                      : "translateY(0)",
+                  boxShadow:
+                    hoveredCard === "topbooked"
+                      ? "0 6px 12px rgba(0, 0, 0, 0.15)"
+                      : "0 2px 6px rgba(0, 0, 0, 0.1)",
+                }}
+                hoverable
+                onMouseEnter={() => handleMouseEnter("topbooked")}
+                onMouseLeave={handleMouseLeave}
+              >
+                <Title className="card-title" style={titleStyle}>
+                  Top Booked
+                </Title>
+                <div
+                  style={{
+                    maxHeight: "250px",
+                    overflowY: "auto",
+                    padding: "10px",
+                    backgroundColor: "transparent",
+                    borderRadius: "8px",
+                  }}
+                >
+                  <List
+                    bordered={false}
+                    dataSource={topBookedFields}
+                    renderItem={(item) => (
+                      <List.Item
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          padding: "10px",
+                          background: "rgba(55, 55, 55, 1)",
+                          borderRadius: "8px",
+                          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                          marginBottom: "10px",
+                          paddingLeft: "20px",
+                          paddingRight: "20px",
+                          fontFamily: "Poppins",
+                        }}
+                      >
+                        <Text
+                          style={{
+                            fontSize: "1.2em",
+                            fontWeight: "bold",
+                            color: "#ABFD13",
+                          }}
+                        >
+                          {item.fieldName}
+                        </Text>
+                        <Text style={{ fontSize: "1em", color: "#d9d9d9" }}>
+                          {item.bookings} bookings
+                        </Text>
+                      </List.Item>
+                    )}
+                  />
+                </div>
+              </Card>
+            </Link>
+          </Col>
+        </Row>
+      </Content>
+      {/* Footer */}
+      <Footer className="footer-dashboard-renter">
+        Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
+        Pendidikan Ganesha
+      </Footer>
     </Layout>
   );
 };

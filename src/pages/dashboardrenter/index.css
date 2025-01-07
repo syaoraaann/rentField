@@ -31,7 +31,7 @@
   font-size: 36px;
   padding-top: 0px !important;
   padding-right: 0px !important;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 /* Simple Fade-In Animation */
@@ -134,13 +134,23 @@
 /* Hover efek pada tombol X */
 .custom-modal-renter .ant-modal-close:hover {
   color: #ffffff !important; /* Warna putih saat di-hover */
-  background-color: rgba(255, 255, 255, 0.1); /* Tambahkan sedikit latar belakang */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Tambahkan sedikit latar belakang */
   border-radius: 50%; /* Buat bentuk bulat */
 }
 
 /* Footer styles */
 .footer-dashboard-renter {
-  background: rgba(255, 255, 255, 0.03) !important; /* Translucent white background */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.03
+  ) !important; /* Translucent white background */
   backdrop-filter: blur(10px) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

@@ -4,12 +4,13 @@ html {
   margin: 0;
   padding: 0;
   background-color: #090909;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins" !important;
 }
 
 .layout-main {
   background-color: #090909;
   min-height: 100vh;
+  font-family: "Poppins" !important;
 }
 
 .page-title {
@@ -217,23 +218,31 @@ html {
   display: flex;
   align-items: center;
   gap: 16px;
+  background-color: transparent !important;
 }
 
 .search-input {
   width: 200px;
-  background-color: #090909;
-  border-color: #abfd13;
+  height: 45px !important ;
+  background-color: transparent !important;
+  border-color: #abfd13 !important;
   color: #d9d9d9;
 }
 
-.search-input::placeholder {
-  color: #d9d9d9;
+.search-input input::placeholder {
+  color: #d9d9d9 !important;
+  font-weight: lighter !important;
+  font-family: "Poppins" !important;
+}
+
+.search-padding-bot {
+  padding-bottom: 2px !important;
 }
 
 .category-select {
   width: 200px;
   margin-top: 21px;
-  height: 66px !important ;
+  height: 68px !important ;
   color: #090909;
   padding-bottom: 24px;
   border-color: #abfd13;
@@ -241,8 +250,8 @@ html {
 
 /* Field Card Styles */
 .field-card {
-  min-height: 550px;
-  height: 100%;
+  height: auto;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
   background-color: #222222;

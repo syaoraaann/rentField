@@ -500,7 +500,7 @@ const ListField = () => {
         <WeatherDisplay />
 
         <Row className="search-section">
-          <Col>
+          <Col className="search-padding-bot">
             <Input
               placeholder="Search fields..."
               value={searchTerm}

@@ -6,8 +6,8 @@
 
 .reslis-layout .ant-table-thead > tr > th {
   background: #161616 !important;
-  color: #ABFD13 !important;
-  border-bottom: 1px solid #ABFD13 !important;
+  color: #abfd13 !important;
+  border-bottom: 1px solid #abfd13 !important;
 }
 
 .reslis-layout .ant-table-tbody > tr > td {
@@ -22,11 +22,11 @@
 .reslis-layout .ant-select-selector {
   background: #161616 !important;
   color: #fff !important;
-  border: 1px solid #ABFD13 !important;
+  border: 1px solid #abfd13 !important;
 }
 
 .reslis-layout .ant-select-arrow {
-  color: #ABFD13 !important;
+  color: #abfd13 !important;
 }
 
 .reslis-layout .ant-input {
@@ -41,14 +41,14 @@
 } */
 
 .reslis-layout .ant-input-prefix {
-  color: #ABFD13 !important;
+  color: #abfd13 !important;
 }
 
 /* Modal styles */
 .reslis-modal .ant-modal-content,
 .reslis-withdraw-modal .ant-modal-content {
   background: #161616 !important;
-  border: 1px solid #ABFD13 !important;
+  border: 1px solid #abfd13 !important;
 }
 
 .reslis-modal .ant-modal-header,
@@ -59,7 +59,7 @@
 
 .reslis-modal .ant-modal-title,
 .reslis-withdraw-modal .ant-modal-title {
-  color: #ABFD13 !important;
+  color: #abfd13 !important;
 }
 
 .reslis-modal .ant-modal-close,
@@ -69,7 +69,7 @@
 
 .reslis-modal .ant-modal-close:hover,
 .reslis-withdraw-modal .ant-modal-close:hover {
-  color: #ABFD13 !important;
+  color: #abfd13 !important;
 }
 
 .reslis-modal .ant-modal-footer,
@@ -92,13 +92,13 @@
 }
 
 .reslis-layout .ant-btn:hover {
-  border-color: #ABFD13 !important;
-  color: #ABFD13 !important;
+  border-color: #abfd13 !important;
+  color: #abfd13 !important;
 }
 
 .reslis-layout .ant-btn-primary {
-  background: #ABFD13 !important;
-  border-color: #ABFD13 !important;
+  background: #abfd13 !important;
+  border-color: #abfd13 !important;
   color: #161616 !important;
 }
 
@@ -111,7 +111,7 @@
 /* Dropdown styles */
 .reslis-layout .ant-select-dropdown {
   background: #161616 !important;
-  border: 1px solid #ABFD13 !important;
+  border: 1px solid #abfd13 !important;
 }
 
 .reslis-layout .ant-select-item {
@@ -120,7 +120,7 @@
 
 .reslis-layout .ant-select-item-option-selected {
   background: #2a2a2a !important;
-  color: #ABFD13 !important;
+  color: #abfd13 !important;
 }
 
 .reslis-layout .ant-select-item-option-active {
@@ -129,7 +129,7 @@
 
 /* Search container */
 .reslis-search-container .ant-input {
-  background: #2A2A2A !important;
+  background: #2a2a2a !important;
 }
 
 /* Table specific styles */
@@ -139,14 +139,14 @@
 
 /* Form input specific styles */
 .reslis-form-input {
-  background: #2A2A2A !important;
+  background: #2a2a2a !important;
   border: 1px solid #2a2a2a !important;
   color: #fff !important;
 }
 
 .reslis-form-input:hover,
 .reslis-form-input:focus {
-  border-color: #ABFD13 !important;
+  border-color: #abfd13 !important;
 }
 
 /* Modal button specific styles */
@@ -157,8 +157,8 @@
 }
 
 .reslis-modal-button:hover {
-  border-color: #ABFD13 !important;
-  color: #ABFD13 !important;
+  border-color: #abfd13 !important;
+  color: #abfd13 !important;
 }
 
 /* Footer styles */
@@ -168,7 +168,7 @@
 
 /* Additional specific styles */
 .reslis-title {
-  color: #A3FF12 !important;
+  color: #a3ff12 !important;
 }
 
 .reslis-withdraw-form .ant-input::placeholder {
@@ -182,7 +182,7 @@
 /* New Total Income Card Styles */
 .reslis-total-income.ant-card {
   background: #161616 !important;
-  border: 1px solid #ABFD13 !important;
+  border: 1px solid #abfd13 !important;
   border-radius: 8px !important;
   margin-bottom: 24px !important;
   transition: all 0.3s ease !important;
@@ -204,12 +204,12 @@
 }
 
 .reslis-total-income .anticon {
-  color: #ABFD13 !important;
+  color: #abfd13 !important;
   font-size: 24px !important;
 }
 
 .reslis-total-income .total-amount {
-  color: #ABFD13 !important;
+  color: #abfd13 !important;
   font-size: 24px !important;
   font-weight: bold !important;
   display: block !important;
@@ -221,19 +221,19 @@
   .reslis-total-income.ant-card {
     margin: 16px 0 !important;
   }
-  
+
   .reslis-total-income .ant-card-body {
     padding: 16px !important;
   }
-  
+
   .reslis-total-income h3 {
     font-size: 14px !important;
   }
-  
+
   .reslis-total-income .total-amount {
     font-size: 20px !important;
   }
-  
+
   .reslis-total-income .anticon {
     font-size: 20px !important;
   }
@@ -244,7 +244,7 @@
   .reslis-total-income.ant-card {
     background: #161616 !important;
   }
-  
+
   .reslis-total-income:hover {
     box-shadow: 0 4px 12px rgba(171, 253, 19, 0.15) !important;
   }
@@ -256,7 +256,7 @@
     break-inside: avoid;
     border: 1px solid #000 !important;
   }
-  
+
   .reslis-total-income h3,
   .reslis-total-income .total-amount {
     color: #000 !important;

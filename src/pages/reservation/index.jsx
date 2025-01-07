@@ -355,8 +355,9 @@ const ReservationList = () => {
               style={{
                 width: 120,
                 borderRadius: "8px",
+                height: 52,
               }}
-              dropdownStyle={{ background: "#2A2A2A" }}
+              dropdownStyle={{ background: "#2A2A2A", color: "#d9d9d9" }}
             >
               <Option value="all">All Status</Option>
               <Option value="WAITING_CONFIRMATION">Waiting</Option>
