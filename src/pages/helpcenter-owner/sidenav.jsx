@@ -10,9 +10,9 @@ import {
   TableOutlined,
   CreditCardOutlined,
 } from "@ant-design/icons";
-import { Link, replace, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { jwtStorage } from "../../utils/jwt_storage";
+// import side
 
 // Styled Components for better structure and readability
 const SideNavContainer = styled.div`
@@ -66,9 +66,9 @@ const SideNavOwner = () => {
     }
   }, []);
 
-  const doLogout = () => {
-    jwtStorage.removeItem();
-    navigate("/", {replace: true}) 
+  const handleLogout = () => {
+    sessionStorage.removeItem("username");
+    navigate("/");
   };
 
   const getMenuItemStyle = (path) =>
@@ -80,7 +80,7 @@ const SideNavOwner = () => {
     <SideNavContainer>
       {/* User Info Section */}
       <UserInfoContainer>
-        <Link to="/profile-owner">
+        <Link to="/profile">
           <ProfileImage />
           <Username>{username || "User"}</Username>
         </Link>
@@ -176,7 +176,7 @@ const SideNavOwner = () => {
           color: "#fff",
           paddingLeft: "28px",
         }}
-        onClick={doLogout}
+        onClick={handleLogout}
       >
         <LogoutOutlined style={{ marginRight: "10px"}} />
         Logout

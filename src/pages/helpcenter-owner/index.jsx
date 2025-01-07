@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 import bgImage from "../../assets/images/bgnew.jpg";
-import SideNav from "../layout/sidenav";
+import SideNav from "./sidenav";
 import {
   Input,
   Layout
@@ -10,7 +10,7 @@ import {
   SearchOutlined
 } from "@ant-design/icons";
 
-const HelpCenter = () => {
+const HelpCenterOwner = () => {
   const handleSearch = (value) => {
     // Add your search functionality here
     console.log(value);
@@ -102,4 +102,4 @@ const HelpCenter = () => {
   );
 };
 
-export default HelpCenter;
+export default HelpCenterOwner;

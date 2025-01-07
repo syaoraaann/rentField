@@ -8,7 +8,7 @@ import "leaflet/dist/leaflet.css";
 
 import LandingPage from "./pages/landing_page";
 import Login from "./pages/login";
-import Profile from "./pages/profile/index";
+// import ProfileRenter from "./pages/profile-renter/index";
 import ApiPage from "./pages/api_page/index";
 import DashboardRenter from "./pages/dashboardrenter";
 import MyPoint from "./pages/my_point";
@@ -19,8 +19,9 @@ import ListField from "./pages/list_field";
 import ProfileOwner from "./pages/profile_owner";
 import ListFieldOwner from "./pages/list_field_owner";
 import History from "./pages/history";
-import HelpCenter from "./pages/helpcenter"
+import HelpCenterRenter from "./pages/helpcenter-renter";
 import AuthProvider from "./providers/AuthProvider";
+import HelpCenterOwner from "./pages/helpcenter-owner";
 
 function App() {
   return (
@@ -35,12 +36,17 @@ function App() {
           <Route path="/dashboard-admin" element={<DashboardAdmin />} />
           <Route path="/list-field" element={<ListField />} />
           <Route path="/list-field-owner" element={<ListFieldOwner />} />
-          <Route path="/profile" element={<Profile />} />
+          {/* <Route path="/profile-renter" element={<ProfileRenter />} /> */}
           <Route path="/api-page" element={<ApiPage />} />
           <Route path="/my-point" element={<MyPoint />} />
           <Route path="/reservation-list" element={<ReservationList />} />
           <Route path="/history" element={<History />} />
           <Route path="/video-review" element={<ApiPage />} />
+          <Route path="/helpcenter-owner" element={<HelpCenterOwner />} />
+          <Route path="/helpcenter-renter" element={<HelpCenterRenter />} />
+          <Route path="/profile-owner" element={<ProfileOwner />} />
+          
+         
         </Routes>
       </AuthProvider>
     </div>
