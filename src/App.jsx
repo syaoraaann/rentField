@@ -40,6 +40,7 @@ function App() {
         <Route path="/history" element={<History />} />
         <Route path="/help-center" element={<HelpCenter />} />
         <Route path="/video-review" element={<ApiPage/>} />
+        <Route path="/profile-owner" element={<ProfileOwner />} />
       </Routes>
     </div>
   );

@@ -29,23 +29,14 @@ export const jwtStorage = {
     }
   },
 
-  async removeToken() {
+  async removeItem() {
     try {
       storage.removeItem(token_auth);
     } catch (error) {
-      console.error("Error removing token:", error);
-      throw error; // Re-throw for error handling
+      console.error("Error retrieving token:", error);
+      return null; // Handle missing or invalid token
     }
   },
-
-  // async removeItem() {
-  //   try {
-  //     storage.removeItem(token_auth);
-  //   } catch (error) {
-  //     console.error("Error retrieving token:", error);
-  //     return null; // Handle missing or invalid token
-  //   }
-  // },
 };
 
 // Optional: Wrap in an immediately invoked function expression (IIFE)
