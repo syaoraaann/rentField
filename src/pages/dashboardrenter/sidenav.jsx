@@ -13,6 +13,7 @@ import {
 } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { jwtStorage } from "../../utils/jwt_storage";
 
 const SideNavContainer = styled.div`
   width: 256px;
@@ -45,10 +46,12 @@ const SideNav = () => {
     }
   }, []);
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("username"); // Hapus nama pengguna dari sessionStorage
-    navigate("/"); // Redirect ke halaman utama setelah logout
+  const doLogout = () => {
+    jwtStorage.removeItem(); // Hapus nama pengguna dari sessionStorage
+    navigate("/", {replace: true}); // Redirect ke halaman utama setelah logout
+
   };
+
 
   return (
     <SideNavContainer>
@@ -60,7 +63,7 @@ const SideNav = () => {
         }}
       >
         {/* Profile photo and name */}
-        <Link to="/profile">
+        <Link to="/profile-renter">
           <div
             style={{
               backgroundColor: "#515151",
@@ -172,10 +175,10 @@ const SideNav = () => {
         {/* Management Group */}
         <Menu.ItemGroup key="management" title="Management">
           <Menu.Item
-            key="/help-center"
+            key="/helpcenter-renter"
             icon={<QuestionCircleOutlined />}
             style={
-              location.pathname === "/help-center"
+              location.pathname === "/helpcenter-renter"
                 ? {
                     backgroundColor: "#ABFD13",
                     color: "#1A1A1A",
@@ -184,7 +187,7 @@ const SideNav = () => {
                 : { width: "220px" }
             }
           >
-            <Link to="/help-center">Help Center</Link>
+            <Link to="/helpcenter-renter">Help Center</Link>
           </Menu.Item>
           <Menu.Item
             key="/video-review"
@@ -215,7 +218,7 @@ const SideNav = () => {
           marginTop: "20px",
           marginRight: "10px",
         }}
-        onClick={handleLogout}
+        onClick={doLogout}
       >
         <LogoutOutlined style={{ marginRight: "10px", marginLeft: "5px" }} />
         Logout

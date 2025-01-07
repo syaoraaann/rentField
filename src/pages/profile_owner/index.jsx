@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "../../pages/profile_owner/index.css";
-import SideNavOwner from './sidenav';
+import SideNavProfileOwner from './sidenav';
 
 const ProfileOwner = () => {
     const [formData, setFormData] = useState({

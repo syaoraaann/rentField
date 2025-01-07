@@ -1,0 +1,211 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  font-family: "Poppins";
+}
+
+.help-center-nab {
+  padding: 0px;
+  min-height: 100vh;
+  color: #fff;
+}
+
+.header-nab {
+  color: #abfd13;
+  font-size: 2.5rem;
+  margin: 35px 0;
+  text-align: center;
+  font-weight: bold;
+  justify-content: center;
+}
+
+.search-bar-nab {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  background-color: transparent;
+  border-color: #abfd13;
+}
+
+.search-bar-nab .ant-input-affix-wrapper {
+  background-color: #111 !important;
+  border: 1px solid #333 !important;
+}
+
+.search-bar-nab .ant-input {
+  background-color: #111 !important;
+  color: #fff !important;
+}
+
+.content-grid-nab {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  background-color: transparent;
+}
+
+.card-nab {
+  background-color: transparent;
+  border: 1px solid #ABFD13;
+  border-radius: 10px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-family: "Poppins";
+
+}
+
+.card-nab:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(171, 253, 19, 0.2);
+}
+
+.card-nab h2 {
+  color: #abfd13;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: "Poppins";
+}
+
+.card-nab p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  font-family: "Poppins";
+  
+}
+
+.card-content-nab {
+  flex: 1;
+  font-family: "Poppins";
+}
+
+.faq-section-nab {
+  margin-bottom: 20px;
+  font-family: "Poppins";
+  color: #abfd13;
+}
+
+.faq-section:last-child {
+  margin-bottom: 0;
+  font-family: "Poppins";
+}
+
+.card ul {
+  list-style-position: inside;
+  margin-bottom: 15px;
+  padding-left: 15px;
+  font-family: "Poppins";
+}
+
+.card li {
+  margin-bottom: 8px;
+  color: #fff;
+  line-height: 1.6;
+  font-family: "Poppins";
+}
+
+.card a {
+  color: #d7ff00;
+  text-decoration: none;
+  transition: color 0.2s;
+  font-family: "Poppins";
+}
+
+.card a:hover {
+  color: #fff;
+}
+
+.contact-info-nab p {
+  margin-bottom: 10px;
+  font-family: "Poppins";
+  
+}
+
+.email-link-nab {
+  color: #abfd13;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.email-link:hover {
+  color: #abfd13;
+}
+
+.footer-nab {
+  background: rgba(255, 255, 255, 0.03) !important; /* Translucent white background */
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 90px;
+  color: #abfd13 !important;
+  text-align: center;
+  position: relative; /* Ensure footer sticks to the bottom */
+  bottom: 0; /* Attach to the bottom of the viewport */
+  left: 0;
+  width: 100%; /* Stretch across the full width */
+  z-index: 10;
+  font-size: 14px;
+  font-family: "Poppins";
+  padding-left: 110px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+  }
+
+  .card {
+    min-height: auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .help-center {
+    padding: 20px;
+    margin-left: 0;
+  }
+
+  .header {
+    font-size: 2rem;
+    margin: 25px 0;
+  }
+
+  .search-bar {
+    padding: 0 20px;
+  }
+
+  .footer {
+    margin-left: 0;
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    font-size: 1.75rem;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .card h2 {
+    font-size: 1.25rem;
+  }
+}

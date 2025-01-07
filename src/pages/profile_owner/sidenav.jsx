@@ -53,7 +53,7 @@ const Username = styled.div`
   cursor: pointer;
 `;
 
-const SideNavOwner = () => {
+const SideNavProfileOwner = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [username, setUsername] = useState(null);
@@ -181,4 +181,4 @@ const SideNavOwner = () => {
   );
 };
 
-export default SideNavOwner;
+export default SideNavProfileOwner;
