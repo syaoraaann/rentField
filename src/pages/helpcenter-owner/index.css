@@ -13,13 +13,13 @@ body, html {
   font-family: "Poppins";
 }
 
-.help-center {
+.help-center-nab {
   padding: 0px;
   min-height: 100vh;
   color: #fff;
 }
 
-.header {
+.header-nab {
   color: #abfd13;
   font-size: 2.5rem;
   margin: 35px 0;
@@ -28,24 +28,24 @@ body, html {
   justify-content: center;
 }
 
-.search-bar {
+.search-bar-nab {
   max-width: 600px;
   margin: 0 auto 40px;
   background-color: transparent;
   border-color: #abfd13;
 }
 
-.search-bar .ant-input-affix-wrapper {
+.search-bar-nab .ant-input-affix-wrapper {
   background-color: #111 !important;
   border: 1px solid #333 !important;
 }
 
-.search-bar .ant-input {
+.search-bar-nab .ant-input {
   background-color: #111 !important;
   color: #fff !important;
 }
 
-.content-grid {
+.content-grid-nab {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
@@ -54,7 +54,7 @@ body, html {
   background-color: transparent;
 }
 
-.card {
+.card-nab {
   background-color: transparent;
   border: 1px solid #ABFD13;
   border-radius: 10px;
@@ -67,12 +67,12 @@ body, html {
 
 }
 
-.card:hover {
+.card-nab:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(171, 253, 19, 0.2);
 }
 
-.card h2 {
+.card-nab h2 {
   color: #abfd13;
   margin-bottom: 20px;
   font-size: 1.5rem;
@@ -80,19 +80,19 @@ body, html {
   font-family: "Poppins";
 }
 
-.card p {
+.card-nab p {
   margin-bottom: 15px;
   line-height: 1.6;
   font-family: "Poppins";
   
 }
 
-.card-content {
+.card-content-nab {
   flex: 1;
   font-family: "Poppins";
 }
 
-.faq-section {
+.faq-section-nab {
   margin-bottom: 20px;
   font-family: "Poppins";
   color: #abfd13;
@@ -128,13 +128,13 @@ body, html {
   color: #fff;
 }
 
-.contact-info p {
+.contact-info-nab p {
   margin-bottom: 10px;
   font-family: "Poppins";
   
 }
 
-.email-link {
+.email-link-nab {
   color: #abfd13;
   text-decoration: none;
   transition: color 0.2s;
@@ -144,7 +144,7 @@ body, html {
   color: #abfd13;
 }
 
-.footer {
+.footer-nab {
   background: rgba(255, 255, 255, 0.03) !important; /* Translucent white background */
   backdrop-filter: blur(10px) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;

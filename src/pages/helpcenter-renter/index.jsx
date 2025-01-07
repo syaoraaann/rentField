@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 import bgImage from "../../assets/images/bgnew.jpg";
-import SideNavOwner from "../helpcenter-owner/sidenav";
+import SideNavRenter from "./sidenav";
 import {
   Input,
   Layout
@@ -26,7 +26,7 @@ const HelpCenterRenter = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <SideNav />
+      <SideNavRenter />
       <Layout.Content style={{ marginLeft: 250, padding:'0 48px' }}>
         <div className="help-center">
           <h1 className="header">How Can We Help You?</h1>

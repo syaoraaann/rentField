@@ -28,9 +28,9 @@ const HelpCenterOwner = () => {
     >
       <SideNav />
       <Layout.Content style={{ marginLeft: 250, padding:'0 48px' }}>
-        <div className="help-center">
+        <div className="help-center-nab">
           <h1 className="header">How Can We Help You?</h1>
-          <div className="search-bar">
+          <div className="search-bar-nab">
             <Input
               prefix={<SearchOutlined />}
               placeholder="Input search text"
@@ -40,7 +40,7 @@ const HelpCenterOwner = () => {
             />
           </div>
           
-          <div className="content-grid">
+          <div className="content-grid-nab">
             <div className="card">
               <h2>Getting Started</h2>
               <p>
@@ -52,8 +52,8 @@ const HelpCenterOwner = () => {
             
             <div className="card">
               <h2>FAQ (Frequently Asked Questions)</h2>
-              <div className="card-content">
-                <div className="faq-section">
+              <div className="card-content-nab">
+                <div className="faq-section-nab">
                   <p><b>For Owners:</b></p>
                   <ul>
                     <li>How to register as the field owner?</li>
@@ -61,7 +61,7 @@ const HelpCenterOwner = () => {
                     <li>How about the payment system works?</li>
                   </ul>
                 </div>
-                <div className="faq-section">
+                <div className="faq-section-nab">
                   <p><b>For Renters:</b></p>
                   <ul>
                     <li>How to book the field?</li>
@@ -84,16 +84,16 @@ const HelpCenterOwner = () => {
 
             <div className="card">
               <h2>Still Can't Find What You Need?</h2>
-              <div className="contact-info">
+              <div className="contact-info-nab">
                 <p>Contact Us through:</p>
-                <p>Email: <a href="mailto:rentfield@gmail.com" className="email-link">rentfield@gmail.com</a></p>
+                <p>Email: <a href="mailto:rentfield@gmail.com" className="email-link-nab">rentfield@gmail.com</a></p>
                 <p>Phone: (+62) 83111274549</p>
                 <p>Address: Udayana St. 20, Singaraja</p>
               </div>
             </div>
           </div>
 
-          <footer className="footer">
+          <footer className="footer-nab">
             <p>Copyright © 2024 RentField.com - Powered by CodeBlue Universitas Pendidikan Ganesha</p>
           </footer>
         </div>

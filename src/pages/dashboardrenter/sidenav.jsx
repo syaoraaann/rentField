@@ -47,9 +47,11 @@ const SideNav = () => {
   }, []);
 
   const doLogout = () => {
-    jwtStorage.removeItem("username"); // Hapus nama pengguna dari sessionStorage
-    navigate("/"); // Redirect ke halaman utama setelah logout
+    jwtStorage.removeItem(); // Hapus nama pengguna dari sessionStorage
+    navigate("/", {replace: true}); // Redirect ke halaman utama setelah logout
+
   };
+
 
   return (
     <SideNavContainer>
