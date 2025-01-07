@@ -53,7 +53,7 @@ const Username = styled.div`
   cursor: pointer;
 `;
 
-const SideNav = () => {
+const SideNavOwner = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [username, setUsername] = useState(null);
@@ -92,6 +92,9 @@ const SideNav = () => {
           backgroundColor: "transparent",
           border: "none",
           marginTop: "-180px",
+          display: "flex", // Mengatur menu sebagai flex container
+          flexDirection: "column", // Atur elemen secara vertikal
+          alignItems: "center", // Memusatkan elemen secara horizontal
         }}
         selectedKeys={[location.pathname]}
         mode="inline"
@@ -149,11 +152,11 @@ const SideNav = () => {
             label: "Management",
             children: [
               {
-                key: "/help-center",
+                key: "/helpcenter-renter",
                 icon: <QuestionCircleOutlined />,
-                label: <Link to="/help-center">Help Center</Link>,
+                label: <Link to="/helpcenter-renter">Help Center</Link>,
                 style: {
-                  ...getMenuItemStyle("/help-center"),
+                  ...getMenuItemStyle("/helpcenter-renter"),
                   width: "220px",
                 },
               },
@@ -170,11 +173,11 @@ const SideNav = () => {
           display: "flex",
           alignItems: "center",
           color: "#fff",
-          paddingLeft: "33px",
+          paddingLeft: "28px",
         }}
         onClick={handleLogout}
       >
-        <LogoutOutlined style={{ marginRight: "10px" }} />
+        <LogoutOutlined style={{ marginRight: "10px"}} />
         Logout
       </div>
     </SideNavContainer>
