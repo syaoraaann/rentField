@@ -10,6 +10,7 @@ import {
   Card,
   Select,
   DatePicker,
+  TimePicker,
   notification,
   Modal,
 } from "antd";
@@ -31,6 +32,7 @@ import {
   CloudDrizzle,
 } from "lucide-react";
 import bgImage from "../../assets/images/bgnew.jpg";
+import { getDataPrivate } from "../../utils/api";
 
 // Leaflet icon configuration
 delete L.Icon.Default.prototype._getIconUrl;
@@ -148,7 +150,7 @@ const WeatherDisplay = () => {
   );
 };
 
-const PaymentModal = ({ visible, onCancel, total, onConfirm }) => {
+const PaymentModal = ({ visible: open, onCancel, total, onConfirm }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [bank, setBank] = useState("BRI");
@@ -166,13 +168,13 @@ const PaymentModal = ({ visible, onCancel, total, onConfirm }) => {
 
   return (
     <Modal
-      visible={visible}
+      open={open}
       onCancel={onCancel}
       onConfirm={onConfirm}
       footer={null}
       title="Pay to Book"
       className="payment-modal"
-      bodyStyle={{ className: "payment-modal-body" }}
+      styles={{ className: "payment-modal-body" }}
       width={700}
     >
       <div className="payment-input-section">
@@ -265,86 +267,111 @@ const ListField = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [selectedField, setSelectedField] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedHours, setSelectedHours] = useState([]);
-  const [selectedFieldOption, setSelectedFieldOption] = useState(null);
-  const [isRentButtonVisible, setIsRentButtonVisible] = useState(false);
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [subtotal, setSubtotal] = useState(0);
-  const [additionalCharge, setAdditionalCharge] = useState(0);
   const [tax, setTax] = useState(0);
   const [total, setTotal] = useState(0);
-  const [totalHarga, setTotalHarga] = useState(0);
   const [paymentModalVisible, setPaymentModalVisible] = useState(false);
+  const [fields, setFields] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const fields = [
-    {
-      id: 1,
-      name: "Singaraja Soccer",
-      category: "Soccer Field",
-      address:
-        "Jl. Udayana, Banjar Jawa, Kec. Buleleng, Kabupaten Buleleng, Bali 81113",
-      coordinates: [-8.115001271274899, 115.09062769800654],
-      imageUrl:
-        "https://fastly.4sqi.net/img/general/600x600/58082938_ZBAJ3Wcn-B_m8pP16l42N0uVIgxWSdnNIQG36_ff0Nk.jpg",
-      basePrice: 50000,
-      operatingHours: {
-        start: 0,
-        end: 24,
-      },
-      fieldOptions: [
-        { name: "Regular", additionalCharge: 0 },
-        { name: "Premium", additionalCharge: 15000 },
-        { name: "VIP", additionalCharge: 25000 },
-      ],
-    },
-    // Add more fields here as needed
-  ];
+  useEffect(() => {
+    fetchFields();
+  }, []);
+
+  const fetchFields = async () => {
+    setLoading(true);
+    try {
+      const response = await getDataPrivate("/api/v1/list_field/read");
+      if (response?.data) {
+        const transformedFields = response.data.map((field) => ({
+          id: field.id_field,
+          name: field.field_name,
+          category: field.field_type,
+          address: field.address,
+          coordinates: [-8.115001271274899, 115.09062769800654],
+          imageUrl:
+            field.image_url ||
+            "https://fastly.4sqi.net/img/general/600x600/58082938_ZBAJ3Wcn-B_m8pP16l42N0uVIgxWSdnNIQG36_ff0Nk.jpg",
+          basePrice: parseFloat(field.price),
+          operatingHours: {
+            start: 0,
+            end: 24,
+          },
+        }));
+        setFields(transformedFields);
+      }
+    } catch (err) {
+      setError(err.message);
+      notification.error({
+        message: "Error",
+        description: "Failed to fetch fields data",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const calculateHours = (start, end) => {
+    if (!start || !end) return 0;
+    const startHour = start.hour();
+    const endHour = end.hour();
+    const startMinute = start.minute();
+    const endMinute = end.minute();
+
+    let hours = endHour - startHour;
+
+    // Adjust for minutes - round up to the next hour
+    if (endMinute > startMinute) {
+      hours += 1;
+    }
+
+    return hours > 0 ? hours : 0;
+  };
+
+  // Function to calculate total price
+  const calculateTotal = (start, end, basePrice) => {
+    const hours = calculateHours(start, end);
+    const subtotalValue = hours * basePrice;
+    const taxValue = subtotalValue * 0.1; // 10% tax
+    const totalValue = subtotalValue + taxValue;
+
+    setSubtotal(subtotalValue);
+    setTax(taxValue);
+    setTotal(totalValue);
+  };
+
+  const handleTimeChange = (times, timeString) => {
+    const [start, end] = times;
+    setStartTime(start);
+    setEndTime(end);
+
+    if (start && end && selectedField) {
+      calculateTotal(start, end, selectedField.basePrice);
+    }
+  };
 
   const disabledDate = (current) => {
     return current && current < dayjs().startOf("day");
   };
 
-  const getAvailableHours = () => {
-    if (!selectedDate || !selectedField) return [];
-
-    const now = dayjs();
-    const selectedDay = dayjs(selectedDate);
-    const isToday = selectedDay.isSame(now, "day");
-    const currentHour = now.hour();
-
-    const { start, end } = selectedField.operatingHours;
-
-    return Array.from({ length: 24 }, (_, i) => {
-      if (i < start || i >= end) {
-        return null;
+  // Time picker disabled hours
+  const disabledHours = () => {
+    const hours = [];
+    if (selectedField) {
+      // Disable hours outside operating hours
+      for (let i = 0; i < selectedField.operatingHours.start; i++) {
+        hours.push(i);
       }
-
-      if (isToday && i <= currentHour) {
-        return null;
+      for (let i = selectedField.operatingHours.end; i < 24; i++) {
+        hours.push(i);
       }
-
-      return {
-        label: `${String(i).padStart(2, "0")}:00 - ${String(i + 1).padStart(
-          2,
-          "0"
-        )}:00`,
-        value: `${i}:00 - ${i + 1}:00`,
-      };
-    }).filter(Boolean);
-  };
-
-  const formatOperatingHours = (hours) => {
-    const formatHour = (hour) => {
-      if (hour === 24) return "00:00";
-      return `${String(hour).padStart(2, "0")}:00`;
-    };
-
-    if (hours.start === 0 && hours.end === 24) {
-      return "24 Hours";
     }
-
-    return `${formatHour(hours.start)} - ${formatHour(hours.end)}`;
+    return hours;
   };
 
   const handlePaymentConfirm = () => {
@@ -360,14 +387,11 @@ const ListField = () => {
   const showDrawer = (field) => {
     setSelectedField(field);
     setDrawerVisible(true);
-    setTotalHarga(0);
     setSubtotal(0);
-    setAdditionalCharge(0);
     setTax(0);
     setTotal(0);
-    setIsRentButtonVisible(false);
-    setSelectedFieldOption(null);
-    setSelectedHours([]);
+    setStartTime(null);
+    setEndTime(null);
     setSelectedDate(null);
   };
 
@@ -375,70 +399,22 @@ const ListField = () => {
     setDrawerVisible(false);
     setSelectedField(null);
     setSelectedDate(null);
-    setSelectedHours([]);
-    setSelectedFieldOption(null);
-    setIsRentButtonVisible(false);
+    setStartTime(null);
+    setEndTime(null);
   };
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    setSelectedHours([]);
-    if (selectedField && selectedFieldOption) {
-      const option = selectedField.fieldOptions.find(
-        (opt) => opt.name === selectedFieldOption
-      );
-      calculateTotal(0, selectedField.basePrice, option?.additionalCharge || 0);
-    }
-  };
-
-  const handleHoursChange = (value) => {
-    setSelectedHours(value);
-    if (selectedField && selectedFieldOption) {
-      const option = selectedField.fieldOptions.find(
-        (opt) => opt.name === selectedFieldOption
-      );
-      calculateTotal(
-        value.length,
-        selectedField.basePrice,
-        option?.additionalCharge || 0
-      );
-    }
-  };
-
-  const handleFieldOptionChange = (value) => {
-    setSelectedFieldOption(value);
-    setIsRentButtonVisible(true);
-    if (selectedField) {
-      const option = selectedField.fieldOptions.find(
-        (opt) => opt.name === value
-      );
-      calculateTotal(
-        selectedHours.length,
-        selectedField.basePrice,
-        option?.additionalCharge || 0
-      );
-    }
-  };
-
-  const calculateTotal = (hours, basePrice, additionalChargePerHour) => {
-    const subtotalValue = hours * basePrice;
-    const additionalChargeValue = hours * additionalChargePerHour;
-    const taxValue = (subtotalValue + additionalChargeValue) * 0.1;
-    const totalValue = subtotalValue + additionalChargeValue + taxValue;
-
-    setSubtotal(subtotalValue);
-    setAdditionalCharge(additionalChargeValue);
-    setTax(taxValue);
-    setTotal(totalValue);
-    setTotalHarga(totalValue);
+    setStartTime(null);
+    setEndTime(null);
+    setTotal(0);
   };
 
   const handleRent = () => {
-    if (!selectedDate || selectedHours.length === 0 || !selectedFieldOption) {
+    if (!selectedDate || !startTime || !endTime) {
       notification.error({
         message: "Incomplete Information",
-        description:
-          "Please select date, hours, and field option before proceeding.",
+        description: "Please select date and time range before proceeding.",
       });
       return;
     }
@@ -484,6 +460,19 @@ const ListField = () => {
     return matchesSearch && matchesCategory;
   });
 
+  const formatOperatingHours = (hours) => {
+    const formatHour = (hour) => {
+      if (hour === 24) return "00:00";
+      return `${String(hour).padStart(2, "0")}:00`;
+    };
+
+    if (hours.start === 0 && hours.end === 24) {
+      return "24 Hours";
+    }
+
+    return `${formatHour(hours.start)} - ${formatHour(hours.end)}`;
+  };
+
   return (
     <Layout
       className="layout-main"
@@ -499,8 +488,11 @@ const ListField = () => {
       <Layout.Content className="content-wrapper-renter">
         <WeatherDisplay />
 
+        {loading && <div>Loading fields...</div>}
+        {error && <div>Error: {error}</div>}
+
         <Row className="search-section">
-          <Col className="search-padding-bot">
+          <Col>
             <Input
               placeholder="Search fields..."
               value={searchTerm}
@@ -560,7 +552,7 @@ const ListField = () => {
                     >
                       <Text className="field-category">{field.category}</Text>
                       <Text className="field-price">
-                        Base Price /Hr: Rp {field.basePrice.toLocaleString()}
+                        Price /Hr: Rp {field.basePrice.toLocaleString()}
                       </Text>
                       <Text className="field-hours">
                         Operating Hours:{" "}
@@ -621,57 +613,39 @@ const ListField = () => {
           />
 
           <div className="required-label">
-            Choose Hours<span className="required-mark">*</span>
+            Choose Time Range<span className="required-mark">*</span>
           </div>
-          <Select
-            mode="multiple"
-            placeholder="Select Hours"
-            value={selectedHours}
-            onChange={handleHoursChange}
+          <TimePicker.RangePicker
+            value={[startTime, endTime]}
+            onChange={handleTimeChange}
+            format="HH:mm"
+            minuteStep={30}
             className="drawer-select"
+            disabledHours={disabledHours}
             disabled={!selectedDate}
-            options={getAvailableHours()}
           />
-
-          <div className="required-label">
-            Select Field Option<span className="required-mark">*</span>
-          </div>
-          <Select
-            placeholder="Select Field Option"
-            value={selectedFieldOption}
-            onChange={handleFieldOptionChange}
-            className="drawer-select"
-          >
-            {selectedField?.fieldOptions.map((option) => (
-              <Option key={option.name} value={option.name}>
-                {option.name}
-                {option.additionalCharge > 0
-                  ? ` (+Rp ${option.additionalCharge.toLocaleString()}/hr)`
-                  : ""}
-              </Option>
-            ))}
-          </Select>
 
           <Button
             type="primary"
             onClick={handleRent}
-            disabled={
-              !isRentButtonVisible ||
-              !selectedDate ||
-              selectedHours.length === 0
-            }
+            disabled={!selectedDate || !startTime || !endTime}
             className="drawer-button"
           >
             RENT
           </Button>
 
-          {selectedFieldOption && (
+          {startTime && endTime && (
             <div className="payment-totals">
-              <Text strong>{`Subtotal: Rp ${subtotal.toLocaleString()}`}</Text>
-              <br />
               <Text
                 strong
-              >{`Additional Charge: Rp ${additionalCharge.toLocaleString()}`}</Text>
+              >{`Base Price/Hour: Rp ${selectedField?.basePrice.toLocaleString()}`}</Text>
+              <br />
+              <Text strong>{`Duration: ${calculateHours(
+                startTime,
+                endTime
+              )} hour(s)`}</Text>
+              <br />
+              <Text strong>{`Subtotal: Rp ${subtotal.toLocaleString()}`}</Text>
               <br />
               <Text strong>{`Tax (10%): Rp ${tax.toLocaleString()}`}</Text>
               <br />
