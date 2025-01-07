@@ -131,6 +131,7 @@ const ApiPage = () => {
   };
 
   const confirmDelete = async (id_play) => {
+    setIsLoading(true);
     try {
       setIsLoading(true);
       let url = `/api/playlist/${id_play}`;
@@ -170,13 +171,11 @@ const ApiPage = () => {
     setIsDrawerVisible(true);
     setIsEdit(true);
     setIdSelected(record?.id_play);
-    form.setFieldsValue({
-      play_name: record?.play_name,
-      play_genre: record?.play_genre,
-      play_description: record?.play_description,
-      play_url: record?.play_url,
-      play_thumbnail: record?.play_thumbnail,
-    });
+    form.setFieldValue("play_name", record?.play_name);
+    form.setFieldValue("play_genre", record?.play_genre);
+    form.setFieldValue("play_description", record?.play_description);
+    form.setFieldValue("play_url", record?.play_url);
+    form.setFieldValue("play_thumbnail", record?.play_thumbnail);
   };
 
   const handleFormSubmit = async () => {
