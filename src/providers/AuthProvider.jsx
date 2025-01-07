@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
         setIsLoadingScreen(false);
         if (resp?.user_logged) {
           setUserProfile(resp);
-          setRole(resp?.role || ""); // Store role (admin, owner, renter)
+          setRole(resp?.roles || ""); // Store role (admin, owner, renter)
           setIsLoggedIn(true);
         } else {
           setIsLoggedIn(false);
@@ -36,9 +36,18 @@ const AuthProvider = ({ children }) => {
     getDataProfile();
   }, []);
 
-  const login = (access_token) => {
+  const login = (access_token, role) => {
     jwtStorage.storeToken(access_token);
     getDataProfile();
+    if (role === "Admin") {
+      navigate("/dashboard-admin");
+    } else if (role === "Renter") {
+      navigate("/dashboard-renter");
+    } else if (role === "Owner") {
+      navigate("/dashboard-owner");
+    } else {
+      message.error("Role not recognized. Contact support.");
+    }
   };
 
   const logout = () => {

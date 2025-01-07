@@ -230,20 +230,16 @@ const DashboardRenter = () => {
           </Carousel>
 
           <Modal
-            title="Notifications"
+            title={<span className="custom-title">Notifications</span>}
             visible={isNotificationModalVisible} // Terhubung dengan state modal
             onCancel={hideNotificationModal}
             footer={null}
             centered
             width={500}
-            style={{
-              borderRadius: "12px",
-              overflow: "hidden",
-              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)",
-            }}
+            className="custom-modal-renter"
             bodyStyle={{
-              background: "linear-gradient(180deg, #222222, #111111)",
-              color: "#fff",
+              background: "transparent",
+              color: "#d9d9d9",
               padding: "20px",
               maxHeight: "500px",
               overflowY: "auto",
@@ -356,7 +352,7 @@ const DashboardRenter = () => {
                       maxHeight: "250px",
                       overflowY: "auto",
                       padding: "10px",
-                      backgroundColor: "#d9d9d9",
+                      backgroundColor: "transparent",
                     }}
                   >
                     <List
@@ -369,7 +365,7 @@ const DashboardRenter = () => {
                             justifyContent: "space-between",
                             padding: "10px",
                             background:
-                              "linear-gradient(180deg, #313131, #090909)",
+                              "rgba(55, 55, 55, 1)",
                             borderRadius: "8px",
                             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                             marginBottom: "10px",
@@ -436,7 +432,7 @@ const DashboardRenter = () => {
                       maxHeight: "250px",
                       overflowY: "auto",
                       padding: "10px",
-                      backgroundColor: "#d9d9d9",
+                      backgroundColor: "transparent",
                       borderRadius: "8px",
                     }}
                   >
@@ -451,7 +447,7 @@ const DashboardRenter = () => {
                             alignItems: "flex-start",
                             padding: "10px",
                             background:
-                              "linear-gradient(180deg, #313131, #090909)",
+                              "rgba(55, 55, 55, 1)",
                             borderRadius: "8px",
                             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                             marginBottom: "10px",
@@ -509,7 +505,7 @@ const DashboardRenter = () => {
                       maxHeight: "250px",
                       overflowY: "auto",
                       padding: "10px",
-                      backgroundColor: "#d9d9d9",
+                      backgroundColor: "transparent",
                       borderRadius: "8px",
                     }}
                   >
@@ -523,7 +519,7 @@ const DashboardRenter = () => {
                             justifyContent: "space-between",
                             padding: "10px",
                             background:
-                              "linear-gradient(180deg, #313131, #090909)",
+                              "rgba(55, 55, 55, 1)",
                             borderRadius: "8px",
                             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                             marginBottom: "10px",

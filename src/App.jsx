@@ -20,28 +20,29 @@ import ProfileOwner from "./pages/profile_owner";
 import ListFieldOwner from "./pages/list_field_owner";
 import History from "./pages/history";
 import HelpCenter from "./pages/helpcenter"
+import AuthProvider from "./providers/AuthProvider";
 
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/landing-page" element={<LandingPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard-renter" element={<DashboardRenter />} />
-        <Route path="/dashboard-owner" element={<DashboardOwner />} />
-        <Route path="/dashboard-admin" element={<DashboardAdmin />} />
-        <Route path="/list-field" element={<ListField />} />
-        <Route path="/list-field-owner" element={<ListFieldOwner />} />
-        <Route path="/profile" element={<Profile />} />
-        {/* <Route path="/api-page" element={<ApiPage />} /> */}
-        <Route path="/my-point" element={<MyPoint />} />
-        <Route path="/reservation-list" element={<ReservationList />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/help-center" element={<HelpCenter />} />
-        <Route path="/video-review" element={<ApiPage/>} />
-        <Route path="/profile-owner" element={<ProfileOwner />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/landing-page" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard-renter" element={<DashboardRenter />} />
+          <Route path="/dashboard-owner" element={<DashboardOwner />} />
+          <Route path="/dashboard-admin" element={<DashboardAdmin />} />
+          <Route path="/list-field" element={<ListField />} />
+          <Route path="/list-field-owner" element={<ListFieldOwner />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/api-page" element={<ApiPage />} />
+          <Route path="/my-point" element={<MyPoint />} />
+          <Route path="/reservation-list" element={<ReservationList />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/video-review" element={<ApiPage />} />
+        </Routes>
+      </AuthProvider>
     </div>
   );
 }
