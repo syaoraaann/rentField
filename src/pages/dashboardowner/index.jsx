@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Layout, Card, Row, Col, Typography, Badge, Modal, List } from "antd";
-import { BellOutlined, CheckCircleOutlined, ExclamationCircleOutlined, } from "@ant-design/icons";
+import {
+  BellOutlined,
+  CheckCircleOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
 import SideNavOwner from "./sidenavowner";
 import bgImage from "../../assets/images/bgnew.jpg"; // Import background image
 import "./index.css";
@@ -26,7 +30,8 @@ const detailedStats = {
 const DashboardOwner = () => {
   const [username, setUsername] = useState(null);
   const [notifications, setNotifications] = useState([]); // State untuk daftar notifikasi
-  const [isNotificationModalVisible, setIsNotificationModalVisible] = useState(false); // State untuk modal notifikasi
+  const [isNotificationModalVisible, setIsNotificationModalVisible] =
+    useState(false); // State untuk modal notifikasi
 
   useEffect(() => {
     const storedUsername = sessionStorage.getItem("username");
@@ -118,7 +123,7 @@ const DashboardOwner = () => {
                   fontWeight: "bold",
                 }}
               >
-                Welcome {username || "User"}!
+                Ready to make the most of today, {username || "user"}?
               </Title>
               <Text
                 style={{
@@ -131,11 +136,15 @@ const DashboardOwner = () => {
               </Text>
             </div>
             {/* Notification Button */}
-            <Badge count={notifications.length} size="small" className="notification-badge-owner">
-                <BellOutlined
-                  className="bell-icon-owner"
-                  onClick={showNotificationModal}
-                />
+            <Badge
+              count={notifications.length}
+              size="small"
+              className="notification-badge-owner"
+            >
+              <BellOutlined
+                className="bell-icon-owner"
+                onClick={showNotificationModal}
+              />
             </Badge>
           </div>
           <Modal
@@ -361,7 +370,6 @@ const DashboardOwner = () => {
             color: "#A3FF12",
             padding: "12px 24px",
             fontWeight: "bold",
-
           }}
         >
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas

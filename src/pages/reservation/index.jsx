@@ -1,299 +1,87 @@
-import React, { useState, useMemo } from "react";
-import {
-  Layout,
-  Input,
-  Select,
-  Table,
-  Avatar,
-  Modal,
-  Button,
-  Space,
-  Form,
-  Card,
-} from "antd";
-import { SearchOutlined, WalletOutlined } from "@ant-design/icons";
+import React, { useState, useEffect } from "react";
+import { Layout, Table, Card } from "antd";
+import { WalletOutlined } from "@ant-design/icons";
 import SideNavOwner from "../dashboardowner/sidenavowner";
 import bgImage from "../../assets/images/bgnew.jpg";
+import { getDataPrivate } from "../../utils/api";
 import "./index.css";
 
 const { Content, Footer } = Layout;
-const { Option } = Select;
 
 const ReservationList = () => {
-  // Modal states
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedRecord, setSelectedRecord] = useState(null);
-  const [modalAction, setModalAction] = useState(null);
-  const [withdrawModalVisible, setWithdrawModalVisible] = useState(false);
-  const [withdrawForm] = Form.useForm();
+  const [dataSources, setDataSources] = useState([]); // Untuk data tabel
+  const [loading, setLoading] = useState(false); // Untuk indikator loading
 
-  // Sample reservation data with income
-  const [reservations, setReservations] = useState([
-    {
-      key: "1",
-      name: "John Doe",
-      time: "2 hours ago",
-      status: "WAITING_CONFIRMATION",
-      income: "Rp. 100,000",
-      incomeValue: 100000, // Added numeric value for calculations
-    },
-    {
-      key: "2",
-      name: "Jane Smith",
-      time: "1 day ago",
-      status: "CONFIRMED",
-      income: "Rp. 100,000",
-      incomeValue: 100000,
-    },
-    {
-      key: "3",
-      name: "Mike Johnson",
-      time: "30 minutes ago",
-      status: "WAITING_CONFIRMATION",
-      income: "Rp. 100,000",
-      incomeValue: 100000,
-    },
-    {
-      key: "4",
-      name: "Sarah Wilson",
-      time: "5 days ago",
-      status: "COMPLETED",
-      income: "Rp. 100,000",
-      incomeValue: 100000,
-      isWithdrawn: false,
-    },
-  ]);
-
-  // Search and filter states
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState("all");
-
-  // Calculate total income using useMemo for better performance
-  const totalIncome = useMemo(() => {
-    return reservations.reduce(
-      (sum, reservation) => sum + reservation.incomeValue,
-      0
-    );
-  }, [reservations]);
-
-  // Format number to currency
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(amount);
+  // Hitung total saldo berdasarkan total_price
+  const calculateTotalSaldo = () => {
+    return dataSources.reduce((total, item) => {
+      const price = parseFloat(
+        item.total_price.replace(/\./g, "").replace(",", ".")
+      ); // Konversi format angka
+      return total + (isNaN(price) ? 0 : price); // Tambahkan jika valid
+    }, 0);
   };
 
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
+  useEffect(() => {
+    getBooking();
+  }, []);
 
-  const handleStatusChange = (value) => {
-    setSelectedStatus(value);
-  };
+  const getBooking = async () => {
+    setLoading(true);
+    try {
+      const resp = await getDataPrivate("/api/v1/booking/read_by_owner");
+      setLoading(false);
 
-  // Filter reservations based on search query and selected status
-  const filteredReservations = reservations.filter((reservation) => {
-    const matchesSearchQuery = reservation.name
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
+      console.log("Data API diterima:", resp); // Debug respons API
 
-    if (selectedStatus === "all") {
-      return matchesSearchQuery;
-    }
-
-    return matchesSearchQuery && reservation.status === selectedStatus;
-  });
-
-  // Handle button click in the table
-  const handleActionClick = (record, action) => {
-    setSelectedRecord(record);
-    setModalAction(action);
-    setModalVisible(true);
-  };
-
-  // Handle withdrawal button click
-  const handleWithdrawClick = (record) => {
-    setSelectedRecord(record);
-    setWithdrawModalVisible(true);
-    withdrawForm.resetFields();
-  };
-
-  // Handle confirmation in action modal
-  const handleConfirmAction = () => {
-    setReservations((prevReservations) =>
-      prevReservations.map((item) => {
-        if (item.key === selectedRecord.key) {
-          return {
-            ...item,
-            status: modalAction,
-          };
-        }
-        return item;
-      })
-    );
-    setModalVisible(false);
-  };
-
-  // Handle withdrawal form submission
-  const handleWithdrawSubmit = (values) => {
-    setReservations((prevReservations) =>
-      prevReservations.map((item) => {
-        if (item.key === selectedRecord.key) {
-          return {
-            ...item,
-            isWithdrawn: true,
-            withdrawalDetails: values,
-          };
-        }
-        return item;
-      })
-    );
-    setWithdrawModalVisible(false);
-    withdrawForm.resetFields();
-  };
-
-  // Handle modal cancels
-  const handleCancel = () => {
-    setModalVisible(false);
-  };
-
-  const handleWithdrawCancel = () => {
-    setWithdrawModalVisible(false);
-    withdrawForm.resetFields();
-  };
-
-  // Get modal content based on action
-  const getModalContent = () => {
-    switch (modalAction) {
-      case "CONFIRMED":
-        return "Are you sure you want to confirm this reservation?";
-      case "CANCELLED":
-        return "Are you sure you want to cancel this reservation?";
-      case "COMPLETED":
-        return "Are you sure you want to mark this reservation as completed?";
-      default:
-        return "Are you sure you want to proceed with this action?";
+      if (Array.isArray(resp)) {
+        setDataSources(resp); // Langsung set data jika berbentuk array
+      }
+    } catch (err) {
+      setLoading(false);
+      console.error("Error fetching data:", err);
     }
   };
 
-  // Table columns configuration
+  useEffect(() => {
+    console.log("Data Source untuk Tabel:", dataSources); // Debug data source
+  }, [dataSources]);
+
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      render: (text) => (
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <Avatar style={{ backgroundColor: "#2A2A2A" }} />
-          <span style={{ color: "#fff" }}>{text}</span>
-        </div>
-      ),
+      title: "Booking ID",
+      dataIndex: "id_booking",
+      key: "id_booking",
     },
     {
-      title: "Time",
-      dataIndex: "time",
-      key: "time",
-      render: (text) => <span style={{ color: "#fff" }}>{text}</span>,
+      title: "Booking Date",
+      dataIndex: "booking_date",
+      key: "booking_date",
     },
     {
-      title: "Income",
-      dataIndex: "income",
-      key: "income",
-      render: (text) => <span style={{ color: "#A3FF12" }}>{text}</span>,
+      title: "Field Name",
+      dataIndex: "field_name",
+      key: "field_name",
+    },
+    {
+      title: "Start Time",
+      dataIndex: "start_time",
+      key: "start_time",
+    },
+    {
+      title: "End Time",
+      dataIndex: "end_time",
+      key: "end_time",
     },
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: (status) => {
-        let color;
-        let text = status.replace(/_/g, " ").toLowerCase();
-        text = text.charAt(0).toUpperCase() + text.slice(1);
-
-        switch (status) {
-          case "WAITING_CONFIRMATION":
-            color = "#FFD700";
-            break;
-          case "CONFIRMED":
-            color = "#A3FF12";
-            break;
-          case "COMPLETED":
-            color = "#1890ff";
-            break;
-          case "CANCELLED":
-            color = "#ff4d4f";
-            break;
-          default:
-            color = "#fff";
-        }
-        return <span style={{ color }}>{text}</span>;
-      },
     },
     {
-      title: "Actions",
-      key: "action",
-      render: (_, record) => {
-        if (record.status === "WAITING_CONFIRMATION") {
-          return (
-            <Space>
-              <Button
-                onClick={() => handleActionClick(record, "CONFIRMED")}
-                style={{
-                  backgroundColor: "#A3FF12",
-                  borderColor: "#A3FF12",
-                  color: "black",
-                  fontWeight: "medium",
-                }}
-              >
-                Confirm
-              </Button>
-              <Button
-                danger
-                onClick={() => handleActionClick(record, "CANCELLED")}
-              >
-                Cancel
-              </Button>
-            </Space>
-          );
-        } else if (record.status === "CONFIRMED") {
-          return (
-            <Space>
-              <Button
-                type="primary"
-                onClick={() => handleActionClick(record, "COMPLETED")}
-                style={{ fontWeight: "medium" }}
-              >
-                Complete
-              </Button>
-              <Button
-                danger
-                onClick={() => handleActionClick(record, "CANCELLED")}
-              >
-                Cancel
-              </Button>
-            </Space>
-          );
-        } else if (record.status === "COMPLETED" && !record.isWithdrawn) {
-          return (
-            <Button
-              type="primary"
-              onClick={() => handleWithdrawClick(record)}
-              style={{
-                backgroundColor: "#A3FF12",
-                borderColor: "#A3FF12",
-                color: "black",
-                fontWeight: "medium",
-              }}
-            >
-              Withdraw
-            </Button>
-          );
-        }
-        return null;
-      },
+      title: "Total Price",
+      dataIndex: "total_price",
+      key: "total_price",
     },
   ];
 
@@ -309,7 +97,6 @@ const ReservationList = () => {
       }}
     >
       <SideNavOwner />
-
       <Layout
         className="reslis-inner-layout"
         style={{ marginLeft: 256, background: "transparent" }}
@@ -330,230 +117,85 @@ const ReservationList = () => {
             Reservation List
           </h1>
 
-          <div
-            className="reslis-search-container"
-            style={{ display: "flex", gap: "16px", marginBottom: "24px" }}
-          >
-            <Input
-              className="reslis-search-input"
-              placeholder="Search reservations..."
-              prefix={<SearchOutlined />}
-              value={searchQuery}
-              onChange={handleSearchChange}
+          {/* Bagian Total Reservations dan Total Saldo */}
+          <div style={{ display: "flex", gap: "16px", marginBottom: "24px" }}>
+            <Card
+              className="reslis-total-reservations"
               style={{
+                background: "#161616",
+                border: "1px solid #ABFD13",
+                borderRadius: "8px",
                 flex: 1,
-                borderRadius: "8px",
-                background: "#2A2A2A",
-                color: "#fff",
               }}
-            />
-
-            <Select
-              className="reslis-status-select"
-              value={selectedStatus}
-              onChange={handleStatusChange}
-              style={{
-                width: 120,
-                borderRadius: "8px",
-                height: 52,
-              }}
-              dropdownStyle={{ background: "#2A2A2A", color: "#d9d9d9" }}
             >
-              <Option value="all">All Status</Option>
-              <Option value="WAITING_CONFIRMATION">Waiting</Option>
-              <Option value="CONFIRMED">Confirmed</Option>
-              <Option value="COMPLETED">Completed</Option>
-              <Option value="CANCELLED">Cancelled</Option>
-            </Select>
-          </div>
-
-          {/* Total Income Card */}
-          <Card
-            className="reslis-total-income"
-            style={{
-              background: "#161616",
-              border: "1px solid #ABFD13",
-              borderRadius: "8px",
-              marginBottom: "24px",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-              <WalletOutlined style={{ fontSize: "24px", color: "#ABFD13" }} />
-              <div>
-                <h3 style={{ color: "#fff", margin: 0, fontSize: "16px" }}>
-                  Total Income
-                </h3>
-                <span
-                  style={{
-                    color: "#ABFD13",
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    display: "block",
-                    marginTop: "4px",
-                  }}
-                >
-                  {formatCurrency(totalIncome)}
-                </span>
-              </div>
-            </div>
-          </Card>
-
-          <Table
-            className="reslis-table"
-            columns={columns}
-            dataSource={filteredReservations}
-            pagination={false}
-            style={{ background: "transparent" }}
-          />
-
-          {/* Action Confirmation Modal */}
-          <Modal
-            className="reslis-modal"
-            title={`Confirm Action - ${selectedRecord?.name}`}
-            open={modalVisible}
-            onCancel={handleCancel}
-            footer={[
-              <Button
-                key="back"
-                className="reslis-modal-button"
-                onClick={handleCancel}
-                style={{ borderRadius: "4px" }}
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "16px" }}
               >
-                Back
-              </Button>,
-              <Button
-                key="submit"
-                className="reslis-modal-button-primary"
-                type="primary"
-                onClick={handleConfirmAction}
-                style={{
-                  backgroundColor:
-                    modalAction === "CANCELLED"
-                      ? "#ff4d4f"
-                      : modalAction === "COMPLETED"
-                      ? "#1890ff"
-                      : "#A3FF12",
-                  borderColor:
-                    modalAction === "CANCELLED"
-                      ? "#ff4d4f"
-                      : modalAction === "COMPLETED"
-                      ? "#1890ff"
-                      : "#A3FF12",
-                  borderRadius: "4px",
-                  color: modalAction === "CONFIRMED" ? "#090909" : "#fff",
-                }}
-              >
-                Confirm
-              </Button>,
-            ]}
-          >
-            {getModalContent()}
-          </Modal>
-
-          {/* Withdrawal Form Modal */}
-          <Modal
-            className="reslis-withdraw-modal"
-            title="Withdrawal Form"
-            open={withdrawModalVisible}
-            onCancel={handleWithdrawCancel}
-            footer={null}
-          >
-            <Form
-              className="reslis-withdraw-form"
-              form={withdrawForm}
-              layout="vertical"
-              onFinish={handleWithdrawSubmit}
-            >
-              <Form.Item
-                name="fullName"
-                label="Full Name"
-                rules={[
-                  { required: true, message: "Please enter your full name" },
-                ]}
-              >
-                <Input
-                  className="reslis-form-input"
-                  placeholder="Enter your full name"
+                <WalletOutlined
+                  style={{ fontSize: "24px", color: "#ABFD13" }}
                 />
-              </Form.Item>
-
-              <Form.Item
-                name="whatsappNumber"
-                label="WhatsApp Number (Ex: 08123456789)"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter your WhatsApp number",
-                  },
-                  {
-                    pattern: /^\d+$/,
-                    message: "Please enter a valid phone number",
-                  },
-                ]}
-              >
-                <Input
-                  className="reslis-form-input"
-                  placeholder="Enter your WhatsApp number"
-                />
-              </Form.Item>
-
-              <Form.Item
-                name="bankName"
-                label="Bank Name (Ex: Bank Rakyat Indonesia/Bank Central Asia/Bank Mandiri)"
-                rules={[
-                  { required: true, message: "Please enter your bank name" },
-                ]}
-              >
-                <Input
-                  className="reslis-form-input"
-                  placeholder="Enter your bank name"
-                />
-              </Form.Item>
-
-              <Form.Item
-                name="bankAccountNumber"
-                label="Bank Account Number"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter your bank account number",
-                  },
-                  {
-                    pattern: /^\d+$/,
-                    message: "Please enter a valid bank account number",
-                  },
-                ]}
-              >
-                <Input
-                  className="reslis-form-input"
-                  placeholder="Enter your bank account number"
-                />
-              </Form.Item>
-
-              <Form.Item className="reslis-form-buttons">
-                <Space style={{ width: "100%", justifyContent: "flex-end" }}>
-                  <Button
-                    className="reslis-cancel-button"
-                    onClick={handleWithdrawCancel}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    className="reslis-submit-button"
-                    type="primary"
-                    htmlType="submit"
+                <div>
+                  <h3 style={{ color: "#fff", margin: 0, fontSize: "16px" }}>
+                    Total Reservations
+                  </h3>
+                  <span
                     style={{
-                      backgroundColor: "#A3FF12",
-                      borderColor: "#A3FF12",
-                      color: "black",
+                      color: "#ABFD13",
+                      fontSize: "24px",
+                      fontWeight: "bold",
+                      display: "block",
+                      marginTop: "4px",
                     }}
                   >
-                    Submit
-                  </Button>
-                </Space>
-              </Form.Item>
-            </Form>
-          </Modal>
+                    {dataSources.length}
+                  </span>
+                </div>
+              </div>
+            </Card>
+
+            <Card
+              className="reslis-total-saldo"
+              style={{
+                background: "#161616",
+                border: "1px solid #ABFD13",
+                borderRadius: "8px",
+                flex: 1,
+              }}
+            >
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "16px" }}
+              >
+                <WalletOutlined
+                  style={{ fontSize: "24px", color: "#ABFD13" }}
+                />
+                <div>
+                  <h3 style={{ color: "#fff", margin: 0, fontSize: "16px" }}>
+                    Total Saldo
+                  </h3>
+                  <span
+                    style={{
+                      color: "#ABFD13",
+                      fontSize: "24px",
+                      fontWeight: "bold",
+                      display: "block",
+                      marginTop: "4px",
+                    }}
+                  >
+                    Rp {calculateTotalSaldo().toLocaleString("id-ID")}
+                  </span>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Tabel Reservasi */}
+          <Table
+            columns={columns}
+            dataSource={dataSources}
+            rowKey="id_booking" // Gunakan id_booking sebagai key unik
+            loading={loading}
+            pagination={false} // Nonaktifkan pagination
+          />
         </Content>
 
         <Footer
