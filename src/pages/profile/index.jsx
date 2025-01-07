@@ -21,7 +21,7 @@ import SideNav from "../dashboardrenter/sidenav";
 import moment from "moment";
 
 const { Title, Text } = Typography;
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 
 const Profile = () => {
   const [form] = Form.useForm();
@@ -150,7 +150,7 @@ const Profile = () => {
     uploadContainer: {
       width: "120px",
       height: "120px",
-      borderRadius: "50%", // Pastikan lingkaran sempurna
+      borderRadius: "50%",
       margin: "0 auto 24px",
       background: INPUT_BG,
       border: `2px solid ${LIME_GREEN}`,
@@ -158,7 +158,7 @@ const Profile = () => {
       alignItems: "center",
       justifyContent: "center",
       cursor: "pointer",
-      overflow: "hidden", // Tambahkan ini untuk memastikan gambar terpotong
+      overflow: "hidden",
       position: "relative",
     },
     uploadIcon: {
@@ -356,6 +356,10 @@ const Profile = () => {
             </Form>
           </div>
         </Content>
+        <Footer className="footer-dashboard-renter">
+          Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
+          Pendidikan Ganesha
+        </Footer>
       </Layout>
     </Layout>
   );

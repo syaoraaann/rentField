@@ -11,12 +11,11 @@ import {
   Select,
   Button,
   notification,
-  FloatButton,
   Skeleton,
   Popconfirm,
   Tooltip,
-  Dropdown,
   Space,
+  Modal,
 } from "antd";
 import {
   PlusCircleOutlined,
@@ -45,6 +44,8 @@ const ApiPage = () => {
   const [idSelected, setIdSelected] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [filterType, setFilterType] = useState("all");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [videoUrl, setVideoUrl] = useState("");
 
   const truncateText = (text, maxLength) => {
     if (text?.length > maxLength) {
@@ -59,16 +60,16 @@ const ApiPage = () => {
 
     try {
       const resp = await getDataUTS("/api/playlist/28");
-      setIsLoading(false);
       if (resp && Array.isArray(resp.datas)) {
         setDataSource(resp.datas);
       } else {
-        setError("No data available or incorrect data structure");
+        throw new Error("No data available or incorrect data structure");
       }
     } catch (err) {
-      setIsLoading(false);
-      setError("Failed to load data");
+      setError(err.message || "Failed to load data");
       console.error("API error:", err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -81,11 +82,11 @@ const ApiPage = () => {
   };
 
   let dataSourceFiltered = dataSource.filter((item) => {
-    const searchMatch = 
-      item?.play_name?.toLowerCase().includes(searchText.toLowerCase()) ||
-      item?.play_genre?.toLowerCase().includes(searchText.toLowerCase()) ||
-      item?.play_description?.toLowerCase().includes(searchText.toLowerCase()) ||
-      item?.play_url?.toLowerCase().includes(searchText.toLowerCase());
+    const searchMatch =
+      item?.play_name?.toLowerCase().includes(searchText) ||
+      item?.play_genre?.toLowerCase().includes(searchText) ||
+      item?.play_description?.toLowerCase().includes(searchText) ||
+      item?.play_url?.toLowerCase().includes(searchText);
 
     if (filterType === "my") {
       return searchMatch && item.author_name === "User"; // Replace with actual user check
@@ -123,14 +124,15 @@ const ApiPage = () => {
       message,
       description,
       style: {
-        backgroundColor: '#1f1f1f',
-        color: '#ffffff'
-      }
+        backgroundColor: "#1f1f1f",
+        color: "#ffffff",
+      },
     });
   };
 
   const confirmDelete = async (id_play) => {
     try {
+      setIsLoading(true);
       let url = `/api/playlist/${id_play}`;
       const resp = await deleteDataUTS(url);
 
@@ -140,15 +142,13 @@ const ApiPage = () => {
         resp.status === 204 ||
         resp.message === "OK"
       ) {
-        showAlert("success", "Data deleted", "Data berhasil terhapus");
-        setTimeout(() => {
-          getDataGallery();
-        }, 500);
+        showAlert("success", "Success", "Data deleted successfully");
+        await getDataGallery();
       } else {
-        showAlert("error", "Failed to delete", "Data gagal terhapus");
+        throw new Error("Failed to delete data");
       }
     } catch (err) {
-      showAlert("error", "Error", "An error occurred while deleting the data");
+      showAlert("error", "Error", err.message || "An error occurred while deleting");
     } finally {
       setIsLoading(false);
     }
@@ -189,16 +189,25 @@ const ApiPage = () => {
         formData.append(key, values[key]);
       });
 
-      const url = !isEdit 
+      const url = !isEdit
         ? "/api/playlist/28"
         : `/api/playlist/update/${idSelected}`;
 
       const resp = await sendDataUTS(url, formData);
 
       if (resp?.message === "OK") {
-        showAlert("success", "Success", isEdit ? "Data updated successfully" : "Data added successfully");
-        handleDrawerClose();
-        getDataGallery();
+        showAlert(
+          "success",
+          "Success",
+          isEdit ? "Data updated successfully" : "Data added successfully"
+        );
+
+        setIsEdit(false);
+        setIdSelected(null);
+        form.resetFields();
+        setIsDrawerVisible(false);
+
+        await getDataGallery();
       } else {
         throw new Error(resp?.message || "Failed to submit data");
       }
@@ -209,18 +218,21 @@ const ApiPage = () => {
     }
   };
 
-  const filterOptions = [
-    { value: 'all', label: 'All Review' },
-    { value: 'my', label: 'My Review' },
-    { value: 'newest', label: 'Newest' },
-    { value: 'oldest', label: 'Oldest' },
-  ];
+  const openModal = (url) => {
+    setVideoUrl(url);
+    setIsModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setVideoUrl("");
+    setIsModalVisible(false);
+  };
 
   const renderCard = (item) => (
     <Card
       className="review-card"
       cover={
-        <div className="video-container">
+        <div className="video-container" onClick={() => openModal(item.play_url)}>
           <img src={item.play_thumbnail} alt={item.play_name} />
           <PlayCircleFilled className="play-icon" />
         </div>
@@ -252,14 +264,7 @@ const ApiPage = () => {
               </Text>
             )}
             <div className="card-footer">
-              <Space className="card-stats">
-                <span>
-                  <MessageOutlined /> {item.comments || 18}
-                </span>
-                <span>
-                  <LikeOutlined /> {item.likes || 137}
-                </span>
-              </Space>
+              
               <Space className="card-actions">
                 <Button
                   type="text"
@@ -283,7 +288,7 @@ const ApiPage = () => {
         }
       />
     </Card>
-  );  
+  );
 
   const drawerSection = () => (
     <Drawer
@@ -291,17 +296,20 @@ const ApiPage = () => {
       width={400}
       onClose={handleDrawerClose}
       open={isDrawerVisible}
-      bodyStyle={{ backgroundColor: '#1f1f1f', color: '#ffffff' }}
-      headerStyle={{ backgroundColor: '#1f1f1f', borderBottom: '1px solid #333333' }}
+      bodyStyle={{ backgroundColor: "#1f1f1f", color: "#ffffff" }}
+      headerStyle={{
+        backgroundColor: "#1f1f1f",
+        borderBottom: "1px solid #333333",
+      }}
       footer={
         <Button
           type="primary"
           onClick={handleFormSubmit}
           loading={isLoading}
           style={{
-            backgroundColor: '#98FB98',
-            borderColor: '#98FB98',
-            color: '#000000'
+            backgroundColor: "#98FB98",
+            borderColor: "#98FB98",
+            color: "#000000",
           }}
         >
           {isEdit ? "Update" : "Submit"}
@@ -312,14 +320,14 @@ const ApiPage = () => {
         <Form.Item
           name="play_name"
           label="Review Name"
-          rules={[{ required: true, message: 'Please enter review name' }]}
+          rules={[{ required: true, message: "Please enter review name" }]}
         >
           <Input placeholder="Enter review name" />
         </Form.Item>
         <Form.Item
           name="play_genre"
           label="Genre"
-          rules={[{ required: true, message: 'Please select a genre' }]}
+          rules={[{ required: true, message: "Please select a genre" }]}
         >
           <Select placeholder="Select a genre">
             <Option value="education">Education</Option>
@@ -332,21 +340,21 @@ const ApiPage = () => {
         <Form.Item
           name="play_description"
           label="Description"
-          rules={[{ required: true, message: 'Please enter description' }]}
+          rules={[{ required: true, message: "Please enter description" }]}
         >
           <Input.TextArea rows={4} placeholder="Enter description" />
         </Form.Item>
         <Form.Item
           name="play_url"
           label="URL"
-          rules={[{ required: true, message: 'Please enter URL' }]}
+          rules={[{ required: true, message: "Please enter URL" }]}
         >
           <Input placeholder="Enter URL" />
         </Form.Item>
         <Form.Item
           name="play_thumbnail"
           label="Thumbnail"
-          rules={[{ required: true, message: 'Please enter thumbnail URL' }]}
+          rules={[{ required: true, message: "Please enter thumbnail URL" }]}
         >
           <Input placeholder="Enter Thumbnail URL" />
         </Form.Item>
@@ -360,7 +368,7 @@ const ApiPage = () => {
       <SideNav />
       <div className="main-content">
         <div className="header-section">
-          <Title level={1} className="page-title">
+          <Title className="page-title">
             Field Reviews
           </Title>
           <Text className="page-description">
@@ -375,62 +383,83 @@ const ApiPage = () => {
             className="search-input"
             onChange={(e) => handleSearch(e.target.value)}
           />
-          <div className="filter-buttons">
-            <Select
-              defaultValue="all"
-              className="filter-select"
-              onChange={handleFilterChange}
-              suffixIcon={<DownOutlined />}
-            >
-              {filterOptions.map(option => (
-                <Option key={option.value} value={option.value}>
-                  {option.label}
-                </Option>
-              ))}
-            </Select>
-            <Button 
-              type="primary" 
-              className="add-review-button"
-              onClick={handleDrawerOpen}
-              icon={<PlusCircleOutlined />}
-            >
-              Add Review
-            </Button>
-          </div>
+          <Select
+            defaultValue="all"
+            className="filter-dropdown"
+            onChange={handleFilterChange}
+            suffixIcon={<DownOutlined />}
+          >
+            <Option value="all">All</Option>
+            <Option value="newest">Newest</Option>
+            <Option value="oldest">Oldest</Option>
+          </Select>
+          <Button
+            type="primary"
+            icon={<PlusCircleOutlined />}
+            className="add-button"
+            onClick={handleDrawerOpen}
+          >
+            Add New Review
+          </Button>
         </div>
 
-        {isLoading && <Skeleton active className="custom-skeleton" />}
+        {isLoading && (
+          <Skeleton active paragraph={{ rows: 3 }} style={{ margin: "2rem" }} />
+        )}
+
         {error && (
-          <Alert 
-            message="Error" 
-            description={error} 
-            type="error" 
-            showIcon 
-            className="error-alert"
+          <Alert
+            message="Error"
+            description={error}
+            type="error"
+            showIcon
+            style={{ margin: "2rem" }}
           />
         )}
 
-        {!isLoading && !error && (
-          <List
-            grid={{
-              gutter: 16,
-              xs: 1,
-              sm: 2,
-              md: 3,
-              lg: 3,
-              xl: 3,
-              xxl: 4,
-            }}
-            dataSource={dataSourceFiltered}
-            renderItem={(item) => (
-              <List.Item>
-                {renderCard(item)}
-              </List.Item>
-            )}
+        {!isLoading && !error && dataSourceFiltered.length === 0 && (
+          <Alert
+            message="No Data"
+            description="No data available."
+            type="info"
+            showIcon
+            style={{ margin: "2rem" }}
           />
         )}
+
+        {!isLoading && !error && dataSourceFiltered.length > 0 && (
+          <List
+            className="review-list"
+            grid={{ gutter: 16, column: 3 }}
+            dataSource={dataSourceFiltered}
+            renderItem={(item) => <List.Item>{renderCard(item)}</List.Item>}
+          />
+        )}
+
+        {drawerSection()}
+
+        <Modal
+          title="Play Video"
+          visible={isModalVisible}
+          onCancel={closeModal}
+          footer={null}
+          width={800}
+        >
+          <iframe
+            width="100%"
+            height="450px"
+            src={videoUrl.replace("watch?v=", "embed/")}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </Modal>
+        
+        <div className="footer-dashboard-renter">
+          Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
+          Pendidikan Ganesha
+        </div>
       </div>
-      {drawerSection()}
     </div>
   );
 };

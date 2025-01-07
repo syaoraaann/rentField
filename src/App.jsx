@@ -36,6 +36,8 @@ function App() {
         <Route path="/my-point" element={<MyPoint />} />
         <Route path="/reservation-list" element={<ReservationList />} />
         <Route path="/history" element={<History />} />
+        <Route path="/video-review" element={<ApiPage />} />
+
       </Routes>
     </div>
   );
