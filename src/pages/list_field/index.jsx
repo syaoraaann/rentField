@@ -19,7 +19,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
-import './index.css'
+import "./index.css";
 import SideNav from "../dashboardrenter/sidenav";
 import "@fontsource/poppins";
 import {
@@ -196,11 +196,7 @@ const PaymentModal = ({ visible, onCancel, total, onConfirm }) => {
 
       <div className="payment-input-section">
         <Text>Choose Your Preferred Payment Destination:</Text>
-        <Select
-          value={bank}
-          onChange={setBank}
-          className="payment-select"
-        >
+        <Select value={bank} onChange={setBank} className="payment-select">
           {Object.keys(bankAccounts).map((bankName) => (
             <Option key={bankName} value={bankName}>
               {bankName}
@@ -215,9 +211,7 @@ const PaymentModal = ({ visible, onCancel, total, onConfirm }) => {
         </Card>
       </div>
 
-      <Text className="payment-total">
-        Total: Rp. {total.toLocaleString()}
-      </Text>
+      <Text className="payment-total">Total: Rp. {total.toLocaleString()}</Text>
 
       <div className="payment-instructions">
         <p>
@@ -240,7 +234,8 @@ const PaymentModal = ({ visible, onCancel, total, onConfirm }) => {
             type="primary"
             onClick={onConfirm}
             style={{
-              width: "100%",backgroundColor: "#abfd13",
+              width: "100%",
+              backgroundColor: "#abfd13",
               borderColor: "#abfd13",
               color: "#000",
             }}
@@ -287,9 +282,11 @@ const ListField = () => {
       id: 1,
       name: "Singaraja Soccer",
       category: "Soccer Field",
-      address: "Jl. Udayana, Banjar Jawa, Kec. Buleleng, Kabupaten Buleleng, Bali 81113",
+      address:
+        "Jl. Udayana, Banjar Jawa, Kec. Buleleng, Kabupaten Buleleng, Bali 81113",
       coordinates: [-8.115001271274899, 115.09062769800654],
-      imageUrl: "https://fastly.4sqi.net/img/general/600x600/58082938_ZBAJ3Wcn-B_m8pP16l42N0uVIgxWSdnNIQG36_ff0Nk.jpg",
+      imageUrl:
+        "https://fastly.4sqi.net/img/general/600x600/58082938_ZBAJ3Wcn-B_m8pP16l42N0uVIgxWSdnNIQG36_ff0Nk.jpg",
       basePrice: 50000,
       operatingHours: {
         start: 0,
@@ -328,7 +325,10 @@ const ListField = () => {
       }
 
       return {
-        label: `${String(i).padStart(2, "0")}:00 - ${String(i + 1).padStart(2, "0")}:00`,
+        label: `${String(i).padStart(2, "0")}:00 - ${String(i + 1).padStart(
+          2,
+          "0"
+        )}:00`,
         value: `${i}:00 - ${i + 1}:00`,
       };
     }).filter(Boolean);
@@ -351,7 +351,8 @@ const ListField = () => {
     setPaymentModalVisible(false);
     notification.success({
       message: "Payment Successful",
-      description: "Your booking has been confirmed. Check your WhatsApp/SMS for details.",
+      description:
+        "Your booking has been confirmed. Check your WhatsApp/SMS for details.",
     });
     closeDrawer();
   };
@@ -436,7 +437,8 @@ const ListField = () => {
     if (!selectedDate || selectedHours.length === 0 || !selectedFieldOption) {
       notification.error({
         message: "Incomplete Information",
-        description: "Please select date, hours, and field option before proceeding.",
+        description:
+          "Please select date, hours, and field option before proceeding.",
       });
       return;
     }
@@ -473,19 +475,28 @@ const ListField = () => {
   );
 
   const filteredFields = fields.filter((field) => {
-    const matchesSearch = field.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory ? field.category === selectedCategory : true;
+    const matchesSearch = field.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory
+      ? field.category === selectedCategory
+      : true;
     return matchesSearch && matchesCategory;
   });
 
   return (
-    <Layout className="layout-main" style={{ backgroundImage: `url(${bgImage})` }}>
+    <Layout
+      className="layout-main"
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
       <SideNav />
       <Title level={3} className="page-title">
-        {selectedField ? `Order Field ${selectedField.name}` : "Available Fields at Singaraja"}
+        {selectedField
+          ? `Order Field ${selectedField.name}`
+          : "Available Fields at Singaraja"}
       </Title>
 
-      <Layout.Content className="content-wrapper">
+      <Layout.Content className="content-wrapper-renter">
         <WeatherDisplay />
 
         <Row className="search-section">
@@ -495,7 +506,11 @@ const ListField = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="search-input"
-              prefix={<SearchOutlined style={{ color: "#d9d9d9", paddingRight: "10px" }} />}
+              prefix={
+                <SearchOutlined
+                  style={{ color: "#d9d9d9", paddingRight: "10px" }}
+                />
+              }
             />
           </Col>
 
@@ -535,16 +550,24 @@ const ListField = () => {
                     </Text>
                   }
                   description={
-                    <div style={{ display: "flex", flexDirection: "column", gap: "8px", height: "250px" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "8px",
+                        height: "250px",
+                      }}
+                    >
                       <Text className="field-category">{field.category}</Text>
                       <Text className="field-price">
                         Base Price /Hr: Rp {field.basePrice.toLocaleString()}
                       </Text>
                       <Text className="field-hours">
-                        Operating Hours: {formatOperatingHours(field.operatingHours)}
+                        Operating Hours:{" "}
+                        {formatOperatingHours(field.operatingHours)}
                       </Text>
                       <Text className="field-address">{field.address}</Text>
-                      
+
                       <div className="rent-button-wrapper">
                         <Button
                           type="primary"
@@ -582,7 +605,7 @@ const ListField = () => {
               <MapComponent coordinates={selectedField.coordinates} zoom={15} />
             </div>
           )}
-          
+
           <Text strong className="drawer-title">
             {`Rent ${selectedField?.name}`}
           </Text>
@@ -632,7 +655,11 @@ const ListField = () => {
           <Button
             type="primary"
             onClick={handleRent}
-            disabled={!isRentButtonVisible || !selectedDate || selectedHours.length === 0}
+            disabled={
+              !isRentButtonVisible ||
+              !selectedDate ||
+              selectedHours.length === 0
+            }
             className="drawer-button"
           >
             RENT
@@ -642,7 +669,9 @@ const ListField = () => {
             <div className="payment-totals">
               <Text strong>{`Subtotal: Rp ${subtotal.toLocaleString()}`}</Text>
               <br />
-              <Text strong>{`Additional Charge: Rp ${additionalCharge.toLocaleString()}`}</Text>
+              <Text
+                strong
+              >{`Additional Charge: Rp ${additionalCharge.toLocaleString()}`}</Text>
               <br />
               <Text strong>{`Tax (10%): Rp ${tax.toLocaleString()}`}</Text>
               <br />
@@ -651,7 +680,7 @@ const ListField = () => {
           )}
         </Drawer>
       </Layout.Content>
-      
+
       <div className="footer">
         Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
         Pendidikan Ganesha

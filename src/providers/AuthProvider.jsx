@@ -10,20 +10,23 @@ const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userProfile, setUserProfile] = useState({});
   const [role, setRole] = useState(""); // Store the user's role
+  const [isLoadingScreen, setIsLoadingScreen] = useState(true);
   const navigate = useNavigate();
 
   const getDataProfile = () => {
     getDataPrivate("/api/v1/protected/data")
       .then((resp) => {
+        setIsLoadingScreen(false);
         if (resp?.user_logged) {
           setUserProfile(resp);
-          setRole(resp?.role || ""); // Store role (admin, owner, renter)
+          setRole(resp?.roles || ""); // Store role (admin, owner, renter)
           setIsLoggedIn(true);
         } else {
           setIsLoggedIn(false);
         }
       })
       .catch((err) => {
+        setIsLoadingScreen(false);
         setIsLoggedIn(false);
         console.log(err);
       });
@@ -33,9 +36,18 @@ const AuthProvider = ({ children }) => {
     getDataProfile();
   }, []);
 
-  const login = (access_token) => {
+  const login = (access_token, role) => {
     jwtStorage.storeToken(access_token);
     getDataProfile();
+    if (role === "Admin") {
+      navigate("/dashboard-admin");
+    } else if (role === "Renter") {
+      navigate("/dashboard-renter");
+    } else if (role === "Owner") {
+      navigate("/dashboard-owner");
+    } else {
+      message.error("Role not recognized. Contact support.");
+    }
   };
 
   const logout = () => {
@@ -66,7 +78,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, login, logout, userProfile, role }}
+      value={{ isLoggedIn, login, logout, userProfile, role, setIsLoadingScreen }}
     >
       {children}
     </AuthContext.Provider>

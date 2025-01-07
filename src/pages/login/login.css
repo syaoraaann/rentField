@@ -1,261 +1,3 @@
-/* .login-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background: url('../../assets/images/loginbg.png') no-repeat center center fixed;
-  background-size: cover;
-  /* margin: 10px; */
-
-/* .login-form {
-  background-color: #090909;
-} */
-
-/* .login-container {
-  display: flex;
-  background-color: #FAF9F6;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0.8, 0.8, 0.8, 0.7);
-  overflow: hidden;
-  width: 900px;
-} */
-
-/* .login-box {
-  flex: 1;
-  background-color: #FAF9F6;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 600px;
-  height: 600px;
-  box-sizing: border-box;
-  border-radius: 20px;
-} */
-
-/* .logo-img {
-  width: 78px;
-  height: auto;
-  margin: 8px;
-  margin-left:30px;
-  align-self: center;
-} */
-
-/* .logo-title {
-  color: #000;
-  font-size: 36px;
-  margin: -10px;
-  text-align: center;
-  font-weight: bold;
-
-} */
-
-/* .logo-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: ceneter;
-  width: 100%;
-  margin-bottom: 20px;
-} */
-
-/* .login-form-wrapper {
-  width: 100%;
-  max-width: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-} */
-
-/* form > .ant-form-item {
-  margin-bottom: 16px;
-}
-
-.login-illustration {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #b3cf3a;
-  border-radius: 20px;
-}
-
-.illustration-card {
-  width: 100%;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-} */
-
-/* .login-button {
-  color: #000;
-  font-size: 16px;
-  cursor: pointer;
-  background: #b3cf3a;
-  border: none;
-} */
-
-/* .custom-button:hover {
-  background-color: #f0f0f0;
-  color: black;
-
-} */
-
-/* .field-image {
-  width: 500px;
-  height: auto;
-} */
-
-/* .login-button {
-  bottom: 15px;
-  position: relative;
-  margin-top: 15px;
-  background-color: #9db53e;
-  border-color: #a3b846;
-  color: #000;
-  border-radius: 8px;
-  margin-bottom: -35px;
-  
-} */
-
-/* form > .ant-form-item .ant-form-item-explain {
-  margin-bottom: -10px;
-} */
-
-/* /* .password-item .ant-form-item-explain {
-  margin-top: 4px; /* Sesuaikan jarak agar lebih dekat */
-/* position: relative; Pastikan posisinya teratur */
-
-/* .password-item .ant-form-item-control-input-content {
-    margin-bottom: 0; /* Hindari margin bawah tambahan di input */
-/* } */
-
-/* .forgot-password-text {
-  display: block;
-  position: relative;
-  margin-top: -20px;
-  cursor: pointer; 
-  z-index: 1;
-}
-
-.register-btn {
-  /* padding-top: 0px; */
-/* margin-bottom: -15px;
-  top: -15px; */
-
-/* .login-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: url('../../assets/images/loginbg.png') no-repeat center center fixed;
-    background-size: cover;
-    padding: 20px;
-  }
-  
-  .login-form {
-    background-color: #090909;
-    width: 100%;
-    max-width: 400px;
-    padding: 32px 24px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* .logo-container {
-    text-align: center;
-    margin-bottom: 24px;
-  } */
-
-/* .logo-img {
-    width: 78px;
-    height: auto;
-    cursor: pointer;
-  }
-  
-  .form-title {
-    color: white;
-    text-align: center;
-    margin-bottom: 24px;
-    font-size: 24px;
-  } */
-
-/* Form Items Styling */
-/* .ant-form-item {
-    margin-bottom: 20px;
-  }
-  
-  .ant-form-item-label > label {
-    color: white !important;
-  }
-  
-  .ant-input,
-  .ant-input-password {
-    width: 100%;
-    height: 40px;
-    border-radius: 8px;
-  }
-  
-  .ant-select {
-    width: 100%;
-  }
-  
- 
-  
-  
-  .submit-button:hover {
-    background-color: #8ca235;
-    border-color: #8ca235;
-  }
-  
-  .submit-button:disabled {
-    background-color: #9db53e;
-    opacity: 0.6;
-    color: #808080;
-  }
-  
- 
-  .form-footer {
-    text-align: center;
-    margin-top: 16px;
-  }
-  
-  .form-footer a {
-    color: #9db53e;
-    cursor: pointer;
-  }
-  
-  .form-footer a:hover {
-    color: #8ca235;
-  }
-  
-  .forgot-password-container {
-    text-align: right;
-    margin: -10px 0 16px;
-  }
-  
-  .forgot-password-container a {
-    color: #9db53e;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  @media screen and (max-width: 480px) {
-    .login-form {
-      padding: 24px 16px;
-    }
-    
-    .form-title {
-      font-size: 20px;
-    }
-  } */
-
 .login-page {
   min-height: 100vh;
   background: url("../../assets/images/loginbg.png") no-repeat center center
@@ -265,6 +7,7 @@
   align-items: ceneter;
   padding: 70px;
   display: flex;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Logo styling */
@@ -288,11 +31,13 @@
   text-align: center;
   margin-top: 16px;
   color: #ffffff !important;
+  font-family: 'Poppins', sans-serif;
 }
 
 .form-footer a {
   color: #abfd13; /* Warna hijau untuk tautan */
   text-decoration: none; /* Menghilangkan garis bawah */
+  font-family: 'Poppins', sans-serif;
 }
 
 .form-footer a:hover {
@@ -301,6 +46,8 @@
 
 .form-footer span {
   color: white; /* Pastikan teks menjadi putih */
+  font-family: 'Poppins', sans-serif;
+  
 }
 
 /* Form container styling */
@@ -319,6 +66,7 @@
   font-weight: bold;
   margin-bottom: 30px;
   text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
 
 .login-form {
@@ -327,7 +75,9 @@
   padding: 40px;
   border-radius: 12px;
   margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
 }
+
 
 /* Styling untuk input */
 .login-input {
@@ -336,6 +86,7 @@
   border-radius: 8px !important;
   height: 45px;
   color: white !important; /* Warna teks putih */
+  font-family: 'Poppins', sans-serif;
 }
 
 .ant-input,
@@ -344,6 +95,7 @@
   color: white !important;
   border-radius: 8px !important;
   height: 45px;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Styling placeholder */
@@ -394,17 +146,18 @@
 }
 
 //Reset Password Button
-.reset-password-btn {
+/* .reset-password-btn {
   height: 45px;
   background-color: transparent !important;
   border: 2px solid #abfd13 !important; /* Border hijau */
-  border-radius: 8px !important;
+  /* border-radius: 8px !important;
   font-size: 16px;
   font-weight: 500;
   margin-top: 20px;
   color: #abfd13 !important; /* Warna teks hijau */
-  transition: all 0.3s ease; /* Animasi halus untuk hover */
-}
+  /* transition: all 0.3s ease; /* Animasi halus untuk hover */
+  /* font-family: 'Poppins', sans-serif;
+}  */
 
 .reset-password-btn:hover {
   background-color: rgba(
@@ -418,10 +171,17 @@
 }
 
 .reset-password-btn {
-  color: rgba(171, 253, 19, 0.5) !important; /* Warna redup saat disabled */
-  border-color: rgba(171, 253, 19, 0.5) !important;
+  height: 45px;
   background-color: transparent !important;
-}
+  border: 2px solid #abfd13 !important; /* Border hijau */
+  border-radius: 8px !important;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 20px;
+  color: #abfd13 !important; /* Warna teks hijau */
+  transition: all 0.3s ease; /* Animasi halus untuk hover */
+  font-family: 'Poppins', sans-serif;
+} 
 
 /* Button styling */
 .login-button {
@@ -434,6 +194,7 @@
   margin-top: 20px;
   color: #abfd13 !important; /* Warna teks hijau */
   transition: all 0.3s ease; /* Animasi halus untuk hover */
+  font-family: 'Poppins', sans-serif;
 }
 
 .login-button:hover {
@@ -465,6 +226,7 @@
   margin-top: 20px;
   color: #abfd13 !important; /* Warna teks hijau */
   transition: all 0.3s ease; /* Animasi halus untuk hover */
+  font-family: 'Poppins', sans-serif;
 }
 
 .register-button:hover {
@@ -558,6 +320,7 @@
   margin-bottom: -15px;
   margin-left: 1px;
   color: #ffffff !important;
+  font-family: 'Poppins', sans-serif;
 }
 
 .forgot-password-container a {
@@ -585,16 +348,20 @@
   background-color: rgba(0, 0, 0, 0.6);
   padding: 4px 8px;
   border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .password-item-respass {
   margin-bottom: 15px !important; /* Jarak kecil antara input dan pesan */
+  
+  
 }
 
 .password-item-respass-password .ant-form-item-explain-error {
   margin-bottom: 10px !important; /* Jarak kecil antara input dan pesan */
   padding-top: -70px;
   margin-top: -25px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .password-item .ant-form-item-explain {
@@ -608,6 +375,8 @@
 
 .role-placeholder {
   margin-top: -10px !important;
+  font-family: 'Poppins' !important;
+  font-size: 16px;
 }
 
 /* For mobile devices */

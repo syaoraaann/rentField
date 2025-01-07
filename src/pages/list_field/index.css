@@ -44,9 +44,8 @@ html {
 }
 
 .search-input {
-   color: #d9d9d9 !important;
+  color: #d9d9d9 !important;
 }
-
 
 .select-category-option {
   background-color: #090909;
@@ -127,7 +126,12 @@ html {
 }
 
 .footer-list-renter {
-  background: rgba(255, 255, 255, 0.03) !important; /* Translucent white background */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.03
+  ) !important; /* Translucent white background */
   backdrop-filter: blur(10px) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -162,7 +166,7 @@ html {
   margin-left: 256px;
 }
 
-.content-wrapper {
+.content-wrapper-renter {
   margin: 10px;
   padding: 20px 20px 40px;
   margin-left: 256px !important;
@@ -228,7 +232,7 @@ html {
 
 .category-select {
   width: 200px;
-  margin-top: 21px;;
+  margin-top: 21px;
   height: 66px !important ;
   color: #090909;
   padding-bottom: 24px;
