@@ -96,16 +96,20 @@
 }
 
 /* Footer styles */
-.footer {
-  background: white;
+.footer-owner {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 10px 20px;
-  color: black;
+  color: #abfd13;
   text-align: center;
-  position: fixed; /* Ensure footer sticks to the bottom */
-  bottom: 0; /* Attach to the bottom of the viewport */
+  position: relative;
+  bottom: 0;
   left: 0;
-  width: 100%; /* Stretch across the full width */
+  width: 100%;
   z-index: 10;
-  border-top: 1px solid #ddd;
+  font-size: 14px;
+  font-family: "Poppins";
+  /* padding-left: 210px !important; */
 }

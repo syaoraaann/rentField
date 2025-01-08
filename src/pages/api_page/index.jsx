@@ -331,37 +331,37 @@ const ApiPage = () => {
         <Form layout="vertical" form={form}>
           <Form.Item
             name="play_name"
-            label="Review Name"
+            label={<span style={{ color: "#d9d9d9" }}>Review name</span>}
             rules={[{ required: true }]}
           >
             <Input placeholder="Enter review name" />
           </Form.Item>
           <Form.Item
             name="play_genre"
-            label="Genre"
+            label={<span style={{ color: "#d9d9d9" }}>Genre</span>}
             rules={[{ required: true }]}
           >
             <Select placeholder="Select a genre">
-              <Option value="education">Education</Option>
-              <Option value="movie">Movie</Option>
-              <Option value="music">Music</Option>
-              <Option value="song">Song</Option>
-              <Option value="others">Others</Option>
+              <Option value="education">Soccer</Option>
+              <Option value="movie">Badminton</Option>
+              <Option value="music">Basket</Option>
+              <Option value="song">Volly</Option>
+              <Option value="others">Biliard</Option>
             </Select>
           </Form.Item>
           <Form.Item
             name="play_description"
-            label="Description"
+            label={<span style={{ color: "#d9d9d9" }}>Description</span>}
             rules={[{ required: true }]}
           >
             <Input.TextArea rows={4} placeholder="Enter description" />
           </Form.Item>
-          <Form.Item name="play_url" label="URL" rules={[{ required: true }]}>
+          <Form.Item name="play_url" label={<span style={{ color: "#d9d9d9" }}>URL</span>} rules={[{ required: true }]}>
             <Input placeholder="Enter URL" />
           </Form.Item>
           <Form.Item
             name="play_thumbnail"
-            label="Thumbnail"
+            label={<span style={{ color: "#d9d9d9" }}>Thumbnail</span>}
             rules={[{ required: true }]}
           >
             <Input placeholder="Enter Thumbnail URL" />
@@ -411,10 +411,11 @@ const ApiPage = () => {
             }}
           >
             <div style={{ paddingRight: "15px" }}>
-              <Dropdown
+              {/* <Dropdown
                 menu={menuProps}
                 trigger={["click"]}
                 className="dropdown-vid-rev"
+                dropdownStyle={{ background: "#2A2A2A" }}
               >
                 <Button>
                   <Space>
@@ -425,17 +426,18 @@ const ApiPage = () => {
                     <DownOutlined style={{ paddingLeft: "10px" }} />
                   </Space>
                 </Button>
-              </Dropdown>
-              {/* <Select
+              </Dropdown> */}
+              <Select
                 defaultValue="all"
-                className="filter-dropdown"
+                className="dropdown-vid-rev"
                 onChange={handleFilterChange}
                 suffixIcon={<DownOutlined />}
+                dropdownStyle={{ background: "#2A2A2A" }}
               >
                 <Option value="all">All</Option>
                 <Option value="newest">Newest</Option>
                 <Option value="oldest">Oldest</Option>
-              </Select>   */}
+              </Select>  
             </div>
             <Button
               type="primary"
@@ -497,6 +499,7 @@ const ApiPage = () => {
         onCancel={closeModal}
         footer={null}
         width={800}
+        className="modal-vid-rev"
       >
         <iframe
           width="100%"
@@ -505,6 +508,7 @@ const ApiPage = () => {
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
+          
         />
       </Modal>
 

@@ -102,14 +102,15 @@ const HelpCenterRenter = () => {
             </div>
           </div>
 
-          <footer className="footer">
+          
+        </div>
+      </Layout.Content>
+        <footer className="footer-help">
             <p>
               Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
               Pendidikan Ganesha
             </p>
-          </footer>
-        </div>
-      </Layout.Content>
+        </footer>
     </Layout>
   );
 };

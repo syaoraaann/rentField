@@ -27,8 +27,8 @@ const HelpCenterOwner = () => {
       }}
     >
       <SideNavOwner />
-      <Layout.Content style={{ marginLeft: 250, padding:'0 48px' }}>
-        <div className="help-center-nab">
+      <Layout.Content >
+        <div className="help-center-nab" style={{ marginLeft: 250 }}>
           <h1 className="header">How Can We Help You?</h1>
           <div className="search-bar-nab">
             <Input
@@ -93,11 +93,16 @@ const HelpCenterOwner = () => {
             </div>
           </div>
 
-          <footer className="footer-nab">
-            <p>Copyright © 2024 RentField.com - Powered by CodeBlue Universitas Pendidikan Ganesha</p>
-          </footer>
+          
         </div>
+        {/* <footer className="footer-help">
+            <p>
+              Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
+              Pendidikan Ganesha
+            </p>
+        </footer> */}
       </Layout.Content>
+      
     </Layout>
   );
 };

@@ -361,16 +361,7 @@ const DashboardOwner = () => {
 
         {/* Footer */}
         <Footer
-          style={{
-            textAlign: "center",
-            background: "rgba(255, 255, 255, 0.03)", // Translucent white background
-            backdropFilter: "blur(10px)", // Apply blur effect
-            border: "1px solid rgba(255, 255, 255, 0.2)",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-            color: "#A3FF12",
-            padding: "12px 24px",
-            fontWeight: "bold",
-          }}
+          className="footer-owner"
         >
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
           Pendidikan Ganesha

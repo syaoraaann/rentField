@@ -78,6 +78,17 @@ const MyPoint = ({ point = 500 }) => {
       <SideNav />
       {/* Main content area */}
         <Content style={{ marginLeft: 256 }} className="pageContent fadeIn">
+          <h1
+            style={{
+              color: "#A3FF12",
+              fontSize: "40px",
+              marginBottom: "40px",
+              fontWeight: "bold",
+              textAlign: "center"
+            }}
+          >
+            My point
+          </h1>
           <Col>
             <div className="box-style" style={{ paddingBottom: "40px" }}>
               <Row>

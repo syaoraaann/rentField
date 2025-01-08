@@ -285,6 +285,7 @@ const ListField = () => {
               onChange={setSelectedCategory}
               className="category-select"
               value={selectedCategory}
+              dropdownStyle={{ background: "#2A2A2A" }}
             >
               <Option value="">All Categories</Option>
               <Option value="Soccer Field">Soccer Field</Option>
@@ -402,7 +403,7 @@ const ListField = () => {
         </Drawer>
       </Layout.Content>
 
-      <div className="footer">
+      <div className="footer-field-renter">
         Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
         Pendidikan Ganesha
       </div>

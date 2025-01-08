@@ -267,10 +267,10 @@ const ListFieldOwner = () => {
             <Col>
               <Input
                 className="search-input"
-                placeholder="Search fields by name..."
+                placeholder="Search fields..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                prefix={<SearchOutlined style={{ color: "#090909" }} />}
+                prefix={<SearchOutlined style={{ color: "#d9d9d9", paddingLeft: "10px", paddingRight: "10px" }} />}
               />
             </Col>
             <Col>
@@ -279,6 +279,7 @@ const ListFieldOwner = () => {
                 placeholder="Select Category"
                 onChange={setSelectedCategory}
                 value={selectedCategory}
+                dropdownStyle={{ background: "#2A2A2A" }}
               >
                 <Option value="">All Categories</Option>
                 <Option value="Soccer Field">Soccer Field</Option>
@@ -304,6 +305,7 @@ const ListFieldOwner = () => {
                     <EditOutlined
                       key="edit"
                       onClick={() => handleDrawerEdit(field)}
+                      style={{color: "#d9d9d9"}}
                     />,
                     <Popconfirm
                       key="delete"
@@ -311,8 +313,9 @@ const ListFieldOwner = () => {
                       onConfirm={() => handleDelete(field.id_field)}
                       okText="Yes"
                       cancelText="No"
+                
                     >
-                      <DeleteOutlined />
+                      <DeleteOutlined style={{color: "red"}}/>
                     </Popconfirm>,
                   ]}
                 >
@@ -351,7 +354,7 @@ const ListFieldOwner = () => {
                 <Button onClick={handleDrawerClose} style={{ marginRight: 8 }}>
                   Cancel
                 </Button>
-                <Button type="primary" onClick={handleFormSubmit}>
+                <Button style={{backgroundColor: "#abfd13", color: "#090909"}} type="primary" onClick={handleFormSubmit}>
                   {isEdit ? "Update Field" : "Create Field"}
                 </Button>
               </div>
@@ -367,7 +370,7 @@ const ListFieldOwner = () => {
             >
               <Form.Item
                 name="field_name"
-                label="Field Name"
+                label={<span style={{ color: "#d9d9d9" }}>Field Name</span>}
                 rules={[{ required: true, message: "Field Name is required" }]}
               >
                 <Input placeholder="Enter the field name" />
@@ -375,7 +378,7 @@ const ListFieldOwner = () => {
 
               <Form.Item
                 name="description"
-                label="Description"
+                label={<span style={{ color: "#d9d9d9" }}>Description</span>}
                 rules={[{ required: true, message: "Description is required" }]}
               >
                 <Input.TextArea
@@ -386,10 +389,10 @@ const ListFieldOwner = () => {
 
               <Form.Item
                 name="field_type"
-                label="Field Type"
+                label={<span style={{ color: "#d9d9d9" }}>Field Type</span>}
                 rules={[{ required: true, message: "Field Type is required" }]}
               >
-                <Select placeholder="Select the field type">
+                <Select placeholder="Select the field type" dropdownStyle={{ background: "#2A2A2A" }}>
                   <Option value="Soccer Field">Soccer Field</Option>
                   <Option value="Badminton Field">Badminton Field</Option>
                   <Option value="Basketball Field">Basketball Field</Option>
@@ -399,7 +402,7 @@ const ListFieldOwner = () => {
 
               <Form.Item
                 name="address"
-                label="Address"
+                label={<span style={{ color: "#d9d9d9" }}>Address</span>}
                 rules={[{ required: true, message: "Address is required" }]}
               >
                 <Input placeholder="Enter the field's address" />
@@ -407,7 +410,7 @@ const ListFieldOwner = () => {
 
               <Form.Item
                 name="price"
-                label="Price (in Rupiah)"
+                label={<span style={{ color: "#d9d9d9" }}>Price in Rupiah </span>}
                 rules={[{ required: true, message: "Price is required" }]}
               >
                 <Input placeholder="Enter the price" type="number" min={0} />
@@ -415,7 +418,7 @@ const ListFieldOwner = () => {
 
               <Form.Item
                 name="image_url"
-                label="Image URL"
+                label={<span style={{ color: "#d9d9d9" }}>Image URL</span>}
                 rules={[{ type: "url", message: "Please enter a valid URL" }]}
               >
                 <Input placeholder="Enter a valid image URL" />
@@ -424,7 +427,7 @@ const ListFieldOwner = () => {
           </Drawer>
         </Content>
 
-        <Footer className="footer">
+        <Footer className="footer-field-owner">
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
           Pendidikan Ganesha
         </Footer>
