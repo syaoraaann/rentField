@@ -1,252 +1,229 @@
-/* Base container styles */
-.dark-mode-container {
+/* Container styles */
+.api-page-container {
   display: flex;
-  min-height: 100vh;
-  background-color: #000000;
-  color: #ffffff;
 }
 
-.main-content {
-  flex: 1;
+.api-page-sidenav {
   margin-left: 256px;
   padding: 24px;
-}
-
-/* Header section styles */
-.header-section {
-  text-align: center;
-  margin-bottom: 32px;
-  display: flex;           /* Tambahkan ini */
-  flex-direction: column;  /* Tambahkan ini */
-  align-items: center;     /* Tambahkan ini */
-}
-
-.page-title {
-  color: #ABFD13 !important;  /* Ubah dari #98FB98 ke #ABFD13 */
-  font-size: 2.5em !important;
-  margin-bottom: 8px !important;
-  text-align: center;
-  font-weight: bold;
-  justify-content: center;
-       
-}
-
-.page-description {
-  color: #ABFD13 !important;  /* Ubah dari #ffffff ke #ABFD13 */
-  opacity: 0.8;
-  font-size: 1.1em;
-  text-align: center;         /* Tambahkan ini */
-}
-
-/* Search and filter section styles */
-.search-filter-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-  gap: 16px;
-}
-
-.search-input {
   flex: 1;
-  background-color: #1f1f1f !important;
-  border: 1px solid #333333 !important;
-  border-radius: 8px !important;
-  color: #ffffff !important;
 }
 
-.search-input input {
-  background-color: transparent !important;
-  color: #ffffff !important;
+.api-page-title {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #abfd13 !important;
+  font-family: "Poppins";
 }
 
-.search-icon {
-  color: #98FB98 !important;
+.api-page-description {
+  font-size: 1.2em;
+  color: #d9d9d9;
+  text-align: center;
+  margin-bottom: 24px;
+  display: block;
+  font-family: "Poppins";
 }
 
-.filter-buttons {
-  display: flex;
-  gap: 12px;
+.search-vid-rev {
+  background: transparent !important;
+  border: 0.2px solid #abfd13 !important;
 }
 
-.add-review-button {
-  background-color: #98FB98 !important;
-  border: none !important;
-  color: #000000 !important;
+.search-vid-rev input::placeholder {
+  color: #d9d9d9 !important;
+  font-weight: lighter !important;
+  font-family: "Poppins" !important;
 }
 
-.add-review-button:hover {
-  background-color: #7dcd7d !important;
+
+/* Add spacing after search input */
+.ant-input-affix-wrapper {
+  margin-bottom: 24px;
+}
+
+.api-page-spinner {
+  display: block;
+  margin-top: 20px;
+}
+
+.api-page-alert {
+  margin-top: 20px;
 }
 
 /* Card styles */
-.review-card {
-  background-color: #1f1f1f !important;
-  border: 1px solid #333333 !important;
-  border-radius: 12px !important;
-  overflow: hidden;
-  transition: transform 0.2s ease;
+.api-page-card {
+  width: 220px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 16px;
+  background: linear-gradient(150deg, #313131, #090909);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  color: #d9d9d9 !important;
+  font-family: "Poppins";
 }
 
-.review-card:hover {
-  transform: translateY(-2px);
+.api-page-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.video-container {
-  position: relative;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+/* Updated image styles with padding */
+.api-page-card .ant-card-cover {
+  padding: 12px 12px 0 12px; /* Add padding to the image container */
 }
 
-.video-container img {
-  position: absolute;
-  top: 0;
-  left: 0;
+.api-page-card img {
   width: 100%;
-  height: 100%;
+  height: 300px;
   object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds subtle shadow to image */
 }
 
-.play-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 48px;
-  color: #98FB98;
-  opacity: 0.9;
-  transition: all 0.2s ease;
+.card-title-vid-rev {
+  color: #abfd13 !important;
+  font-family: "Poppins" !important;
+  font-size: 20px;
 }
 
-.play-icon:hover {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1.1);
+.card-description-vid-rev {
+  color: #d9d9d9 !important;
+  font-family: "Poppins";
 }
 
-.card-title {
-  color: #98FB98 !important;
-  font-size: 1.2em !important;
-  margin-bottom: 8px !important;
+.api-page-card .card-dsc-vid-rev {
+  color: #d9d9d9 !important;
+  font-family: "Poppins" !important;
+  font-weight: lighter !important;
+  word-spacing: 2px !important;
 }
 
-.category-tag {
-  color: #ffffff;
-  opacity: 0.8;
-  margin-bottom: 8px;
+/* URL text with ellipsis */
+.api-page-url {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #1890ff;
+  font-size: 0.9em;
 }
 
-.card-description {
-  color: #ffffff;
-  opacity: 0.7;
+.api-page-url:hover {
+  text-decoration: underline;
+}
+
+/* Hide redundant delete button */
+.card-url + .anticon-delete {
+  display: none;
+}
+
+/* Title style for cards */
+.api-page-card .ant-card-head {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+/* Adjust the List layout for better spacing */
+.ant-list-item {
+  display: flex;
+  justify-content: center;
   margin-bottom: 16px;
 }
 
-.card-footer {
+.ant-list {
+  margin-top: 24px;
+}
+
+/* Make cards take full width in their grid cell */
+.api-page-card.wider-card {
+  width: 100%;
+  height: fix;
+  min-height: 500px;
+}
+
+.floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-top: 16px;
+  justify-content: center;
+  background-color: #1890ff;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
 }
 
-.card-stats {
-  display: flex;
-  gap: 16px;
-  color: #ffffff;
-  opacity: 0.8;
+.floating-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-.card-actions {
-  display: flex;
-  gap: 8px;
+.add-button {
+  height: 54px;
+  width: 150px;
+  background: #abfd13 !important;
+  border: 0.2px solid #abfd13 !important;
+  font-size: 18px;
+  color: #090909 !important;
 }
 
-/* Ant Design component overrides */
-.ant-drawer {
-  background-color: #1f1f1f !important;
+.dropdown-vid-rev {
+  background: transparent !important;
+  width: 200px;
+  height: 56px;
+  font-size: 18px !important;
+  font-family: "Poppins" !important;
+  color: #abfd13;
+  border: 0.2px solid #abfd13 !important;
 }
 
-.ant-drawer-content {
-  background-color: #1f1f1f !important;
+.dropdown-vid-rev:hover {
+  color: #d9d9d9 !important;
 }
 
-.ant-drawer-header {
-  background-color: #1f1f1f !important;
-  border-bottom: 1px solid #333333 !important;
+/* Responsiveness */
+@media (max-width: 768px) {
+  .api-page-sidenav {
+    margin-left: 0;
+    padding: 16px;
+  }
+
+  .api-page-card {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+  }
+
+  .api-page-title {
+    font-size: 1.5em;
+  }
+  
+  /* Adjust padding for mobile */
+  .api-page-card .ant-card-cover {
+    padding: 8px 8px 0 8px;
+  }
 }
 
-.ant-drawer-title {
-  color: #ffffff !important;
-}
-
-.ant-drawer-body {
-  background-color: #1f1f1f !important;
-  color: #ffffff !important;
-}
-
-.ant-form-item-label > label {
-  color: #ffffff !important;
-}
-
-.ant-input,
-.ant-select-selector,
-.ant-input-textarea {
-  background-color: #333333 !important;
-  border: 1px solid #444444 !important;
-  color: #ffffff !important;
-}
-
-.ant-select-dropdown {
-  background-color: #1f1f1f !important;
-  border: 1px solid #333333 !important;
-}
-
-.ant-select-item {
-  color: white !important;
-}
-
-.ant-select-item-option-selected {
-  background-color: #98FB98 !important;
-  color: black !important;
-}
-
-.ant-select-item-option-active {
-  background-color: #333333 !important;
-}
-
-.ant-btn-text {
-  color: #ffffff !important;
-}
-
-.ant-btn-text:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.ant-btn-dangerous {
-  color: #ff4d4f !important;
-}
-
-.ant-popconfirm-buttons .ant-btn-primary {
-  background-color: #98FB98 !important;
-  border: none !important;
-  color: #000000 !important;
-}
-
-.ant-popconfirm-buttons .ant-btn-primary:hover {
-  background-color: #7dcd7d !important;
-}
-
-/* Loading skeleton styles */
-.ant-skeleton {
-  background-color: #1f1f1f !important;
-}
-
-.ant-skeleton-title,
-.ant-skeleton-paragraph > li {
-  background-color: #333333 !important;
-}
-
-/* Footer styles */
-.footer-dashboard-renter {
-  background: rgba(255, 255, 255, 0.03) !important; /* Translucent white background */
+.footer-vid-rev {
+  background: rgba(
+    255,
+    255,
+    255,
+    0.03
+  ) !important; /* Translucent white background */
   backdrop-filter: blur(10px) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
