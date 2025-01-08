@@ -1,67 +1,47 @@
-import React, { useState } from "react";
-import { Layout, Input, Select, Table, Avatar } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-import SideNavRenter from "../dashboardrenter/sidenav";
+import React, { useState, useEffect } from "react";
+import { Layout, Table, Card, Input, Select } from "antd";
+import { SearchOutlined, WalletOutlined } from "@ant-design/icons";
+import SideNavOwner from "../dashboardowner/sidenavowner";
 import bgImage from "../../assets/images/bgnew.jpg";
+import { getDataPrivate } from "../../utils/api";
 import "./index.css";
 
 const { Content, Footer } = Layout;
 const { Option } = Select;
 
 const History = () => {
-  // Sample history data
-  const [histories, setHistories] = useState([
-    {
-      key: "1",
-      fieldName: "Field A",
-      date: "2024-01-01",
-      status: "UPCOMING",
-    },
-    {
-      key: "2",
-      fieldName: "Field B",
-      date: "2023-12-31",
-      status: "ONGOING",
-    },
-    {
-      key: "3",
-      fieldName: "Field C",
-      date: "2024-01-02",
-      status: "WAITING_CONFIRMATION",
-    },
-    {
-      key: "4",
-      fieldName: "Field D",
-      date: "2023-12-30",
-      status: "FINISHED",
-    },
-    {
-      key: "5",
-      fieldName: "Field E",
-      date: "2023-12-29",
-      status: "CANCELED",
-    },
-  ]);
+  const [dataSources, setDataSources] = useState([]); // Data untuk tabel
+  const [loading, setLoading] = useState(false); // Indikator loading
+  const [searchQuery, setSearchQuery] = useState(""); // Pencarian
+  const [selectedStatus, setSelectedStatus] = useState("all"); // Filter status
 
-  // State for search query and selected status
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState("all");
+  // Mengambil data booking
+  useEffect(() => {
+    getBooking();
+  }, []);
 
-  // Handle search input change
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
+  const getBooking = async () => {
+    setLoading(true);
+    try {
+      const resp = await getDataPrivate("/api/v1/booking/read");
+      setLoading(false);
+
+      if (Array.isArray(resp)) {
+        setDataSources(resp); // Set data jika respons berbentuk array
+      } else {
+        console.error("Unexpected API response format:", resp);
+        setDataSources([]);
+      }
+    } catch (err) {
+      setLoading(false);
+      console.error("Error fetching data:", err);
+    }
   };
 
-  // Handle status change in dropdown
-  const handleStatusChange = (value) => {
-    setSelectedStatus(value);
-  };
-
-  // Filter histories based on search query and selected status
-  const filteredHistories = histories.filter((history) => {
-    const matchesSearchQuery = history.fieldName
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
+  // Filter data berdasarkan pencarian dan status
+  const filteredHistories = dataSources.filter((history) => {
+    const fieldName = history.field_name?.toLowerCase() || ""; // Avoid crash if field_name is undefined
+    const matchesSearchQuery = fieldName.includes(searchQuery.toLowerCase());
 
     if (selectedStatus === "all") {
       return matchesSearchQuery;
@@ -70,55 +50,37 @@ const History = () => {
     return matchesSearchQuery && history.status === selectedStatus;
   });
 
-  // Table columns configuration
+  // Konfigurasi kolom tabel
   const columns = [
     {
-      title: "Field Name",
-      dataIndex: "fieldName",
-      key: "fieldName",
-      render: (text) => (
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <Avatar style={{ backgroundColor: "#2A2A2A" }} />
-          <span style={{ color: "#fff" }}>{text}</span>
-        </div>
-      ),
+      title: "Booking Date",
+      dataIndex: "booking_date",
+      key: "booking_date",
     },
     {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-      render: (text) => <span style={{ color: "#fff" }}>{text}</span>,
+      title: "Field Name",
+      dataIndex: "field_name",
+      key: "field_name",
+    },
+    {
+      title: "Start Time",
+      dataIndex: "start_time",
+      key: "start_time",
+    },
+    {
+      title: "End Time",
+      dataIndex: "end_time",
+      key: "end_time",
     },
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: (status) => {
-        let color;
-        let text = status.replace(/_/g, " ").toLowerCase();
-        text = text.charAt(0).toUpperCase() + text.slice(1);
-
-        switch (status) {
-          case "UPCOMING":
-            color = "#87CEEB"; // Light Blue
-            break;
-          case "ONGOING":
-            color = "#32CD32"; // Lime Green
-            break;
-          case "FINISHED":
-            color = "#1890ff"; // Blue
-            break;
-          case "WAITING_CONFIRMATION":
-            color = "#FFD700"; // Yellow
-            break;
-          case "CANCELED":
-            color = "#ff4d4f"; // Red
-            break;
-          default:
-            color = "#fff";
-        }
-        return <span style={{ color }}>{text}</span>;
-      },
+    },
+    {
+      title: "Total Price",
+      dataIndex: "total_price",
+      key: "total_price",
     },
   ];
 
@@ -126,14 +88,13 @@ const History = () => {
     <Layout
       style={{
         minHeight: "100vh",
-        backgroundImage: `url(${bgImage})`, // Set background image
+        backgroundImage: `url(${bgImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
-      <SideNavRenter />
-
+      <SideNavOwner />
       <Layout style={{ marginLeft: 256, background: "transparent" }}>
         <Content style={{ padding: "24px", background: "transparent" }}>
           <h1
@@ -147,18 +108,23 @@ const History = () => {
             My History
           </h1>
 
+          {/* Bagian Filter dan Pencarian */}
           <div style={{ display: "flex", gap: "16px", marginBottom: "24px" }}>
             <Input
               placeholder="Search history..."
-              prefix={<SearchOutlined style={{color: "#d9d9d9", paddingRight: "10px"}}/>}
+              prefix={
+                <SearchOutlined
+                  style={{ color: "#d9d9d9", paddingRight: "10px" }}
+                />
+              }
               value={searchQuery}
-              onChange={handleSearchChange}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="custom-input-history"
             />
 
             <Select
               value={selectedStatus}
-              onChange={handleStatusChange}
+              onChange={(value) => setSelectedStatus(value)}
               style={{
                 width: 120,
                 height: "55px",
@@ -178,15 +144,64 @@ const History = () => {
             </Select>
           </div>
 
+          {/* Bagian Total Reservations */}
+          <div style={{ display: "flex", marginBottom: "24px" }}>
+            <Card
+              style={{
+                background: "#161616",
+                border: "1px solid #ABFD13",
+                borderRadius: "8px",
+                flex: 1,
+              }}
+            >
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "16px" }}
+              >
+                <WalletOutlined
+                  style={{ fontSize: "24px", color: "#ABFD13" }}
+                />
+                <div>
+                  <h3 style={{ color: "#fff", margin: 0, fontSize: "16px" }}>
+                    Total Reservations
+                  </h3>
+                  <span
+                    style={{
+                      color: "#ABFD13",
+                      fontSize: "24px",
+                      fontWeight: "bold",
+                      display: "block",
+                      marginTop: "4px",
+                    }}
+                  >
+                    {filteredHistories.length}
+                  </span>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Tabel Histories */}
           <Table
             columns={columns}
             dataSource={filteredHistories}
+            rowKey="id_booking"
+            loading={loading}
             pagination={false}
             style={{ background: "transparent" }}
           />
         </Content>
-
-        <Footer className="footer">
+        <Footer
+          style={{
+            textAlign: "center",
+            background: "rgba(255, 255, 255, 0.03)",
+            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(255, 255, 255, 0.2)",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            color: "#A3FF12",
+            padding: "12px 24px",
+            fontWeight: "bold",
+          }}
+        >
           Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
           Pendidikan Ganesha
         </Footer>
