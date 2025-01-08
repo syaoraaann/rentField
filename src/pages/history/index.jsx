@@ -53,11 +53,6 @@ const History = () => {
   // Konfigurasi kolom tabel
   const columns = [
     {
-      title: "Booking ID",
-      dataIndex: "id_booking",
-      key: "id_booking",
-    },
-    {
       title: "Booking Date",
       dataIndex: "booking_date",
       key: "booking_date",
