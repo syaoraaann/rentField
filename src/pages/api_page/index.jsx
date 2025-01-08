@@ -244,7 +244,7 @@ const ApiPage = () => {
 
   const renderCard = (item) => (
     <Card
-      className="api-page-card wider-card"
+      className="review-card"
       cover={
         <div className="video-container" onClick={() => openModal(item.play_url)}>
           <img src={item.play_thumbnail} alt={item.play_name} />
