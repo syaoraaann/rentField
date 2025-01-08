@@ -8,7 +8,6 @@ import "leaflet/dist/leaflet.css";
 
 import LandingPage from "./pages/landing_page";
 import Login from "./pages/login";
-// import ProfileRenter from "./pages/profile-renter/index";
 import ApiPage from "./pages/api_page/index";
 import DashboardRenter from "./pages/dashboardrenter";
 import MyPoint from "./pages/my_point";
@@ -22,6 +21,7 @@ import History from "./pages/history";
 import HelpCenterRenter from "./pages/helpcenter-renter";
 import AuthProvider from "./providers/AuthProvider";
 import HelpCenterOwner from "./pages/helpcenter-owner";
+import ProfileRenter from "./pages/profile_renter";
 
 function App() {
   return (
@@ -36,7 +36,7 @@ function App() {
           <Route path="/dashboard-admin" element={<DashboardAdmin />} />
           <Route path="/list-field" element={<ListField />} />
           <Route path="/list-field-owner" element={<ListFieldOwner />} />
-          {/* <Route path="/profile-renter" element={<ProfileRenter />} /> */}
+          <Route path="/profile-renter" element={<ProfileRenter />} />
           <Route path="/api-page" element={<ApiPage />} />
           <Route path="/my-point" element={<MyPoint />} />
           <Route path="/reservation-list" element={<ReservationList />} />

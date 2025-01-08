@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 import bgImage from "../../assets/images/bgnew.jpg";
-import SideNav from "./sidenav";
+import SideNavOwner from "../dashboardowner/sidenavowner";
 import {
   Input,
   Layout
@@ -26,7 +26,7 @@ const HelpCenterOwner = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <SideNav />
+      <SideNavOwner />
       <Layout.Content style={{ marginLeft: 250, padding:'0 48px' }}>
         <div className="help-center-nab">
           <h1 className="header">How Can We Help You?</h1>
@@ -44,7 +44,7 @@ const HelpCenterOwner = () => {
             <div className="card">
               <h2>Getting Started</h2>
               <p>
-                Follow the initial setup guide to start renting fields and book
+                Follow the initial setup guide to start add fields and book
                 fields here. Get an overview of RentField platform and features, and
                 learn ways that you can promote your fields here.
               </p>

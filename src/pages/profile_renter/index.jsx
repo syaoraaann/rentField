@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import "../../pages/profile_owner/index.css";
-import SideNavOwner from '../dashboardowner/sidenavowner';
+import SideNav from '../dashboardrenter/sidenav';
 import Layout from 'antd/es/layout/layout';
 import bgImage from "../../assets/images/bgnew.jpg"; // Import background image
 
-const ProfileOwner = () => {
+const ProfileRenter = () => {
     const [formData, setFormData] = useState({
         username: '',
         fullName: '',
@@ -48,7 +48,7 @@ const ProfileOwner = () => {
                backgroundPosition: "center", // Center the image
                backgroundRepeat: "no-repeat", // Prevent repeating the image
              }}>
-        <SideNavOwner/>
+        <SideNav/>
 
         <div className="profile-page">
            
@@ -184,4 +184,4 @@ const ProfileOwner = () => {
     );
 };
 
-export default ProfileOwner;
+export default ProfileRenter;

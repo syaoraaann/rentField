@@ -9,7 +9,8 @@ import {
   QuestionCircleOutlined,
   VideoCameraOutlined,
   TableOutlined,
-  HistoryOutlined
+  HistoryOutlined,
+  UserOutlined
 } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -173,7 +174,8 @@ const SideNav = () => {
         </Menu.ItemGroup>
 
         {/* Management Group */}
-        <Menu.ItemGroup key="management" title="Management">
+        <Menu.ItemGroup 
+          key="management" title="Management">
           <Menu.Item
             key="/helpcenter-renter"
             icon={<QuestionCircleOutlined />}
@@ -203,6 +205,24 @@ const SideNav = () => {
             }
           >
             <Link to="/video-review">Video Review</Link>
+
+            
+          </Menu.Item>
+
+          <Menu.Item
+            key="/profile-renter"
+            icon={<UserOutlined />}
+            style={
+              location.pathname === "/profile-renter"
+                ? {
+                    backgroundColor: "#ABFD13",
+                    color: "#1A1A1A",
+                    width: "220px",
+                  }
+                : { width: "220px" }
+            }
+          >
+            <Link to="/profile-renter">Profile</Link>
           </Menu.Item>
         </Menu.ItemGroup>
       </Menu>

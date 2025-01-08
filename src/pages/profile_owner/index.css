@@ -1,8 +1,9 @@
 .profile-page {
     min-height: 100vh;
     padding: 2rem;
-    background: url('../../assets/images/loginbg.png') no-repeat center center fixed;
+    background: transparent !important;
     background-size: cover;
+    margin-left: 250px;
 }
 
 .profile-container {

@@ -124,7 +124,7 @@ const LoginPage = () => {
           {isSignup
             ? "Sign Up"
             : isForgotPassword
-            ? "Reset Password"
+            ? "Update Password"
             : "Log In"}
         </h2>
 
@@ -161,7 +161,7 @@ const LoginPage = () => {
                 // }
                 block
               >
-                Reset Password
+                Update Password
               </Button>
             </Form.Item>
             <div className="form-footer">

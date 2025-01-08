@@ -361,7 +361,7 @@
   margin-bottom: 10px !important; /* Jarak kecil antara input dan pesan */
   padding-top: -70px;
   margin-top: -25px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins';
 }
 
 .password-item .ant-form-item-explain {

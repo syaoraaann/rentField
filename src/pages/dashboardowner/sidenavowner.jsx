@@ -9,6 +9,7 @@ import {
   VideoCameraOutlined,
   TableOutlined,
   CreditCardOutlined,
+  UserOutlined
 } from "@ant-design/icons";
 import { Link, replace, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -82,7 +83,7 @@ const SideNavOwner = () => {
       <UserInfoContainer>
         <Link to="/profile-owner">
           <ProfileImage />
-          <Username>{username || "User"}</Username>
+          <Username>{"" || "User"}</Username>
         </Link>
       </UserInfoContainer>
 
@@ -158,6 +159,16 @@ const SideNavOwner = () => {
                 label: <Link to="/helpcenter-owner">Help Center</Link>,
                 style: {
                   ...getMenuItemStyle("/helpcenter-owner"),
+                  width: "220px",
+                },
+              },
+
+              {
+                key: "/profile-owner",
+                icon: <UserOutlined />,
+                label: <Link to="/profile-owner">Profile</Link>,
+                style: {
+                  ...getMenuItemStyle("/profile-owner"),
                   width: "220px",
                 },
               },
