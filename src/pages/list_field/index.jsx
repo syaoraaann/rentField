@@ -21,7 +21,7 @@ import dayjs from "dayjs";
 import "./index.css";
 import SideNav from "../dashboardrenter/sidenav";
 import bgImage from "../../assets/images/bgnew.jpg";
-import { getDataPrivate } from "../../utils/api";
+import { getDataPrivate, sendDataPrivate} from "../../utils/api";
 
 // Konfigurasi Leaflet Icon
 delete L.Icon.Default.prototype._getIconUrl;
@@ -150,7 +150,7 @@ const ListField = () => {
     setEndTime(null);
   };
 
-  const handleBooking = () => {
+  const handleBooking = async () => {
     if (!selectedDate || !startTime || !endTime) {
       notification.error({
         message: "Incomplete Information",
@@ -158,11 +158,54 @@ const ListField = () => {
       });
       return;
     }
-    notification.success({
-      message: "Booking Successful",
-      description: "Your booking has been confirmed.",
-    });
-    closeDrawer();
+  
+    try {
+      const formData = new FormData();
+      formData.append("id_field", selectedField.id);
+      formData.append("booking_date", selectedDate.format("YYYY-MM-DD"));
+      formData.append("start_time", startTime.format("HH:mm:ss"));
+      formData.append("end_time", endTime.format("HH:mm:ss"));
+  
+      // Changed from postDataPrivate to sendDataPrivate
+      const response = await sendDataPrivate("/api/v1/booking/create", formData);
+  
+      if (response) {
+        notification.success({
+          message: "Booking Successful",
+          description: "Your booking has been confirmed.",
+        });
+        closeDrawer();
+      }
+    } catch (error) {
+      notification.error({
+        message: "Booking Failed",
+        description: error.message || "Something went wrong during booking process.",
+      });
+    }
+  };
+  
+  const getBooking = async () => {
+    setLoading(true);
+    try {
+      const resp = await getDataPrivate("/api/v1/booking/read_by_owner");
+      setLoading(false);
+  
+      if (Array.isArray(resp)) {
+        setDataSources(resp);
+      } else {
+        notification.error({
+          message: "Data Error",
+          description: "Received invalid data format from server",
+        });
+      }
+    } catch (err) {
+      setLoading(false);
+      console.error("Error fetching data:", err);
+      notification.error({
+        message: "Error",
+        description: "Failed to fetch reservation data",
+      });
+    }
   };
 
   const MapComponent = ({ coordinates, zoom = 13 }) => (
