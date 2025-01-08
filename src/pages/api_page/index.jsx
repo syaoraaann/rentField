@@ -20,7 +20,7 @@ import {
   Modal,
   Dropdown,
   Space,
-  Menu
+  Menu,
 } from "antd";
 import {
   PlusCircleOutlined,
@@ -60,19 +60,19 @@ const ApiPage = () => {
   const menuProps = {
     items: [
       {
-        label: 'All',
-        key: 'all',
-        onClick: () => handleFilterChange('all'),
+        label: "All",
+        key: "all",
+        onClick: () => handleFilterChange("all"),
       },
       {
-        label: 'Newest',
-        key: 'newest',
-        onClick: () => handleFilterChange('newest'),
+        label: "Newest",
+        key: "newest",
+        onClick: () => handleFilterChange("newest"),
       },
       {
-        label: 'Oldest',
-        key: 'oldest',
-        onClick: () => handleFilterChange('oldest'),
+        label: "Oldest",
+        key: "oldest",
+        onClick: () => handleFilterChange("oldest"),
       },
     ],
   };
@@ -246,7 +246,10 @@ const ApiPage = () => {
     <Card
       className="review-card"
       cover={
-        <div className="video-container" onClick={() => openModal(item.play_url)}>
+        <div
+          className="video-container"
+          onClick={() => openModal(item.play_url)}
+        >
           <img src={item.play_thumbnail} alt={item.play_name} />
           <PlayCircleFilled className="play-icon" />
         </div>
@@ -278,7 +281,6 @@ const ApiPage = () => {
               </Text>
             )}
             <div className="card-footer">
-              
               <Space className="card-actions">
                 <Button
                   type="text"
@@ -388,20 +390,37 @@ const ApiPage = () => {
             Explore our service reviews below!
           </Text>
           <Input
-            prefix={<SearchOutlined style={{paddingRight: "10px", paddingLeft: "10px"}}/>}
+            prefix={
+              <SearchOutlined
+                style={{ paddingRight: "10px", paddingLeft: "10px" }}
+              />
+            }
             placeholder="Input search text"
             allowClear
             size="large"
             onChange={(e) => handleSearch(e.target.value)}
             className="search-vid-rev"
           />
-          <Row style={{display: "flex", flexDirection: "row", justifyContent: "end"}}>
-            <div style={{paddingRight: "15px"}}>
-              <Dropdown menu={menuProps} trigger={['click']} className="dropdown-vid-rev">
+          <Row
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "end",
+            }}
+          >
+            <div style={{ paddingRight: "15px" }}>
+              <Dropdown
+                menu={menuProps}
+                trigger={["click"]}
+                className="dropdown-vid-rev"
+              >
                 <Button>
                   <Space>
-                    {filterType === "all" ? "All" : filterType.charAt(0).toUpperCase() + filterType.slice(1)}
-                    <DownOutlined style={{paddingLeft: "10px"}}/>
+                    {filterType === "all"
+                      ? "All"
+                      : filterType.charAt(0).toUpperCase() +
+                        filterType.slice(1)}
+                    <DownOutlined style={{ paddingLeft: "10px" }} />
                   </Space>
                 </Button>
               </Dropdown>
@@ -417,9 +436,9 @@ const ApiPage = () => {
               </Select>   */}
             </div>
             <Button
-            type="primary"
-            className="add-button"
-            onClick={handleDrawerOpen}
+              type="primary"
+              className="add-button"
+              onClick={handleDrawerOpen}
             >
               Add Review
             </Button>
@@ -512,37 +531,41 @@ const ApiPage = () => {
             />
           ) : null} */}
           {isLoading && (
-          <Skeleton active paragraph={{ rows: 3 }} style={{ margin: "2rem" }} />
-        )}
+            <Skeleton
+              active
+              paragraph={{ rows: 3 }}
+              style={{ margin: "2rem" }}
+            />
+          )}
 
-        {error && (
-          <Alert
-            message="Error"
-            description={error}
-            type="error"
-            showIcon
-            style={{ margin: "2rem" }}
-          />
-        )}
+          {error && (
+            <Alert
+              message="Error"
+              description={error}
+              type="error"
+              showIcon
+              style={{ margin: "2rem" }}
+            />
+          )}
 
-        {!isLoading && !error && dataSourceFiltered.length === 0 && (
-          <Alert
-            message="No Data"
-            description="No data available."
-            type="info"
-            showIcon
-            style={{ margin: "2rem" }}
-          />
-        )}
+          {!isLoading && !error && dataSourceFiltered.length === 0 && (
+            <Alert
+              message="No Data"
+              description="No data available."
+              type="info"
+              showIcon
+              style={{ margin: "2rem" }}
+            />
+          )}
 
-        {!isLoading && !error && dataSourceFiltered.length > 0 && (
-          <List
-            className="review-list"
-            grid={{ gutter: 16, column: 3 }}
-            dataSource={dataSourceFiltered}
-            renderItem={(item) => <List.Item>{renderCard(item)}</List.Item>}
-          />
-        )}
+          {!isLoading && !error && dataSourceFiltered.length > 0 && (
+            <List
+              className="review-list"
+              grid={{ gutter: 16, column: 3 }}
+              dataSource={dataSourceFiltered}
+              renderItem={(item) => <List.Item>{renderCard(item)}</List.Item>}
+            />
+          )}
         </div>
         <FloatButton
           icon={<PlusCircleOutlined />}
@@ -554,21 +577,21 @@ const ApiPage = () => {
       </div>
 
       <Modal
-          title="Play Video"
-          visible={isModalVisible}
-          onCancel={closeModal}
-          footer={null}
-          width={800}
-        >
-          <iframe
-            width="100%"
-            height="450px"
-            src={videoUrl.replace("watch?v=", "embed/")}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </Modal>
+        title="Play Video"
+        visible={isModalVisible}
+        onCancel={closeModal}
+        footer={null}
+        width={800}
+      >
+        <iframe
+          width="100%"
+          height="450px"
+          src={videoUrl.replace("watch?v=", "embed/")}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      </Modal>
 
       <Footer className="footer-vid-rev">
         Copyright © 2024 RentField.com - Powered by CodeBlue Universitas

@@ -37,7 +37,6 @@
   font-family: "Poppins" !important;
 }
 
-
 /* Add spacing after search input */
 .ant-input-affix-wrapper {
   margin-bottom: 24px;
@@ -210,7 +209,7 @@
   .api-page-title {
     font-size: 1.5em;
   }
-  
+
   /* Adjust padding for mobile */
   .api-page-card .ant-card-cover {
     padding: 8px 8px 0 8px;
@@ -267,7 +266,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 48px;
-  color: #98FB98;
+  color: #98fb98;
   opacity: 0.9;
   transition: all 0.2s ease;
 }
@@ -278,7 +277,7 @@
 }
 
 .card-title-vid-rev {
-  color: #98FB98 !important;
+  color: #98fb98 !important;
   font-size: 1.2em !important;
   margin-bottom: 8px !important;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Layout, Table, Card, Input, Select } from "antd";
 import { SearchOutlined, WalletOutlined } from "@ant-design/icons";
-import SideNavOwner from "../dashboardowner/sidenavowner";
+import SideNav from "../dashboardrenter/sidenav";
 import bgImage from "../../assets/images/bgnew.jpg";
 import { getDataPrivate } from "../../utils/api";
 import "./index.css";
@@ -94,7 +94,7 @@ const History = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <SideNavOwner />
+      <SideNav />
       <Layout style={{ marginLeft: 256, background: "transparent" }}>
         <Content style={{ padding: "24px", background: "transparent" }}>
           <h1
