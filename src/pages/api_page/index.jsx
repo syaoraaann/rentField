@@ -244,7 +244,7 @@ const ApiPage = () => {
 
   const renderCard = (item) => (
     <Card
-      className="review-card"
+      className="review-card-vid-rev"
       cover={
         <div
           className="video-container"
@@ -268,7 +268,7 @@ const ApiPage = () => {
             </div>
             {item.play_description.length > 80 ? (
               <Tooltip title={item.play_description}>
-                <Text className="card-description">
+                <Text className="card-description-vid-rev">
                   {highlightText(
                     truncateText(item.play_description, 40),
                     searchText
@@ -276,15 +276,15 @@ const ApiPage = () => {
                 </Text>
               </Tooltip>
             ) : (
-              <Text className="card-description">
+              <Text className="card-description-vid-rev">
                 {highlightText(item.play_description, searchText)}
               </Text>
             )}
-            <div className="card-footer">
+            <div style={{paddingTop: "20px"}}>
               <Space className="card-actions">
                 <Button
                   type="text"
-                  icon={<EditOutlined />}
+                  icon={<EditOutlined style={{color: "#d9d9d9"}} />}
                   onClick={() => handleDrawerEdit(item)}
                 />
                 <Popconfirm
@@ -309,6 +309,7 @@ const ApiPage = () => {
   const drawerSection = () => {
     return (
       <Drawer
+        className="drawer-vid-rev"
         title={isEdit ? "Edit Review" : "Add New Review"}
         width={400}
         onClose={handleDrawerClose}
@@ -318,8 +319,9 @@ const ApiPage = () => {
             type="primary"
             onClick={handleFormSubmit}
             style={{
-              backgroundColor: isEdit ? "green" : "blue",
-              borderColor: isEdit ? "green" : "blue",
+              backgroundColor: isEdit ? "#defd13" : "#abfd13",
+              borderColor: isEdit ? "#defd13" : "#abfd13",
+              color: "#090909"
             }}
           >
             {isEdit ? "Update" : "Submit"}
@@ -449,87 +451,6 @@ const ApiPage = () => {
             <Alert message="Error" description={error} type="error" showIcon />
           )}
 
-          {/* {!isLoading && !error && dataSource.length > 0 ? (
-            <List
-              grid={{
-                gutter: 16,
-                xs: 1,
-                sm: 2,
-                md: 4,
-                lg: 4,
-                xl: 3,
-              }}
-              dataSource={dataSourceFiltered}
-              renderItem={(item) => (
-                <List.Item>
-                  <Card
-                    title={
-                      <span className="card-title-vid-rev">
-                        {highlightText(
-                          truncateText(item.play_name, 30),
-                          searchText
-                        )}
-                      </span>
-                    }
-                    bordered={true}
-                    cover={<img src={item.play_thumbnail} alt={item.play_name} />}
-                    className="api-page-card wider-card"
-                    actions={[
-                      <Button
-                        icon={<EditOutlined />}
-                        type="link"
-                        onClick={() => handleDrawerEdit(item)}
-                      >
-                        Edit
-                      </Button>,
-                      <Popconfirm
-                        title="Are you sure you want to delete this playlist?"
-                        onConfirm={() => confirmDelete(item.id_play)}
-                        okText="Yes"
-                        cancelText="No"
-                      >
-                        <Button icon={<DeleteOutlined />} type="link" danger>
-                          Delete
-                        </Button>
-                      </Popconfirm>,
-                    ]}
-                  >
-                    <Text strong className="card-dsc-vid-rev">Genre:</Text>{" "}
-                    {highlightText(item.play_genre, searchText)} <br />
-                    <Text strong className="card-dsc-vid-rev">Description:</Text>{" "}
-                    {item.play_description.length > 40 ? (
-                      <Tooltip title={item.play_description}>
-                        <span className="card-description-vid-rev">
-                          {highlightText(
-                            truncateText(item.play_description, 40),
-                            searchText
-                          )}
-                        </span>
-                      </Tooltip>
-                    ) : (
-                      <span className="card-description-vid-rev">
-                        {highlightText(item.play_description, searchText)}
-                      </span>
-                    )}
-                    <br />
-                    <Text strong className="card-dsc-vid-rev">URL:</Text>{" "}
-                    <a
-                      href={item.play_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="card-url"
-                    >
-                      {highlightText(truncateText(item.play_url, 50), searchText)}
-                    </a>
-                    <DeleteOutlined
-                      style={{ color: "red", marginTop: 10, cursor: "pointer"}}
-                      onClick={() => deleteDataUTS(item.id)}
-                    />
-                  </Card>
-                </List.Item>
-              )}
-            />
-          ) : null} */}
           {isLoading && (
             <Skeleton
               active
@@ -567,12 +488,6 @@ const ApiPage = () => {
             />
           )}
         </div>
-        <FloatButton
-          icon={<PlusCircleOutlined />}
-          type="primary"
-          onClick={handleDrawerOpen}
-          className="floating-button"
-        />
         {drawerSection()}
       </div>
 

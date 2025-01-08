@@ -331,8 +331,8 @@ const ListFieldOwner = () => {
             ))}
           </Row>
           <FloatButton
-            icon={<PlusCircleOutlined />}
-            type="primary"
+            icon={<PlusCircleOutlined style={{color: "#090909"}}/>}
+            type=""
             onClick={() => handleDrawerOpen(null)}
             className="floating-button"
           />

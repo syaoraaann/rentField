@@ -117,7 +117,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #1890ff;
+  background-color: #abfd13 !important;
   color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -127,6 +127,7 @@
 .floating-button:hover {
   transform: scale(1.1);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  background-color: #abfd13 !important;
 }
 
 /* Ensure text inside inputs is visible only in form drawer */
