@@ -45,3 +45,15 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+
+.filter-dropdown {
+  width: 200px;
+  height: 56px;
+  font-size: 18px !important;
+  font-family: "Poppins" !important;
+}
+
+.filter-dropdown .ant-select-item {
+  font-family: "Poppins" !important; /* Apply font to dropdown items */
+  font-size: 18px !important
+}

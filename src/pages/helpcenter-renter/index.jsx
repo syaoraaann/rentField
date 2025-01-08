@@ -39,7 +39,7 @@ const HelpCenterRenter = () => {
               onChange={(e) => handleSearch(e.target.value)}
             />
           </div>
-          
+
           <div className="content-grid">
             <div className="card">
               <h2>Getting Started</h2>
@@ -49,12 +49,14 @@ const HelpCenterRenter = () => {
                 learn ways that you can promote your fields here.
               </p>
             </div>
-            
+
             <div className="card">
               <h2>FAQ (Frequently Asked Questions)</h2>
               <div className="card-content">
                 <div className="faq-section">
-                  <p><b>For Owners:</b></p>
+                  <p>
+                    <b>For Owners:</b>
+                  </p>
                   <ul>
                     <li>How to register as the field owner?</li>
                     <li>How to upload the details of the fields?</li>
@@ -62,7 +64,9 @@ const HelpCenterRenter = () => {
                   </ul>
                 </div>
                 <div className="faq-section">
-                  <p><b>For Renters:</b></p>
+                  <p>
+                    <b>For Renters:</b>
+                  </p>
                   <ul>
                     <li>How to book the field?</li>
                     <li>How to cancel my bookings?</li>
@@ -86,7 +90,12 @@ const HelpCenterRenter = () => {
               <h2>Still Can't Find What You Need?</h2>
               <div className="contact-info">
                 <p>Contact Us through:</p>
-                <p>Email: <a href="mailto:rentfield@gmail.com" className="email-link">rentfield@gmail.com</a></p>
+                <p>
+                  Email:{" "}
+                  <a href="mailto:rentfield@gmail.com" className="email-link">
+                    rentfield@gmail.com
+                  </a>
+                </p>
                 <p>Phone: (+62) 83111274549</p>
                 <p>Address: Udayana St. 20, Singaraja</p>
               </div>
@@ -94,7 +103,10 @@ const HelpCenterRenter = () => {
           </div>
 
           <footer className="footer">
-            <p>Copyright © 2024 RentField.com - Powered by CodeBlue Universitas Pendidikan Ganesha</p>
+            <p>
+              Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
+              Pendidikan Ganesha
+            </p>
           </footer>
         </div>
       </Layout.Content>

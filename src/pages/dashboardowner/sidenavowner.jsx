@@ -123,15 +123,6 @@ const SideNavOwner = () => {
                   width: "220px",
                 },
               },
-              {
-                key: "/payment",
-                icon: <CreditCardOutlined />,
-                label: <Link to="/payment">Payment</Link>,
-                style: {
-                  ...getMenuItemStyle("/payment"),
-                  width: "220px",
-                },
-              },
             ],
           },
           {
