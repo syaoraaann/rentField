@@ -37,7 +37,6 @@
   font-family: "Poppins" !important;
 }
 
-
 /* Add spacing after search input */
 .ant-input-affix-wrapper {
   margin-bottom: 24px;
@@ -210,7 +209,7 @@
   .api-page-title {
     font-size: 1.5em;
   }
-  
+
   /* Adjust padding for mobile */
   .api-page-card .ant-card-cover {
     padding: 8px 8px 0 8px;
