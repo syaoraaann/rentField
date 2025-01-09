@@ -127,11 +127,12 @@
     cursor: pointer;
 }
 
+
 .submit-button {
-    background-color: #9eff00;
-    color: black;
+    background-color: transparent;
+    color: #abfd13;
     padding: 0.75rem 2rem;
-    border: none;
+    border: 1px solid #abfd13;
     border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
@@ -139,10 +140,12 @@
     transition: background-color 0.2s;
     margin-left: 330px;
 }
-
+  
 .submit-button:hover {
     background-color: #8ce000;
+    color: #090909
 }
+  
 
 /* Responsive adjustments */
 @media (max-width: 640px) {

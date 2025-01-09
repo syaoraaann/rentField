@@ -117,10 +117,9 @@ html {
 
 .drawer-button {
   margin-top: 20px;
-  background-color: #abfd13;
-  color: #090909;
+  background-color: transparent;
+  color: #abfd13;
   width: 100px;
-  font-weight: bold;
   font-size: 18px;
 }
 
@@ -323,11 +322,19 @@ html {
 }
 
 .rent-button {
-  background-color: #abfd13;
-  color: #090909;
-  font-size: 25px;
-  font-weight: bold;
+  background-color: transparent ;
+  color: #abfd13 !important;
+  border: 1px solid #abfd13;
+  font-size: 18px;
   width: 100%;
+  border: 2px solid #abfd13;
+}
+
+.rent-button:hover {
+  background-color: #669410 !important;
+  color: #090909 !important;
+  border-color: #abfd13 !important;
+  outline: none;
 }
 
 /* Drawer Styles */
@@ -385,7 +392,6 @@ html {
   background-color: #abfd13 !important;
   color: #090909 !important;
   width: 100px;
-  font-weight: bold;
   font-size: 18px;
   border: #A3FF12 !important;
 }

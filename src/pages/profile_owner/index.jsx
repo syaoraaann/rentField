@@ -174,7 +174,7 @@ const ProfileOwner = () => {
                     </div>
 
                     <button type="submit" className="submit-button">
-                        SAVE
+                        Save
                     </button>
                 </form>
             </div>

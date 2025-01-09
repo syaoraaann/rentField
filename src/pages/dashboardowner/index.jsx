@@ -123,7 +123,7 @@ const DashboardOwner = () => {
                   fontWeight: "bold",
                 }}
               >
-                Ready to make the most of today, {username || "user"}?
+                Ready to make the most of today?
               </Title>
               <Text
                 style={{

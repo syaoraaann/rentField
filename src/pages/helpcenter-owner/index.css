@@ -144,7 +144,7 @@ body, html {
   color: #abfd13;
 }
 
-.footer-help {
+.footer-help-owner {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);

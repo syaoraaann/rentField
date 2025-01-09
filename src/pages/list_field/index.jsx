@@ -336,11 +336,11 @@ const ListField = () => {
 
                       <div className="rent-button-wrapper">
                         <Button
-                          type="primary"
+                          type="default"
                           onClick={() => showDrawer(field)}
                           className="rent-button"
                         >
-                          RENT
+                          Rent
                         </Button>
                       </div>
                     </div>
@@ -393,12 +393,12 @@ const ListField = () => {
           />
 
           <Button
-            type="primary"
+            type="default"
             onClick={handleBooking}
             disabled={!selectedDate || !startTime || !endTime}
             className="drawer-button"
           >
-            BOOK
+            Book
           </Button>
         </Drawer>
       </Layout.Content>

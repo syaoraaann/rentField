@@ -120,7 +120,9 @@ const DashboardRenter = () => {
 
   useEffect(() => {
     const storedUsername = sessionStorage.getItem("username");
+    console.log("Stored Username: ", storedUsername);
     if (storedUsername) setUsername(storedUsername);
+
 
     // Dummy notifikasi
     setNotifications([
@@ -196,7 +198,7 @@ const DashboardRenter = () => {
           <div>
             {/* Dashboard Header */}
             <Title level={1} className="dashboard-header">
-              Ready to make the most of today, {username}?
+              Ready to make the most of today?
             </Title>
             <Text className="desc-header">
               Here's an overview of your recent activities!
@@ -406,7 +408,10 @@ const DashboardRenter = () => {
 
           {/* Baris kedua: Top Booked Fields */}
           <Col span={12}>
-            <Link to="/upcoming-event" style={{ color: "inherit" }}>
+            <Link to="#" 
+            style={{ color: "inherit" }}
+            onClick={(e) => e.preventDefault()}
+            >
               <Card
                 bordered={false}
                 style={{
@@ -478,7 +483,9 @@ const DashboardRenter = () => {
             </Link>
           </Col>
           <Col span={12}>
-            <Link to="/topbooked" style={{ color: "inherit" }}>
+            <Link 
+            style={{ color: "inherit" }}
+            onClick={(e) => e.preventDefault()}>
               <Card
                 bordered={false}
                 style={{

@@ -95,7 +95,7 @@ const HelpCenterOwner = () => {
 
           
         </div>
-        {/* <footer className="footer-help">
+        {/* <footer className="footer-help-owner">
             <p>
               Copyright © 2024 RentField.com - Powered by CodeBlue Universitas
               Pendidikan Ganesha
