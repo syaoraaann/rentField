@@ -68,7 +68,7 @@ const ListField = () => {
           imageUrl:
             field.image_url ||
             "https://fastly.4sqi.net/img/general/600x600/58082938_ZBAJ3Wcn-B_m8pP16l42N0uVIgxWSdnNIQG36_ff0Nk.jpg",
-          basePrice: parseFloat(field.price),
+            basePrice: parseFloat(field.price) * 1000,
           operatingHours: {
             start: 0,
             end: 24,
