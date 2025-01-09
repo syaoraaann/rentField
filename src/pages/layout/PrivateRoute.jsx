@@ -2,6 +2,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import LoginPage from "../login";
+import HamsterLoader from "../loaders/hamster";
 
 import MainLayout from "./Main";
 
@@ -16,7 +17,7 @@ const PrivateRoute = ({ component }) => {
   // return <Navigate to="/login" replace />;
   return <LoginPage />;
 }
-
+return <HamsterLoader/>;
   // Render the child component or outlet
 };
 
