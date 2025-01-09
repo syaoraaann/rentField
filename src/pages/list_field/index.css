@@ -19,10 +19,13 @@ html {
   font-weight: bold;
   margin-top: 60px;
   margin-bottom: 20px;
-  color: #fff;
+  color: #abfd13 !important;
   font-size: 70px;
 }
 
+h3.page-title {
+  color: #abfd13 !important;
+}
 .content-container {
   margin: 10px;
   padding: 20px;
