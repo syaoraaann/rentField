@@ -68,9 +68,9 @@ function LandingPage() {
   const cards = [
     {
       number: "01.",
-      title: 'Effectiveness & Efficiency',
+      title: 'Rent Field Services',
       content:
-        'Provide effectiveness and efficiency for user who want to rent field or place.',
+        'Provide several rental field and place for rent.',
     },
     {
       number: "02.",
@@ -243,7 +243,7 @@ function LandingPage() {
                 title={<h2 style={{ color: '#ABFD13',fontWeight: "bold" }}>Vision</h2>} 
                 bordered= {false} 
                 className="cards-about">
-                  <p>Create an unforgettable sports experience with the best facilities available anytime according to your needs. Let's start now to find the ideal field for your next match!</p>
+                  <p>Become the leading platform that facilitates access and booking of sports fields quickly, easily, and reliably throughout Singaraja.</p>
                 </Card>
               </div>
               <div>
@@ -251,7 +251,7 @@ function LandingPage() {
                 title={<h2 style={{ color: '#ABFD13', fontWeight: "bold" }}>Mision</h2>} 
                 bordered= {false} 
                 className="cards-about">
-                  <p>Create an unforgettable sports experience with the best facilities available anytime according to your needs. Let's start now to find the ideal field for your next match!</p>
+                  <p>Provide a practical sports field search and booking service and Develop user-driven technology features for a better booking experience.</p>
                 </Card>
               </div>
               </Col>
